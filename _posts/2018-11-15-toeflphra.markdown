@@ -11,7 +11,7 @@ categories: jekyll update
 ---
 
 ## **太阳系行星**  
-<font color=#6495ED>
+<span style="color:#6495ED;">
 <strong>
 Jupiter&nbsp;&nbsp;&nbsp;木星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uranus &nbsp;&nbsp;&nbsp;天王星 
 <br>
@@ -19,7 +19,7 @@ Saturn &nbsp;&nbsp;&nbsp;土星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neptune&nbsp
 <br>
 Mercury&nbsp;&nbsp;&nbsp;水星 &nbsp;&nbsp;&nbsp;&nbsp;Pluto&nbsp;&nbsp;&nbsp;冥王星    
 <br>
-</font>  
+</span >
 
 arouse;evoke;fuel;ignite;spark;act as a catalyst for...;catalyze;act as a trigger for;trigger
 
