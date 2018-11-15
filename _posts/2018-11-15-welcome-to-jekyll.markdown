@@ -35,25 +35,38 @@ Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most ou
 #h2 -sed- , -sid-:sit
 
 [assiduous](https://fanyi.baidu.com/?aldtype=85\#en/zh/assiduous)     as-一再 sid坐 --\>勤奋的
-[assiduity](https://fanyi.baidu.com/?aldtype=85#en/zh/assiduity)
-[sediment](https://fanyi.baidu.com/?aldtype=85#en/zh/sediment)
-[sedimentary](https://fanyi.baidu.com/?aldtype=85#en/zh/sedimentary)
-[sedative](https://fanyi.baidu.com/?aldtype=85#en/zh/sedative)  坐下来的剂-->镇静剂
-[sedate](https://fanyi.baidu.com/?aldtype=85#en/zh/sedate) sed-坐 ate具有什么的-->坐下来的-->文静的
-[dissident](https://fanyi.baidu.com/?aldtype=85#en/zh/dissident)dis-分开 sid-坐-->分开坐-->持不同政见者
-
-[insidious](https://fanyi.baidu.com/?aldtype=85#en/zh/insidious)in-向内 sid-坐-->坐在幕后的-->阴险的，潜伏的
-[preside](https://fanyi.baidu.com/?aldtype=85#en/zh/preside) pre-前 sid-坐 -->在前面坐-->主持   
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preside over a meeting</p>
-[reside](https://fanyi.baidu.com/?aldtype=85#en/zh/reside)re-重新 sid-坐-->重新坐-->安定下来-->居住
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resident 居住 &nbsp; residence 住所 &nbsp; residential 居民的</p>
-[residue](https://fanyi.baidu.com/?aldtype=85#en/zh/residue)残留物
-[subside](https://fanyi.baidu.com/?aldtype=85#en/zh/subside) sub-下 sid-坐-->向下坐-->下沉，下陷
+<br>
+[assiduity](https://fanyi.baidu.com/?aldtype=85#en/zh/assiduity)  
+<br>
+[sediment](https://fanyi.baidu.com/?aldtype=85#en/zh/sediment)  
+<br>
+[sedimentary](https://fanyi.baidu.com/?aldtype=85#en/zh/sedimentary)   
+<br>
+[sedative](https://fanyi.baidu.com/?aldtype=85#en/zh/sedative)  坐下来的剂-->镇静剂  
+<br>
+[sedate](https://fanyi.baidu.com/?aldtype=85#en/zh/sedate) sed-坐 ate具有什么的-->坐下来的-->文静的 
+<br>
+[dissident](https://fanyi.baidu.com/?aldtype=85#en/zh/dissident)dis-分开 sid-坐-->分开坐-->持不同政见者  
+<br>
+[insidious](https://fanyi.baidu.com/?aldtype=85#en/zh/insidious)in-向内 sid-坐-->坐在幕后的-->阴险的，潜伏的  
+<br>
+[preside](https://fanyi.baidu.com/?aldtype=85#en/zh/preside) pre-前 sid-坐 -->在前面坐-->主持     
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preside over a meeting</p>  
+[reside](https://fanyi.baidu.com/?aldtype=85#en/zh/reside)re-重新 sid-坐-->重新坐-->安定下来-->居住  
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resident 居住 &nbsp; residence 住所 &nbsp; residential 居民的</p>  
+[residue](https://fanyi.baidu.com/?aldtype=85#en/zh/residue)残留物 
+<br>
+[subside](https://fanyi.baidu.com/?aldtype=85#en/zh/subside) sub-下 sid-坐-->向下坐-->下沉，下陷 
+<br>
 #h2 terr-:land
-[extraterrestrial](https://fanyi.baidu.com/?aldtype=85#en/zh/extraterrestrial) extra-以外 terr-地-->地球外的-->外星人(ET)
+[extraterrestrial](https://fanyi.baidu.com/?aldtype=85#en/zh/extraterrestrial) extra-以外   terr-地-->地球外的-->外星人(ET)
+<br>
 [territory](https://fanyi.baidu.com/?aldtype=85#en/zh/territory) terr-地 -tory场所-->地盘，领地
-[terrace](https://fanyi.baidu.com/?aldtype=85#en/zh/terrace) 梯田
-[terraqueous](https://fanyi.baidu.com/?aldtype=85#en/zh/terrace)
+<br>
+[terrace](https://fanyi.baidu.com/?aldtype=85#en/zh/terrace) 梯田  
+<br>
+[terraqueous](https://fanyi.baidu.com/?aldtype=85#en/zh/terrace)  
+<br>
 <p>repulse 击退repel 拒绝排斥憎恶refuse</p>
 <p>resent 愤怒怨恨</p>
 <p>reservoir 水库，蓄水池</p>
