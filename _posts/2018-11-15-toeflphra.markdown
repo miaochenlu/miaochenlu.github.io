@@ -16,7 +16,8 @@ categories: jekyll update
 <br>
 <span style="color:#6495ED;">Saturn &nbsp;&nbsp;&nbsp;土星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neptune&nbsp;&nbsp;&nbsp;海王星 </span>
 <br>
-<span style="color:#6495ED;">Mercury&nbsp;&nbsp;&nbsp;水星 &nbsp;&nbsp;&nbsp;&nbsp;Pluto&nbsp;&nbsp;&nbsp;冥王星</span>
+<span style="color:#6495ED;">Mercury&nbsp;&nbsp;&nbsp;水星 &nbsp;&nbsp;&nbsp;&nbsp;Pluto&nbsp;&nbsp;&nbsp;冥王星</span>  
+
 <br>
 
 arouse;evoke;fuel;ignite;spark;act as a catalyst for...;catalyze;act as a trigger for;trigger
