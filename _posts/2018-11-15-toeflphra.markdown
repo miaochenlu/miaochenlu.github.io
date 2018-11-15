@@ -11,13 +11,12 @@ categories: jekyll update
 ---
 
 ## **太阳系行星**  
-<span style="color:#6495ED;">
 <strong>
-Jupiter&nbsp;&nbsp;&nbsp;木星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uranus &nbsp;&nbsp;&nbsp;天王星
+<span style="color:#6495ED;">Jupiter&nbsp;&nbsp;&nbsp;木星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uranus &nbsp;&nbsp;&nbsp;天王星  </span>
 <br>
-Saturn &nbsp;&nbsp;&nbsp;土星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neptune&nbsp;&nbsp;&nbsp;海王星
+<span style="color:#6495ED;">Saturn &nbsp;&nbsp;&nbsp;土星 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neptune&nbsp;&nbsp;&nbsp;海王星 </span>
 <br>
-Mercury&nbsp;&nbsp;&nbsp;水星 &nbsp;&nbsp;&nbsp;&nbsp;Pluto&nbsp;&nbsp;&nbsp;冥王星</span>    
+<span style="color:#6495ED;">Mercury&nbsp;&nbsp;&nbsp;水星 &nbsp;&nbsp;&nbsp;&nbsp;Pluto&nbsp;&nbsp;&nbsp;冥王星</span>
 <br>
 
 arouse;evoke;fuel;ignite;spark;act as a catalyst for...;catalyze;act as a trigger for;trigger
