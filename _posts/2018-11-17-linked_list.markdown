@@ -97,7 +97,7 @@ void DeleteAll(ELementType X, List L)
         }
     }
 }
-```cpp
+```
 
 
 
