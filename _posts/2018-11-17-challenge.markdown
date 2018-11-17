@@ -10,11 +10,12 @@ categories: jekyll update
 
 ---
 
-![avatar](/Users/jones/Desktop/miaochenlu.github.io/picture/picture20181117.jpg )
+<img src="/Users/jones/Desktop/miaochenlu.github.io/picture/picture20181117.jpg">
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
 
 [jekyll-talk]: https://talk.jekyllrb.com/
+
 
