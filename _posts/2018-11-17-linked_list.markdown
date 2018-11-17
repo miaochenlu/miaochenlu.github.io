@@ -10,7 +10,7 @@ categories: jekyll update
 
 ---
 
-```C
+{% highlight c %}
 #include<stdio.h>
 #include<stdlib.h>
 #include"list.h"
@@ -97,7 +97,7 @@ void DeleteAll(ELementType X, List L)
         }
     }
 }
-```
+{%endhighlight%}
 
 
 
