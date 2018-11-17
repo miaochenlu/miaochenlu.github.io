@@ -10,10 +10,7 @@ categories: jekyll update
 
 ---
 
-<!-- <span style="bgcolor:#000000;"> -->
-<pre>
-<code class="c">
-
+```cpp
 #include<stdio.h>
 #include<stdlib.h>
 #include"list.h"
@@ -100,9 +97,7 @@ void DeleteAll(ELementType X, List L)
         }
     }
 }
-</pre>
-</code>
-<!-- </span> -->
+```
 
 
 
