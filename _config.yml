@@ -23,7 +23,7 @@ github_username:  miaochenlu
 
 # Build settings
 markdown: kramdown
-highlighter: rouge
+highlighter: pygments
 theme: minima
 plugins:
   - jekyll-feed
