@@ -4,7 +4,7 @@ layout: post
 
 title: "Linked List"
 
-date: 2018-11-15 18:07:05 +0800
+date: 2018-11-17 18:07:05 +0800
 
 categories: jekyll update
 

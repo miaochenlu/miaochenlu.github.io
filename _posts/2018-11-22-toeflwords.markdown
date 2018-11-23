@@ -10,7 +10,7 @@ categories: jekyll update
 
 ---
 
-## **-sed- , -sid-:sit**
+## **重要学科名词**
 
 [**ethics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/ethics)&nbsp;&nbsp;&nbsp;伦理学 
 <br>
