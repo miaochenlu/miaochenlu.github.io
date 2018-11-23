@@ -4,7 +4,7 @@ layout: post
 
 title: "TOEFL Listening Words"
 
-date: 2018-11-17 12:21:05 +0800
+date: 2018-11-22 12:21:05 +0800
 
 categories: jekyll update
 
@@ -12,19 +12,19 @@ categories: jekyll update
 
 ## **重要学科名词**
 
-[**ethics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/ethics)&nbsp;&nbsp;&nbsp;伦理学 
+[**ethics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/ethics)&nbsp;&nbsp;&nbsp;伦理学   
 <br>
-[**accounting**](https://fanyi.baidu.com/?aldtype=85\#en/zh/accounting)&nbsp;&nbsp;&nbsp;会计学  
-[**anthropology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/anthropology)&nbsp;&nbsp;&nbsp;人类学
+[**accounting**](https://fanyi.baidu.com/?aldtype=85\#en/zh/accounting)&nbsp;&nbsp;&nbsp;会计学   
+<br>
+[**anthropology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/anthropology)&nbsp;&nbsp;&nbsp;人类学  
 <br>
 [**archaeology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/archaeology)&nbsp;&nbsp;&nbsp;考古学  
 <br>
 [**psychology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/psychology)&nbsp;&nbsp;&nbsp;心理学  
 <br>
+[**sociology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/sociology)&nbsp;&nbsp;&nbsp;社会学  
 <br>
-[**sociology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/sociology)&nbsp;&nbsp;&nbsp;社会学
-<br>
-[**history**](https://fanyi.baidu.com/?aldtype=85\#en/zh/history)&nbsp;&nbsp;&nbsp;历史   
+[**history**](https://fanyi.baidu.com/?aldtype=85\#en/zh/history)&nbsp;&nbsp;&nbsp;历史     
 <br>
 [**mathematics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/mathematic)&nbsp;&nbsp;&nbsp;数学  
 <br>
