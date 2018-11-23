@@ -12,49 +12,67 @@ categories: jekyll update
 
 ## **-sed- , -sid-:sit**
 
-
-
-
-[**statistics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/statistics)&nbsp;&nbsp;&nbsp;统计学
+[**ethics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/ethics)&nbsp;&nbsp;&nbsp;伦理学 
+<br>
+[**accounting**](https://fanyi.baidu.com/?aldtype=85\#en/zh/accounting)&nbsp;&nbsp;&nbsp;会计学  
+[**anthropology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/anthropology)&nbsp;&nbsp;&nbsp;人类学
+<br>
+[**archaeology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/archaeology)&nbsp;&nbsp;&nbsp;考古学  
+<br>
+[**psychology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/psychology)&nbsp;&nbsp;&nbsp;心理学  
+<br>
+<br>
+[**sociology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/sociology)&nbsp;&nbsp;&nbsp;社会学
+<br>
+[**history**](https://fanyi.baidu.com/?aldtype=85\#en/zh/history)&nbsp;&nbsp;&nbsp;历史   
+<br>
+[**mathematics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/mathematic)&nbsp;&nbsp;&nbsp;数学  
+<br>
+[**geology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/geology)&nbsp;&nbsp;&nbsp;地质学  
+<br>
+[**linguistics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/linguistics)&nbsp;&nbsp;&nbsp;语言学  
+<br>
+[**demography**](https://fanyi.baidu.com/?aldtype=85\#en/zh/demography)&nbsp;&nbsp;&nbsp;人口统计学  
+<br>
+[**literature**](https://fanyi.baidu.com/?aldtype=85\#en/zh/statistics)&nbsp;&nbsp;&nbsp;文学  
+<br>
+[**logic**](https://fanyi.baidu.com/?aldtype=85\#en/zh/logic)&nbsp;&nbsp;&nbsp;逻辑学/论理学  
+<br>
+[**philosophy**](https://fanyi.baidu.com/?aldtype=85\#en/zh/philosophy)&nbsp;&nbsp;&nbsp;哲学  
+<br>
+[**zoology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/zoology)&nbsp;&nbsp;&nbsp;动物学  
+<br>
+[**ornithology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/ornithology)&nbsp;&nbsp;&nbsp;鸟类学  
+<br>
+[**microbiology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/microbiology)&nbsp;&nbsp;&nbsp;微生物学  
+<br>
+**enviromental science** 环境科学  
+<br>
+**electronic engineering** 电子工程  
+<br>
+[**architecture**](https://fanyi.baidu.com/?aldtype=85\#en/zh/architecture)&nbsp;&nbsp;&nbsp;建筑学  
+<br>
+[**oceanography**](https://fanyi.baidu.com/?aldtype=85\#en/zh/oceanography)&nbsp;&nbsp;&nbsp;海洋学  
+<br>
+[**meteorology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/meteorology)&nbsp;&nbsp;&nbsp;气象学  
+<br>
+[**seismology**](https://fanyi.baidu.com/?aldtype=85\#en/zh/seismology)&nbsp;&nbsp;&nbsp;地震学  
+<br>
+[**biochemistry**](https://fanyi.baidu.com/?aldtype=85\#en/zh/biochemistry)&nbsp;&nbsp;&nbsp;生物化学  
+<br>
+[**genetics**](https://fanyi.baidu.com/?aldtype=85\#en/zh/genetics)&nbsp;&nbsp;&nbsp;遗传学  
 <br>
 [**astronomy**](https://fanyi.baidu.com/?aldtype=85#en/zh/astronomy)&nbsp;&nbsp;&nbsp;
-天文学
+天文学  
 <br>
-[**electronics**](https://fanyi.baidu.com/?aldtype=85#en/zh/electronics)&nbsp;&nbsp;&nbsp;电子学
+[**electronics**](https://fanyi.baidu.com/?aldtype=85#en/zh/electronics)&nbsp;&nbsp;&nbsp;电子学  
 <br>
-[**biology**](https://fanyi.baidu.com/?aldtype=85#en/zh/biology) &nbsp;&nbsp;&nbsp;生物
+[**biology**](https://fanyi.baidu.com/?aldtype=85#en/zh/biology) &nbsp;&nbsp;&nbsp;生物  
 <br>
-[**ecology**](https://fanyi.baidu.com/?aldtype=85#en/zh/ecology)&nbsp;&nbsp;&nbsp; 生态学
+[**ecology**](https://fanyi.baidu.com/?aldtype=85#en/zh/ecology)&nbsp;&nbsp;&nbsp; 生态学  
 <br>
-[**entomology**](https://fanyi.baidu.com/?aldtype=85#en/zh/entomology)&nbsp;&nbsp;&nbsp;昆虫学
-<br>
-[**dissident**](https://fanyi.baidu.com/?aldtype=85#en/zh/dissident)&nbsp;&nbsp;&nbsp;dis-分开 sid-坐-->分开坐-->持不同政见者    
-<br>
-[**insidious**](https://fanyi.baidu.com/?aldtype=85#en/zh/insidious)&nbsp;&nbsp;&nbsp;in-向内 sid-坐-->坐在幕后的-->阴险的，潜伏的    
-<br>
-[**preside**](https://fanyi.baidu.com/?aldtype=85#en/zh/preside) &nbsp;&nbsp;&nbsp;pre-前 sid-坐 -->在前面坐-->主持    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preside over a meeting  
+[**entomology**](https://fanyi.baidu.com/?aldtype=85#en/zh/entomology)&nbsp;&nbsp;&nbsp;昆虫学  
 <br> 
-[**reside**](https://fanyi.baidu.com/?aldtype=85#en/zh/reside)&nbsp;&nbsp;&nbsp;re-重新 sid-坐-->重新坐-->安定下来-->居住    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resident 居住 &nbsp; residence 住所 &nbsp; residential 居民的  
-<br>
-[**residue**](https://fanyi.baidu.com/?aldtype=85#en/zh/residue)&nbsp;&nbsp;&nbsp;残留物   
-<br>
-[**subside**](https://fanyi.baidu.com/?aldtype=85#en/zh/subside)&nbsp;&nbsp;&nbsp;sub-下 sid-坐-->向下坐-->下沉，下陷 
-<br>
-
-## **terr-:land**
-[**extraterrestrial**](https://fanyi.baidu.com/?aldtype=85#en/zh/extraterrestrial) &nbsp;&nbsp;&nbsp;extra-以外   terr-地-->地球外的-->外星人(ET)  
-<br>
-[**territory**](https://fanyi.baidu.com/?aldtype=85#en/zh/territory)&nbsp;&nbsp;&nbsp; terr-地 -tory场所-->地盘，领地  
-<br>
-[**terrace**](https://fanyi.baidu.com/?aldtype=85#en/zh/terrace) &nbsp;&nbsp;&nbsp;梯田  
-<br>
-[**terraqueous**](https://fanyi.baidu.com/?aldtype=85#en/zh/terraqueous)&nbsp;&nbsp;&nbsp;  terr-陆 qu-水-->水陆的  
-<br>
-[**terraneous**](https://fanyi.baidu.com/?aldtype=85#en/zh/terraneous)&nbsp;&nbsp;&nbsp; 陆生的  
-<br>
-[**terracotta warriors**](https://fanyi.baidu.com/?aldtype=85#en/zh/terracotta%20warriors)&nbsp;&nbsp;&nbsp;兵马俑 
 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
