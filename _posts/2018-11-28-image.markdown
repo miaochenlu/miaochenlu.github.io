@@ -10,7 +10,7 @@ categories: jekyll update
 
 ---
  
-## 图像插值算法：  
+## **图像插值算法：**  
 ### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
 素值，可以⾸先计算该⼏何变换的逆变换，计算出
@@ -21,6 +21,13 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 像素值。
 
 <img src="http://miaochenlu.github.io/picture/picture20181128interpolation.png">
+
+### 2、线性插值
+$在x_1和x_2处的灰度值为g_1和g_2$
+$$
+g_3 = \frac{g_2-g_1}{x_2-x_1}(x_3-x_1)+g_1
+$$
+
 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
