@@ -26,8 +26,8 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 $在x_1和x_2处的灰度值为g_1和g_2$
 $$g_3 = \frac{g_2-g_1}{x_2-x_1}(x_3-x_1)+g_1$$
 
-
-
+<img src="http://miaochenlu.github.io/picture/picture20181128linear.png">
+<img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png">
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
