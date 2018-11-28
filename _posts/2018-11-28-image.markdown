@@ -9,8 +9,9 @@ date: 2018-11-28 12:21:05 +0800
 categories: jekyll update
 
 ---
-##图像插值算法：  
-###1、最邻近插值  
+ 
+## 图像插值算法：  
+### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
 素值，可以⾸先计算该⼏何变换的逆变换，计算出
 P’所对应的原图像中的位置P。通常情况下，P的位
@@ -18,7 +19,9 @@ P’所对应的原图像中的位置P。通常情况下，P的位
 P点的坐标通常都不会正好是整数）。寻找与P点最
 接近的像素Q，把Q点的像素值作为新图像中P’点的
 像素值。
-[!img](http://miaochenlu.github.io/picture/picture20181128interpolation.png)
+
+<img src="http://miaochenlu.github.io/picture/picture20181128interpolation.png">
+
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
