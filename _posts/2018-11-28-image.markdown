@@ -26,8 +26,8 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 <!-- $$g_3 = \frac{g_2-g_1}{x_2-x_1}(x_3-x_1)+g_1$$    -->
 
 <table><tr>
-<td><img src="http://miaochenlu.github.io/picture/picture20181128linear.png" height = "200" width = "200"></td>
-<td><img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png"></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181128linear.png" width = "500" border = "0"></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png" width = "200" border = "0"></td>
 </tr></table>
 <!-- <img src="http://miaochenlu.github.io/picture/picture20181128linear.png" height = "200" width = "200">
 <img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png"> -->
