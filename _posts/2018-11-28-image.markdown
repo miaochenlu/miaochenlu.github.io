@@ -37,8 +37,8 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 <img src="http://miaochenlu.github.io/picture/picture20181205bilinearequa.png">
 
 ## Simple geometric transformation
-### 1、Translation 平移
-<img src="http://miaochenlu.github.io/picture/picture20181205translation.png">
+### 1、Translation 平移 
+<img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "400">  
 <img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">
 
 ```c
