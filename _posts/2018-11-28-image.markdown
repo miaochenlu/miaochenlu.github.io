@@ -35,6 +35,36 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 ### 3、双线性插值
 <img src="http://miaochenlu.github.io/picture/picture20181205bilinear.png">
 <img src="http://miaochenlu.github.io/picture/picture20181205bilinearequa.png">
+
+## Simple geometric transformation
+### 1、Translation 平移
+<img src="http://miaochenlu.github.io/picture/picture2018translation.png">
+<img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">
+
+```c
+void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,int yoffbit,const char*filename )
+{
+    int translationwidth = width + abs(xoffbit);
+    int translationheight = height + abs(yoffbit);
+    U32 bmppitch = ((translationwidth*bitCountPerPix + 31) >> 5) << 2;
+    U8 BytePerPix = bitCountPerPix >> 3;
+    U8* copydata = (U8*)malloc(bmppitch*translationheight);
+    memset(copydata, 255, bmppitch*translationheight);
+    U32 originpitch = width * BytePerPix;
+    U32 pitch = translationwidth * BytePerPix;
+    int h,w;
+    for(h = translationheight - 1; h >=yoffbit ; h--) {
+        for(w = xoffbit; w < translationwidth; w++) {
+            copydata[h*pitch+w*BytePerPix+0] = pdata[(h-yoffbit)*originpitch+(w-xoffbit)*BytePerPix+0];
+            copydata[h*pitch+w*BytePerPix+1] = pdata[(h-yoffbit)*originpitch+(w-xoffbit)*BytePerPix+1];
+            copydata[h*pitch+w*BytePerPix+2] = pdata[(h-yoffbit)*originpitch+(w-xoffbit)*BytePerPix+2];
+        }
+    }
+    GenerateBmpFile(copydata,bitCountPerPix,translationwidth,translationheight,filename);
+    free(copydata);
+}
+```
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
