@@ -22,12 +22,17 @@ inlineMath: [['$','$']]
 
 快速幂取模算法的推导 $a^b\, mod\, c=?$  
 将10进制的b转化为二进制的表达式:$b_{(10)}=a_n a_{n-1} \cdots a_1 a_{0(2)}$
-$$b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0$$
+$$b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0$$ 
+
 $$a^b=a^{a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0}$$
-$$=a^{a_n·2^n}·a^{a_{n-1}·2^{n-1}}·\cdots a^{a_1 ·2}·a^{a_0}$$
+
+$$=a^{a_n·2^n}·a^{a_{n-1}·2^{n-1}}·\cdots a^{a_1 ·2}·a^{a_0}$$ 
+
 所以     
 $$a^b\, mod\, c=a^{a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0}mod\, c$$
 $$=\left[a^{a_n·2^n}mod\,c\right]·\left[a^{a_{n-1}·2^{n-1}}mod\,c\right]·\cdots \left[a^{a_1 ·2}mod\, c\right]·\left[a^{a_0}mod\,c\right]$$
+
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
