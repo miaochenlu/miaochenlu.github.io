@@ -9,7 +9,20 @@ date: 2018-11-28 12:21:05 +0800
 categories: jekyll update
 
 ---
- 
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+$a^b$
+
 ## **图像插值算法：**  
 ### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
