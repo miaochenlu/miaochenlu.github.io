@@ -77,7 +77,6 @@ void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,i
     free(copydata);
 }
 ```
-$$b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0$$
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 

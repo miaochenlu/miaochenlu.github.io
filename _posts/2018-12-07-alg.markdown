@@ -1,0 +1,31 @@
+---
+
+layout: post
+
+title: "algorithm"
+
+date: 2018-12-07 12:21:05 +0800
+
+categories: jekyll update
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+快速幂取模算法的推导 $a^b mod c=?$  
+将10进制的b转化为二进制的表达式:$b_{(10)}=a_n a_{n-1} \cdots a_1 a_0(2)$
+$$b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0$$
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+
+[jekyll-gh]: https://github.com/jekyll/jekyll
+
+[jekyll-talk]: https://talk.jekyllrb.com/
