@@ -20,7 +20,7 @@ inlineMath: [['$','$']]
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
-快速幂取模算法的推导 $a^b\quad mod\quad c=?$  
+快速幂取模算法的推导 $a^b\qquad mod\qquad c=?$  
 将10进制的b转化为二进制的表达式:$b_{(10)}=a_n a_{n-1} \cdots a_1 a_{0(2)}$
 $$b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0$$
 
