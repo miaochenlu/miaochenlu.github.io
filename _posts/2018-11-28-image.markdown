@@ -28,7 +28,9 @@ The output of the linear smoothing filter is the mean value of the pixels in the
 * **application**   
 Mean filter is mainly used for subtle detail removal,
 namely, eliminating the unwanted region smaller than the mask.  
-* **general equation**   
+* **general equation**     
+
+  
 $$
     g(x,y)=\frac{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)}
 $$
