@@ -33,8 +33,9 @@ namely, eliminating the unwanted region smaller than the mask.
 <td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "300" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "300" border="0"></td>
 
-* **general equation**  
-$$g(x,y)=\frac{\Sigma_{s=-1}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\sigma_{s=-1}^{s=a}\sigma_{t=-b}^{t=b}w(s,t)}$$  
+
+* **general equation**      
+$$g(x,y)=\frac{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)}$$  
  
 
 
