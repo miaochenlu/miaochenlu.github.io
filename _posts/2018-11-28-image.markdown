@@ -21,6 +21,19 @@ inlineMath: [['$','$']]
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
 
+## **Spatial Filtering**
+### Linear smoothing filter
+* Concept
+The output of the linear smoothing filter is the mean value of the pixels in the mask. It’s also called mean filter.
+* application 
+Mean filter is mainly used for subtle detail removal,
+namely, eliminating the unwanted region smaller than the mask.
+
+<table border="0"><tr>
+<td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "400" border="0"></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "200" border="0"></td>
+</tr></table>
+
 ## **图像插值算法：**  
 ### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
