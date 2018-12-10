@@ -27,15 +27,16 @@ inlineMath: [['$','$']]
 The output of the linear smoothing filter is the mean value of the pixels in the mask. It’s also called mean filter.
 * **application**   
 Mean filter is mainly used for subtle detail removal,
-namely, eliminating the unwanted region smaller than the mask.
-
+namely, eliminating the unwanted region smaller than the mask.  
+* **general equation**   
+   
+$$g(x,y)=\frac{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)}$$ 
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "300" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "300" border="0"></td>
 
 
-* **general equation**      
-$$g(x,y)=\frac{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)}$$  
+ 
  
 
 
