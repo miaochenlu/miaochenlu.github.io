@@ -23,7 +23,7 @@ inlineMath: [['$','$']]
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
-* **Concept** 
+* **Concept**    
 The output of the linear smoothing filter is the mean value of the pixels in the mask. It’s also called mean filter.
 * **application**   
 Mean filter is mainly used for subtle detail removal,
