@@ -30,8 +30,12 @@ Mean filter is mainly used for subtle detail removal,
 namely, eliminating the unwanted region smaller than the mask.
 
 <table border="0"><tr>
-<td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "300" border="0"></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "300" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "300" border="0"></td>
+
+* **general equation**  
+$$g(x,y)=\frac{\sigma{s=-1}{s=a}\sigma{t=-b}{t=b}w(s,t)f(x+s,y+t)}{\sigma{s=-1}{s=a}\sigma{t=-b}{t=b}w(s,t)}$$  
+
 
 </tr></table>
 
