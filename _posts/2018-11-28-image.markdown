@@ -39,14 +39,15 @@ $$
 <td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "300" border="0"></td>
 </tr></table>
 
- ### **Statistical sorting filter**
+### **Statistical sorting filter**
 * **Concept**  
 Statistical filter is a kind of nonlinear spatial filter, whose response is based on the **sorting of pixel value in the mask window**.The value of center pixel depends on the sorting result in the window.  
 The most popular statistical filter is median filter.
 * **Median filter**  
-* Subsititute the center pixel with the median value in the neighborhood.  
-* Provide excellent de-noise ability, which introduce less blurring than the mean filter.
-* Be effective to deal with the pulse noise(or pepper noise) because this kind of noise looks like bright or dark point in the image.
+    * Subsititute the center pixel with the median value in the neighborhood.  
+    * Provide excellent de-noise ability, which introduce less blurring than the mean filter.
+    * Be effective to deal with the pulse noise(or pepper noise) because this kind of noise looks like bright or dark point in the image.  
+
 
 
 
