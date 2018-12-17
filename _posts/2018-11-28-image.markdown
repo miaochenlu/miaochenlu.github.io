@@ -52,7 +52,7 @@ In a $3 \times 3$ neighborhood, there are a series pixel values:
 (21, 100, 99, 22, 20, 102, 97, 101)  
 After sorting:  
 (20, 21, 22, 97, 100, 101, 102)  
-<img src="http//miaochenlu.github.io/picture/picture20191217sortfilter.png">
+<img src="http://miaochenlu.github.io/picture/picture20191217sortfilter.png">
 
 
 
