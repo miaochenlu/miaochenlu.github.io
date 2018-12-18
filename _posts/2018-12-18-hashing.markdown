@@ -1,0 +1,35 @@
+---
+
+layout: post
+
+title: "Hashing"
+
+date: 2018-12-18 12:21:05 +0800
+
+categories: jekyll update
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+1. 散列是一种以常数平均时间执行插入、删除、查找的技术。散列函数将关键字映射到从0到TableSize-1范围中的某个数，剩下要解决冲突问题。
+
+2. 散列函数
+    * $f(x)$ must be easy to compute and minimizes the number of collisions.
+    * $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability(f ( x ) = i ) = 1 / b. Such kind of a hash function is called a uniform hash function.
+
+(Note: TableSize = prime number ---- good for random integer keys)
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+
+[jekyll-gh]: https://github.com/jekyll/jekyll
+
+[jekyll-talk]: https://talk.jekyllrb.com/
