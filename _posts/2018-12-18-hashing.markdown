@@ -60,6 +60,9 @@ Index Hash(const char *Key, int TableSize)
 <td><img src="http://miaochenlu.github.io/picture/picture20181218hash.png" width = "150" border="0"></td>
 </tr></table>
 
+<details>
+  <summary>Click to expand</summary>
+
 ```c
 //
 //  HashTable.h
@@ -166,8 +169,7 @@ void Insert(ElementType Key, HashTable H)
     }
 }
 ```
-
-
+</details>
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
