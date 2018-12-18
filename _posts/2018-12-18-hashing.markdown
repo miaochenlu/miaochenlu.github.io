@@ -24,9 +24,15 @@ inlineMath: [['$','$']]
 
 2. 散列函数
     * $f(x)$ must be easy to compute and minimizes the number of collisions.
-    * $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability(f ( x ) = i ) = 1 / b. Such kind of a hash function is called a uniform hash function.
+    * $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability$(f(x)=i)=1/b$. Such kind of a hash function is called a uniform hash function.
 
-(Note: TableSize = prime number ---- good for random integer keys)
+(Note: TableSize = prime number   good for random integer keys)  
+   
+    1. 直接定址法: 取关键词的某个线性函数值为散列地址
+    $$Hash(key) = a\times key+b$$  
+    2. 除留余数法
+    $$Hash(key) = key mod p$$
+    一般p取素数
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
