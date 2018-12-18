@@ -32,7 +32,7 @@ inlineMath: [['$','$']]
 1. 直接定址法: 取关键词的某个线性函数值为散列地址  
 $$Hash(key) = a\times key+b$$  
 2. 除留余数法  
-$$Hash(key) = key mod p$$  
+$$Hash(key) = key\,mod\,p$$  
 一般p取素数  
 3. 数字分析法: 分析数字关键字在各位上的变化情况，取比较随机的位作为散列地址  
 4. 折叠法:把关键词分割成位数相同的几个部分，然后叠加  
@@ -40,7 +40,8 @@ $56793524-->542+793+056=1391$取$Hash(56693542)=391$
 5. 平方取中法  
 $56793542^2=3225506412905764$取$Hash(56793542)=641$  
 #### 字符关键词的散列函数
-$$\Sigma_{i=0}^{KeySize-1}Key[KeySize-i-1]·32^i$$
+$$\Sigma_{i=0}^{KeySize-1}Key[KeySize-i-1]·32^i$$  
+
 ```c
 Index Hash(const char *Key, int TableSize)
 {
@@ -49,7 +50,7 @@ Index Hash(const char *Key, int TableSize)
         HashVal = (HashVal << 5) + *Key++;
     return HashVal % TableSize
 }
-
+```
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
