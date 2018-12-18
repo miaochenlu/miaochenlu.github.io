@@ -28,7 +28,7 @@ inlineMath: [['$','$']]
 * $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability$(f(x)=i)=1/b$. Such kind of a hash function is called a uniform hash function.
 
 (Note: TableSize = prime number --> good for random integer keys)  
-   
+#### 数字关键词的散列函数  
 1. 直接定址法: 取关键词的某个线性函数值为散列地址  
 $$Hash(key) = a\times key+b$$  
 2. 除留余数法  
@@ -37,7 +37,18 @@ $$Hash(key) = key mod p$$
 3. 数字分析法: 分析数字关键字在各位上的变化情况，取比较随机的位作为散列地址  
 4. 折叠法:把关键词分割成位数相同的几个部分，然后叠加  
 $56793524-->542+793+056=1391$取$Hash(56693542)=391$
-
+5. 平方取中法  
+$56793542^2=3225506412905764$取$Hash(56793542)=641$  
+#### 字符关键词的散列函数
+$$\Sigma_{i=0}^{KeySize-1}Key[KeySize-i-1]·32^i$$
+```c
+Index Hash(const char *Key, int TableSize)
+{
+    unsigned int HashVal = 0;
+    while(*Key != 0) 
+        HashVal = (HashVal << 5) + *Key++;
+    return HashVal % TableSize
+}
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
