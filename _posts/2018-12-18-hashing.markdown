@@ -20,10 +20,10 @@ inlineMath: [['$','$']]
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
-###1. **散列**
+### **散列**
 散列是一种以常数平均时间执行插入、删除、查找的技术。散列函数将关键字映射到从0到TableSize-1范围中的某个数，剩下要解决冲突问题。
 
-###2. **散列函数**
+### **散列函数**
     * $f(x)$ must be easy to compute and minimizes the number of collisions.
     * $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability$(f(x)=i)=1/b$. Such kind of a hash function is called a uniform hash function.
 
@@ -34,6 +34,9 @@ $$Hash(key) = a\times key+b$$
 2. 除留余数法
 $$Hash(key) = key mod p$$
 一般p取素数
+3. 数字分析法: 分析数字关键字在各位上的变化情况，取比较随机的位作为散列地址
+4. 折叠法:把关键词分割成位数相同的几个部分，然后叠加
+
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
