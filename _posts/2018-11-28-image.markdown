@@ -20,6 +20,7 @@ inlineMath: [['$','$']]
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
+
 ## **Basic Concept**
 ### Lens
 <ima src="http://miaochenlu.github.io/picture/pixture20181222lens.png">
@@ -29,7 +30,7 @@ A lens focuses light onto the film
 focus” 
 
     • other points project to a “circle of confusion” in the image  
-    
+
 – Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
@@ -161,8 +162,8 @@ void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_
     free(copypdata);
 }
 ```
-Result:
 
+Result:
 <img src="http://miaochenlu.github.io/picture/picture20181222bila.png">
 ## **图像插值算法：**  
 ### 1、最邻近插值  
@@ -183,8 +184,7 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 <td><img src="http://miaochenlu.github.io/picture/picture20181128linear.png" width = "400" border="0"></td>
 <td><img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png" width = "200" border="0"></td>
 </tr></table>
-<!-- <img src="http://miaochenlu.github.io/picture/picture20181128linear.png" height = "200" width = "200">
-<img src="http://miaochenlu.github.io/picture/picture20181128 linearequation.png"> -->
+
 
 ### 3、双线性插值
 <img src="http://miaochenlu.github.io/picture/picture20181205bilinear.png">
@@ -192,6 +192,7 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 
 ## Simple geometric transformation
 ### 1、Translation 平移 
+
 <img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "300">  
 其逆变换为
 <img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">
