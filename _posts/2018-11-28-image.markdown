@@ -26,24 +26,25 @@ inlineMath: [['$','$']]
 <ima src="http://miaochenlu.github.io/picture/pixture20181222lens.png">
 
 A lens focuses light onto the film   
-– There is a specific distance at which objects are “in
-focus” 
+– There is a specific distance at which objects are "in
+focus"
 
-    • other points project to a “circle of confusion” in the image  
+    -other points project to a “circle of confusion” in the image  
 
 – Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
+
 <table border="0"><tr>
 <td><img src="http:///miaochenlu.github.io/picture/picture20181222aperture.png" width = "600" border="0" ></td>
 <td><p>
 Why not make the aperture as small as possible? 
 <br> 
-▪ The quantity of light is too small.  
+ The quantity of light is too small.  
 <br>
-▪ Lead to diffraction if the aperture is too small.  
+ Lead to diffraction if the aperture is too small.  
 <br>
-▪ Difficult to control.
+ Difficult to control.
 </p></td>
 </tr></table>
 
@@ -65,10 +66,10 @@ Mean filter is mainly used for subtle detail removal,
 namely, eliminating the unwanted region smaller than the mask.  
 * **general equation**     
 
-  
 $$
     g(x,y)=\frac{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)f(x+s,y+t)}{\Sigma_{s=-a}^{s=a}\Sigma_{t=-b}^{t=b}w(s,t)}
 $$
+
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210nonweight.png" width = "300" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/picture20181210weight.png" width = "300" border="0"></td>
@@ -195,14 +196,15 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 ### 1、Translation 平移 
 
 <img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "300">  
+
 其逆变换为
-<img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">
+<img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">  
+
 
 根据其逆变换，我们可以知道平移后的图像中的像素对应的在原来图像中的坐标
 
 
 ```c
-
 void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,int yoffbit,const char*filename )
 {
     int translationwidth = width + abs(xoffbit);
@@ -225,8 +227,6 @@ void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,i
     free(copydata);
 }
 ```
-
-
 
 
 
