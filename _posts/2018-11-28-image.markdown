@@ -55,7 +55,7 @@ object is approximately in focus
 
 ### The principle imaging process of DC(digital camera)
 <table border="0"><tr>
-<td><img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "800" border="0" ></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" ></td>
 <td><p>
  （1）When taking photograph, the light from the scene goes through the lens and
 reaches CCD.<br>
