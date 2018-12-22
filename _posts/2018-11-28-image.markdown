@@ -165,6 +165,7 @@ void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_
 
 Result:
 <img src="http://miaochenlu.github.io/picture/picture20181222bila.png">
+
 ## **图像插值算法：**  
 ### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
@@ -196,9 +197,12 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 <img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "300">  
 其逆变换为
 <img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">
+
 根据其逆变换，我们可以知道平移后的图像中的像素对应的在原来图像中的坐标
 
+
 ```c
+
 void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,int yoffbit,const char*filename )
 {
     int translationwidth = width + abs(xoffbit);
@@ -221,6 +225,9 @@ void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,i
     free(copydata);
 }
 ```
+
+
+
 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
