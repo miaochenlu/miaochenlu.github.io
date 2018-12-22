@@ -29,16 +29,16 @@ inlineMath: [['$','$']]
 
 A lens focuses light onto the film   
 – There is a specific distance at which objects are "in
-focus"
-    ·other points project to a "circle of confusion" in the image  
-Changing the shape of the lens changes this distance
+focus"    
+    * other points project to a "circle of confusion" in the image   
+– Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
 
 <table border="0"><tr>
 <td><img src="http:///miaochenlu.github.io/picture/picture20181222aperture.png" width = "600" border="0" ></td>
 <td><p>
-Why not make the aperture as small as possible? <br>
+<b>Why not make the aperture as small as possible?</b> <br>
 * The quantity of light is too small. <br>
 * Lead to diffraction if the aperture is too small.  <br>
 * Difficult to control.
