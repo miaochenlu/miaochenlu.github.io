@@ -47,7 +47,7 @@ focus"
 
 
 ### depth of field(景深)
-<img src = "http://miaochenlu.github.io/picture/picture20181222depth.png">
+<img src = "http://miaochenlu.github.io/picture/picture20181222depth.png" width = "600">
 
 It can be seen from the picture that changing the aperture size affects depth of field.  
 – A smaller aperture increases the range in which the
@@ -55,7 +55,7 @@ object is approximately in focus
 
 ### The principle imaging process of DC(digital camera)
 
-<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" >
+<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "800">
 
  （1）When taking photograph, the light from the scene goes through the lens and
 reaches CCD.  
