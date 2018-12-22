@@ -20,6 +20,17 @@ inlineMath: [['$','$']]
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
+## **Basic Concept**
+### aperture(光圈)
+<table border="0"><tr>
+<td><img src="http:///miaochenlu.github.io/picture/picture20181222aperture.png" width = "300" border="0" ></td>
+<td><p>
+Why not make the aperture as small as possible?  
+▪ The quantity of light is too small.  
+▪ Lead to diffraction if the aperture is too small.  
+▪ Difficult to control.
+</p></td>
+</tr></table>
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
