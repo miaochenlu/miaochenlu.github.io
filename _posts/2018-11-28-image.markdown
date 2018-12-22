@@ -28,10 +28,10 @@ inlineMath: [['$','$']]
 <img src="http://miaochenlu.github.io/picture/picture20181222lens.png">
 
 A lens focuses light onto the film   
-– There is a specific distance at which objects are "in
+1. There is a specific distance at which objects are "in
 focus"    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * other points project to a "circle of confusion" in the image   
-– Changing the shape of the lens changes this distance
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  other points project to a "circle of confusion" in the image   
+2. Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
 
