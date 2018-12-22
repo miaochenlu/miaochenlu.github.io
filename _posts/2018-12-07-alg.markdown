@@ -2,7 +2,7 @@
 
 layout: post
 
-title: "algorithm"
+title: "data structure and algorithm"
 
 date: 2018-12-07 12:21:05 +0800
 
@@ -19,6 +19,472 @@ inlineMath: [['$','$']]
 });
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+# Linked List
+
+```c
+//
+//  list.h
+//  listtest
+//
+//  Created by jones on 2018/11/17.
+//  Copyright © 2018 jones. All rights reserved.
+//
+
+#ifndef list_h
+#define list_h
+
+#include<stdio.h>
+#define ELementType int
+struct Node;
+typedef struct Node* PtrToNode;
+typedef PtrToNode List;
+typedef PtrToNode Position;
+struct Node
+{
+    ELementType Element;
+    Position Next;
+};
+
+List MakeEmpty(List L);
+int IsEmpty(List L);
+int IsLast(Position P, List L);
+Position Find(ELementType X, List L);
+void Delete(ELementType X, List L);
+void DeleteAll(ELementType X, List L);
+
+Position FindPrevious(ELementType X, List L);
+void Insert(ELementType X, List L, Position P);
+void Delete1(ELementType X, List L);
+void DeleteList(List L);
+Position Header(List L);
+Position First(List L);
+Position Advance(Position P);
+ELementType Retrieve(Position P);
+
+#endif /* list_h */
+```
+
+```c
+//
+//  list.c
+//  listtest
+//
+//  Created by jones on 2018/11/17.
+//  Copyright © 2018 jones. All rights reserved.
+//
+
+#include "list.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+List MakeEmpty(List L)
+{
+    DeleteList(L);
+    return L;
+}
+//Return True if L is empty
+int IsEmpty(List L)
+{
+    return L->Next == NULL;
+}
+
+//Return true if P is the last position in list L
+//parameter L is unused in this implementation
+int IsLast(Position P, List L)
+{
+    return P->Next == NULL;
+}
+
+//Return Position of X in L; NULL if not find
+Position Find(ELementType X, List L)
+{
+    Position P;
+    P = L->Next;
+    if(P != NULL && P->Element != X)
+        P = P->Next;
+    return P;
+}
+
+//Delete first occurence of X from list
+//Assume use of a header node *
+void Delete(ELementType X,List L)
+{
+    Position P, TmpCell;
+    
+    P = FindPrevious(X, L);
+    if(!IsLast(P, L)) {
+        TmpCell = P->Next;
+        P->Next = TmpCell->Next;
+        free(TmpCell);
+    }
+}
+
+//Instead of usign FindPrevious, use node* pre, *cur
+void Delete1(ELementType X, List L)
+{
+    Position pre, cur;
+    for(pre = L, cur = L->Next; cur; pre = cur, cur = cur->Next) {
+        if(cur->Element == X) {
+            Position Tmpcell = cur;
+            pre->Next = Tmpcell->Next;
+            free(Tmpcell);
+            break;
+        }
+    }
+}
+
+Position FindPrevious(ELementType X, List L)
+{
+    Position P;
+    P = L;
+    while(P->Next != NULL && P->Next->Element != X)
+        P=P->Next;
+    return P;
+}
+//Delete all occurence of X from list
+void DeleteAll(ELementType X, List L)
+{
+    Position pre, cur;
+    for(pre = L, cur = L->Next; cur; ) {
+        Position TmpCell;
+        if(cur->Element == X) {
+            TmpCell = cur;
+            pre->Next = TmpCell->Next;
+            cur = TmpCell->Next;
+            free(TmpCell);
+        }
+        else {
+            pre = cur;
+            cur = cur->Next;
+        }
+    }
+}
+
+//Insert after legal position P
+//Header implementation assumed
+//Parameter L is unused in this implementation
+void Insert(ELementType X, List L, Position P)
+{
+    Position TmpCell;
+    TmpCell = (Position)malloc(sizeof(struct Node));
+    if(TmpCell == NULL) {
+        printf("Out of space");
+        return;
+    }
+    TmpCell->Element = X;
+    TmpCell->Next = P->Next;
+    P->Next = TmpCell;
+}
+
+void DeleteList(List L)
+{
+    Position P, tmp;
+    
+    P = L->Next;
+    L->Next = NULL;
+    while(P != NULL){
+        tmp = P->Next;
+        free(P);
+        P=tmp;
+    }
+}
+
+```
+
+
+# Priority Queue
+```c
+//
+//  main.c
+//  Heap
+//
+//  Created by jones on 2018/11/26.
+//  Copyright © 2018 jones. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int
+#define MinData -1000
+
+typedef struct HeapStruct *PriorityQueue;
+struct HeapStruct
+{
+    ElementType* Elements;
+    int Capacity;
+    int Size;
+};
+
+PriorityQueue Initialize(int MaxElements)
+{
+    PriorityQueue H;
+    //为Hw分配存储空间  此时Elements只有指针空间
+    H = (PriorityQueue)malloc(sizeof(struct HeapStruct));
+    //为Elements分配空间
+    H->Elements = (ElementType*)malloc((MaxElements+1)*sizeof(ElementType));
+    //H初始化
+    H->Capacity = MaxElements;
+    H->Size = 0;
+    H->Elements[0] = MinData;
+    return H;
+}
+
+void PercolateUp(int p, PriorityQueue H)
+{
+    int element = H->Elements[p];
+    int i;
+    for(i = p; H->Elements[i/2] > element; i /= 2)
+        H->Elements[i] = H->Elements[i / 2];
+    
+    H->Elements[i] = element;
+}
+
+void PercolateDown(int p, PriorityQueue H)
+{
+    int child;
+    int i;
+    ElementType element = H->Elements[p];
+    for(i = p; i * 2 <= H->Size; i = child) {
+        //choose a child that has smaller key
+        child = i * 2;
+        if(child != H->Size && H->Elements[child+1] < H->Elements[child])
+            child++;
+        //percolata down
+        if(element > H->Elements[child])
+            H->Elements[i] = H->Elements[child];
+        else break;
+    }
+    H->Elements[i] = element;
+}
+
+void Insert(ElementType X, PriorityQueue H)
+{
+    int i;
+    //插入元素X,size先加一，然后上滤，如果父亲比较大，则把父亲移下来
+    //如果比X小，就跳出循环
+    for(i = ++H->Size; H->Elements[i/2] > X; i /= 2)
+        H->Elements[i] = H->Elements[i/2];
+    
+    H->Elements[i] = X;
+}
+
+ElementType DeleteMin(PriorityQueue H)
+{
+    int i, child;
+    ElementType MinElement = H->Elements[1];
+    ElementType lastElement = H->Elements[H->Size--];
+    
+    for(i = 1; i * 2 <= H->Size; i = child) {
+        //找出儿子中较小的那一个进行下滤
+        child = i * 2;
+        if(child != H->Size && H->Elements[child+1] < H->Elements[child])
+            child++;
+        //H->Elements[i]的值是lastElement,如果lastElement大于它孩子的值，则进行下滤，否则跳出循环
+        if(lastElement > H->Elements[child])
+            H->Elements[i] = H->Elements[child];
+        else break;
+    }
+    
+    H->Elements[i] = lastElement;
+    return MinElement;
+}
+
+void PrintHeap(PriorityQueue H)
+{
+    int i;
+    for(i = 1; i <= H->Size; i++)
+        printf("%d ",H->Elements[i]);
+}
+
+void BuildHeap(PriorityQueue H)
+{
+    int N;
+    int i;
+    scanf("%d", &N);
+    H->Size = N;
+    for(i = 1; i <= N; i++)
+        scanf("%d", &H->Elements[i]);
+    
+    for(i = N/2; i > 0; i--)
+        PercolateDown(i, H);
+}
+
+void Free(PriorityQueue H)
+{
+    free(H->Elements);
+    free(H);
+}
+
+int main()
+{
+    PriorityQueue H = Initialize(30);
+    BuildHeap(H);
+    PrintHeap(H);
+    printf("\n");
+    Insert(3, H);
+    PrintHeap(H);
+    printf("\n");
+    DeleteMin(H);
+    PrintHeap(H);
+    printf("\n");
+    Free(H);
+}
+
+```
+
+
+# Hashing
+### **散列**  
+散列是一种以常数平均时间执行插入、删除、查找的技术。散列函数将关键字映射到从0到TableSize-1范围中的某个数，剩下要解决冲突问题。
+
+### **散列函数**  
+* $f(x)$ must be easy to compute and minimizes the number of collisions.
+* $f(x)$ should be unbiased. That is, for any x and any i, we have that Probability$(f(x)=i)=1/b$. Such kind of a hash function is called a uniform hash function.
+
+(Note: TableSize = prime number --> good for random integer keys)  
+#### 数字关键词的散列函数  
+1. 直接定址法: 取关键词的某个线性函数值为散列地址  
+$$Hash(key) = a\times key+b$$  
+2. 除留余数法  
+$$Hash(key) = key\,mod\,p$$  
+一般p取素数  
+3. 数字分析法: 分析数字关键字在各位上的变化情况，取比较随机的位作为散列地址  
+4. 折叠法:把关键词分割成位数相同的几个部分，然后叠加  
+$56793524-->542+793+056=1391$取$Hash(56693542)=391$
+5. 平方取中法  
+$56793542^2=3225506412905764$取$Hash(56793542)=641$  
+
+#### 字符关键词的散列函数
+$$\Sigma_{i=0}^{KeySize-1}Key[KeySize-i-1]·32^i$$  
+
+```c
+Index Hash(const char *Key, int TableSize)
+{
+    unsigned int HashVal = 0;
+    while(*Key != 0) 
+        HashVal = (HashVal << 5) + *Key++;
+    return HashVal % TableSize
+}
+```
+
+### 冲突解决方法
+1. 分离链接法  
+<table border="0"><tr>
+<td><p>将散列到同一个值的所有元素保留到一个表中</p></td>
+<td><img src="http://miaochenlu.github.io/picture/picture20181218hash.png" width = "150" border="0"></td>
+</tr></table>
+
+<!-- <details>
+  <summary>Click to expand</summary> -->
+
+```c
+//
+//  HashTable.h
+//  HashTable.c
+//
+//  Created by jones on 2018/12/4.
+//  Copyright © 2018 jones. All rights reserved.
+//
+
+#ifndef HashTable_h
+#define HashTable_h
+#define ElementType int
+struct ListNode;
+typedef  struct ListNode *Position;
+struct HashTbl;
+typedef struct HashTbl *HashTable;
+
+HashTable InitializeTable(int TableSize);
+void DestroyTable(HashTable H);
+Position Find(ElementType Key, HashTable H);
+void Insert(ElementType Key, HashTable H);
+ElementType Retrieve(Position P);
+#endif /* HashTable_h */
+
+
+#include <stdio.h>
+#include "HashTable.h"
+#include <stdlib.h>
+
+struct ListNode
+{
+    ElementType Element;
+    Position Next;
+};
+typedef Position List;
+
+struct HashTbl {
+    int TableSize;
+    List *TheLists;//TheLists是指向ListNode的指针的指针
+};
+
+int NextPrime(int TableSize)
+{
+    if(TableSize == 1) return 2;
+    int flag;
+    for(int j = TableSize;; j++) {
+        for(int i = 2; i * i <= TableSize; i++) {
+            if(j % i == 0) {
+                flag = 0;
+                break;
+            }
+        }
+        if(flag == 1) return j;
+    }
+}
+HashTable InitializeTable(int TableSize)
+{
+    HashTable H;
+    int i;
+    
+    H = (HashTable)malloc(sizeof(struct HashTbl));
+    H->TableSize = NextPrime(TableSize);
+    //为TheLists分配空间
+    H->TheLists = (List*)malloc(sizeof(List) * H->TableSize);
+    //设置哑结点
+    for(i = 0; i < H->TableSize; i++) {
+        H->TheLists[i] = (Position)malloc(sizeof(struct ListNode));
+        H->TheLists[i]->Next = NULL;
+    }
+    
+    return H;
+}
+
+ElementType Hash(ElementType Key, int TableSize)
+{
+    return Key % TableSize;
+}
+
+Position Find(ElementType Key, HashTable H)
+{
+    Position P;
+    List L;
+    //根据Hash结果找出位置
+    L = H->TheLists[Hash(Key,H->TableSize)];
+    P = L->Next;
+    while (P != NULL && P->Element) {
+        P = P->Next;
+    }
+    return P;
+    //没找到的话返回的是NULL
+}
+
+void Insert(ElementType Key, HashTable H)
+{
+    Position Pos, NewCell;
+    List L;
+    
+    Pos = Find(Key, H);
+    if(Pos == NULL) {
+        NewCell = (Position)malloc(sizeof(struct ListNode));
+        L = H->TheLists[Hash(Key, H->TableSize)];
+        NewCell->Next = L->Next;
+        L->Next = NewCell;
+    }
+}
+```
 
 快速幂取模算法的推导 $a^b\, mod\, c=?$  
 将10进制的b转化为二进制的表达式:$$b_{(10)}=a_n a_{n-1} \cdots a_1 a_{0(2)}$$  
