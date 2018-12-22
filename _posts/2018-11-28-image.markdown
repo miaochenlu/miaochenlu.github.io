@@ -54,27 +54,26 @@ It can be seen from the picture that changing the aperture size affects depth of
 object is approximately in focus
 
 ### The principle imaging process of DC(digital camera)
-<table border="0"><tr>
-<td><img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" ></td>
-<td><p>
+
+<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" >
+
  （1）When taking photograph, the light from the scene goes through the lens and
-reaches CCD.<br>
+reaches CCD.  
  （2）When CCD being exposed, the photodiode is stimulated to release charges,
-and produces electrical signals.<br>
+and produces electrical signals.  
  （3）CCD controlling chip controls the electric flow through the controlling signal
 circuit in photoperceptive component. CCD will collect such electrical signals and
-output them to an amplifier.<br>
+output them to an amplifier.  
  （4）After amplifying and filtering, the electrical signals reach ADC. And ADC
-transfer such electrical signals (continuous) to digital ones (discrete). The value of digital signal is proportional to the intensity of electrical signal and voltage. These values are corresponding to those of an image.<br>
+transfer such electrical signals (continuous) to digital ones (discrete). The value of digital signal is proportional to the intensity of electrical signal and voltage. These values are corresponding to those of an image.  
  （5）But the above data cannot be treated as image directly. They will be further
 processed by DSP (digital signal processing). In DSP, color correction and white
 balance will be performed to obtain a qualified image, and the image will be
 encoded into the supported format and resolution, which can be stored as a image
-file.<br>
+file.  
  （6）After the above steps, the image file appears on your memory card and can
-be previewed.<br>
-</p></td>
-</tr></table>
+be previewed.  
+
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
