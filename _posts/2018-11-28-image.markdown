@@ -26,8 +26,10 @@ inlineMath: [['$','$']]
 
 A lens focuses light onto the film   
 – There is a specific distance at which objects are “in
-focus”  
+focus” 
+
     • other points project to a “circle of confusion” in the image  
+    
 – Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
@@ -44,11 +46,14 @@ Why not make the aperture as small as possible?
 </p></td>
 </tr></table>
 
+
 ### depth of field(景深)
 <img src = "http://miaochenlu.github.io/picture/picture20181222depth.png">
+
 It can be seen from the picture that changing the aperture size affects depth of field.  
 – A smaller aperture increases the range in which the
 object is approximately in focus
+
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
