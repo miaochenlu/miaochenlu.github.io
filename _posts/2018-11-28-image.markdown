@@ -21,30 +21,25 @@ inlineMath: [['$','$']]
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
 
+
 ## **Basic Concept**
 ### Lens
-<ima src="http://miaochenlu.github.io/picture/pixture20181222lens.png">
+
+<ima src="http://miaochenlu.github.io/picture/picture20181222lens.png">
 
 A lens focuses light onto the film   
 – There is a specific distance at which objects are "in
 focus"
 
-    -other points project to a “circle of confusion” in the image  
-
-– Changing the shape of the lens changes this distance
+    -other points project to a "circle of confusion" in the image  
+Changing the shape of the lens changes this distance
 
 ### aperture(光圈)
 
 <table border="0"><tr>
 <td><img src="http:///miaochenlu.github.io/picture/picture20181222aperture.png" width = "600" border="0" ></td>
 <td><p>
-Why not make the aperture as small as possible? 
-<br> 
- The quantity of light is too small.  
-<br>
- Lead to diffraction if the aperture is too small.  
-<br>
- Difficult to control.
+Why not make the aperture as small as possible? <br> The quantity of light is too small. <br>Lead to diffraction if the aperture is too small.  <br>Difficult to control.
 </p></td>
 </tr></table>
 
@@ -164,7 +159,7 @@ void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_
 }
 ```
 
-Result:
+Result:  
 <img src="http://miaochenlu.github.io/picture/picture20181222bila.png">
 
 ## **图像插值算法：**  
