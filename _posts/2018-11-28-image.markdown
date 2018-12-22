@@ -56,7 +56,7 @@ object is approximately in focus
 ### The principle imaging process of DC(digital camera)
 
 <img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "600" align = "center">
-
+(CCD:可以称为CCD图像传感器,也叫图像控制器。CCD是一种半导体器件,能够把光学影像转化为电信号)  
  （1）When taking photograph, the light from the scene goes through the lens and
 reaches CCD.  
  （2）When CCD being exposed, the photodiode is stimulated to release charges,
