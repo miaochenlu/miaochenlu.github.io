@@ -54,8 +54,82 @@ After sorting:
 (20, 21, 22, 97, 100, 101, 102)  
 <img src="http://miaochenlu.github.io/picture/picture20191217sortfilter.png">
 
+### **Bilateral filter**
+* **Gereral idea** 
+An image has two main characteristics
+    * The space domain S, which is the set of possible
+    positions in an image. This is related to the
+    resolution, i.e., the number of rows and columns in
+    the image.
+    * The intensity domain R, which is the set of
+    possible pixel values. The number of bits used to
+    represent the pixel value may vary. Common pixel
+    representations are unsigned bytes (0 to 255) and
+    floating point  
 
+Every sample is replaced by a weighted average of its neighbors,  These weights reflect two forces
+* How close are the neighbor and the center sample, so that
+larger weight to closer samples,
+* How similar are the neighbor and the center sample –
+larger weight to similar samples.   
+All the weights should be normalized to preserve the
+local mean.
 
+```c
+void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_s, double sigma_r, const char *filename)
+{
+    int i, j;
+    int maskh,maskw;
+    U8 BytePerPix = bitCountPerPix >> 3;
+    U32 pitch = width * BytePerPix;
+
+    U32 bmppitch = ((width * bitCountPerPix + 31) >> 5) << 2;
+    U8 *copypdata = (U8*)malloc(height*bmppitch);
+    memset(copypdata, 0, bmppitch*height);
+    memcpy(copypdata, pdata, height*bmppitch);
+
+    double wred, wblue, wgreen;
+    double ws;
+    double wr_green, wr_blue, wr_red;
+    double pixelgreen, pixelblue, pixelred;
+    for(j = height - 22; j >= 20; j--) {
+        for(i = 20; i <= width - 22; i++) {
+            wred = 0; wblue = 0; wgreen = 0; 
+            ws = 0; 
+            wr_green = 0; wr_blue = 0; wr_red = 0;
+            pixelgreen = 0; pixelblue = 0; pixelred = 0;
+
+            for(maskh = j + 21; maskh >= j - 20; maskh--) {
+                for(maskw = i - 20; maskw <= i + 21; maskw++) {
+                    ws = exp(-((maskh-j)*(maskh-j)+(maskw-i)*(maskw-i))/(2*sigma_s*sigma_s));
+                    double differencegreen = (pdata[maskh*pitch + maskw*BytePerPix + 0]-pdata[j*pitch + i*BytePerPix + 0]);
+                    double differenceblue = (pdata[maskh*pitch + maskw*BytePerPix + 1]-pdata[j*pitch + i*BytePerPix + 1]);
+                    double differencered = (pdata[maskh*pitch + maskw*BytePerPix + 2]-pdata[j*pitch + i*BytePerPix + 2]);
+                    wr_green = exp(-(differencegreen*differencegreen)/(2*sigma_r*sigma_r));
+                    wr_blue = exp(-(differenceblue*differenceblue)/(2*sigma_r*sigma_r));
+                    wr_red = exp(-(differencered*differencered)/(2*sigma_r*sigma_r));
+                    wgreen += ws * wr_green;
+                    wblue += ws * wr_blue;
+                    wred += ws * wr_red;
+                    pixelgreen += wr_green * ws * pdata[maskh*pitch + maskw*BytePerPix + 0];
+                    pixelblue += wr_blue * ws * pdata[maskh*pitch + maskw*BytePerPix + 1];
+                    pixelred += wr_red * ws * pdata[maskh*pitch + maskw*BytePerPix + 2];
+                }
+            }
+            copypdata[j*pitch + i*BytePerPix + 0] = pixelgreen / wgreen;
+            copypdata[j*pitch + i*BytePerPix + 1] = pixelblue / wblue;
+            copypdata[j*pitch + i*BytePerPix + 2] = pixelred / wred;
+
+        }
+    }
+ 
+    GenerateBmpFile(copypdata,bitCountPerPix, width, height, filename);
+    free(copypdata);
+}
+```
+Result:
+
+<img src="http://miaochenlu.github.io/picture/picture20181222bila.png">
 ## **图像插值算法：**  
 ### 1、最邻近插值  
 为了计算⼏何变换后新图像中某⼀点P’处的像
