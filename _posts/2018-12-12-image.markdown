@@ -55,7 +55,8 @@ object is approximately in focus
 
 ### The principle imaging process of DC(digital camera)
 
-<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "600" align = "center">
+<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "600" align = "center">  
+
 (CCD:可以称为CCD图像传感器,也叫图像控制器。CCD是一种半导体器件,能够把光学影像转化为电信号)  
  （1）When taking photograph, the light from the scene goes through the lens and
 reaches CCD.  
@@ -74,6 +75,14 @@ file.
  （6）After the above steps, the image file appears on your memory card and can
 be previewed.  
 
+## Color Space
+### RGB color model
+ RGB color model is a unit cube in a Cartesian coordinates system.
+▪ The magnitudes of each primary color are equivalent on the main diagonal line, which lead to the white color from darkness to brightness, i.e., grayscale.
+▪ (0,0,0)-dark, (1,1,1)-bright. The other 6 corners are respectively <span style="color:red;">red</span>, <span style="color:yellow;">yellow </span>, <span style="color:cyan;">cyan </span>,<span style="color:blue;">blue </span> and <span style="color:magenta;">magenta </span>.  
+▪ RGB is a subset of CIE primary color space.  
+▪ RGB is usually used in Color cathode ray tube and Color raster graphics display
+(computer , TV). 
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
