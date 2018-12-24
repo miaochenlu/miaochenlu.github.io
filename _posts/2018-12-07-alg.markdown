@@ -486,6 +486,12 @@ void Insert(ElementType Key, HashTable H)
 }
 ```
 
+### 图论算法
+## Basic Concept
+一个图G = (V,E)由
+* 顶点集V
+* 边集E(每一条边是一个点对$(v,w),v,w\belong V$)
+
 快速幂取模算法的推导 $a^b\, mod\, c=?$  
 将10进制的b转化为二进制的表达式:$$b_{(10)}=a_n a_{n-1} \cdots a_1 a_{0(2)}$$  
 得  

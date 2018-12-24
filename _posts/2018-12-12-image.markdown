@@ -77,12 +77,12 @@ be previewed.
 
 ## Color Space
 ### RGB color model
- RGB color model is a unit cube in a Cartesian coordinates system.
-▪ The magnitudes of each primary color are equivalent on the main diagonal line, which lead to the white color from darkness to brightness, i.e., grayscale.
+ RGB color model is a unit cube in a Cartesian coordinates system.  
+▪ The magnitudes of each primary color are equivalent on the main diagonal line, which lead to the white color from darkness to brightness, i.e., grayscale.  
 ▪ (0,0,0)-dark, (1,1,1)-bright. The other 6 corners are respectively <span style="color:red;">red</span>, <span style="color:yellow;">yellow </span>, <span style="color:cyan;">cyan </span>,<span style="color:blue;">blue </span> and <span style="color:magenta;">magenta </span>.  
 ▪ RGB is a subset of CIE primary color space.  
-▪ RGB is usually used in Color cathode ray tube and Color raster graphics display
-(computer , TV). 
+▪ RGB is usually used in <i>Color cathode ray tube and Color raster graphics display
+(computer , TV).</i> 
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
