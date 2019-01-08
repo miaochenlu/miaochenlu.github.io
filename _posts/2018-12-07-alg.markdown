@@ -298,6 +298,8 @@ void PrintHeap(PriorityQueue H)
         printf("%d ",H->Elements[i]);
 }
 
+
+//这个建堆操作是O(N)的，如果用Insert函数建堆，最坏O(NlogN)，平均O(N)
 void BuildHeap(PriorityQueue H)
 {
     int N;
@@ -306,7 +308,7 @@ void BuildHeap(PriorityQueue H)
     H->Size = N;
     for(i = 1; i <= N; i++)
         scanf("%d", &H->Elements[i]);
-    
+    //从倒数第二层percolatedown
     for(i = N/2; i > 0; i--)
         PercolateDown(i, H);
 }
@@ -521,32 +523,74 @@ $$=a^{a_n·2^n}·a^{a_{n-1}·2^{n-1}}·\cdots a^{a_1 ·2}·a^{a_0} $$
 $$a^b\, mod\, c=a^{a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0}mod\, c$$
 $$=\left[a^{a_n·2^n}mod\,c\right]·\left[a^{a_{n-1}·2^{n-1}}mod\,c\right]·\cdots \left[a^{a_1 ·2}mod\, c\right]·\left[a^{a_0}mod\,c\right]$$
 
+## ** Disjoint Set **
 ```c
-int Pow_Recursive(int a, int b) 
+#include <stdio.h>
+#define NumSets 100
+typedef int DisjSets[NumSets + 1];
+typedef int SetType;
+typedef int ElementType;
+
+void Initialize(DisjSets S)
 {
-    if(b == 0) return 1;
-    if(b & 1)
-        return a * Pow_Recursive(a, b - 1);
+    int i;
+    for(i = NumSets; i > 0; i--) {
+        S[i] = 0;
+    }
+}
+
+void SetUnion(DisjSets S, SetType Root1, SetType Root2)
+{
+    S[Root2] = Root1;
+}
+
+ElementType Find(ElementType X, DisjSets S)
+{
+    //S[X] <= 0说明S没有父亲，说明属于X集
+    if(S[X] <= 0) return X; 
+    else return Find(S[X], S);//如果有父亲，一直返回父亲
+}
+
+/*用Union by rank(size也差不多)和pathCompression,进行N次
+Union和M次Find的运行时间为O(N+MlogN)*/
+void SetUnion_bySize(DisjSets S, SetType Root1, SetType Root2)
+{
+    if(-S[Root1] > -S[Root2]) {
+        S[Root2] = Root1;
+        S[Root1] += S[Root2];
+    }
     else {
-        int t = Pow_Recursive(a, b / 2);
-        return t * t;
+        S[Root1] = Root2;
+        S[Root2] += S[Root1];
     }
 }
-```
-```c
-int Pow(int a, int b)
+SetType Find_pathCompression(ElementType X, DisjSets S)
 {
-    int result = 1;
-    int base = a;
-    while(b) {
-        if(b & 1)  
-            result *= base ;
-        base *= base;
-        b >>= 1;
+    if(S[X] <= 0) return X;//如果他是父亲，则返回自己
+    else return S[X] = Find(S[X], S);//若他有父亲，则把他接到顶端的父亲
+}
+SetType Find_pathCompression_Norecursice(ElementType X, DisjSets S)
+{
+    ElementType root, trail, lead;
+    for(root = X; S[root] > 0; root = S[root]);//找到X的root
+    for(trail = X; trail != root; trail = lead) {
+        lead = S[trail];
+        S[trail] = root;
     }
-    return result;
+    return root;
 }
 ```
+//Union by Height与Path Compression不兼容
+void SetUnion_byHeight(DisjSets S, SetType Root1, SetType Root2)
+{
+    if(-S[Root2] > -S[Root1])   //Root2 高度更高
+        S[Root1] = Root2;       //把Root1接到Root2上
+    else {
+        if(S[Root1] == S[Root2])
+            S[Root1] = S[Root1] - 1;//相当于正数的加一
+        S[Root2] = Root1;
+    }
+}
 
 
 ## 排序算法
@@ -599,7 +643,7 @@ void Insertion_Sort(ElementType A[], int N)
     int Tmp;
     for(P = 1; P < N; P++) {
         Tmp = A[P];         //摸下一张牌
-        for(i = P; i > 0 &&A[i-1] > A[i]; i--) {
+        for(i = P; i >= 1 &&A[i-1] > A[i]; i--) {
             A[i] = A[i-1];  //移出空位
         }
         A[i] = Tmp;         //新牌落位
