@@ -523,7 +523,9 @@ $$=a^{a_n·2^n}·a^{a_{n-1}·2^{n-1}}·\cdots a^{a_1 ·2}·a^{a_0} $$
 $$a^b\, mod\, c=a^{a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0}mod\, c$$
 $$=\left[a^{a_n·2^n}mod\,c\right]·\left[a^{a_{n-1}·2^{n-1}}mod\,c\right]·\cdots \left[a^{a_1 ·2}mod\, c\right]·\left[a^{a_0}mod\,c\right]$$
 
-## ** Disjoint Set **
+
+
+### **Disjoint Set**
 ```c
 #include <stdio.h>
 #define NumSets 100
@@ -579,7 +581,7 @@ SetType Find_pathCompression_Norecursice(ElementType X, DisjSets S)
     }
     return root;
 }
-```
+
 //Union by Height与Path Compression不兼容
 void SetUnion_byHeight(DisjSets S, SetType Root1, SetType Root2)
 {
@@ -591,7 +593,7 @@ void SetUnion_byHeight(DisjSets S, SetType Root1, SetType Root2)
         S[Root2] = Root1;
     }
 }
-
+```
 
 ## 排序算法
 * **冒泡排序**
