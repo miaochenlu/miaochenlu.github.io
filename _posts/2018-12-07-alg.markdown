@@ -511,7 +511,7 @@ void Insert(ElementType Key, HashTable H)
 #### 无权图单源最短路径
 按照递增（非递减）的顺序找出各个顶点的最短路径
 
-快速幂取模算法的推导 $a^b\, mod\, c=?$  
+<!-- 快速幂取模算法的推导 $a^b\, mod\, c=?$  
 将10进制的b转化为二进制的表达式:$$b_{(10)}=a_n a_{n-1} \cdots a_1 a_{0(2)}$$  
 得  
 $$ b=a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0 $$ 
@@ -521,7 +521,7 @@ $$=a^{a_n·2^n}·a^{a_{n-1}·2^{n-1}}·\cdots a^{a_1 ·2}·a^{a_0} $$
 
 所以     
 $$a^b\, mod\, c=a^{a_n·2^n+a_{n-1}·2^{n-1}+\cdots+a_1·2^1+a_0}mod\, c$$
-$$=\left[a^{a_n·2^n}mod\,c\right]·\left[a^{a_{n-1}·2^{n-1}}mod\,c\right]·\cdots \left[a^{a_1 ·2}mod\, c\right]·\left[a^{a_0}mod\,c\right]$$
+$$=\left[a^{a_n·2^n}mod\,c\right]·\left[a^{a_{n-1}·2^{n-1}}mod\,c\right]·\cdots \left[a^{a_1 ·2}mod\, c\right]·\left[a^{a_0}mod\,c\right]$$ -->
 
 
 
