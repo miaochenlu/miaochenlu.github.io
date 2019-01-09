@@ -91,7 +91,9 @@ Otsu算法也称最大类间差法
 按图像的灰度特性将图像分成 **背景**和 **前景**，前景和背景的 **类间方差**最大，说明构成图像的两部分差别越大，当部分前景错分为背景或部分背景错分为前景都会导致两部分差别变小。
 
 * 推导  
-$$W_f=\frac{N_Fgrd}{N},W_b=\frac{N_Bgrd}{N},W_f+W_b=1$$
+<img src="http://miaochenlu.github.io/picture/picture20190109otsudeduct.png">
+
+
 ```c
 int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     int Pn[256]={0};
