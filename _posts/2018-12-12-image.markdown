@@ -84,6 +84,66 @@ be previewed.
 ▪ RGB is usually used in <i>Color cathode ray tube and Color raster graphics display
 (computer , TV).</i> 
 
+
+## Otsu 大津算法
+Otsu算法也称最大类间差法  
+* 思想  
+按图像的灰度特性将图像分成 **背景**和 **前景**，前景和背景的 **类间方差**最大，说明构成图像的两部分差别越大，当部分前景错分为背景或部分背景错分为前景都会导致两部分差别变小。
+
+* 推导  
+$$W_f=\frac{N_Fgrd}{N},W_b=\frac{N_Bgrd}{N},W_f+W_b=1$$
+```c
+int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
+    int Pn[256]={0};
+    U32 bmppitch = ((width*bitCountPerPix + 31) >> 5) << 2;
+    U32 filesize = bmppitch*height;
+    U8 BytePerPix = bitCountPerPix >> 3;
+    U32 pitch = width * BytePerPix;
+    int h,w;
+    for(h = height-1; h >= 0; h--) {
+        for(w = 0; w < width; w++) {
+            Pn[pData[h*pitch + w*BytePerPix + 0]]++;
+        }
+        
+    }
+    U32 pixelCount = width * height;
+    U32  NumberSmall = 0;
+    U32  NumberBig = 0;
+    double MaxGapSquare = 0;
+    double TmpGapSquare = 0;
+    U32 m1k = 0;
+    U32 m2k = 0;
+    U32 mgk = 0;
+    U32 MaxK = 0;
+    U32 k;
+    for(k = 0; k < 256; k++) {
+        NumberSmall = 0;
+        NumberBig = 0;
+        TmpGapSquare = 0;
+        m1k = 0;
+        m2k = 0;
+        mgk = 0;
+        for(int i = 0; i <=k; i++) {
+            NumberSmall += Pn[i];
+            m1k += i * Pn[i];
+        }
+        for(int j = k+1; j < 256; j++) {
+            NumberBig +=Pn[j];
+            m2k += j * Pn[j];
+        }
+        mgk = m1k + m2k;
+        TmpGapSquare = ((mgk * 1.0 / pixelCount) * (NumberSmall * 1.0 / pixelCount) - m1k * 1.0 / pixelCount) *
+                        ((mgk * 1.0 / pixelCount) * (NumberSmall * 1.0 / pixelCount) - m1k * 1.0 / pixelCount) /
+                        ((NumberSmall * 1.0 / pixelCount) * (1 - NumberSmall * 1.0 / pixelCount));
+        if(TmpGapSquare > MaxGapSquare) 
+        {
+            MaxGapSquare = TmpGapSquare;
+            MaxK = k;
+        }
+    }
+    return MaxK;
+}
+```
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
 * **Concept**    
