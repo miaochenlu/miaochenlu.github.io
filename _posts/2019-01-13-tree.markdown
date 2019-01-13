@@ -1,0 +1,155 @@
+---
+
+layout: post
+
+title: "data structure and algorithm"
+
+date: 2018-12-07 12:21:05 +0800
+
+categories: jekyll update
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int ElementType;
+typedef struct TreeNode *Tree;
+struct TreeNode
+{
+    ElementType Element;
+    Tree Left;
+    Tree Right;
+};
+
+Tree CreateBiTree(){
+    
+    int element;
+    Tree T;
+    scanf("%d",&element);
+    
+    if(element==-1)
+        T=NULL;
+    
+    else {
+        T = (Tree)malloc(sizeof(struct TreeNode));
+        T->Element = element;
+        T->Left = CreateBiTree();//递归建树（根左右：先序建树）
+        T->Right = CreateBiTree();
+        
+    }
+    return T;
+}
+
+void PrintNode( Tree NodePtr )
+{
+    printf(" %d", NodePtr->Element);
+}
+
+void Level_Order(Tree T)
+{
+    if(T == 0) return;
+    int QueueLength = 1000;
+    Tree Queue[QueueLength];
+    int front = 0, rear = 0;
+    
+    Queue[rear++] = T;
+    while(front != rear) {
+        Tree TmpNode = Queue[front];
+        int element = TmpNode->Element;
+        Queue[front++] = 0;
+        if(TmpNode->Left) Queue[rear++] = TmpNode->Left;
+        if(TmpNode->Right) Queue[rear++] = TmpNode->Right;
+        if(front!=rear)
+            printf("%d ",element);
+        else printf("%d",element);
+    }
+}
+
+void InOrder(Tree T)
+{
+    if(T) {
+        InOrder(T->Left);
+        printf("%d ",T->Element);
+        InOrder(T->Right);
+    }
+}
+void Iterative_InOrder(Tree T)
+{
+    if(T == 0) return;
+    Tree Stack[1000];
+    int top = -1;
+    for(;;) {
+        for(; T; T = T->Left)
+            Stack[++top] = T;
+        
+        if(top == -1) break;
+        //top
+        T = Stack[top];
+        printf("%d ",Stack[top]->Element);
+        //pop
+        Stack[top--] = 0;
+        T = T->Right;
+    }
+}
+
+void preOrder(Tree T)
+{
+    if(T) {
+        printf("%d ",T->Element);
+        preOrder(T->Left);
+        preOrder(T->Right);
+        
+    }
+}
+
+void Iterative_PreOrder(Tree T)
+{
+    if(T == 0) return;
+    Tree Stack[1000];
+    int top = -1;
+    for(;;) {
+        for(; T;) {
+            printf("%d ",T->Element);
+            if(T->Right)
+                Stack[++top] = T->Right;
+            T = T->Left;
+        }
+        if(top == -1) break;
+        T = Stack[top--];
+    }
+}
+
+void postOrder(Tree T)
+{
+    if(T) {
+        postOrder(T->Left);
+        postOrder(T->Right);
+        printf("%d ",T->Element);
+    }
+}
+
+int main()
+{
+    Tree T = CreateBiTree();
+    // Iter_InOrder(T);
+    Iterative_PreOrder(T);
+}
+```
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+
+[jekyll-gh]: https://github.com/jekyll/jekyll
+
+[jekyll-talk]: https://talk.jekyllrb.com/
