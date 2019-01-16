@@ -1,0 +1,113 @@
+---
+
+layout: post
+
+title: "Binary Search Tree"
+
+date: 2018-12-07 12:21:05 +0800
+
+categories: jekyll update
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+```c
+//
+//  main.c
+//  BinTree.c
+//
+//  Created by jones on 2019/1/16.
+//  Copyright © 2019 jones. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int
+
+typedef struct TreeNode* Position;
+typedef Position SearchTree;
+struct TreeNode
+{
+    ElementType Element;
+    SearchTree Left;
+    SearchTree Right;
+};
+
+SearchTree MakeEmpty(SearchTree T)
+{
+    if(T != NULL) {
+        MakeEmpty(T->Left);
+        MakeEmpty(T->Right);
+        free(T);
+    }
+    return NULL;
+}
+
+Position Find(ElementType X, SearchTree T)
+{
+    if(T == NULL) return NULL;
+    if(T->Element > X) return Find(X, T->Left);
+    else if(T->Element < X) return  Find(X, T->Right);
+    else return T;
+}
+
+//recursive
+Position FindMin(SearchTree T)
+{
+    if(T == NULL) return  NULL;
+    //base case empty left subtree means T is the minimun
+    else if(T->Left == NULL) return  T;
+    else return FindMin(T->Left);
+}
+
+Position FindMax(SearchTree T)
+{
+    if(T) {
+        while (T->Right) {
+            T = T->Right;
+        }
+    }
+    return T;
+}
+
+SearchTree Insert(ElementType X, SearchTree T)
+{
+    //Create a new Node
+    if(T == NULL) {
+        T = (SearchTree)malloc(sizeof(struct TreeNode));
+        T->Element = X;
+        T->Left = T->Right = 0;
+    }
+    else if(X < T->Element) T->Left = Insert(X, T->Left);
+    else if(X > T->Element) T->Right = Insert(X, T->Right);
+    return T;
+}
+
+SearchTree Delete(ElementType X, SearchTree T)
+{
+    Position TmpCell;
+    if(X < T->Element) T->Left = Delete(X, T->Left);
+    else if(X > T->Element) T->Right = Delete(X, T->Right);
+    else if(T->Left && T->Right) {
+        TmpCell = FindMin(T->Right);
+        T->Element = TmpCell->Element;
+        T->Right = Delete(T->Element, T->Right);
+    }
+    else {
+        TmpCell = T;
+        if(T->Left == NULL) T = T->Right;
+        else if(T->Right == NULL) return T = T->Left;
+        free(TmpCell);
+    }
+    return T;
+}
+```
