@@ -102,7 +102,7 @@ Position Find(ELementType X, List L)
 {
     Position P;
     P = L->Next;
-    if(P != NULL && P->Element != X)
+    while(P != NULL && P->Element != X)
         P = P->Next;
     return P;
 }
