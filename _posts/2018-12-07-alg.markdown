@@ -27,7 +27,7 @@ Vertex FindMinDist( MGraph Graph, int dist[], int collected[] )
     Vertex MinV, V;
     int Mindist = INFINITY;
     for(int i = 0; i < Graph->Nv; i++) {
-        if(dist[i] < Mindist) {
+        if(collected[i] == 0 && dist[i] < Mindist) {
             Mindist = dist[i];
             MinV = i;
         }
