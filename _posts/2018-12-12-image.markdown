@@ -290,6 +290,7 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     Expression ratio image:$$\frac{I'}{I}=\frac{E(n')}{E(n)}  $$   
     
     * algorithm
+    <img src="http://miaochenlu.github.io/picture/20190123imgexpressionalg.png">
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
