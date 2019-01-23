@@ -345,7 +345,7 @@ larger weight to closer samples,
 larger weight to similar samples.   
 All the weights should be normalized to preserve the
 local mean.
-
+<img src="http://miaochenlu.github.io/picture/20190123bilateralpara.png">
 ```c
 void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_s, double sigma_r, const char *filename)
 {
