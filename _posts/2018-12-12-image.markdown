@@ -93,7 +93,7 @@ be previewed.
 
 ### Weber's Law
 <img src="http://miaochenlu.github.io/picture/20190122pictureweberslaw.jpeg">  
-The response of the eye to changes in the intensity of illumination is known to be nonlinear. Consider a patch of light of intensity I + ΔI surrounded by a background of intensity I . The just noticeable difference ΔI is to be determined as a function of I. Over a wide range of intensities, it is found that the ratio ΔI ⁄ I , called the Weber fraction, is nearly constant at a value of about 0.02 (11; 12, p. 62). This result does not hold at very low or very high intensities, as illus- trated by Figure 2.3-1a (13). Furthermore, contrast sensitivity is dependent on the intensity of the surround. Consider the experiment of Figure 2.3-1b, in which two patches of light, one of intensity I and the other of intensity I + ΔI , are surrounded by light of intensityIo . The Weber fraction ΔI ⁄ I for this experiment is plotted in Figure 2.3-1b as a function of the intensity of the background. In this situation, it is found that the range over which the Weber fraction remains constant is reduced con- siderably compared to the experiment of Figure 2.3-1a. The envelope of the lower limits of the curves of Figure 2.3-lb is equivalent to the curve of Figure 2.3-1a. However, the range over which ΔI ⁄ I is approximately constant for a fixed back- ground intensity Io is still comparable to the dynamic range of most electronic imaging systems.  
+The response of the eye to changes in the intensity of illumination is known to be nonlinear. Consider a patch of light of intensity I + ΔI surrounded by a background of intensity I . The just noticeable difference ΔI is to be determined as a function of I. Over a wide range of intensities, it is found that the ratio ΔI ⁄ I , called the Weber fraction, is nearly constant at a value of about 0.02 . This result does not hold at very low or very high intensities. Furthermore, contrast sensitivity is dependent on the intensity of the surround. Consider the experiment of Figure 2.3-1b, in which two patches of light, one of intensity I and the other of intensity I + ΔI , are surrounded by light of intensityIo . The Weber fraction ΔI ⁄ I for this experiment is plotted in Figure 2.3-1b as a function of the intensity of the background. In this situation, it is found that the range over which the Weber fraction remains constant is reduced con- siderably compared to the experiment. The envelope of the lower limits of the curves of Figure 2.3-lb is equivalent to the curve of Figure 2.3-1a. However, the range over which ΔI ⁄ I is approximately constant for a fixed background intensity Io is still comparable to the dynamic range of most electronic imaging systems.  
 ## Color Space
 * 设备相关
     * RGB
@@ -110,6 +110,13 @@ The response of the eye to changes in the intensity of illumination is known to 
 ▪ RGB is a subset of CIE primary color space.  
 ▪ RGB is usually used in <i>Color cathode ray tube and Color raster graphics display
 (computer , TV).</i> 
+
+是加色，加光 color + light energy increase  
+### CMY 
+C 青色 M 品红 Y 黄色 (K 黑色)  
+减色空间 light - pigment  energy decreases
+<img src="http://miaochenlu.github.io/picture/20190122picturecmyk.png">
+<img src="http://miaochenlu.github.io/picture/20190122pictureaddcolor.png">
 ### HSV 
 H 色调 S 饱和度 V亮度
 *perception priority 
