@@ -285,9 +285,9 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
 
 
     <img src="http://miaochenlu.github.io/picture/20190122lambertianexplain.png>   
-    Before deformation: $$ I = \rho E(n)$$
-    After deformation: $$ I^'=\rho E(n^')$$
-    Expression ratio image:\frac{I^'}{I}=\frac{E(n^')}{E(n)}$$
+    Before deformation: $$ I = \rho E(n)$$\\
+    After deformation: $$ I^'=\rho E(n^')$$\\
+    Expression ratio image:\frac{I^'}{I}=\frac{E(n^')}{E(n)}$$\\
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
