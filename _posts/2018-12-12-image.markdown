@@ -164,7 +164,9 @@ Otsu算法也称最大类间差法
 <img src="http://miaochenlu.github.io/picture/picture20190109otsudeduct.png">
 easy approach
 <img src="http://miaochenlu.github.io/picture/20190122pictureotsueasy.png">
-
+**local adaptive operation**
+* set a local window, find its good threshold;
+* sliding your local window over the whole image
 ```c
 int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     int Pn[256]={0};
@@ -217,6 +219,17 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     return MaxK;
 }
 ```
+### Morphology
+* Dilation
+    * definition
+        <img src="http://miaochenlu.github.io/picture/20190122picturedilation.png">
+        范围里有1就是1
+    * physical meaning:  
+        Dilation adopts the connected background pixels into the foreground, which extends its boundary and fill the holes in the foreground.And whether “connected” is decided by the structure element.
+    * Effect:
+        enlarge foreground, fill holes
+    * Example
+        <img src="http://miaochenlu.github.io/picture/20190122picturedilaexample.png">
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
 * **Concept**    
