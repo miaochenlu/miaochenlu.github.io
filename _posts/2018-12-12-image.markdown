@@ -150,14 +150,20 @@ Compression strategy: According to the requirement of compressionratio, remove i
 
 ### run length code
 <img src="http://miaochenlu.github.io/picture/20190122picturerunlengthcode.png">
-## Otsu 大津算法
+
+## Binary Image
+<img src="http://miaochenlu.github.io/picture/20190122picturebinary.png">
+
+how to choose threshold? -->otsu
+### Otsu 大津算法
 Otsu算法也称最大类间差法  
 * 思想  
 按图像的灰度特性将图像分成 **背景**和 **前景**，前景和背景的 **类间方差**最大，说明构成图像的两部分差别越大，当部分前景错分为背景或部分背景错分为前景都会导致两部分差别变小。
 
 * 推导  
 <img src="http://miaochenlu.github.io/picture/picture20190109otsudeduct.png">
-
+easy approach
+<img src="http://miaochenlu.github.io/picture/20190122pictureotsueasy.png">
 
 ```c
 int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
