@@ -133,7 +133,7 @@ Y 明亮度  U 色度  V 浓度
 ### BMP 
 位图数据：位图数据在文件中的排列顺序是从左下角到右上角，以行为主序排列的。  
 对齐规则：要求每行的数据的长度必须是4的倍数，如果不够需要进行比特填充（以0填充）
-<img src="http://20190122picturebitmapdata.png">  
+<img src="http://miaochenlu.github.io/picture/20190122picturebitmapdata.png">  
 <a href="http://www.cnblogs.com/wainiwann/p/7086844.html">BMP格式详解</a>
 
 ## Otsu 大津算法
