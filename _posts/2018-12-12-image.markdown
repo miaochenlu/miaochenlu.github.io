@@ -137,7 +137,7 @@ Y 明亮度  U 色度  V 浓度
 <img src="http://miaochenlu.github.io/picture/20190122picturebitmapdata.png">  
 <a href="http://www.cnblogs.com/wainiwann/p/7086844.html">BMP格式详解</a>
 
-###图像压缩
+### 图像压缩
 Compression strategy: According to the requirement of compressionratio, remove information from high frequency to low frequency. Advantages 
 
 * 无损
@@ -148,7 +148,7 @@ Compression strategy: According to the requirement of compressionratio, remove i
 * 均可 
     * tiff
 
-run length code
+### run length code
 <img src="http://miaochenlu.github.io/picture/20190122picturerunlengthcode.png">
 ## Otsu 大津算法
 Otsu算法也称最大类间差法  
