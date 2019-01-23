@@ -81,7 +81,9 @@ encoded into the supported format and resolution, which can be stored as a image
 file.  
  （6）After the above steps, the image file appears on your memory card and can
 be previewed.  
-
+  
+##### 总而言之    
+光-->CCD转化成电信号-->电信号放大过滤-->ADC将连续信号转换为离散信号-->DSP(digital signal processing)color correction and white balance-->image will be encoded into the supported format and resolution-->image file appears on your memory card   
 ## Color Space
 ### RGB color model
  RGB color model is a unit cube in a Cartesian coordinates system.  
