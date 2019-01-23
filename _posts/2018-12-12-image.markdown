@@ -22,7 +22,7 @@ inlineMath: [['$','$']]
 
 
 
-## **Basic Concept**
+# **Basic Concept**
 ### Lens
 
 <img src="http://miaochenlu.github.io/picture/picture20181222lens.png" width = "600" align = "center" id = "start">
@@ -94,7 +94,7 @@ be previewed.
 ### Weber's Law
 <img src="http://miaochenlu.github.io/picture/20190122pictureweberslaw.jpeg">  
 The response of the eye to changes in the intensity of illumination is known to be nonlinear. Consider a patch of light of intensity I + ΔI surrounded by a background of intensity I . The just noticeable difference ΔI is to be determined as a function of I. Over a wide range of intensities, it is found that the ratio ΔI ⁄ I , called the Weber fraction, is nearly constant at a value of about 0.02 . This result does not hold at very low or very high intensities. Furthermore, contrast sensitivity is dependent on the intensity of the surround. Consider the experiment of Figure 2.3-1b, in which two patches of light, one of intensity I and the other of intensity I + ΔI , are surrounded by light of intensityIo . The Weber fraction ΔI ⁄ I for this experiment is plotted in Figure 2.3-1b as a function of the intensity of the background. In this situation, it is found that the range over which the Weber fraction remains constant is reduced con- siderably compared to the experiment. The envelope of the lower limits of the curves of Figure 2.3-lb is equivalent to the curve of Figure 2.3-1a. However, the range over which ΔI ⁄ I is approximately constant for a fixed background intensity Io is still comparable to the dynamic range of most electronic imaging systems.  
-## Color Space
+# **Color Space**
 * 设备相关
     * RGB
     * CMY
@@ -130,6 +130,7 @@ Cones: ~6,000,000-7,000,000, work under strong light, but can identify different
 ### YUV
 Y 明亮度  U 色度  V 浓度
 
+# **Image file**
 ### BMP 
 位图数据：位图数据在文件中的排列顺序是从左下角到右上角，以行为主序排列的。  
 对齐规则：要求每行的数据的长度必须是4的倍数，如果不够需要进行比特填充（以0填充）
