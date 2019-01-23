@@ -82,9 +82,27 @@ file.
  （6）After the above steps, the image file appears on your memory card and can
 be previewed.  
   
-##### 总而言之    
-光-->CCD转化成电信号-->电信号放大过滤-->ADC将连续信号转换为离散信号-->DSP(digital signal processing)color correction and white balance-->image will be encoded into the supported format and resolution-->image file appears on your memory card   
+#### 总而言之    
+光-->CCD转化成电信号-->电信号放大过滤-->ADC将连续信号转换为离散信号-->DSP(digital signal processing)color correction and white balance-->image will be encoded into the supported format and resolution-->image file appears on your memory card  
+
+### 颜色分类
+* chromatic color 
+    * monochrome color (red, yellow, blue, etc.) and their combination. The colorful objects reflect the light selectively to the light spectrum of different wavelengths. Hence, they present different color under white light.
+* achromatic color 
+    * Achromatic color, also called non- chromatic color OR grayscale, means white, black and the gray intensities between them. The achromatic objects do not select the wavelength, so they are in neutral color.
+
+### Weber's Law
+<img src="http://miaochenlu.github.io/picture/20190122pictureweberslaw.jpeg">  
+The response of the eye to changes in the intensity of illumination is known to be nonlinear. Consider a patch of light of intensity I + ΔI surrounded by a background of intensity I . The just noticeable difference ΔI is to be determined as a function of I. Over a wide range of intensities, it is found that the ratio ΔI ⁄ I , called the Weber fraction, is nearly constant at a value of about 0.02 (11; 12, p. 62). This result does not hold at very low or very high intensities, as illus- trated by Figure 2.3-1a (13). Furthermore, contrast sensitivity is dependent on the intensity of the surround. Consider the experiment of Figure 2.3-1b, in which two patches of light, one of intensity I and the other of intensity I + ΔI , are surrounded by light of intensityIo . The Weber fraction ΔI ⁄ I for this experiment is plotted in Figure 2.3-1b as a function of the intensity of the background. In this situation, it is found that the range over which the Weber fraction remains constant is reduced con- siderably compared to the experiment of Figure 2.3-1a. The envelope of the lower limits of the curves of Figure 2.3-lb is equivalent to the curve of Figure 2.3-1a. However, the range over which ΔI ⁄ I is approximately constant for a fixed back- ground intensity Io is still comparable to the dynamic range of most electronic imaging systems.  
 ## Color Space
+* 设备相关
+    * RGB
+    * CMY
+    * HSV
+* 设备无关
+    * CIE XYZ
+    * CIE L*a*b
+    * CIE YUV
 ### RGB color model
  RGB color model is a unit cube in a Cartesian coordinates system.  
 ▪ The magnitudes of each primary color are equivalent on the main diagonal line, which lead to the white color from darkness to brightness, i.e., grayscale.  
@@ -92,7 +110,15 @@ be previewed.
 ▪ RGB is a subset of CIE primary color space.  
 ▪ RGB is usually used in <i>Color cathode ray tube and Color raster graphics display
 (computer , TV).</i> 
-
+### HSV 
+H 色调 S 饱和度 V亮度
+*perception priority 
+    HSV
+* sentivity 
+    lightness  
+because   
+Rods: ~100, 000, 000, sensitive to light but cannot identify different colors.  
+Cones: ~6,000,000-7,000,000, work under strong light, but can identify different colors.
 
 ## Otsu 大津算法
 Otsu算法也称最大类间差法  
