@@ -281,13 +281,15 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     * **Lambertian model**
     <img src="http://miaochenlu.github.io/picture/20190122lambertian.png">
    
-    $$ 参数:\qquad\rho:材质 \qquad I_i:光照 \qquad n:表面的单位法向量 \qquad l_i:点光源的单位方向向量$$\\
+    $$ 参数:\qquad\rho:材质 \qquad I_i:光照 \qquad n:表面的单位法向量 \qquad l_i:点光源的单位方向向量$$
 
 
-    <img src="http://miaochenlu.github.io/picture/20190122lambertianexplain.png>   
+    <img src="http://miaochenlu.github.io/picture/20190122lambertianexplain.png">   
     Before deformation: $$ I = \rho E(n)$$   
     After deformation: $$ I'=\rho E(n')$$   
-    Expression ratio image:\frac{I'}{I}=\frac{E(n')}{E(n)}  $$   
+    Expression ratio image:$$\frac{I'}{I}=\frac{E(n')}{E(n)}  $$   
+    
+    * algorithm
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
