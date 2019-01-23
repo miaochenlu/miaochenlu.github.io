@@ -220,16 +220,37 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
 }
 ```
 ### Morphology
-* Dilation
-    * definition
+* **Dilation**
+    * **definition**
         <img src="http://miaochenlu.github.io/picture/20190122picturedilation.png">
         范围里有1就是1
-    * physical meaning:  
+    * **physical meaning**:  
         Dilation adopts the connected background pixels into the foreground, which extends its boundary and fill the holes in the foreground.And whether “connected” is decided by the structure element.
-    * Effect:
+    * **Effect**:
         enlarge foreground, fill holes
-    * Example
+    * **Example**
         <img src="http://miaochenlu.github.io/picture/20190122picturedilaexample.png">
+* **Erosion**
+    * **definition**
+        <img src="http://miaochenlu.github.io/picture/20190122pictureerosion.png">
+        范围里有0就是0
+    * **physical meaning**:  
+       remove boundary, remove unwanted small objects
+    * **Example**
+        <img src="http://miaochenlu.github.io/picture/20190122pictureeroexample.png">
+* **Opening**
+    * **definition**
+        <img src="http://miaochenlu.github.io/picture/20190122pictureopen.png">
+        先腐蚀，再膨胀
+    * **physical meaning**:  
+       Remove small objects, segment object at thin part, smooth boundary of large object but preserve its original area.
+* **closing**
+* **definition**
+        <img src="http://miaochenlu.github.io/picture/20190122pictureclose.png">
+        先膨胀，再腐蚀
+    * **physical meaning**:  
+        Fill small holes, connect the neighboring objects, smooth boundary while preserving the area at most.
+<img src="http://miaochenlu.github.io/picture/20190122pictureopenclose.png">
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
 * **Concept**    
