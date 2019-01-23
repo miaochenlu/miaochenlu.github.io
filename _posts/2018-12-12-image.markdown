@@ -276,7 +276,7 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
 * **problem**
     <img src="http://miaochenlu.github.io/picture/20190122expe.png" height=300>
 * **one possible solution**
-    <img src="http://Desktop/miaochenlu.github.io/picture/20190122expresolu1.png">
+    <img src="http://miaochenlu.github.io/picture/20190122expresolu1.png">
 * **Ratio Images**
     * **Lambertian model**
     <img src="http://miaochenlu.github.io/picture/20190122lambertian.png">
