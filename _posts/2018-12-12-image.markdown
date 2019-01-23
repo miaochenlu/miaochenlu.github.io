@@ -251,6 +251,26 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     * **physical meaning**:  
         Fill small holes, connect the neighboring objects, smooth boundary while preserving the area at most.
 <img src="http://miaochenlu.github.io/picture/20190122pictureopenclose.png">
+
+## Grayscale Transform
+### Grayscale perception
+<img src="http://miaochenlu.github.io/picture/20190122picturegrayscale.png">
+<img src="http://miaochenlu.github.io/picture/20190122grayscaleweber.png">
+255次是指每一个灰度级要被看见的话，需要和前面相邻的灰度级相差Kweber
+
+### logarithmic operation
+图像的低灰度值部分扩展，显示出低灰度部分更多的细节，将其高灰度值部分压缩  
+<img src="http://miaochenlu.github.io/picture/20190123log.png">
+
+## Image Morph
+* difference between morph and warp
+    * Morph is not warp (geometric transformation)
+    * Morph is a kind of morphological changing, which makes an image change to another image gradually.
+    * 􏰀Morph handles both the location and the intensity of a pixel.
+    * 􏰀The beginning image and end image are two key frames. Other frames between the two key frames are generated automatically.
+<img src="http://miaochenlu.github.io/picture/20190122morph.png">
+* result
+<img src="http://miaochenlu.github.io/picture/20190123morphresult.png">
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
 * **Concept**    
