@@ -109,14 +109,15 @@ The response of the eye to changes in the intensity of illumination is known to 
 ▪ (0,0,0)-dark, (1,1,1)-bright. The other 6 corners are respectively <span style="color:red;">red</span>, <span style="color:yellow;">yellow </span>, <span style="color:cyan;">cyan </span>,<span style="color:blue;">blue </span> and <span style="color:magenta;">magenta </span>.  
 ▪ RGB is a subset of CIE primary color space.  
 ▪ RGB is usually used in <i>Color cathode ray tube and Color raster graphics display
-(computer , TV).</i> 
+(computer , TV).彩色监视器，彩色视频摄像机</i> 
 
 是加色，加光 color + light energy increase  
 ### CMY 
 C 青色 M 品红 Y 黄色 (K 黑色)  
 减色空间 light - pigment  energy decreases
 <img src="http://miaochenlu.github.io/picture/20190122picturecmyk.png">
-<img src="http://miaochenlu.github.io/picture/20190122pictureaddcolor.png">
+<img src="http://miaochenlu.github.io/picture/20190122pictureaddcolor.png">  
+CMY彩色打印机  
 ### HSV 
 H 色调 S 饱和度 V亮度
 *perception priority 
