@@ -1,0 +1,70 @@
+---
+
+layout: post
+
+title: "data structure and algorithm"
+
+date: 2018-12-07 12:21:05 +0800
+
+categories: jekyll update
+
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+## 第一章
+<img src="http://miaochenlu.github.io/picture/20190214triangle.png">
+* 第一种方法  
+三根棍子能组成三角形的充要条件是 **最长棍子的长度<其余两根棍子的长度之和**  
+用三重循环判断三根棍子是否符合上述条件
+复杂度:$$O(n^3)$$
+```c
+int n;
+int a[MAX_N];
+void solve()
+{
+    int ans = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = i + 1; j < n; j++) {
+            for(int k = j + 1; k < n; k++) {
+                int len = a[i] + a[j] + a[k];           //周长
+                int ma = max(a[i], max(a[j], a[k]));    //最长边
+                int rest = len - ma;                    //另外两边之和
+                if(rest > ma) ans = max(len, ans);      //判断最大周长
+            }
+        }
+    }
+    printf("%d\n", ans);
+}
+```
+* 第二种方法
+对长度进行排序，依次判断连续三个数是否能形成三角形。  
+如果不能，则说明最长的那根太长了，需舍弃；再找前一根   
+如果能，就找到了
+```c
+void solve()
+{
+    int ans = 0;
+    sort(a, a + n);                           
+    for(int i = n - 3; i >= 0; i--) {
+        int len = a[i] + a[i + 1] + a[i + 2];
+        if(a[i] + a[i + 1] > a[i + 2])
+            ans = max(ans, len);
+    }
+    printf("%d\n", ans);
+}
+```
+[jekyll-docs]: https://jekyllrb.com/docs/home
+
+[jekyll-gh]: https://github.com/jekyll/jekyll
+
+[jekyll-talk]: https://talk.jekyllrb.com/
