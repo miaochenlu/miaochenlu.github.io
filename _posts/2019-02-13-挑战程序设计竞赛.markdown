@@ -110,7 +110,40 @@ void solve()
 
 复杂度:
     排序$$O(nlogn)$$        循环$$O(n^3logn)$$
+```c
+int n, m, k[MAX_N];
 
+bool binary_search(int x) 
+{
+    //x的存在范围为k[l]---k[r-1]
+    int l = 0, r = n;
+
+    //反复操作直到存在范围为空
+    while(r - l >= 1) {
+        int i = (r + l) / 2;
+        if(k[i] == x) return true;//找到x
+        else if(k[i] < x) l = i + 1;
+        else r = i;
+    }
+    //没找到x
+    return false;
+}
+void solve()
+{
+    std::sort(k, k + n);
+    bool f = false;
+    for(int a = 0; a < n; a++) {
+        for(int b = 0; b < n; b++) {
+            for(int c = 0; c < n; c++) {
+                if(binary_search(m - k[a] - k[b] - k[c]))
+                    f = true;
+            }
+        }
+    }
+    if(f) puts("Yes");
+    else puts("No");
+}
+```
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
