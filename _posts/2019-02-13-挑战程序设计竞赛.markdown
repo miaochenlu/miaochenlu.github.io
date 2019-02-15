@@ -149,7 +149,8 @@ void solve()
 复杂度：
     * 排序$$O(n^2logn)$$        
     * 循环$$O(n^2logn)$$
-```cpp
+    
+```c
 int n, m, k[MAX_N];
 int kk[MAX_N * MAX_N];
 bool binary_search(int x) 
