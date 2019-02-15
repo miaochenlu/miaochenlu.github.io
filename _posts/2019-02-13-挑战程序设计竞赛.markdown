@@ -110,6 +110,7 @@ void solve()
 复杂度:
     * 排序$$O(nlogn)$$        
     * 循环$$O(n^3logn)$$
+    
 ```c
 int n, m, k[MAX_N];
 
@@ -145,11 +146,12 @@ void solve()
 }
 ```
 * $$O(n^2logn)$$的算法
-检查是否有$$c和d使得k_c+k_d=m-k_a-k_b$$，可以预先枚举出$$k_c+k_d$$所得的$$n^2$$个数字排好序，再用二分搜索  
+检查是否有$$c和d使得k_c+k_d=m-k_a-k_b$$，可以预先枚举出$$k_c+k_d$$所得的$$n^2$$个数字排好序，再用二分搜索    
 复杂度：
     * 排序$$O(n^2logn)$$        
     * 循环$$O(n^2logn)$$
-    
+
+
 ```c
 int n, m, k[MAX_N];
 int kk[MAX_N * MAX_N];
@@ -187,6 +189,7 @@ void solve()
     else puts("No");
 }
 ```
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
