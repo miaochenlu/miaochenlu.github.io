@@ -107,9 +107,9 @@ void solve()
 记所要查找的值 $$m-k_a-k_b-k_c为x$$ ，预先把数组k排好序，然后看k中央的数字
     * 如果它比x小，x只可能在后半段
     * 如果它比x大，x只可能在前半段  
-
 复杂度:
-    排序$$O(nlogn)$$        循环$$O(n^3logn)$$
+    * 排序$$O(nlogn)$$        
+    * 循环$$O(n^3logn)$$
 ```c
 int n, m, k[MAX_N];
 
@@ -144,7 +144,48 @@ void solve()
     else puts("No");
 }
 ```
+* $$O(n^2logn)$$的算法
+检查是否有$$c和d使得k_c+k_d=m-k_a-k_b$$，可以预先枚举出$$k_c+k_d$$所得的$$n^2$$个数字排好序，再用二分搜索  
+复杂度：
+    * 排序$$O(n^2logn)$$        
+    * 循环$$O(n^2logn)$$
+```cpp
+int n, m, k[MAX_N];
+int kk[MAX_N * MAX_N];
+bool binary_search(int x) 
+{
+    //x的存在范围为k[l]---k[r-1]
+    int l = 0, r = n * n;
 
+    //反复操作直到存在范围为空
+    while(r - l >= 1) {
+        int i = (r + l) / 2;
+        if(kk[i] == x) return true;//找到x
+        else if(kk[i] < x) l = i + 1;
+        else r = i;
+    }
+    //没找到x
+    return false;
+}
+
+void solve()
+{
+    for(int c = 0; c < n; c++)
+        for(int d = 0; d < n; d++) 
+            kk[c * n + d] = k[c] + k[d];
+
+    std::sort(kk, kk + n * n);
+    bool f = false;
+    for(int a = 0; a < n; a++) {
+        for(int b = 0; b < n; b++) {
+                if(binary_search(m - k[a] - k[b]))
+                    f = true;
+        }
+    }
+    if(f) puts("Yes");
+    else puts("No");
+}
+```
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
