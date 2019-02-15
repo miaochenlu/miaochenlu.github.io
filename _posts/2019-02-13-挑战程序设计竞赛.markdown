@@ -63,6 +63,31 @@ void solve()
     printf("%d\n", ans);
 }
 ```
+
+<img src="http://miaochenlu.github.io/picture/20190214ants.png">
+解题思路:  
+穷举肯定复杂度爆炸
+<img src="http://miaochenlu.github.io/picture/20190214antsol.png">
+考虑到这个我们只要对每一只蚂蚁进行考虑就可以了
+```c
+int L, n;
+int X[MAX_N];
+
+void solve()
+{
+    int minT = 0;
+    for(int i = 0; i < n; i++)
+        minT = max(minT, min(X[i], L - X[i]));
+    
+    int maxT = 0; 
+    for(int i = 0; i < n; i++) 
+        maxT = max(maxT, max(X[i], L - X[i]));
+    
+    printf("%d %d\n", minT, maxT);
+}
+```
+<img src="http://miaochenlu.github.io/picture/20190214drawlots.png">
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
