@@ -106,10 +106,12 @@ void solve()
 * 二分搜索与$$O(n^3logn)的算法  
 记所要查找的值$$m-k_a-k_b-k_c为x$$，预先把数组k排好序，然后看k中央的数字
     * 如果它比x小，x只可能在后半段
-    * 如果它比x大，x只可能在前半段
+    * 如果它比x大，x只可能在前半段    
 复杂度:
     * 排序$$O(nlogn)$$
     * 循环$$O(n^3logn)$$
+
+    
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
