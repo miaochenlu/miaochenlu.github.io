@@ -189,7 +189,84 @@ void solve()
     else puts("No");
 }
 ```
+## 第二章
+### 深度优先搜索
+<img src="http://miaochenlu.github.io/picture/20190215partialsum.png">
+<img src="http://miaochenlu.github.io/picture/20190215dfstrans.png">
+```c
+int n, k;
+int a[MAX_N];
+//已经从前i项得到了和sum,然后对于i项之后的进行分支
+bool dfs(int i, int sum) 
+{
+    //如果前n项都计算过了，则返回sum是否与k相等
+    if(i == n) return sum == k;
+    
+    //不加上a[i]的情况
+    if(dfs(i + 1, sum)) return true;
+    
+    //加上a[i]的情况
+    if(dfs(i + 1, sum + a[i])) return true;
+    return false;//这句好像不必要
+}
 
+void solve()
+{
+    if(dfs(0, 0)) printf("Yes\n");
+    else printf("No\n");
+}
+```
+
+<img src = "http://miaochenlu.github.io/picture/20190218lakecounting.png">
+解题思路:从任意W开始，不停地把邻接的部分用.代替。1次dfs后与初始的W连接的所有W都被替换成了.。直到图中不存在W为止，总共的dfs次数就是答案，8个方向对应了8种状态转移。
+```c
+#include <cstdio>
+const int MAX_N = 50;
+const int MAX_M = 50;
+int N, M;
+char field[MAX_N][MAX_M + 1];
+
+void dfs(int x, int y) {
+    //将现在所在位置替换成.
+    field[x][y] = '.';
+    //循环遍历移动的8个方向
+    for(int dx = -1; dx <= 1; dx++) {
+        for(int dy = -1; dy <= 1; dy++) {
+            //向x方向移动dx,向y方向移动dy,移动的结果为(nx, ny)
+            int nx = x + dx, ny = y + dy;
+            //判断(nx, ny)是否在园子里以及是否有积水
+            if(0 <= nx && nx < N && 0 <= ny && ny < M && field[nx][ny] == 'W')
+                dfs(nx, ny);
+        }
+    }
+}
+void solve()
+{
+    int res = 0;
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < M; j++) {
+            if(field[i][j] == 'W') {
+                dfs(i, j);
+                res++;
+            }
+        }
+    }
+    printf("%d\n", res);
+}
+
+int main(int argc, char const *argv[])
+{
+    scanf("%d %d", &N, &M);
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < M; j++) {
+            scanf("%c", &field[i][j]);
+        }
+        getchar();//注意这个地方不写会导致输入错误
+    }
+    solve();
+    return 0;
+}
+```
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
