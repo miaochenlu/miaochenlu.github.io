@@ -217,6 +217,7 @@ void solve()
 }
 ```
 
+### 广度优先搜索
 <img src = "http://miaochenlu.github.io/picture/20190218lakecounting.png">
 解题思路:从任意W开始，不停地把邻接的部分用.代替。1次dfs后与初始的W连接的所有W都被替换成了.。直到图中不存在W为止，总共的dfs次数就是答案，8个方向对应了8种状态转移。
 ```c
@@ -265,6 +266,48 @@ int main(int argc, char const *argv[])
     }
     solve();
     return 0;
+}
+```
+宽度优先搜索与深度优先搜索一样，都会生成所有能够遍历到的状态，因此需要对所有状态进行处理时使用宽度优先搜索也是可以的。但是递归函数可以简短地编写，而且状态的管理也更加简单，所以大多数情况下还是深度优先搜索实现。反之，在求取最短路时深度优先搜索需要反复经历同样的状态，所以此时还是使用宽度优先搜索为好。  
+宽度优先搜索会把状态逐个加入队列，因此通常需要与状态数成正比的内存空间。反之，深度优先搜索是与最大的递归深度成正比的。一般与状态数相比，递归的深度不会太大，所以可以认为深度优先搜索更加节省内存。  
+## 一直往前，贪心法
+<img src = "http://miaochenlu.github.io/picture/20190224coins.png">
+```c
+//硬币的面值
+const int V[6] = {1, 5, 10, 50, 100, 500};
+int C[6];
+int A;
+//输入
+void solve() {
+    int ans = 0;
+    for(int i = 5; i >= 0; i--) {
+        int t = min(A / V[i], C[i]);//使用硬币i的枚数
+        A -= t * V[i];
+        ans += t;
+    }
+    cout << ans << endl;
+}
+```
+```c
+const int MAX_N = 100000;
+//输入
+int N, S[MAX_N], T[MAX_N];
+pair<int, int> itv[MAX_N];
+void solve() {
+    for(int i = 0; i < N; i++) {
+        itv[i].first = T[i];
+        itv[i].second = S[i];
+    }
+    sort(itv, itv + N);
+    int ans = 0; 
+    int t = 0;
+    for(int i = 0; i < N; i++) {
+        if(t < itv[i].second) {
+            ans++;
+            t = itv[i].first;
+        }
+    }
+    cout << ans;
 }
 ```
 [jekyll-docs]: https://jekyllrb.com/docs/home
