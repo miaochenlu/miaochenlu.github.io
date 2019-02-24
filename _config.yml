@@ -25,7 +25,7 @@ github_username:  miaochenlu
 markdown: kramdown
 kramdown:
   input: GFM
-highlighter: pygments
+highlighter: rouge
 theme: minima
 plugins:
   - jekyll-feed
