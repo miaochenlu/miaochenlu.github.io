@@ -95,7 +95,7 @@ If\quad d_1-d_2>0 \quad y_{i+1} = y_i, else\quad y_{i+1}=y_i
 $$  
 $$d_1-d_2=2y-2y_i-1=2m(x_i+1)+2b-2y_i-1\\
 =2\frac{dy}{dx}·x_i+2\frac{dy}{dx}+2b-2y_i-1$$  
-$On\quad each\quad side\quad of\quad the\quad equation multiply\quad dx,denote \quad d_1-d_2 \quad as\quad P_i$  
+$On\quad each\quad side\quad of\quad the\quad equation \quad multiply\quad dx,denote \quad d_1-d_2 \quad as\quad P_i$  
 $$P_i=2x_idy+2dy+(2b-1)dx-2y_idx$$  
 $$If\quad P_i>0,then \quad y_{i+1}=y_i+1,else \quad y_{i+1}=y_i$$    
 $$P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1$$   
