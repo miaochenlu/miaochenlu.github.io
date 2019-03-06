@@ -32,9 +32,9 @@ $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
 * Digital Differential Analyzer(DDA)
 $$ y_i = m·x_i+c    \\
 m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
-x_i = x_{i_prev} + 1  \\
-y_i = y_{i_prev} + m\\
-illuminate\quadthe\quadpixel [x_i,round(y_i)]
+x_i = x_{i_{prev}} + 1  \\
+y_i = y_{i_{prev}} + m\\
+illuminate the pixel [x_i,round(y_i)]
 $$
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
