@@ -77,6 +77,7 @@ finish
 Incremental algorithm: at each step it makes incremental calculations based on the calculations done during the preceding step.  
 But it uses floating point operations.
 
+-results  
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "100" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/20190306res1.png" width = 
@@ -99,9 +100,52 @@ $On\quad each\quad side\quad of\quad the\quad equation multiply\quad dx,denote \
 $$P_i=2x_idy+2dy+(2b-1)dx-2y_idx$$  
 $$If\quad P_i>0,then \quad y_{i+1}=y_i+1,else \quad y_{i+1}=y_i$$    
 $$P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1$$   
-$$P_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$
+$$P_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$  
 
-
+另一种思路
+```
+    initialize variables
+    x = x1
+    y = y1
+    Δx = x2 - x1
+    Δy = y2 - y1
+    m = Δy / Δx
+    initialize e to compensate for a nonzero intercept
+    e = m - 1 / 2
+    begin the main loop
+    for i = 1 to Δx
+        setpixel(x, y)
+        while(e > 0)
+            y = y + 1
+            e = e - 1
+        end while
+        x = x + 1
+        e = e + m
+    next i
+finish
+```
+上述会用到浮点运算和除法，采用整数运算比较好  
+$$\overline e = 2e\Delta x$$
+```
+    initialize variables
+    x = x1
+    y = y1
+    Δx = x2 - x1
+    Δy = y2 - y1
+    initialize e to compensate for a nonzero intercept
+    e = 2*Δy-Δx
+    begin the main loop
+    for i = 1 to Δx
+        setpixel(x, y)
+        while(e > 0)
+            y = y + 1
+            e = e-2*Δx
+        end while
+        x = x + 1
+        e = e + 2*Δy
+    next i
+finish
+```
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
