@@ -39,7 +39,7 @@ P(x2,y2)
 $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
 
 <img src = "http://miaochenlu.github.io/picture/20190306slope.png" width = "300">
-* Digital Differential Analyzer(DDA)
+### **Digital Differential Analyzer(DDA)**
 $$ y_i = m·x_i+c    \\
 m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
 x_i = x_{i_{prev}} + 1  \\
@@ -83,11 +83,13 @@ But it uses floating point operations.
 "100" border="0"></td>
 </tr></table>
 
-* Bresenham Line Drawing
+### **Bresenham Line Drawing**
 <img src="http://miaochenlu.github.io/picture/20190306Bresenham.png">
-    * Analysis:
-    先考虑第一八分圆域，$$0\leq \delta y \leq \delta x$$
-    事实上，$y_{i+1}$的选择只有两种情况：$y_i or y_i+1$
+* Analysis:
+先考虑第一八分圆域，$$0\leq \delta y \leq \delta x$$
+事实上，$y_{i+1}$的选择只有两种情况：$y_i \quad or\quad y_i+1$
+
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
