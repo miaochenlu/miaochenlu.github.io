@@ -288,6 +288,7 @@ void solve() {
     cout << ans << endl;
 }
 ```
+<img src = "http://miaochenlu.github.io/picture/20190224timanage.png">
 ```c
 const int MAX_N = 100000;
 //输入
