@@ -22,7 +22,11 @@ inlineMath: [['$','$']]
 
 
 # 光栅扫描图形学
-## 直线生成算法
+## Scan converting lines
+<img src="http://miaochenlu.github.io/picture/20190306scanconverting.png">
+* Question 1: How to draw the line?
+$$from (x_1,y_1),(x_2,y_2)\rightarrow y=mx+b\rightarrow x_1+1->y=? rounding \rightarrow x_1+i->y=?rounding$$
+* Question 2:How to speed up?
 **Equation of a line:**  $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
 P(x2,y2)    
@@ -62,12 +66,17 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
         i = i + 1
     endwhile
 finish
+
+--Discussion: What technique makes it faster?  
+Incremental algorithm: at each step it makes incremental calculations based on the calculations done during the preceding step.
 ```
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "100" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/20190306res1.png" width = 
 "100" border="0"></td>
 </tr></table>
+
+* Bresenham Line Drawing
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
