@@ -25,7 +25,7 @@ inlineMath: [['$','$']]
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png">
 * Question 1: How to draw the line?
-$$from (x_1,y_1),(x_2,y_2)\rightarrow y=mx+b\rightarrow x_1+1->y=? rounding \rightarrow x_1+i->y=?rounding$$
+$$from (x_1,y_1),(x_2,y_2)\LongRightarrow y=mx+b\LongRightarrow x_1+1\rightarrow y=? rounding \LongRightarrow x_1+i\rightarrow y=?rounding$$
 * Question 2:How to speed up?
 **Equation of a line:**  $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
