@@ -23,7 +23,7 @@ inlineMath: [['$','$']]
 
 # 光栅扫描图形学
 ## 直线生成算法
-**Equation of a line** $y-m\times x+c=0$   
+**Equation of a line:**  $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
 P(x2,y2)    
 $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
@@ -34,9 +34,37 @@ $$ y_i = m·x_i+c    \\
 m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
 x_i = x_{i_{prev}} + 1  \\
 y_i = y_{i_{prev}} + m\\
-illuminate \quad the \quad pixel [x_i,round(y_i)]
+illuminate\quad the\quad pixel [x_i,round(y_i)]
 $$
 
+
+
+```c
+DDA routine for rastering a line  
+the line end points are(x1,y1) and (x2,y2), assumed not equal  
+integer is the integer function. It's a floor function.  
+Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
+
+if abs(x2 - x1) >= abs(y2 - y1) then
+    Length = abs(x2 - x1)
+else 
+    Length = abs(y2 - y1)
+//select the larger of Δx or Δy to be one raster unit
+Δx = (x2 - x1) / Length
+Δy = (y2 - y1) / Length
+//round the values rather than truncate
+x = x1 + 0.5
+y = y1 + 0.5
+begin main loop
+i = 1
+    while(i <= Length)
+    setpixel(Integer(x), Integer(y))
+    x = x + Δx
+    y = y + Δy
+    i = i + 1
+    endwhile
+finish
+```
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
