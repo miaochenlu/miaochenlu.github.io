@@ -64,9 +64,9 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
 finish
 ```
 <table border="0"><tr>
-<td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "300" border="0" ></td>
+<td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "100" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/20190306res1.png" width = 
-"300" border="0"></td>
+"100" border="0"></td>
 </tr></table>
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
