@@ -72,11 +72,11 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
         i = i + 1
     endwhile
 finish
-
+```
 --Discussion: What technique makes it faster?  
 Incremental algorithm: at each step it makes incremental calculations based on the calculations done during the preceding step.  
 But it uses floating point operations.
-```
+
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "100" border="0" ></td>
 <td><img src="http://miaochenlu.github.io/picture/20190306res1.png" width = 
@@ -88,8 +88,18 @@ But it uses floating point operations.
 * Analysis:  
 先考虑第一八分圆域，$$0\leq \delta y \leq \delta x$$
 事实上，$y_{i+1}$的选择只有两种情况：$y_i \quad or\quad y_i+1$
-
-
+$$ y = m(x_i+1)+b\\
+d_1=y-y_i\\
+d_2=y_i+1-y\\
+If d_1-d_2>0 y_{i+1} = y_i, else y_{i+1}=y_i
+$$  
+$$d_1-d_2=2y-2y_i-1=2m(x_i+1)+2b-2y_i-1\\
+=2\frac{dy}{dx}·x_i+2\frac{dy}{dx}+2b-2y_i-1$$  
+On each side of the equation ·dx,denote $d_1-d_2 \quad as\quad P_i$  
+$$P_i=2x_idy+2dy+(2b-1)dx-2y_idx$$  
+$$If P_i>0,then y_{i+1}=y_i+1,else y_{i+1}=y_i$$    
+$$P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1$$   
+$$p_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
