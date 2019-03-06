@@ -56,7 +56,7 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
         Length = abs(x2 - x1)
     else 
         Length = abs(y2 - y1)
-    //select the larger of Δx or Δy to be one raster unit
+    select the larger of Δx or Δy to be one raster unit
     Δx = (x2 - x1) / Length
     Δy = (y2 - y1) / Length
     round the values rather than truncate
@@ -96,12 +96,12 @@ $$
 $$d_1-d_2=2y-2y_i-1=2m(x_i+1)+2b-2y_i-1\\
 =2\frac{dy}{dx}·x_i+2\frac{dy}{dx}+2b-2y_i-1$$  
 $On\quad each\quad side\quad of\quad the\quad equation \quad multiply\quad dx,denote \quad d_1-d_2 \quad as\quad P_i$  
-$$P_i=2x_idy+2dy+(2b-1)dx-2y_idx$$  
-$$If\quad P_i>0,then \quad y_{i+1}=y_i+1,else \quad y_{i+1}=y_i$$    
-$$P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1$$   
-$$P_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$  
+$$P_i=2x_idy+2dy+(2b-1)dx-2y_idx\\
+If\quad P_i>0,then \quad y_{i+1}=y_i+1,else \quad y_{i+1}=y_i\\  
+P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1\\ 
+P_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$  
 
-另一种思路
+use e  
 ```
     initialize variables
     x = x1
