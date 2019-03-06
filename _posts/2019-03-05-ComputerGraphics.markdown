@@ -84,8 +84,8 @@ But it uses floating point operations.
 </tr></table>
 
 ### **Bresenham Line Drawing**
-<img src="http://miaochenlu.github.io/picture/20190306Bresenham.png">
-* Analysis:
+<img src="http://miaochenlu.github.io/picture/20190306Bresenham.png" width = "300">
+* Analysis:  
 先考虑第一八分圆域，$$0\leq \delta y \leq \delta x$$
 事实上，$y_{i+1}$的选择只有两种情况：$y_i \quad or\quad y_i+1$
 
