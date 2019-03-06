@@ -29,7 +29,10 @@ $$from (x_1,y_1),(x_2,y_2) \\
 \Rightarrow y=mx+b \\
 \Rightarrow x_1+1 \rightarrow y=? rounding \\ 
 \Rightarrow x_1+i \rightarrow y=?rounding$$
-* Question 2:How to speed up?  
+* Question 2:How to speed up? 
+\\
+\\
+\\
 **Equation of a line:**  $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
 P(x2,y2)    
@@ -71,7 +74,8 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
 finish
 
 --Discussion: What technique makes it faster?  
-Incremental algorithm: at each step it makes incremental calculations based on the calculations done during the preceding step.
+Incremental algorithm: at each step it makes incremental calculations based on the calculations done during the preceding step.  
+But it uses floating point operations.
 ```
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/20190306res2.png" width = "100" border="0" ></td>
@@ -80,7 +84,10 @@ Incremental algorithm: at each step it makes incremental calculations based on t
 </tr></table>
 
 * Bresenham Line Drawing
-
+<img src="http://miaochenlu.github.io/picture/20190306Bresenham.png">
+    * Analysis:
+    先考虑第一八分圆域，$$0\leq \delta y \leq \delta x$$
+    事实上，$y_{i+1}$的选择只有两种情况：$y_i or y_i+1$
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
