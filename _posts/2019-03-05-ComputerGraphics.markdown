@@ -23,9 +23,10 @@ inlineMath: [['$','$']]
 
 # 光栅扫描图形学
 ## 直线生成算法
-Equation of a line $y-m\times x+c=0$
+**Equation of a line** $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
-P(x2,y2) $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
+P(x2,y2)    
+$ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
