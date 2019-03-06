@@ -32,6 +32,7 @@ inlineMath: [['$','$']]
 <a href="https://ocw.mit.edu/courses/comparative-media-studies-writing/cms-611j-creating-video-games-fall-2014/projects/">Creating Video Games</a>
 
 <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-441-information-theory-spring-2016/lecture-notes/">Information Theory</a>
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
