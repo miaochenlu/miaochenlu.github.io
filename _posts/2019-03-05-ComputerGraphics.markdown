@@ -47,12 +47,11 @@ y_i = y_{i_{prev}} + m\\
 illuminate\quad the\quad pixel [x_i,round(y_i)]
 $$
 
-
+```
 DDA routine for rastering a line  
 the line end points are(x1,y1) and (x2,y2), assumed not equal  
 integer is the integer function. It's a floor function.  
 Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
-```c
     if abs(x2 - x1) >= abs(y2 - y1) then
         Length = abs(x2 - x1)
     else 
@@ -60,7 +59,7 @@ Sign returns -1, 0, 1 for arguments <0, =0, >0 respectively
     //select the larger of Δx or Δy to be one raster unit
     Δx = (x2 - x1) / Length
     Δy = (y2 - y1) / Length
-    //round the values rather than truncate
+    round the values rather than truncate
     x = x1 + 0.5
     y = y1 + 0.5
     begin main loop
