@@ -2,7 +2,7 @@
 
 layout: post
 
-title: "Computer Graphics"
+title: "MIT Open Course"
 
 date: 2019-03-04 12:21:05 +0800
 
