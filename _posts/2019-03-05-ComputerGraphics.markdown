@@ -95,11 +95,13 @@ If d_1-d_2>0 y_{i+1} = y_i, else y_{i+1}=y_i
 $$  
 $$d_1-d_2=2y-2y_i-1=2m(x_i+1)+2b-2y_i-1\\
 =2\frac{dy}{dx}·x_i+2\frac{dy}{dx}+2b-2y_i-1$$  
-On each side of the equation ·dx,denote $d_1-d_2 \quad as\quad P_i$  
+On each side of the equation multiply dx,denote $\quad d_1-d_2 \quad as\quad P_i$  
 $$P_i=2x_idy+2dy+(2b-1)dx-2y_idx$$  
-$$If P_i>0,then y_{i+1}=y_i+1,else y_{i+1}=y_i$$    
+$$If\quad P_i>0,then \quad y_{i+1}=y_i+1,else \quad y_{i+1}=y_i$$    
 $$P_{i+1}=2x_{i+1}dy-2y_{i+1}dx+2dy+(2b-1)dx,\quad note\quad that\quad x_{i+1}=x_i+1$$   
 $$p_{i+1}=p_i+2dy-2(y_{i+1}-y_i)dx$$
+
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
