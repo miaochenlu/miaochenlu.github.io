@@ -83,7 +83,7 @@ static void Right_Rotate(RBTree T, Position K2) {
 }
 ```
 <img src="http://miaochenlu.github.io/picture/20190307insertion.png">
-<img src="http://miaochenlu.github.io/picture/20190307insertionadd.png>
+<img src="http://miaochenlu.github.io/picture/20190307insertionadd.png">
 <img src="http://miaochenlu.github.io/picture/201903073cases.png">
 ```c
 static void RB_Insert(RBTree T, Position Z) {
