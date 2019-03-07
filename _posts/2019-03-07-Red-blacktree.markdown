@@ -155,6 +155,9 @@ static void RB_Insert_Fixup(RBTree T, Position Z) {\
     T->color = BLACK;
 }
 ```
+reference:  
+[1] CLRS
+
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
