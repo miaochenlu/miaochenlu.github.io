@@ -27,6 +27,15 @@ inlineMath: [['$','$']]
 <img src="http://miaochenlu.github.io/picture/20190307rotation.png">
 
 ```c
+/*
+        k2
+    Z      k1
+          X  Y
+
+        k1
+    k2      Y
+  Z   X
+*/
 static void Left_Rotate(RBTree T, Position K2) {
     //设置K2的右儿子为K1
     Position K1 = K2->Right;
@@ -71,6 +80,77 @@ static void Right_Rotate(RBTree T, Position K2) {
         K2->Parent->Right = K1;
     K1->Right = K2;
     K2->Parent = K1;
+}
+```
+
+```c
+static void RB_Insert(RBTree T, Position Z) {
+    Position x = T;
+    Position y = 0;
+    //二叉查找树插入节点
+    while( x != 0) {
+        y = x;
+        if(Z->Element < x->Element) 
+            x = x->Left;
+        else x = x->Right;
+    }
+    Z->Parent = y;
+    
+    if(y == 0) 
+        T = Z;
+    else if(Z->Element < T->Element) 
+        T->Left = Z;
+    else 
+        T->Right = Z;
+
+    Z->Left = 0;
+    Z->Right = 0;
+    Z->color = RED;
+    RB_Insert_Fixup(T, Z);
+}
+
+static void RB_Insert_Fixup(RBTree T, Position Z) {\
+    Position y;
+    while(Z->Parent->color == RED) {
+        if(Z->Parent == Z->Parent->Parent->Left) {
+            y = Z->Parent->Parent->Right;
+            //case 1
+            if(y->color == RED) {
+                Z->Parent->color = BLACK;
+                y->color = BLACK;
+                Z->Parent->Parent->color = RED;
+                Z = Z->Parent->Parent;
+                continue;
+            }
+            //case 2
+            else if(Z == Z->Parent->Right) {
+                Z = Z->Parent;
+                Left_Rotate(T, Z);
+            }
+            //case 3
+            Z->Parent->color = BLACK;
+            Z->Parent->Parent->color = RED;
+            Right_Rotate(T, Z->Parent->Parent);
+        }
+        else if(Z->Parent == Z->Parent->Parent->Right) {
+            y = Z->Parent->Parent->Left;
+            if(y->color == RED) {
+                Z->Parent->color = BLACK;
+                y->color = BLACK;
+                Z->Parent->Parent->color = RED;
+                Z = Z->Parent->Parent;
+                continue;
+            }
+            else if(Z == Z->Parent->Left) {
+                Z = Z->Parent;
+                Right_Rotate(T, Z);
+            }
+            Z->Parent->color = BLACK;
+            Z->Parent->Parent->color = RED;
+            Left_Rotate(T, Z->Parent->Parent);
+        }
+    }
+    T->color = BLACK;
 }
 ```
 [jekyll-docs]: https://jekyllrb.com/docs/home
