@@ -100,10 +100,10 @@ static void RB_Insert(RBTree T, Position Z) {
     
     if(y == 0) 
         T = Z;
-    else if(Z->Element < T->Element) 
-        T->Left = Z;
+    else if(Z->Element < y->Element) 
+        y->Left = Z;
     else 
-        T->Right = Z;
+        y->Right = Z;
 
     Z->Left = 0;
     Z->Right = 0;
