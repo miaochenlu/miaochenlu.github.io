@@ -97,7 +97,7 @@ static void RB_Insert(RBTree T, Position Z) {
         else x = x->Right;
     }
     Z->Parent = y;
-    
+    //判断是y的左右儿子
     if(y == 0) 
         T = Z;
     else if(Z->Element < y->Element) 
@@ -113,21 +113,26 @@ static void RB_Insert(RBTree T, Position Z) {
 
 static void RB_Insert_Fixup(RBTree T, Position Z) {\
     Position y;
+    //如果父亲的颜色是红色
     while(Z->Parent->color == RED) {
+        //如果父亲是祖父的左儿子
         if(Z->Parent == Z->Parent->Parent->Left) {
+            //y是祖父的右儿子，即叔叔
             y = Z->Parent->Parent->Right;
             //case 1
-            if(y->color == RED) {
+            if(y->color == RED) {//叔叔是红色
+                //将父亲叔叔都变成黑色，祖父变成红色
                 Z->Parent->color = BLACK;
                 y->color = BLACK;
                 Z->Parent->Parent->color = RED;
+                //z变成祖父
                 Z = Z->Parent->Parent;
                 continue;
             }
             //case 2
-            else if(Z == Z->Parent->Right) {
+            else if(Z == Z->Parent->Right) {//z是父亲的右儿子
                 Z = Z->Parent;
-                Left_Rotate(T, Z);
+                Left_Rotate(T, Z);//进行一次左旋
             }
             //case 3
             Z->Parent->color = BLACK;
