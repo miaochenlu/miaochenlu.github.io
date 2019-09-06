@@ -1,7 +1,7 @@
 # Site settings 
 title: 'Chenlu Miao | site'
-description: 'Private Blog and my notes'
-keyword: 'ruby, rails, sinatra, javascript, vuejs, expressjs'
+description: 'Thinking  Exploring'
+keyword: 'CG, AI'
 url: '' 
 baseurl: ''
 
@@ -20,7 +20,7 @@ footer:
 author: 'Chenlu Miao'
 nickname: 'whdzera'
 bio: 'hi @everyone, im programmer ruby on rails. blogging as my hobby'
-avatar: 'assets/img/profile.png'
+avatar: 'assets/img/profile.jpeg'
 
 # Search
 search: true
@@ -31,7 +31,8 @@ nightMode: true #always_true
 # Comments
 comments:
   disqus: true
-  disqus_url: 'https://rokhimin.disqus.com/embed.js'
+  # disqus_url: 'https://rokhimin.disqus.com/embed.js'
+  disqus_url: 'https://miaochenlu.github.io'
 
 # MathJax by Ray-Eldath
 mathjax: false
@@ -44,7 +45,7 @@ social-share-items: ['vk', 'facebook', 'twitter']
 theme-color: 'default' 
 
 # Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
-postPatterns: 'assets/img/banner.jpg'
+postPatterns: 'assets/img/banner.JPG'
 
 # SNS settings 
 # url: email, weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
