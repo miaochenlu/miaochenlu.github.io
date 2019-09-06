@@ -21,6 +21,327 @@ inlineMath: [['$','$']]
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
 
+
+# Binary Search Tree
+
+```cpp
+//
+//  main.c
+//  BinTree.c
+//
+//  Created by jones on 2019/1/16.
+//  Copyright © 2019 jones. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int
+
+typedef struct TreeNode* Position;
+typedef Position SearchTree;
+struct TreeNode
+{
+    ElementType Element;
+    SearchTree Left;
+    SearchTree Right;
+};
+
+SearchTree MakeEmpty(SearchTree T)
+{
+    if(T != NULL) {
+        MakeEmpty(T->Left);
+        MakeEmpty(T->Right);
+        free(T);
+    }
+    return NULL;
+}
+
+Position Find(ElementType X, SearchTree T)
+{
+    if(T == NULL) return NULL;
+    if(T->Element > X) return Find(X, T->Left);
+    else if(T->Element < X) return  Find(X, T->Right);
+    else return T;
+}
+
+//recursive
+Position FindMin(SearchTree T)
+{
+    if(T == NULL) return  NULL;
+    //base case empty left subtree means T is the minimun
+    else if(T->Left == NULL) return  T;
+    else return FindMin(T->Left);
+}
+
+Position FindMax(SearchTree T)
+{
+    if(T) {
+        while (T->Right) {
+            T = T->Right;
+        }
+    }
+    return T;
+}
+
+SearchTree Insert(ElementType X, SearchTree T)
+{
+    //Create a new Node
+    if(T == NULL) {
+        T = (SearchTree)malloc(sizeof(struct TreeNode));
+        T->Element = X;
+        T->Left = T->Right = 0;
+    }
+    else if(X < T->Element) T->Left = Insert(X, T->Left);
+    else if(X > T->Element) T->Right = Insert(X, T->Right);
+    return T;
+}
+
+SearchTree Delete(ElementType X, SearchTree T)
+{
+    Position TmpCell;
+    if(X < T->Element) T->Left = Delete(X, T->Left);
+    else if(X > T->Element) T->Right = Delete(X, T->Right);
+    else if(T->Left && T->Right) {
+        TmpCell = FindMin(T->Right);
+        T->Element = TmpCell->Element;
+        T->Right = Delete(T->Element, T->Right);
+    }
+    else {
+        TmpCell = T;
+        if(T->Left == NULL) T = T->Right;
+        else if(T->Right == NULL) return T = T->Left;
+        free(TmpCell);
+    }
+    return T;
+}
+```
+
+# Tree
+
+```cpp
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int ElementType;
+typedef struct TreeNode *Tree;
+struct TreeNode
+{
+    ElementType Element;
+    Tree Left;
+    Tree Right;
+};
+
+Tree CreateBiTree(){
+    
+    int element;
+    Tree T;
+    scanf("%d",&element);
+    
+    if(element==-1)
+        T=NULL;
+    
+    else {
+        T = (Tree)malloc(sizeof(struct TreeNode));
+        T->Element = element;
+        T->Left = CreateBiTree();//递归建树（根左右：先序建树）
+        T->Right = CreateBiTree();
+        
+    }
+    return T;
+}
+
+void PrintNode( Tree NodePtr )
+{
+    printf(" %d", NodePtr->Element);
+}
+
+void Level_Order(Tree T)
+{
+    if(T == 0) return;
+    int QueueLength = 1000;
+    Tree Queue[QueueLength];
+    int front = 0, rear = 0;
+    
+    Queue[rear++] = T;
+    while(front != rear) {
+        Tree TmpNode = Queue[front];
+        int element = TmpNode->Element;
+        Queue[front++] = 0;
+        if(TmpNode->Left) Queue[rear++] = TmpNode->Left;
+        if(TmpNode->Right) Queue[rear++] = TmpNode->Right;
+        if(front!=rear)
+            printf("%d ",element);
+        else printf("%d",element);
+    }
+}
+
+void InOrder(Tree T)
+{
+    if(T) {
+        InOrder(T->Left);
+        printf("%d ",T->Element);
+        InOrder(T->Right);
+    }
+}
+void Iterative_InOrder(Tree T)
+{
+    if(T == 0) return;
+    Tree Stack[1000];
+    int top = -1;
+    for(;;) {
+        for(; T; T = T->Left)
+            Stack[++top] = T;
+        
+        if(top == -1) break;
+        //top
+        T = Stack[top];
+        printf("%d ",Stack[top]->Element);
+        //pop
+        Stack[top--] = 0;
+        T = T->Right;
+    }
+}
+
+void preOrder(Tree T)
+{
+    if(T) {
+        printf("%d ",T->Element);
+        preOrder(T->Left);
+        preOrder(T->Right);
+        
+    }
+}
+
+void Iterative_PreOrder(Tree T)
+{
+    if(T == 0) return;
+    Tree Stack[1000];
+    int top = -1;
+    for(;;) {
+        for(; T;) {
+            printf("%d ",T->Element);
+            if(T->Right)
+                Stack[++top] = T->Right;
+            T = T->Left;
+        }
+        if(top == -1) break;
+        T = Stack[top--];
+    }
+}
+
+void postOrder(Tree T)
+{
+    if(T) {
+        postOrder(T->Left);
+        postOrder(T->Right);
+        printf("%d ",T->Element);
+    }
+}
+
+int main()
+{
+    Tree T = CreateBiTree();
+    // Iter_InOrder(T);
+    Iterative_PreOrder(T);
+}
+```
+
+
+
+# Red-Black Tree
+
+<img src="http://miaochenlu.github.io/picture/20190307inductionrbtree.png" width=400>
+
+<img src="http://miaochenlu.github.io/picture/20190307heightrbtree.png" width=400>
+
+<img src="http://miaochenlu.github.io/picture/20190307rotation.png" width=400>
+
+```cpp
+static void RB_Insert(RBTree T, Position Z) {
+    Position x = T;
+    Position y = 0;
+    //二叉查找树插入节点
+    while( x != 0) {
+        y = x;
+        if(Z->Element < x->Element) 
+            x = x->Left;
+        else x = x->Right;
+    }
+    Z->Parent = y;
+    //判断是y的左右儿子
+    if(y == 0) 
+        T = Z;
+    else if(Z->Element < y->Element) 
+        y->Left = Z;
+    else 
+        y->Right = Z;
+
+    Z->Left = 0;
+    Z->Right = 0;
+    Z->color = RED;
+    RB_Insert_Fixup(T, Z);
+}
+
+static void RB_Insert_Fixup(RBTree T, Position Z) {\
+    Position y;
+    //如果父亲的颜色是红色
+    while(Z->Parent->color == RED) {
+        //如果父亲是祖父的左儿子
+        if(Z->Parent == Z->Parent->Parent->Left) {
+            //y是祖父的右儿子，即叔叔
+            y = Z->Parent->Parent->Right;
+            //case 1
+            if(y->color == RED) {//叔叔是红色
+                //将父亲叔叔都变成黑色，祖父变成红色
+                Z->Parent->color = BLACK;
+                y->color = BLACK;
+                Z->Parent->Parent->color = RED;
+                //z变成祖父
+                Z = Z->Parent->Parent;
+                continue;
+            }
+            //case 2
+            else if(Z == Z->Parent->Right) {//z是父亲的右儿子
+                Z = Z->Parent;
+                Left_Rotate(T, Z);//进行一次左旋
+            }
+            //case 3
+            Z->Parent->color = BLACK;
+            Z->Parent->Parent->color = RED;
+            Right_Rotate(T, Z->Parent->Parent);
+        }
+        else if(Z->Parent == Z->Parent->Parent->Right) {
+            y = Z->Parent->Parent->Left;
+            if(y->color == RED) {
+                Z->Parent->color = BLACK;
+                y->color = BLACK;
+                Z->Parent->Parent->color = RED;
+                Z = Z->Parent->Parent;
+                continue;
+            }
+            else if(Z == Z->Parent->Left) {
+                Z = Z->Parent;
+                Right_Rotate(T, Z);
+            }
+            Z->Parent->color = BLACK;
+            Z->Parent->Parent->color = RED;
+            Left_Rotate(T, Z->Parent->Parent);
+        }
+    }
+    T->color = BLACK;
+}
+```
+
+
+
+
+
+
+
+
+
+# Dijkstra
+
 ```c
 Vertex FindMinDist( MGraph Graph, int dist[], int collected[] )
 {
