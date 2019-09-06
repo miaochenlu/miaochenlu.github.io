@@ -1,43 +1,80 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# Site settings 
+title: 'Rokhimin whd | site'
+description: 'Private Blog and my notes'
+keyword: 'ruby, rails, sinatra, javascript, vuejs, expressjs'
+url: '' 
+baseurl: ''
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: MCL blog
-email: jones.mcl1999@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  God grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  miaochenlu
+# Navigation links
+nav:
+  home: '/'
+  about: '/about.html' 
+  tags: '/tags.html' 
+  project: '/projects.html' 
+
+# Footer
+footer:
+  since: 2019
+
+# Author 
+author: 'Rokhimin whd'
+nickname: 'whdzera'
+bio: 'hi @everyone, im programmer ruby on rails. blogging as my hobby'
+avatar: 'assets/img/profile.png'
+
+# Search
+search: true
+
+# Night mode
+nightMode: true #always_true
+
+# Comments
+comments:
+  disqus: true
+  disqus_url: 'https://rokhimin.disqus.com/embed.js'
+
+# MathJax by Ray-Eldath
+mathjax: false
+
+# Share
+social-share: false
+social-share-items: ['vk', 'facebook', 'twitter']
+
+# theme color
+theme-color: 'default' 
+
+# Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
+postPatterns: 'assets/img/banner.jpg'
+
+# SNS settings 
+# url: email, weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
+sns:
+  email: 'mailto:whdzera@gmail.com'
+  github: '//github.com/rokhimin'
+  linkedin: '//www.linkedin.com/in/rokhim-wahid-4b4209142'
+  instagram: '//www.instagram.com/rokhiminwahid'
+  twitter: '//twitter.com/rokhiminwahid'
+
+# Tags 
+recommend-tags: true # whether or not display recommend-tags on the sidebar
+recommend-condition-size: 12 # a tag will be recommended if the size of it is more than this value
 
 # Build settings
+paginate: 6
+paginate_path: 'page:num'
+exclude: ['node_modules', '_darkness', 'package.json', 'gulpfile.js', '.gitignore', 'README.md']
+
+# Markdown
 markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
-highlighter: rouge
-theme: minima
-plugins:
-  - jekyll-feed
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# RSS
+RSS: false
+
+# Permalink
+permalink: /:title.rb
+
+# Plugins
+plugins: [jekyll-paginate]
