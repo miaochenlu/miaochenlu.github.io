@@ -1,5 +1,5 @@
 # Site settings 
-title: 'Rokhimin whd | site'
+title: 'Chenlu Miao | site'
 description: 'Private Blog and my notes'
 keyword: 'ruby, rails, sinatra, javascript, vuejs, expressjs'
 url: '' 
@@ -17,7 +17,7 @@ footer:
   since: 2019
 
 # Author 
-author: 'Rokhimin whd'
+author: 'Chenlu Miao'
 nickname: 'whdzera'
 bio: 'hi @everyone, im programmer ruby on rails. blogging as my hobby'
 avatar: 'assets/img/profile.png'
@@ -49,11 +49,8 @@ postPatterns: 'assets/img/banner.jpg'
 # SNS settings 
 # url: email, weibo, zhihu, twitter, instagram, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
 sns:
-  email: 'mailto:whdzera@gmail.com'
-  github: '//github.com/rokhimin'
-  linkedin: '//www.linkedin.com/in/rokhim-wahid-4b4209142'
-  instagram: '//www.instagram.com/rokhiminwahid'
-  twitter: '//twitter.com/rokhiminwahid'
+  email: 'jones.mcl1999@gmail.com'
+  github: '//github.com/miaochenlu'
 
 # Tags 
 recommend-tags: true # whether or not display recommend-tags on the sidebar
