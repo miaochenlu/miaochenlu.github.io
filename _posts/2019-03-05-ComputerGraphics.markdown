@@ -49,19 +49,19 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 假设这个旋转轴u经过原点, $u=(x,y,z)^T$,我们要将BD(向量v)绕着轴旋转 $\alpha$变换到 BA(向量v')
 
-\\
 
 * 首先我们要得到 $\mathbf{u}$的单位向量 $\hat{\mathbf{u}}$
 
 为什么？ 
 
-因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
+> 因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
 
-但是我们不需要用到长度的信息
+> 但是我们不需要用到长度的信息
 
-因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
+> 因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
 
-其中 $\hat{\mathbf{u}}=\frac{\mathbf{u}}{||\mathbf{u||}}$
+
+其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{||\mathbf{u||}}$
 
 
 
@@ -87,9 +87,8 @@ v_{\parallel}&=proj_u(v)\\
 &=(\hat{u}\cdot v)\hat{u}
 \end{aligned}$$
 
-因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$
+因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$ 
 
-//
 
 ### **再讨论 $v_{\perp}$**
 
@@ -98,6 +97,8 @@ v_{\parallel}&=proj_u(v)\\
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
 
 左图是旋转过程示意图，右图是俯视图
+
+
 
 <figure>
   <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width=300>
@@ -132,7 +133,7 @@ $$\begin{aligned}
 
 $$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 
-\\
+
 
 ### 最终旋转公式
 
@@ -162,7 +163,6 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 ## 2 四元数
 
 
-
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
 ## Scan converting lines
@@ -181,7 +181,6 @@ $$from (x_1,y_1),(x_2,y_2) \\
 For a line segment joining points P(x1,y2) and
 P(x2,y2)    
 $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
-
 <img src = "http://miaochenlu.github.io/picture/20190306slope.png" width = "300">
 
 ### **Digital Differential Analyzer(DDA)**
@@ -190,7 +189,7 @@ m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
 x_i = x_{i_{prev}} + 1  \\
 y_i = y_{i_{prev}} + m\\
 illuminate\quad the\quad pixel [x_i,round(y_i)]$$
-$$
+
 ```
 DDA routine for rastering a line  
 the line end points are(x1,y1) and (x2,y2), assumed not equal  
@@ -229,6 +228,7 @@ But it uses floating point operations.
 
 ### **Bresenham Line Drawing**
 <img src="http://miaochenlu.github.io/picture/20190306Bresenham.png" width = "300">
+
 * Analysis:  
 先考虑第一八分圆域，$$0\leq \Delta y \leq \Delta x$$
 事实上，$y_{i+1}$的选择只有两种情况：$y_i \quad or\quad y_i+1$
