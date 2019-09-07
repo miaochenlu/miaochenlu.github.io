@@ -120,7 +120,7 @@ v_{\parallel}&=proj_u(v)\\
 
 由于一个向量 $v_{\perp}$不足以表示旋转，我们构造一个垂直于 $v_{\perp}$和旋转轴u的向量 $\mathbf{w}$, $\mathbf{w}$可以通过叉乘获得
 
-$$\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}$$
+$$\mathbf{w}=\mathbf{\hat{u}}\times \mathbf{v_{\perp}}$$
 
 将 $v_{\perp}'$分别向 $\mathbf{w}$和 $v_{\perp}$投影，得到$v_w'$和$v_v'$
 
@@ -129,20 +129,20 @@ $$\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}$$
 $$\begin{aligned}
 v_{\perp}'&=v_v'+v_w'\\
 &=v_{\perp}cos\alpha +wsin\alpha\\
-&=v_{\perp}cos\alpha+(\mathbf{u}\times \mathbf{v_{\perp}})sin\alpha
+&=v_{\perp}cos\alpha+(\mathbf{\hat{u}}\times \mathbf{v_{\perp}})sin\alpha
 \end{aligned}$$
 
-代入 $v_{\perp}=v-v_{\parallel}$到 $\mathbf{u}\times\mathbf{v_{\perp}}$
+代入 $v_{\perp}=v-v_{\parallel}$到 $\mathbf{\hat{u}}\times\mathbf{v_{\perp}}$
 
 $$\begin{aligned}
-\mathbf{u}\times \mathbf{v_{\perp}}&=\mathbf{u}\times(v-v_{\parallel})\\
-&=\mathbf{u}\times v-\mathbf{u}\times v_{\parallel}\\
-&=\mathbf{u}\times\mathbf{v}\qquad\qquad(\mathbf{u}||v_{\parallel})
+\mathbf{\hat{u}}\times \mathbf{v_{\perp}}&=\mathbf{\hat{u}}\times(v-v_{\parallel})\\
+&=\mathbf{\hat{u}}\times v-\mathbf{\hat{u}}\times v_{\parallel}\\
+&=\mathbf{\hat{u}}\times\mathbf{v}\qquad\qquad(\mathbf{\hat{u}}||v_{\parallel})
 \end{aligned}$$
 
 所以最终我们得到
 
-$$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
+$$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha$$
 
 <br/>
 
@@ -151,13 +151,13 @@ $$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 以上两步，我们得到
 
 $$v_{\parallel}'=v_{\parallel}\\
-v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
+v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha$$
 
 结合这两个结果  
 
 $$\begin{aligned}
 v'&=v_{\parallel}'+v_{\perp}'\\
-&=v_{\parallel}+v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
+&=v_{\parallel}+v_{\perp}cos\alpha+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha
 \end{aligned}$$
 
 <br/>
@@ -167,8 +167,8 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 最终得到
 
 $$\begin{aligned}
-v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}})cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha\\
-&=\mathbf{v}cos\alpha+(1-cos\alpha)(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{u}\times\mathbf{v})sin\alpha
+v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}})cos\alpha+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha\\
+&=\mathbf{v}cos\alpha+(1-cos\alpha)(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha
 \end{aligned}$$
 
 ## 2 四元数
@@ -338,9 +338,11 @@ $q_1q_2$的标量部分可以用$ae-\mathbf{v}\cdot\mathbf{u}$表示
 <br/>
 对于任意四元素$q_1=[s,\mathbf{v}]$,$q_2=[t,\mathbf{u}]$  
 $$q_1q_2=[st-\mathbf{v}\cdot\mathbf{u},s\mathbf{u}+t\mathbf{v}+\mathbf{v}\times\mathbf{u}]$$
+<br/>
 
 #### 2.2.5 纯四元数
-仅有虚部的四元数数是纯四元数
+仅有虚部的四元数数是纯四元数  
+
 $$v=[0,\mathbf{v}]$$
 $v$就是一个纯四元数
 
@@ -348,14 +350,14 @@ $v$就是一个纯四元数
 假设有两个纯四元数$v=[0,\mathbf{v}]$,$u=[0,\mathbf{u}]$
 $$vu=[0-\mathbf{v}\cdot\mathbf{u},\mathbf{v}\times\mathbf{u}$$
 之后会用到这条性质
-
+<br/>
 #### 2.2.6 逆及共轭
 定义四元数$q$的逆$q^{-1}$  
 
 $$qq^{-1}=q^{-1}q=1(q\neq 0)$$  
 计算逆非常困难，下面我们会发现通过共轭来计算逆非常方便  
-
-$q=[s,\mathbf{v}]$的共轭为$q^*=[s,-\mathbf{v}]$  
+<br/>
+$q=[s,\mathbf{v}]$的共轭为 $q^*=[s,-\mathbf{v}]$  
 
 二者相乘  
 
@@ -367,7 +369,7 @@ qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
 \end{aligned}
 $$   
 
-易证 $qq^*=q^*q$，满足交换律  
+易证 $qq^*=q^*q$ ，满足交换律  
 
 <br/>
 接下来我们求逆  
@@ -379,6 +381,71 @@ q^*qq^{-1}&=q^*\\
 ||q||^2\cdot q^{-1}&=q^*\\
 q^{-1}&=\frac{q^*}{||q||^2}
 \end{aligned}$$
+
+## 3 四元数与3D旋转
+我们要将一个向量 $\mathbf{v}$绕旋转轴 $\mathbf{u}$旋转 $\alpha$    
+
+之前我们将 $\mathbf{v}$拆分成 $v_{\parallel}$ , $v_{perp}$分别旋转   
+
+下面，我们对这些向量转换为四元数来做计算  
+
+$$\begin{aligned}
+    v&=[0,\mathbf{v}] &v'=[0,\mathbf{v'}]\\
+    v_{\perp}&=[0,\mathbf{v_{\perp}}] &v_{\perp}'=[0,\mathbf{v_{\perp}}'] \\
+    v_{\parallel}&=[0,\mathbf{v_{\parallel}}] &v_{\parallel}'=[0,\mathbf{v_{\parallel}}'] \\
+    u&=[0,\mathbf{\hat{u}}]
+\end{aligned}
+$$  
+
+注意粗体的是向量，非粗体是四元数  
+
+<br/>
+
+### 3.1 $v_{\parallel}$旋转
+与之前一样  
+
+$$v_{\parallel}'=v_{\parallel}$$
+<br/>
+
+### 3.2 $v_{\perp}$的旋转
+之前我们得到
+$$\mathbf{v_{\perp}'}=\mathbf{v_{\perp}}cos\alpha+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha$$
+
+
+显然，我们可以将 $\mathbf{v_{\perp}'}$,$\mathbf{v_{\perp}}$分别替换成$v_{\perp}'$和$v_{\perp}$  
+
+剩下的问题是如何处理 $\mathbf{\hat{u}}\times\mathbf{v}$  
+
+因为 $\mathbf{v_{\perp}}\perp\mathbf{\hat{u}}$,所以 $\mathbf{v_{\perp}}\cdot\mathbf{\hat{u}}=0$
+
+$$ uv_{\perp}=[0,\mathbf{\hat{u}}\times\mathbf{v}_{\perp}]=\mathbf{\hat{u}}\times\mathbf{v}_{\perp}$$
+
+所以
+$$\begin{aligned}v_{\perp}'&=v_{\perp}cos\alpha+uv_{\perp}sin\alpha\\
+&=(cos\alpha+usin\alpha)v_{\perp}
+\end{aligned}$$
+
+我们将 $cos\alpha+usin\alpha$看成一个四元数q,则  
+$$v_{\perp}'=qv_{\perp}$$
+
+q是什么呢？  
+
+$$\begin{aligned}
+q&=cos\alpha+usin\alpha\\
+&=[cos\alpha,\mathbf{\hat{u}}sin\alpha]\qquad(u是一个纯四元数)
+\end{aligned}$$  
+
+同时可以发现， $||q||=1$
+
+<br/>
+
+### 3.3 $v$的旋转  
+
+$$\begin{aligned}
+v'&=v_{\parallel}'+v_{\perp}'\\
+&=v_{\parallel}+qv_{\perp}
+\end{aligned}$$
+其中$q=[cos\alpha,\mathbf{\hat{u}}sin\alpha]$
 
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
