@@ -42,7 +42,8 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-<video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
+<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4">
+
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
 假设这个旋转轴u经过原点, $u=(x,y,z)^T$,我们要将BD(向量v)绕着轴旋转 $\alpha$变换到 BA(向量v')
@@ -285,7 +286,6 @@ reference:
 [1] 计算机图形学的算法基础
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
