@@ -42,7 +42,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4">
+<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4"></iframe>
 
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
