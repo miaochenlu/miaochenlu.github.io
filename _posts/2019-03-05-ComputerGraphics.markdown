@@ -236,6 +236,7 @@ $sq=sa+sbi+scj+sdk$
 
 
 #### 2.2.4 四元数乘法
+##### 2.2.4.1 乘法推导
 
 在进入四元数乘法之前，我们先来看一下四元数单位元的乘法
 
@@ -287,9 +288,79 @@ q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 \end{aligned}
 $$
 
+##### 2.2.4.2 矩阵形式
+从上述结果，我们可以得到乘法的矩阵形式
+$$q_1q_2=\left[\begin{matrix}a&-b&-c&-d\\
+b&a&-d&c\\
+c&d&a&-b\\
+d&-c&b&a
+\end{matrix}\right]
+\left[\begin{matrix}e\\f\\g\\h\end{matrix}\right]$$
+这相当于左乘$q_1$所做的矩阵变换
 
+##### 2.2.4.3 Grassmann积
+2.2.4.1中我们得到乘积的表达式为
+$$\begin{aligned}q_1q_2
+&=(ae-(bf+cg+dh))+\\
+&\quad \,(be+af+ch-dg)i+\\
+&\quad \,(ce+ag-bh+df)j+\\
+&\quad \,(de+ah+bg-cf)k
+\end{aligned}$$
+现在我们可能还不能发现什么  
+<br/>
+假设令$\mathbf{v}=\left[\begin{matrix}b\\c\\d\end{matrix}\right]$,$\mathbf{u}=\left[\begin{matrix}f\\g\\h\end{matrix}\right]$  
+点乘：$\mathbf{v}\cdot\mathbf{u}=bf+cg+dh$  
+定义叉乘（想不到吧，叉乘就是在这里被定义的）  
+$$\begin{aligned}\mathbf{v}\times\mathbf{u}&=\left|\begin{matrix}
+\mathbf{i}&\mathbf{j}&\mathbf{k}\\
+b&c&d\\
+f&g&h
+\end{matrix}\right|\\
+&=(ch-dg)\mathbf{i}-(bh-df)\mathbf{j}+(bg-cf)\mathbf{k}
+\end{aligned}$$
+<br/>
+<br/>
 
+$q_1q_2$的标量部分可以用$ae-\mathbf{v}\cdot\mathbf{u}$表示  
+向量部分可以用$a\mathbf{u}+e\mathbf{v}+\mathbf{v}\times\mathbf{u}$表示   
+因此，用标量向量有序对表示，我们可以得到  
+<br/>
+对于任意四元素$q_1=[s,\mathbf{v}]$,$q_2=[t,\mathbf{u}]$  
+$$q_1q_2=[st-\mathbf{v}\cdot\mathbf{u},s\mathbf{u}+t\mathbf{v}+\mathbf{v}\times\mathbf{u}]$$
 
+#### 2.2.5 纯四元数
+仅有虚部的四元数数是纯四元数
+$$v=[0,\mathbf{v}]$$
+$v$就是一个纯四元数
+
+两个纯属元数的相乘会发生什么呢？
+假设有两个纯四元数$v=[0,\mathbf{v}]$,$u=[0,\mathbf{u}]$
+$$vu=[0-\mathbf{v}\cdot\mathbf{u},\mathbf{v}\times\mathbf{u}$$
+之后会用到这条性质
+
+#### 2.2.6 逆及共轭
+定义四元数$q$的逆$q^{-1}$
+$$qq^{-1}=q^{-1}q=1(q\neq 0)$$
+计算逆非常困难，下面我们会发现通过共轭来计算逆非常方便  
+$q=[s,\mathbf{v}]$的共轭为$q^*=[s,-\mathbf{v}]$
+二者相乘
+$$\begin{aligned}
+qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
+&=[s^2-\mathbf{v}\cdot(-\mathbf{v}),s(-\mathbf{v}+s\mathbf{v}+\mathbf{v}\times\mathbf{-v})]\\
+&=[s^2+||v||^2,0]\\
+&=||q||^2
+\end{aligned}
+$$
+易证 $qq^*=q^*q$，满足交换律
+<br/>
+$$\begin{aligned}
+qq^{-1}&=&1\\
+q^*qq^{-1}&=&q^*\\
+(q^*q)q^{-1}&=&q^*\\
+||q||^2\cdot q^{-1}&=&q^*\\
+q^{-1}&=&\frac{q^*}{||q||^2}
+\end{aligned}$$
+接下来我们求逆
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
