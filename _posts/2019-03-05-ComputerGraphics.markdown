@@ -181,13 +181,13 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 
 每个四元数都是 $1、i、j、k$这些单位元的线性组合，四元数q可以表示成 
 
-$$q=a+bi+cj+dk\quad(a,b,c,d\in\R)$$
+$$q=a+bi+cj+dk\quad(a,b,c,d\in\mathbf{R})$$
 
 其中： $i^2=j^2=k^2=ijk=-1$
 
 通常我们也会将四元数写成标量和向量的有序对，标量是实部，三维向量表示虚部
 
-$$q=[s,\mathbf{v}]\quad(v=\left[\begin{matrix}x\\y\\z\end{matrix}\right], s,x,y,z\in\R)$$
+$$q=[s,\mathbf{v}]\quad(v=\left[\begin{matrix}x\\y\\z\end{matrix}\right], s,x,y,z\in\mathbf{R})$$
 
 ### 2.2 运算与性质
 
@@ -288,29 +288,40 @@ q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 \end{aligned}
 $$
 
-##### 2.2.4.2 矩阵形式
-从上述结果，我们可以得到乘法的矩阵形式
+#### 2.2.4.2 矩阵形式
+从上述结果，我们可以得到乘法的矩阵形式  
+
 $$q_1q_2=\left[\begin{matrix}a&-b&-c&-d\\
 b&a&-d&c\\
 c&d&a&-b\\
 d&-c&b&a
 \end{matrix}\right]
 \left[\begin{matrix}e\\f\\g\\h\end{matrix}\right]$$
+
 这相当于左乘$q_1$所做的矩阵变换
 
-##### 2.2.4.3 Grassmann积
-2.2.4.1中我们得到乘积的表达式为
+#### 2.2.4.3 Grassmann积  
+
+2.2.4.1中我们得到乘积的表达式为  
+
 $$\begin{aligned}q_1q_2
 &=(ae-(bf+cg+dh))+\\
 &\quad \,(be+af+ch-dg)i+\\
 &\quad \,(ce+ag-bh+df)j+\\
 &\quad \,(de+ah+bg-cf)k
-\end{aligned}$$
+\end{aligned}$$  
+
+<br/>
 现在我们可能还不能发现什么  
 <br/>
-假设令$\mathbf{v}=\left[\begin{matrix}b\\c\\d\end{matrix}\right]$,$\mathbf{u}=\left[\begin{matrix}f\\g\\h\end{matrix}\right]$  
+
+假设令
+$$\mathbf{v}=\left[\begin{matrix}b\\c \\ d \end{matrix}\right],\mathbf{u}=\left[\begin{matrix}f\\g\\h\end{matrix}\right]$$
+
 点乘：$\mathbf{v}\cdot\mathbf{u}=bf+cg+dh$  
+
 定义叉乘（想不到吧，叉乘就是在这里被定义的）  
+
 $$\begin{aligned}\mathbf{v}\times\mathbf{u}&=\left|\begin{matrix}
 \mathbf{i}&\mathbf{j}&\mathbf{k}\\
 b&c&d\\
@@ -339,28 +350,36 @@ $$vu=[0-\mathbf{v}\cdot\mathbf{u},\mathbf{v}\times\mathbf{u}$$
 之后会用到这条性质
 
 #### 2.2.6 逆及共轭
-定义四元数$q$的逆$q^{-1}$
-$$qq^{-1}=q^{-1}q=1(q\neq 0)$$
+定义四元数$q$的逆$q^{-1}$  
+
+$$qq^{-1}=q^{-1}q=1(q\neq 0)$$  
 计算逆非常困难，下面我们会发现通过共轭来计算逆非常方便  
-$q=[s,\mathbf{v}]$的共轭为$q^*=[s,-\mathbf{v}]$
-二者相乘
+
+$q=[s,\mathbf{v}]$的共轭为$q^*=[s,-\mathbf{v}]$  
+
+二者相乘  
+
 $$\begin{aligned}
 qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
 &=[s^2-\mathbf{v}\cdot(-\mathbf{v}),s(-\mathbf{v}+s\mathbf{v}+\mathbf{v}\times\mathbf{-v})]\\
 &=[s^2+||v||^2,0]\\
 &=||q||^2
 \end{aligned}
-$$
-易证 $qq^*=q^*q$，满足交换律
+$$   
+
+易证 $qq^*=q^*q$，满足交换律  
+
 <br/>
+接下来我们求逆  
+
 $$\begin{aligned}
-qq^{-1}&=&1\\
-q^*qq^{-1}&=&q^*\\
-(q^*q)q^{-1}&=&q^*\\
-||q||^2\cdot q^{-1}&=&q^*\\
-q^{-1}&=&\frac{q^*}{||q||^2}
+qq^{-1}&=1\\
+q^*qq^{-1}&=q^*\\
+(q^*q)q^{-1}&=q^*\\
+||q||^2\cdot q^{-1}&=q^*\\
+q^{-1}&=\frac{q^*}{||q||^2}
 \end{aligned}$$
-接下来我们求逆
+
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
