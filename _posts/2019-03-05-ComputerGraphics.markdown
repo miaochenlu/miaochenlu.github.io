@@ -42,7 +42,9 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4"></iframe>
+<video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400" />
+
+
 
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
@@ -57,6 +59,8 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 > 但是我们不需要用到长度的信息.   
 >  因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度.   
 > 其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{\mathbf{||u||}}$                         
+
+<br/>
 
 * 分解旋转
 
@@ -81,6 +85,8 @@ v_{\parallel}&=proj_u(v)\\
 \end{aligned}$$
 
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$ 
+
+<br/>
 
 
 ### **再讨论 $v_{\perp}$**  
@@ -123,7 +129,7 @@ $$\begin{aligned}
 
 $$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 
-
+<br/>
 
 ### 最终旋转公式
 
@@ -139,7 +145,7 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 &=v_{\parallel}+v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
 \end{aligned}$$
 
-
+<br/>
 
 带入 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$和 $v_{\perp}=v-(\hat{u}\cdot v)\hat{u}$
 
