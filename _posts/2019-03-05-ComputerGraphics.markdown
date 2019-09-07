@@ -53,12 +53,10 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 为什么？   
 
-> 因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
-> 但是我们不需要用到长度的信息
->  因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
-> 其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{\mathbf{||u||}}$
-
-
+> 因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度  
+> 但是我们不需要用到长度的信息.   
+>  因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度.   
+> 其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{\mathbf{||u||}}$                         
 
 * 分解旋转
 
@@ -72,7 +70,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 ### 先讨论 $v_{\parallel}$  
 
-<img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
+<img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width="300" />
 
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下  
 
@@ -93,8 +91,8 @@ v_{\parallel}&=proj_u(v)\\
 左图是旋转过程示意图，右图是俯视图    
 
 <figure>
-  <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width=300>
-  <img src="http://miaochenlu.github.io/picture/image-20190907120930786-7829821.png" width=300>
+  <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width="300" />
+  <img src="http://miaochenlu.github.io/picture/image-20190907120930786-7829821.png" width="300" />
 </figure>
 
 接下来我们在俯视图的2D视角来推导
