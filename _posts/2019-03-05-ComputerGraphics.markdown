@@ -43,10 +43,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转
 
-
-
 <video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
-
 
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
@@ -80,10 +77,6 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 ### 先讨论 $v_{\parallel}$
 
-
-
-
-
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下
@@ -94,13 +87,9 @@ v_{\parallel}&=proj_u(v)\\
 &=(\hat{u}\cdot v)\hat{u}
 \end{aligned}$$
 
-
-
-
-
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$
 
-\\
+//
 
 ### **再讨论 $v_{\perp}$**
 
@@ -108,68 +97,67 @@ v_{\parallel}&=proj_u(v)\\
 
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
 
-
-
 左图是旋转过程示意图，右图是俯视图
 
-<figure class="half">
-  <img src="http://miaochenlu.github.io/picture/image-20190907112926608.png" width=300>
-  <img src="http://miaochenlu.github.io/picture/image-20190907120930786.png" width=350>
+<figure>
+  <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width=300>
+  <img src="http://miaochenlu.github.io/picture//image-20190907120930786-7829821.png" width=300>
 </figure>
 
 接下来我们在俯视图的2D视角来推导
 
 由于一个向量 $v_{\perp}$不足以表示旋转，我们构造一个垂直于 $v_{\perp}$和旋转轴u的向量 $\mathbf{w}$, $\mathbf{w}$可以通过叉乘获得
-$$
-\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}
-$$
+
+$$\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}$$
+
 将 $v_{\perp}'$分别向 $\mathbf{w}$和 $v_{\perp}$投影，得到$v_w'$和$v_v'$
 
 接下来我们来推导 $v_{\perp}'$
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 v_{\perp}'&=v_v'+v_w'\\
 &=v_{\perp}cos\alpha +wsin\alpha\\
 &=v_{\perp}cos\alpha+(\mathbf{u}\times \mathbf{v_{\perp}})sin\alpha
-\end{aligned}
-$$
+\end{aligned}$$
+
 带入 $v_{\perp}=v-v_{\parallel}$到 $\mathbf{u}\times\mathbf{v_{\perp}}$
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 \mathbf{u}\times \mathbf{v_{\perp}}&=\mathbf{u}\times(v-v_{\parallel})\\
 &=\mathbf{u}\times v-\mathbf{u}\times v_{\parallel}\\
 &=\mathbf{u}\times\mathbf{v}\qquad\qquad(\mathbf{u}||v_{\parallel})
-\end{aligned}
-$$
+\end{aligned}$$
+
 所以最终我们得到
-$$
-v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
-$$
+
+$$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
+
 \\
 
 ### 最终旋转公式
 
 以上两步，我们得到
-$$
-v_{\parallel}'=v_{\parallel}\\
-v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
-$$
+
+$$v_{\parallel}'=v_{\parallel}\\
+v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
+
 结合这两个结果
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 v'&=v_{\parallel}'+v_{\perp}'\\
 &=v_{\parallel}+v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
-\end{aligned}
-$$
+\end{aligned}$$
+
+\\
+
 带入 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$和 $v_{\perp}=v-(\hat{u}\cdot v)\hat{u}$
 
 最终得到
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}})cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha\\
 &=\mathbf{v}cos\alpha+(1-cos\alpha)(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{u}\times\mathbf{v})sin\alpha
-\end{aligned}
-$$
+\end{aligned}$$
 
 ## 2 四元数
 
