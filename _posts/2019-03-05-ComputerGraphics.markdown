@@ -56,11 +56,10 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-
-
-<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400" align="center" /></iframe>
-
-
+<video id="video" controls="" preload="none">
+      <source id="mp4" src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" type="video/mp4" width="400">
+      <p>Your user agent does not support the HTML5 Video element.</p>
+    </video>
 
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
