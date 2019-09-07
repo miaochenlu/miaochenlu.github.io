@@ -34,18 +34,15 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 });
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
 <h1><a name="top">目录</a></h1>
 <a href="#rotation">旋转与四元数</a>
 
 <a href="#scan_convert_line">光栅扫描图形学</a>
 
 <h1><a name="rotation">旋转与四元数</a></h1>
-
 ## 1 三维空间中的旋转  
 
 <video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
-
 如图，我们要将D点绕旋转轴Axis旋转到A点
 
 假设这个旋转轴u经过原点, $u=(x,y,z)^T$,我们要将BD(向量v)绕着轴旋转 $\alpha$变换到 BA(向量v')
@@ -77,7 +74,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下  
-  
+
 $$\begin{aligned}
 v_{\parallel}&=proj_u(v)\\
 &=\frac{u\cdot v}{||u||}\hat{u}\\
@@ -86,12 +83,12 @@ v_{\parallel}&=proj_u(v)\\
 
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$ 
 
-  
+
 ### **再讨论 $v_{\perp}$**  
 在讨论 $v_{\parallel}$时我们得出 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$
 
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
-  
+
 左图是旋转过程示意图，右图是俯视图    
 
 <figure>
@@ -159,7 +156,6 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
-
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300">
 
@@ -289,7 +285,6 @@ reference:
 [1] 计算机图形学的算法基础
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 
 
 
