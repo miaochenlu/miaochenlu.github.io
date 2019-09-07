@@ -10,20 +10,40 @@ categories: jekyll update
 
 ---
 
-<h1><a name="top">目录</a></h1>
 
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+inlineMath: [['$','$']],['\\(','\\)']]
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+<h1><a name="top">目录</a></h1>
 <a href="#rotation">旋转与四元数</a>
 
 <a href="#scan_convert_line">光栅扫描图形学</a>
 
 <h1><a name="rotation">旋转与四元数</a></h1>
-
 ## 1 三维空间中的旋转
 
 
 
 <video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
-
 
 
 如图，我们要将D点绕旋转轴Axis旋转到A点
@@ -60,19 +80,15 @@ categories: jekyll update
 
 
 
-
-
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下
 
-$$\begin{aligned}
+\begin{aligned}
 v_{\parallel}&=proj_u(v)\\
 &=\frac{u\cdot v}{||u||}\hat{u}\\
 &=(\hat{u}\cdot v)\hat{u}
 \end{aligned}$$
-
-
 
 
 
@@ -98,9 +114,9 @@ v_{\parallel}&=proj_u(v)\\
 接下来我们在俯视图的2D视角来推导
 
 由于一个向量 $v_{\perp}$不足以表示旋转，我们构造一个垂直于 $v_{\perp}$和旋转轴u的向量 $\mathbf{w}$, $\mathbf{w}$可以通过叉乘获得
-$$
-\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}
-$$
+
+$$\mathbf{w}=\mathbf{u}\times \mathbf{v_{\perp}}$$
+
 将 $v_{\perp}'$分别向 $\mathbf{w}$和 $v_{\perp}$投影，得到$v_w'$和$v_v'$
 
 接下来我们来推导 $v_{\perp}'$
@@ -154,9 +170,7 @@ $$
 
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
-
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300">
 
@@ -286,7 +300,6 @@ reference:
 [1] 计算机图形学的算法基础
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 
 
 
