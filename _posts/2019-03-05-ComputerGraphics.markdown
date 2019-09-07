@@ -1,5 +1,5 @@
 ---
-$$v_{\parallel}'=v_{\parallel}
+
 layout: post
 
 title: "Computer Graphics"
