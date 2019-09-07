@@ -10,18 +10,6 @@ categories: jekyll update
 
 ---
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-inlineMath: [['$','$']]
-}
-});
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
-
 <h1><a name="top">目录</a></h1>
 
 <a href="#rotation">旋转与四元数</a>
@@ -34,7 +22,7 @@ inlineMath: [['$','$']]
 
 
 
-<video src="http:/miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
+<video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
 
 
 
@@ -42,19 +30,19 @@ inlineMath: [['$','$']]
 
 假设这个旋转轴u经过原点, $u=(x,y,z)^T$,我们要将BD(向量v)绕着轴旋转 $\alpha$变换到 BA(向量v')
 
-\
+\\
 
 * 首先我们要得到 $\mathbf{u}$的单位向量 $\hat{\mathbf{u}}$
 
-> 为什么？ 
->
-> 因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
->
-> 但是我们不需要用到长度的信息
->
-> 因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
->
-> 其中 $\hat{\mathbf{u}}=\frac{\mathbf{u}}{||\mathbf{u||}}$
+为什么？ 
+
+因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
+
+但是我们不需要用到长度的信息
+
+因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
+
+其中 $\hat{\mathbf{u}}=\frac{\mathbf{u}}{||\mathbf{u||}}$
 
 
 
@@ -62,27 +50,35 @@ inlineMath: [['$','$']]
 
 可以将 $\mathbf{v}$绕轴 $\mathbf{u}$的旋转分解到平行 $\mathbf{u}$和 垂直$\mathbf{u}$两个方向,
 
-> 旋转前$v=v_{\parallel}+v_{\perp}$
+旋转前$v=v_{\parallel}+v_{\perp}$
 
-> 旋转后 $v'=v_{\parallel}'+v_{\perp}'$
+旋转后 $v'=v_{\parallel}'+v_{\perp}'$
 
 接下来我们通过u、v来求解 $v_{\parallel}$和 $v_{\perp}$的表达式
 
-### **先讨论 $v_{\parallel}$**
+### 先讨论 $v_{\parallel}$
+
+
+
+
 
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 v_{\parallel}&=proj_u(v)\\
 &=\frac{u\cdot v}{||u||}\hat{u}\\
 &=(\hat{u}\cdot v)\hat{u}
-\end{aligned}
-$$
+\end{aligned}$$
+
+
+
+
+
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$
 
-\
+\\
 
 ### **再讨论 $v_{\perp}$**
 
@@ -127,7 +123,7 @@ $$
 $$
 v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
 $$
-\
+\\
 
 ### 最终旋转公式
 
@@ -163,6 +159,7 @@ $$
 
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300">
+
 * Question 1: How to draw the line?
 $$from (x_1,y_1),(x_2,y_2) \\ 
 \Rightarrow y=mx+b \\
@@ -178,8 +175,9 @@ P(x2,y2)
 $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
 
 <img src = "http://miaochenlu.github.io/picture/20190306slope.png" width = "300">
+
 ### **Digital Differential Analyzer(DDA)**
-$$ y_i = m·x_i+c    \\
+$$ y_i = m\cdot x_i+c    \\
 m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
 x_i = x_{i_{prev}} + 1  \\
 y_i = y_{i_{prev}} + m\\
