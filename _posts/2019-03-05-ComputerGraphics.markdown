@@ -41,7 +41,8 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <a href="#scan_convert_line">光栅扫描图形学</a>
 
 <h1><a name="rotation">旋转与四元数</a></h1>
-## 1 三维空间中的旋转
+
+## 1 三维空间中的旋转  
 
 <video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width=400></video>
 
@@ -52,16 +53,12 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 * 首先我们要得到 $\mathbf{u}$的单位向量 $\hat{\mathbf{u}}$
 
-为什么？ 
+为什么？   
 
 > 因为 $u=(x,y,z)^T$有三个自由度，确定了旋转轴的方向与长度
-
 > 但是我们不需要用到长度的信息
-
-> 因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
-
-
-其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{||\mathbf{u||}}$
+>  因此，我们可以将u转换成单位向量 $\hat{\mathbf{u}}$，这样我们可以减少一个自由度
+> 其中$\hat{\mathbf{u}}=\frac{\mathbf{u}}{\mathbf{||u||}}$
 
 
 
@@ -75,7 +72,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 接下来我们通过u、v来求解 $v_{\parallel}$和 $v_{\perp}$的表达式
 
-### 先讨论 $v_{\parallel}$
+### 先讨论 $v_{\parallel}$  
 
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
@@ -90,16 +87,12 @@ v_{\parallel}&=proj_u(v)\\
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$ 
 
   
-### **再讨论 $v_{\perp}$**
-
+### **再讨论 $v_{\perp}$**  
 在讨论 $v_{\parallel}$时我们得出 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$
 
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
   
-左图是旋转过程示意图，右图是俯视图  
-  
-
-
+左图是旋转过程示意图，右图是俯视图    
 
 <figure>
   <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width=300>
@@ -166,6 +159,7 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
+
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300">
 
