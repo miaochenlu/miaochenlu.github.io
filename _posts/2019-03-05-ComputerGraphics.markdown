@@ -39,10 +39,26 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 <a href="#scan_convert_line">光栅扫描图形学</a>
 
+
+
+
+
+
+
+</br>
+
+</br>
+
+</br>
+
+</br>
+
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-<video src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400"></video>
+
+
+<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400" align="center" />
 
 
 
@@ -117,7 +133,7 @@ v_{\perp}'&=v_v'+v_w'\\
 &=v_{\perp}cos\alpha+(\mathbf{u}\times \mathbf{v_{\perp}})sin\alpha
 \end{aligned}$$
 
-带入 $v_{\perp}=v-v_{\parallel}$到 $\mathbf{u}\times\mathbf{v_{\perp}}$
+代入 $v_{\perp}=v-v_{\parallel}$到 $\mathbf{u}\times\mathbf{v_{\perp}}$
 
 $$\begin{aligned}
 \mathbf{u}\times \mathbf{v_{\perp}}&=\mathbf{u}\times(v-v_{\parallel})\\
@@ -147,7 +163,7 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 
 <br/>
 
-带入 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$和 $v_{\perp}=v-(\hat{u}\cdot v)\hat{u}$
+代入 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$和 $v_{\perp}=v-(\hat{u}\cdot v)\hat{u}$
 
 最终得到
 
