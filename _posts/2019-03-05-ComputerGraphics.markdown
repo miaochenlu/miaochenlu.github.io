@@ -173,6 +173,123 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 
 ## 2 四元数
 
+### 2.1 定义
+
+* **复数**由实数加上虚数单位 $i$组成，其中$i^2=-1$
+
+* **四元数**由实数加上三个元素 $i、j、k$组成
+
+每个四元数都是 $1、i、j、k$这些单位元的线性组合，四元数q可以表示成 
+
+$$q=a+bi+cj+dk\quad(a,b,c,d\in\R)$$
+
+其中： $i^2=j^2=k^2=ijk=-1$
+
+通常我们也会将四元数写成标量和向量的有序对，标量是实部，三维向量表示虚部
+
+$$q=[s,\mathbf{v}]\quad(v=\left[\begin{matrix}x\\y\\z\end{matrix}\right], s,x,y,z\in\R)$$
+
+### 2.2 运算与性质
+
+#### 2.2.1 范数
+
+复数的范数对应他在复平面向量的长度
+
+四元数的范数的定义和高维向量一样，虽然很难想象在四维空间中的长度
+
+
+
+如果我们用 $q=a+bi+cj+dk$表示四元数，那么他的范数定义为
+
+$$||q||=\sqrt{a^2+b^2+c^2+d^2}$$
+
+如果我们用标量向量有序对 $q=[s,\mathbf{v}]$的形式表示四元数，那么他的范数定义为
+
+$$||q||=\sqrt{s^2+\mathbf{||v||}^2}$$
+
+
+
+#### 2.2.2 四元数加减法
+
+四元数加减法就是将对应分量相加减
+
+假设我们有两个四元数 $q_1=a+bi+cj+dk$, $q_2=e+fi+gj+hk$
+
+$$q_1+q_2=(a+e)+(b+f)i+(c+g)j+(d+h)k$$
+
+$$q_1-q_2=(a-e)+(b-f)i+(c-g)j+(d-h)k$$
+
+或者写成下面的形式
+
+$$q_1\pm q_2=[s\pm t, \mathbf{v}\pm \mathbf{u}]$$
+
+
+
+#### 2.2.3 标量乘法
+
+假设我们有一个标量s,和一个四元数 $q=a+bi+cj+dk$
+
+$sq=sa+sbi+scj+sdk$
+
+标量乘法满足交换律，即 $sq=qs$
+
+
+
+#### 2.2.4 四元数乘法
+
+在进入四元数乘法之前，我们先来看一下四元数单位元的乘法
+
+根据$i^2=j^2=k^2=ijk=-1$
+
+$$\begin{aligned}ijk=&-1\\iijk=&-i\\-jk=&-i\\jk=&i\end{aligned}$$
+
+同理
+
+$$\begin{aligned}ijk=&-1\\ ijkk=&-k\\-ij=&-k\\ij=&k\end{aligned}$$
+
+利用 $ij=k$，我们可以推导出
+
+$$\begin{aligned}ij=&k\\ijj=&kj\\-i=&kj\\kj=&-i\end{aligned}$$
+
+
+
+我们可以得到下面这张乘数表
+
+| $\times$ | 1    | $i$  | $j$  | $k$  |
+| -------- | ---- | ---- | ---- | ---- |
+| 1        | 1    | $i$  | $j$  | $k$  |
+| $i$      | $i$  | -1   | $k$  | $-j$ |
+| $j$      | $j$  | $k$  | -1   | $i$  |
+| $k$      | $k$  | $j$  | -$i$ | -1   |
+
+我们可以看到四元数的乘法是不满足交换律的。（结合律，分配律满足）
+
+
+
+接下来我们进入四元数的乘法
+
+假设我们有两个四元数 $q_1=a+bi+cj+dk$和 $q_2=e+fi+gj+hk$
+$$
+\begin{aligned}
+q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
+&=ae+afi+agj+ahk+\\
+&\quad \,bei+bfi^2+bgij+bhik+\\
+&\quad \,cej+cfji+cgj^2+chjk+\\
+&\quad \,dek+dfki+dgkj+dhk^2\\
+&=ae+afi+agj+ahk+\\
+&\quad \,bei-bf+bgk-bhj+\qquad (i^2=-1,ij=k,ik=-j)\\
+&\quad \,cej-cfk-cg+chi+\qquad(ji=-k,j^2=-1,jk=i)\\
+&\quad \,dek+dfj-dgi-dh\qquad\quad (ki=j,kj=-i,k^2=-1)\\
+&=(ae-(bf+cg+dh))+\\
+&\quad \,(af+be+ch-dg)i+\\
+&\quad \,(ag-bh+ce+df)j+\\
+&\quad \,(ah+bg-cf+de)k
+\end{aligned}
+$$
+
+
+
+
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
