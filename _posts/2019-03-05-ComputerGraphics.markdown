@@ -79,8 +79,8 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width=300>
 
-$v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下
-
+$v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下  
+  
 $$\begin{aligned}
 v_{\parallel}&=proj_u(v)\\
 &=\frac{u\cdot v}{||u||}\hat{u}\\
@@ -89,20 +89,21 @@ v_{\parallel}&=proj_u(v)\\
 
 因为 $v_{\parallel}$平行于旋转轴，所以他是不变的，即旋转之后 $v_{\parallel}'=v_{\parallel}$ 
 
-
+  
 ### **再讨论 $v_{\perp}$**
 
 在讨论 $v_{\parallel}$时我们得出 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$
 
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
-
-左图是旋转过程示意图，右图是俯视图
+  
+左图是旋转过程示意图，右图是俯视图  
+  
 
 
 
 <figure>
   <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width=300>
-  <img src="http://miaochenlu.github.io/picture//image-20190907120930786-7829821.png" width=300>
+  <img src="http://miaochenlu.github.io/picture/image-20190907120930786-7829821.png" width=300>
 </figure>
 
 接下来我们在俯视图的2D视角来推导
@@ -142,14 +143,14 @@ $$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 $$v_{\parallel}'=v_{\parallel}\\
 v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 
-结合这两个结果
+结合这两个结果  
 
 $$\begin{aligned}
 v'&=v_{\parallel}'+v_{\perp}'\\
 &=v_{\parallel}+v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha
 \end{aligned}$$
 
-\\
+
 
 带入 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$和 $v_{\perp}=v-(\hat{u}\cdot v)\hat{u}$
 
