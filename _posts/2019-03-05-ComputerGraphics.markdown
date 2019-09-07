@@ -45,20 +45,20 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 
 
-</br>
+<br/>
 
-</br>
+<br/>
 
-</br>
+<br/>
 
-</br>
+<br/>
 
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
 
 
-<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400" align="center" />
+<iframe src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" width="400" align="center" /></iframe>
 
 
 
@@ -88,7 +88,7 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 
 接下来我们通过u、v来求解 $v_{\parallel}$和 $v_{\perp}$的表达式
 
-### 先讨论 $v_{\parallel}$  
+### 1.1  $v_{\parallel}$ 推导 
 
 <img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width="300" />
 
@@ -105,7 +105,7 @@ v_{\parallel}&=proj_u(v)\\
 <br/>
 
 
-### **再讨论 $v_{\perp}$**  
+### 1.2 $v_{\perp}$推导
 在讨论 $v_{\parallel}$时我们得出 $v_{\parallel}=(\hat{u}\cdot v)\hat{u}$
 
 所以我们可以求得 $v_{\perp}=v-v_{\parallel}=v-(\hat{u}\cdot v)\hat{u}$
@@ -147,7 +147,7 @@ $$v_{\perp}'=v_{\perp}cos\alpha+(\mathbf{u}\times\mathbf{v})sin\alpha$$
 
 <br/>
 
-### 最终旋转公式
+### 1.3 最终旋转公式
 
 以上两步，我们得到
 
