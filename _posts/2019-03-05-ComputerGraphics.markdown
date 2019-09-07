@@ -56,8 +56,8 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <h1><a name="rotation">旋转与四元数</a></h1>
 ## 1 三维空间中的旋转  
 
-<video id="video" controls="" preload="none">
-      <source id="mp4" src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" type="video/mp4" width="400">
+<video id="video" controls="" preload="none" width="400">
+      <source id="mp4" src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" type="video/mp4" >
       <p>Your user agent does not support the HTML5 Video element.</p>
     </video>
 
