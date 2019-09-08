@@ -42,7 +42,7 @@ social-share: false
 social-share-items: ['vk', 'facebook', 'twitter']
 
 # theme color
-theme-color: 'blue' 
+theme-color: 'default' 
 
 # Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
 postPatterns: 'assets/img/banner.JPG'
