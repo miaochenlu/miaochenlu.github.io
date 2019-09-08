@@ -381,7 +381,7 @@ q^*qq^{-1}&=q^*\\
 ||q||^2\cdot q^{-1}&=q^*\\
 q^{-1}&=\frac{q^*}{||q||^2}
 \end{aligned}$$
-
+<br/>
 ## 3 四元数与3D旋转
 我们要将一个向量 $\mathbf{v}$绕旋转轴 $\mathbf{u}$旋转 $\alpha$    
 
