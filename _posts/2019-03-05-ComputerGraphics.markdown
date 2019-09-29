@@ -36,7 +36,6 @@ skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
 
-
 <h1><a name="top">目录</a></h1>
 <a href="#rotation">旋转与四元数</a>
 
@@ -370,8 +369,7 @@ qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
 &=[s^2+||v||^2,0]\\
 &=||q||^2
 \end{aligned}
-$$   
-
+$$
 易证 $qq^*=q^*q$ ，满足交换律  
 
 <br/>
@@ -400,7 +398,7 @@ $$\begin{aligned}
     v_{\parallel}&=[0,\mathbf{v_{\parallel}}] &v_{\parallel}'=[0,\mathbf{v_{\parallel}}'] \\
     u&=[0,\mathbf{\hat{u}}]
 \end{aligned}
-$$  
+$$
 
 注意粗体的是向量，非粗体是四元数  
 
@@ -584,7 +582,6 @@ reference:
 [1] 计算机图形学的算法基础
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
