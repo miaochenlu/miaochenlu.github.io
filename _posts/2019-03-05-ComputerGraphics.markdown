@@ -1,7 +1,7 @@
 ---
 title: "Computer Graphics"
-
 tags: graphics
+key: page-graphics
 
 ---
 
