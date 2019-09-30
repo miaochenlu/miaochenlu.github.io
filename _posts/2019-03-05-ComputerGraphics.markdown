@@ -3,7 +3,37 @@ title: "Computer Graphics"
 tags: graphics
 key: page-graphics
 
+
 ---
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      inlineMath: [ ['$','$'], ['\(', '\)'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      inlineMath: [ ['$','$'], ['\(', '\)'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+}
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
 
 
 <h1><a name="top">目录</a></h1>
@@ -62,7 +92,6 @@ key: page-graphics
 ### 1.1  $v_{\parallel}$ 推导 
 
 <center><img src="http://miaochenlu.github.io/picture/image-20190907100316520.png" width="300" /></center>
-
 $v_{\parallel}$的方向就是旋转轴u的方向，大小就是v在u上投影的大小，根据向量点乘的几何意义，我们可以得到投影公式，如下  
 
 $$\begin{aligned}
@@ -437,17 +466,14 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 其中$q=[cos\alpha,\mathbf{\hat{u}}sin\alpha]$
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 <br/>
 
 
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
 
 
-
 ## Scan converting lines
 <center><img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300"></center>
-
 * Question 1: How to draw the line?
 $$from (x_1,y_1),(x_2,y_2) \\ 
 \Rightarrow y=mx+b \\
@@ -461,7 +487,6 @@ P(x2,y2)
 $ slope\quad m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}$
 
 <center><img src = "http://miaochenlu.github.io/picture/20190306slope.png" width = "300"></center>
-
 ### **Digital Differential Analyzer(DDA)**
 $$ y_i = m\cdot x_i+c    \\
 m=\frac{y_2-y_1}{x_2-x_1}=\frac{dy}{dx}\\
@@ -507,7 +532,6 @@ But it uses floating point operations.
 
 ### **Bresenham Line Drawing**
 <center><img src="http://miaochenlu.github.io/picture/20190306Bresenham.png" width = "300"></center>
-
 * Analysis:  
 先考虑第一八分圆域，$$0\leq \Delta y \leq \Delta x$$
 事实上，$y_{i+1}$的选择只有两种情况：$y_i \quad or\quad y_i+1$
