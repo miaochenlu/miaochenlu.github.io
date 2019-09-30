@@ -46,14 +46,14 @@ nav:
   About:          
     - '/about/'
   Github Project: 
-    - 'http://codinfox.github.io/'
+    - 'http://miaochenlu.github.io/'
 
 # Where are tags and categories displayed
 tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: /public/img/we_will_be_giants_by_yalestewart.jpg
+  image: 
   caption: Original Artwork &copy; <a href="http://yalestewart.deviantart.com/art/We-Will-Be-Giants-370176475">Yale Stewart</a>
 
 # Puglins
