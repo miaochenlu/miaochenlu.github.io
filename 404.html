@@ -1,16 +1,10 @@
 ---
 layout: default
-description: "Sorry, Page Not Found :("
+title: "404: Page not found"
+permalink: 404.html
 ---
 
-{% include header.html %}
-
-<header class="g-banner np-banner {{ site.postPatterns | prepend: 'post-pattern-' }}" data-theme="{{ site.theme-color }}">
-    <div class="post-wrapper">
-        <h1>404</h1>
-        <span class="subheading">{{ page.description }}</span>
-        <a href="{{ site.nav.home }}" class="btn">Back to home</a>
-    </div>
-</header>
-
-
+<div class="page">
+  <h1 class="page-title">404: Page not found</h1>
+  <p class="lead">Sorry, we've misplaced that URL or it's pointing to something that doesn't exist. <a href="{{ site.baseurl }}/">Head back home</a> to try finding it again.</p>
+</div>
