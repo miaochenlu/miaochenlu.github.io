@@ -35,7 +35,7 @@ focus"
 
 
 ### depth of field(景深)
-<img src = "http://miaochenlu.github.io/picture/picture20181222depth.png" width = "600" align = "center">
+<img src = "http://miaochenlu.github.io/picture/picture20181222depth.png" width = "500" align = "center">
 
 It can be seen from the picture that changing the aperture size affects depth of field.  
 – A smaller aperture increases the range in which the
@@ -50,7 +50,7 @@ object is approximately in focus
 <a href="http://www.360doc.com/content/18/0104/17/50354283_719051589.shtml">景深</a>
 
 ### The principle imaging process of DC(digital camera)  
-<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "600" align = "center">  
+<img src="http://miaochenlu.github.io/picture/picture20181222dc.png" width = "1600" border="0" width = "400" align = "center">  
 
 (CCD:可以称为CCD图像传感器,也叫图像控制器。CCD是一种半导体器件,能够把光学影像转化为电信号)  
  （1）When taking photograph, the light from the scene goes through the lens and
@@ -68,10 +68,12 @@ balance will be performed to obtain a qualified image, and the image will be
 encoded into the supported format and resolution, which can be stored as a image
 file.  
  （6）After the above steps, the image file appears on your memory card and can
-be previewed.  
+be previewed.   
 
 #### 总而言之    
 光-->CCD转化成电信号-->电信号放大过滤-->ADC将连续信号转换为离散信号-->DSP(digital signal processing)color correction and white balance-->image will be encoded into the supported format and resolution-->image file appears on your memory card  
+
+<br/>
 
 ### 颜色分类
 * chromatic color 
@@ -79,9 +81,14 @@ be previewed.
 * achromatic color 
     * Achromatic color, also called non- chromatic color OR grayscale, means white, black and the gray intensities between them. The achromatic objects do not select the wavelength, so they are in neutral color.
 
+<br/>
+
 ### Weber's Law
 <img src="http://miaochenlu.github.io/picture/20190122pictureweberslaw.jpeg">  
 The response of the eye to changes in the intensity of illumination is known to be nonlinear. Consider a patch of light of intensity I + ΔI surrounded by a background of intensity I . The just noticeable difference ΔI is to be determined as a function of I. Over a wide range of intensities, it is found that the ratio ΔI ⁄ I , called the Weber fraction, is nearly constant at a value of about 0.02 . This result does not hold at very low or very high intensities. Furthermore, contrast sensitivity is dependent on the intensity of the surround. Consider the experiment of Figure 2.3-1b, in which two patches of light, one of intensity I and the other of intensity I + ΔI , are surrounded by light of intensityIo . The Weber fraction ΔI ⁄ I for this experiment is plotted in Figure 2.3-1b as a function of the intensity of the background. In this situation, it is found that the range over which the Weber fraction remains constant is reduced con- siderably compared to the experiment. The envelope of the lower limits of the curves of Figure 2.3-lb is equivalent to the curve of Figure 2.3-1a. However, the range over which ΔI ⁄ I is approximately constant for a fixed background intensity Io is still comparable to the dynamic range of most electronic imaging systems.  
+
+<br/>
+
 # **Color Space**
 * 设备相关
     * RGB
@@ -100,12 +107,17 @@ The response of the eye to changes in the intensity of illumination is known to 
 (computer , TV).彩色监视器，彩色视频摄像机</i> 
 
 是加色，加光 color + light energy increase  
+
+<br/>
+
 ### CMY 
 C 青色 M 品红 Y 黄色 (K 黑色)  
 减色空间 light - pigment  energy decreases
-<img src="http://miaochenlu.github.io/picture/20190122picturecmyk.png">
-<img src="http://miaochenlu.github.io/picture/20190122pictureaddcolor.png">  
+<img src="http://miaochenlu.github.io/picture/20190122picturecmyk.png" style="zoom: 50%;" >
+<img src="http://miaochenlu.github.io/picture/20190122pictureaddcolor.png" style="zoom:50%;" >  
+
 CMY彩色打印机  
+
 ### HSV 
 H 色调 S 饱和度 V亮度
 *perception priority 
@@ -123,7 +135,7 @@ Y 明亮度  U 色度  V 浓度
 ### BMP 
 位图数据：位图数据在文件中的排列顺序是从左下角到右上角，以行为主序排列的。  
 对齐规则：要求每行的数据的长度必须是4的倍数，如果不够需要进行比特填充（以0填充）
-<img src="http://miaochenlu.github.io/picture/20190122picturebitmapdata.png">  
+<img src="http://miaochenlu.github.io/picture/20190122picturebitmapdata.png" style="zoom:50%;" >  
 <a href="http://www.cnblogs.com/wainiwann/p/7086844.html">BMP格式详解</a>
 
 ### 图像压缩
@@ -138,21 +150,24 @@ Compression strategy: According to the requirement of compressionratio, remove i
     * tiff
 
 ### run length code
-<img src="http://miaochenlu.github.io/picture/20190122picturerunlengthcode.png">
+<img src="http://miaochenlu.github.io/picture/20190122picturerunlengthcode.png" style="zoom:50%;" >
 
 ## Binary Image
-<img src="http://miaochenlu.github.io/picture/20190122picturebinary.png">
+<img src="http://miaochenlu.github.io/picture/20190122picturebinary.png" style="zoom: 33%;" >
 
 how to choose threshold? -->otsu
+
+<br/>
+
 ### Otsu 大津算法
 Otsu算法也称最大类间差法  
 * 思想  
 按图像的灰度特性将图像分成 **背景**和 **前景**，前景和背景的 **类间方差**最大，说明构成图像的两部分差别越大，当部分前景错分为背景或部分背景错分为前景都会导致两部分差别变小。
 
 * 推导  
-<img src="http://miaochenlu.github.io/picture/picture20190109otsudeduct.png">
+<img src="http://miaochenlu.github.io/picture/picture20190109otsudeduct.png" style="zoom:67%;" >
 easy approach
-<img src="http://miaochenlu.github.io/picture/20190122pictureotsueasy.png">
+<img src="http://miaochenlu.github.io/picture/20190122pictureotsueasy.png" style="zoom: 33%;" >
 **local adaptive operation**
 * set a local window, find its good threshold;
 * sliding your local window over the whole image
@@ -208,7 +223,10 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     return MaxK;
 }
 ```
+<br/>
+
 ### Morphology
+
 * **Dilation**
     * **definition**
         <img src="http://miaochenlu.github.io/picture/20190122picturedilation.png">
@@ -218,38 +236,40 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     * **Effect**:
         enlarge foreground, fill holes
     * **Example**
-        <img src="http://miaochenlu.github.io/picture/20190122picturedilaexample.png">
+        <img src="http://miaochenlu.github.io/picture/20190122picturedilaexample.png" style="zoom:33%;" >
 * **Erosion**
     * **definition**
-        <img src="http://miaochenlu.github.io/picture/20190122pictureerosion.png">
+        <img src="http://miaochenlu.github.io/picture/20190122pictureerosion.png" style="zoom:33%;" >
         范围里有0就是0
     * **physical meaning**:  
        remove boundary, remove unwanted small objects
     * **Example**
-        <img src="http://miaochenlu.github.io/picture/20190122pictureeroexample.png">
+        <img src="http://miaochenlu.github.io/picture/20190122pictureeroexample.png" style="zoom:50%;" >
 * **Opening**
     * **definition**
-        <img src="http://miaochenlu.github.io/picture/20190122pictureopen.png">
+        <img src="http://miaochenlu.github.io/picture/20190122pictureopen.png" style="zoom:33%;" >
         先腐蚀，再膨胀
     * **physical meaning**:  
        Remove small objects, segment object at thin part, smooth boundary of large object but preserve its original area.
 * **closing**
 * **definition**
-        <img src="http://miaochenlu.github.io/picture/20190122pictureclose.png">
+        <img src="http://miaochenlu.github.io/picture/20190122pictureclose.png" style="zoom:33%;" >
         先膨胀，再腐蚀
     * **physical meaning**:  
         Fill small holes, connect the neighboring objects, smooth boundary while preserving the area at most.
-<img src="http://miaochenlu.github.io/picture/20190122pictureopenclose.png">
+<img src="http://miaochenlu.github.io/picture/20190122pictureopenclose.png" style="zoom:50%;" >
 
 ## Grayscale Transform
 ### Grayscale perception
-<img src="http://miaochenlu.github.io/picture/20190122picturegrayscale.png">
-<img src="http://miaochenlu.github.io/picture/20190122grayscaleweber.png">
+<img src="http://miaochenlu.github.io/picture/20190122picturegrayscale.png" style="zoom:50%;" >
+<img src="http://miaochenlu.github.io/picture/20190122grayscaleweber.png" style="zoom:50%;" >
 255次是指每一个灰度级要被看见的话，需要和前面相邻的灰度级相差Kweber
+
+<br/>
 
 ### logarithmic operation
 图像的低灰度值部分扩展，显示出低灰度部分更多的细节，将其高灰度值部分压缩  
-<img src="http://miaochenlu.github.io/picture/20190123log.png">
+<img src="http://miaochenlu.github.io/picture/20190123log.png" style="zoom:50%;" >
 
 ## Image Morph
 * difference between morph and warp
@@ -257,30 +277,36 @@ int Otsu(U8*pData, U8 bitCountPerPix, U32 width, U32 height) {
     * Morph is a kind of morphological changing, which makes an image change to another image gradually.
     * 􏰀Morph handles both the location and the intensity of a pixel.
     * 􏰀The beginning image and end image are two key frames. Other frames between the two key frames are generated automatically.
-<img src="http://miaochenlu.github.io/picture/20190122morph.png">
+<img src="http://miaochenlu.github.io/picture/20190122morph.png" style="zoom:67%;" >
 * result
-<img src="http://miaochenlu.github.io/picture/20190123morphresult.png">
+<img src="http://miaochenlu.github.io/picture/20190123morphresult.png" style="zoom:67%;" >
+
+<br/>
 
 ## **Expressive Expression Mapping with Ratio Images**
 * **problem**
-    <img src="http://miaochenlu.github.io/picture/20190122expe.png">
+    <img src="http://miaochenlu.github.io/picture/20190122expe.png" style="zoom: 33%;" >
+    
 * **one possible solution**
-    <img src="http://miaochenlu.github.io/picture/20190122expresolu1.png">
+    <img src="http://miaochenlu.github.io/picture/20190122expresolu1.png" style="zoom:33%;" >
+    
 * **Ratio Images**
     * **Lambertian model**
-    <img src="http://miaochenlu.github.io/picture/20190122lambertian.png">
-     
-    
+    <img src="http://miaochenlu.github.io/picture/20190122lambertian.png" style="zoom:50%;" >
+   
     $$ 参数:\qquad\rho:材质 \qquad I_i:光照 \qquad n:表面的单位法向量 \qquad l_i:点光源的单位方向向量$$
 
+<img src="http://miaochenlu.github.io/picture/20190122lambertianexplain.png" style="zoom: 50%;" > 
 
-    <img src="http://miaochenlu.github.io/picture/20190122lambertianexplain.png">   
-    Before deformation: $$ I = \rho E(n)$$   
-    After deformation: $$ I'=\rho E(n')$$   
-    Expression ratio image:$$\frac{I'}{I}=\frac{E(n')}{E(n)}  $$   
-    
-    * algorithm
-    <img src="http://miaochenlu.github.io/picture/20190123imgexpressionalg.png">
+Before deformation: $$ I = \rho E(n)$$   
+After deformation: $$ I'=\rho E(n')$$   
+Expression ratio image:$$\frac{I'}{I}=\frac{E(n')}{E(n)}  $$ 
+
+
+
+* algorithm
+
+<img src="http://miaochenlu.github.io/picture/20190123imgexpressionalg.png" style="zoom:50%;" >
 
 ## **Spatial Filtering**
 ### **Linear smoothing filter**
@@ -335,7 +361,7 @@ larger weight to closer samples,
 larger weight to similar samples.   
 All the weights should be normalized to preserve the
 local mean.
-<img src="http://miaochenlu.github.io/picture/20190123bilateralpara.png">
+<img src="http://miaochenlu.github.io/picture/20190123bilateralpara.png" style="zoom:50%;" >
 ```c
 void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_s, double sigma_r, const char *filename)
 {
@@ -390,7 +416,7 @@ void Bilateral(U8 *pdata, U8 bitCountPerPix, U32 width, U32 height,double sigma_
 ```
 
 Result:  
-<img src="http://miaochenlu.github.io/picture/picture20181222bila.png">
+<img src="http://miaochenlu.github.io/picture/picture20181222bila.png" style="zoom:50%;" >
 
 ## **图像插值算法：**  
 ### 1、最邻近插值  
@@ -402,10 +428,10 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 接近的像素Q，把Q点的像素值作为新图像中P’点的
 像素值。
 
-<img src="http://miaochenlu.github.io/picture/picture20181128interpolation.png">
+<img src="http://miaochenlu.github.io/picture/picture20181128interpolation.png" style="zoom:50%;" >
 
 ### 2、线性插值
-<!-- $$g_3 = \frac{g_2-g_1}{x_2-x_1}(x_3-x_1)+g_1$$    -->
+$$g_3 = \frac{g_2-g_1}{x_2-x_1}(x_3-x_1)+g_1$$ 
 
 <table border="0"><tr>
 <td><img src="http://miaochenlu.github.io/picture/picture20181128linear.png" width = "400" border="0"></td>
@@ -414,16 +440,16 @@ P点的坐标通常都不会正好是整数）。寻找与P点最
 
 
 ### 3、双线性插值
-<img src="http://miaochenlu.github.io/picture/picture20181205bilinear.png">
+<img src="http://miaochenlu.github.io/picture/picture20181205bilinear.png" style="zoom:67%;" >
 <img src="http://miaochenlu.github.io/picture/picture20181205bilinearequa.png">
 
 ## Simple geometric transformation
 ### 1、Translation 平移 
 
-<img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "300">  
+<img src="http://miaochenlu.github.io/picture/picture20181205translation.png" width = "300" style="zoom:50%;" >  
 
 其逆变换为
-<img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png">  
+<img src="http://miaochenlu.github.io/picture/picture2018translationreverse.png" style="zoom:50%;" >  
 
 
 根据其逆变换，我们可以知道平移后的图像中的像素对应的在原来图像中的坐标
@@ -455,8 +481,5 @@ void translation(U8* pdata,U32 bitCountPerPix,int width,int height,int xoffbit,i
 
 <a id="bottomsection" href="#start">去顶部</a>
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
 
-[jekyll-gh]: https://github.com/jekyll/jekyll
 
-[jekyll-talk]: https://talk.jekyllrb.com/

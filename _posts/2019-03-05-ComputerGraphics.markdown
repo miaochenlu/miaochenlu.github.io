@@ -83,10 +83,16 @@ v_{\parallel}&=proj_u(v)\\
 
 左图是旋转过程示意图，右图是俯视图    
 
-<figure>
+<table>
+  <tr>
+    <td>
   <img src="http://miaochenlu.github.io/picture/image-20190907112926608-7829821.png" width="300" />
+      </td>
+    <td>
   <img src="http://miaochenlu.github.io/picture/image-20190907120930786-7829821.png" width="300" />
-</figure>
+      </td>
+    </tr>
+</table>
 
 接下来我们在俯视图的2D视角来推导
 
@@ -143,6 +149,8 @@ v'&=(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{v}-(\hat{\mathbf
 &=\mathbf{v}cos\alpha+(1-cos\alpha)(\hat{\mathbf{u}}\cdot \mathbf{v})\hat{\mathbf{u}}+(\mathbf{\hat{u}}\times\mathbf{v})sin\alpha
 \end{aligned}$$
 
+<br/>
+
 ## 2 四元数
 
 ### 2.1 定义
@@ -195,7 +203,7 @@ $$q_1-q_2=(a-e)+(b-f)i+(c-g)j+(d-h)k$$
 
 $$q_1\pm q_2=[s\pm t, \mathbf{v}\pm \mathbf{u}]$$
 
-
+<br/>
 
 #### 2.2.3 标量乘法
 
@@ -205,7 +213,7 @@ $sq=sa+sbi+scj+sdk$
 
 标量乘法满足交换律，即 $sq=qs$
 
-
+<br/>
 
 #### 2.2.4 四元数乘法
 ##### 2.2.4.1 乘法推导
@@ -224,7 +232,7 @@ $$\begin{aligned}ijk=&-1\\ ijkk=&-k\\-ij=&-k\\ij=&k\end{aligned}$$
 
 $$\begin{aligned}ij=&k\\ijj=&kj\\-i=&kj\\kj=&-i\end{aligned}$$
 
-
+<br/>
 
 我们可以得到下面这张乘数表
 
@@ -237,7 +245,7 @@ $$\begin{aligned}ij=&k\\ijj=&kj\\-i=&kj\\kj=&-i\end{aligned}$$
 
 我们可以看到四元数的乘法是不满足交换律的。（结合律，分配律满足）
 
-
+<br/>
 
 接下来我们进入四元数的乘法
 
@@ -260,7 +268,10 @@ q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 \end{aligned}
 $$
 
+<br/>
+
 #### 2.2.4.2 矩阵形式
+
 从上述结果，我们可以得到乘法的矩阵形式  
 
 $$q_1q_2=\left[\begin{matrix}a&-b&-c&-d\\
@@ -271,6 +282,8 @@ d&-c&b&a
 \left[\begin{matrix}e\\f\\g\\h\end{matrix}\right]$$
 
 这相当于左乘$q_1$所做的矩阵变换
+
+<br/>
 
 #### 2.2.4.3 Grassmann积  
 
@@ -287,7 +300,7 @@ $$\begin{aligned}q_1q_2
 现在我们可能还不能发现什么  
 <br/>
 
-假设令
+假设
 $$\mathbf{v}=\left[\begin{matrix}b\\c \\ d \end{matrix}\right],\mathbf{u}=\left[\begin{matrix}f\\g\\h\end{matrix}\right]$$
 
 点乘：$\mathbf{v}\cdot\mathbf{u}=bf+cg+dh$  
@@ -338,8 +351,10 @@ qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
 &=[s^2-\mathbf{v}\cdot(-\mathbf{v}),s(-\mathbf{v}+s\mathbf{v}+\mathbf{v}\times\mathbf{-v})]\\
 &=[s^2+||v||^2,0]\\
 &=||q||^2
-\end{aligned}
-$$
+\end{aligned}$$
+
+
+
 易证 $qq^*=q^*q$ ，满足交换律  
 
 <br/>
@@ -367,8 +382,9 @@ $$\begin{aligned}
     v_{\perp}&=[0,\mathbf{v_{\perp}}] &v_{\perp}'=[0,\mathbf{v_{\perp}}'] \\
     v_{\parallel}&=[0,\mathbf{v_{\parallel}}] &v_{\parallel}'=[0,\mathbf{v_{\parallel}}'] \\
     u&=[0,\mathbf{\hat{u}}]
-\end{aligned}
-$$
+\end{aligned}$$
+
+
 
 注意粗体的是向量，非粗体是四元数  
 
@@ -420,9 +436,15 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 \end{aligned}$$
 其中$q=[cos\alpha,\mathbf{\hat{u}}sin\alpha]$
 
-
 <p id="back-to-top"><a href="#top">返回目录</a></p>
+
+<br/>
+
+
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
+
+
+
 ## Scan converting lines
 <img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300">
 
@@ -432,9 +454,7 @@ $$from (x_1,y_1),(x_2,y_2) \\
 \Rightarrow x_1+1 \rightarrow y=? rounding \\ 
 \Rightarrow x_1+i \rightarrow y=?rounding$$
 * Question 2:How to speed up? 
-\\
-\\
-\\
+<br/>
 **Equation of a line:**  $y-m\times x+c=0$   
 For a line segment joining points P(x1,y2) and
 P(x2,y2)    
@@ -551,9 +571,8 @@ finish
 reference:
 [1] 计算机图形学的算法基础
 
+[2]https://krasjet.github.io/quaternion/quaternion.pdf (感叹一下这个作者真的好厉害， 读了之后感觉融会贯通)
+
+
+
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-[jekyll-docs]: https://jekyllrb.com/docs/home
-
-[jekyll-gh]: https://github.com/jekyll/jekyll
-
-[jekyll-talk]: https://talk.jekyllrb.com/
