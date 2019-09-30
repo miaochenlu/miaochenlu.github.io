@@ -1,39 +1,9 @@
 ---
-
-layout: post
-
 title: "Computer Graphics"
 
-date: 2019-03-04 12:21:05 +0800
-
-categories: jekyll update
+tags: graphics
 
 ---
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-      inlineMath: [ ['$','$'], ['\(', '\)'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-}
-});
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-      inlineMath: [ ['$','$'], ['\(', '\)'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-}
-});
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 <h1><a name="top">目录</a></h1>
@@ -582,7 +552,6 @@ reference:
 [1] 计算机图形学的算法基础
 
 <p id="back-to-top"><a href="#top">返回目录</a></p>
-
 [jekyll-docs]: https://jekyllrb.com/docs/home
 
 [jekyll-gh]: https://github.com/jekyll/jekyll
