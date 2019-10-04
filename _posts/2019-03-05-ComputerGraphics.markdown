@@ -203,9 +203,9 @@ $$||q||=\sqrt{s^2+\mathbf{||v||}^2}$$
 
 假设我们有两个四元数 $q_1=a+bi+cj+dk$, $q_2=e+fi+gj+hk$
 
-$$q_1+q_2=(a+e)+(b+f)i+(c+g)j+(d+h)k$$
+$q_1+q_2=(a+e)+(b+f)i+(c+g)j+(d+h)k $ 
 
-$$q_1-q_2=(a-e)+(b-f)i+(c-g)j+(d-h)k$$
+$q_1-q_2=(a-e)+(b-f)i+(c-g)j+(d-h)k $ 
 
 或者写成下面的形式
 
@@ -258,8 +258,8 @@ $$\begin{aligned}ij=&k\\ijj=&kj\\-i=&kj\\kj=&-i\end{aligned}$$
 接下来我们进入四元数的乘法
 
 假设我们有两个四元数 $q_1=a+bi+cj+dk$和 $q_2=e+fi+gj+hk$
-$$
-\begin{aligned}
+
+$\begin{aligned}
 q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 &=ae+afi+agj+ahk+\\
 &\quad \,bei+bfi^2+bgij+bhik+\\
@@ -273,8 +273,9 @@ q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 &\quad \,(af+be+ch-dg)i+\\
 &\quad \,(ag-bh+ce+df)j+\\
 &\quad \,(ah+bg-cf+de)k
-\end{aligned}
-$$
+\end{aligned}$
+
+
 
 <br/>
 
@@ -354,16 +355,16 @@ $q=[s,\mathbf{v}]$的共轭为 $q^*=[s,-\mathbf{v}]$
 
 二者相乘  
 
-$$\begin{aligned}
+$\begin{aligned}
 qq^*&=[s,\mathbf{v}][s,-\mathbf{v}]\\
 &=[s^2-\mathbf{v}\cdot(-\mathbf{v}),s(-\mathbf{v}+s\mathbf{v}+\mathbf{v}\times\mathbf{-v})]\\
 &=[s^2+||v||^2,0]\\
 &=||q||^2
-\end{aligned}$$
+\end{aligned}$
 
 
 
-易证 $qq^*=q^*q$ ，满足交换律  
+易证  $qq^*=q^*q$  ，满足交换律  
 
 <br/>
 接下来我们求逆  
@@ -432,7 +433,7 @@ q&=cos\alpha+usin\alpha\\
 &=[cos\alpha,\mathbf{\hat{u}}sin\alpha]\qquad(u是一个纯四元数)
 \end{aligned}$$  
 
-同时可以发现， $||q||=1$
+同时可以发现， $\Vert{q}\Vert=1$
 
 <br/>
 
