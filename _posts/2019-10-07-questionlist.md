@@ -29,9 +29,19 @@ Bandwith:H
 
   一个时钟周期只能传输1bit,所以$H=B$
 
-我的问题是：Manchester encoding的symbol rate怎么算？
+我的问题是：Manchester encoding的离散等级
 
 $$dataRate=2Hlog_2V$$
 
 $$H=B\Rightarrow V=\sqrt{2}$$？
+
+
+
+疑问解答：
+
+> $log_2V$这个式子是用来表示一个symbol代表了多少bits
+
+
+
+
 
