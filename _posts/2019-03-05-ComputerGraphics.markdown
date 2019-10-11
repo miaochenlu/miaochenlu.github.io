@@ -574,10 +574,11 @@ finish
 
 <br/>
 
-reference:
-[1] 计算机图形学的算法基础
+Reference:  
 
-[2]https://krasjet.github.io/quaternion/quaternion.pdf (感叹一下这个作者真的好厉害， 读了之后感觉融会贯通)
+[1] ]https://krasjet.github.io/quaternion/quaternion.pdf [感叹一下这个作者真的好厉害， 读了之后感觉融会贯通
+
+[2] 计算机图形学的算法基础
 
 
 
