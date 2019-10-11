@@ -259,7 +259,7 @@ $$\begin{aligned}ij=&k\\ijj=&kj\\-i=&kj\\kj=&-i\end{aligned}$$
 
 假设我们有两个四元数 $q_1=a+bi+cj+dk$和 $q_2=e+fi+gj+hk$
 
-$\begin{aligned}
+$$\begin{aligned}
 q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 &=ae+afi+agj+ahk+\\
 &\quad \,bei+bfi^2+bgij+bhik+\\
@@ -273,7 +273,7 @@ q_1q_2&=(a+bi+cj+dk)(e+fi+gj+hk)\\
 &\quad \,(af+be+ch-dg)i+\\
 &\quad \,(ag-bh+ce+df)j+\\
 &\quad \,(ah+bg-cf+de)k
-\end{aligned}$
+\end{aligned}$$
 
 
 
@@ -450,7 +450,6 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 
 
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
-
 
 ## Scan converting lines
 <center><img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300"></center>
