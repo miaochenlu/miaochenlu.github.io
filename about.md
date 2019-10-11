@@ -17,3 +17,9 @@ titles:
   ko-KR   : *KO
 key: page-about
 ---
+
+# About
+
+I'm a Computer Science undergraduate student  studying at Zhejiang University.
+
+You can reach me at jones.mcl1999@gmail.com
