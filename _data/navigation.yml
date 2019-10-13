@@ -48,5 +48,5 @@ header:
       zh-HK   : *ZH_HANT
       ko      : &KO       
       ko-KR   : *KO
-    url: /timeline.html
+    url: /timeline.md
 
