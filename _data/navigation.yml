@@ -42,11 +42,9 @@ header:
       zh-Hans : &ZH_HANS  时间线
       zh      : *ZH_HANS
       zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  
+      zh-SG   : *ZH_HANS 
       zh-TW   : *ZH_HANT
-      zh-HK   : *ZH_HANT
-      ko      : &KO       
+      zh-HK   : *ZH_HANT     
       ko-KR   : *KO
-    url: /timeline.md
+    url: /timeline.html
 
