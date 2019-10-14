@@ -20,6 +20,24 @@ key: page-timeline
 
 ## <br/>
 
+## 2019-10-14
+
+* C++ STL lec2
+* head first java chapter6 [still not quite understand
+* paper 《Steal but No Force: Efficient Hardware Undo+Redo Logging for Persistent Memory Systems》 more than half
+* CSAPP chapter1 finish
+
+今天flag没倒，其实效率也不高
+
+明天计划
+
+- [ ] paper读完
+- [ ] ppt维护
+- [ ] 计网上节课内容复习完
+- [ ] 运筹学作业还剩一题做了
+
+
+
 ## 2019-10-13
 
 一觉睡到了10点......[🐷啊你]
