@@ -20,8 +20,9 @@ key: page-about
 
 
 
-I'm a Computer Science undergraduate student  studying at Zhejiang University.
+Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. 
 
   <br/>
 
 You can reach me at jones.mcl1999@gmail.com
+
