@@ -20,6 +20,30 @@ key: page-timeline
 
 ## <br/>
 
+## 2019-10-15
+
+- [x] paper读完
+- [x] ppt维护
+- [ ] 计网上节课内容复习完
+- [x] 运筹学作业还剩一题做了，看了mit视频发现根本没有张国川老师讲的好emmmm
+- [ ] leetcode 一题， 约瑟夫环相关
+- [ ] java没看kkkkkk
+
+靠，今天效率真低下
+
+码住末代皇帝，有空去看
+
+明天计划
+
+- [ ] paper logTM[19:00-21:00]
+- [ ] 计网上节课内容复习完[零碎]
+- [ ] head first Java[10:00-11:00]
+- [ ] C++ STL[12:00-13:00]
+- [ ] CSAPP chapter some pages[零碎]
+- [ ] 明天必须去运动
+
+<br/>
+
 ## 2019-10-14
 
 * C++ STL lec2
@@ -63,6 +87,5 @@ key: page-timeline
 <center><img src="https:///miaochenlu.github.io/picture/A1BB6411086BB318D116285299E767C4.png" alt="A1BB6411086BB318D116285299E767C4" style="zoom:10%;" /><center>
 
 <center><img src="https://miaochenlu.github.io/picture/292EF9ECEC03431D707514F77CBEA7B9.png" alt="292EF9ECEC03431D707514F77CBEA7B9" style="zoom:50%;" /></center>
-
 
 
