@@ -37,7 +37,7 @@ wow, 效率不错
 
 <a href="http://myan8.web.engr.illinois.edu">Mengjia Yan</a>
 
-<img src="/Users/jones/Desktop/miaochenlu.github.io/picture/9C400D0D8117A7B9BE347462A4EC4C70.jpg" alt="9C400D0D8117A7B9BE347462A4EC4C70" style="zoom: 33%;" />
+<img src="https://miaochenlu.github.io/picture/9C400D0D8117A7B9BE347462A4EC4C70.jpg" alt="9C400D0D8117A7B9BE347462A4EC4C70" style="zoom: 33%;" />
 
 <br/>
 
