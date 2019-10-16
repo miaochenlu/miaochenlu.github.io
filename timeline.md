@@ -20,13 +20,46 @@ key: page-timeline
 
 ## <br/>
 
+一天可以不走很远，但是每一天都要在路上！
+
+
+
+## 2019-10-16
+
+- [x] paper logTM读了abstract,intro; 读了part of DAMMP 明白了actor model[不得不说，这个真的np
+- [x] 计网Hamming code
+- [x] head first Java
+- [x] C++ STL
+- [x] CSAPP chapter 2
+- [x] 去运动
+
+wow, 效率不错
+
+<a href="http://myan8.web.engr.illinois.edu">Mengjia Yan</a>
+
+<img src="/Users/jones/Desktop/miaochenlu.github.io/picture/9C400D0D8117A7B9BE347462A4EC4C70.jpg" alt="9C400D0D8117A7B9BE347462A4EC4C70" style="zoom: 33%;" />
+
+<br/>
+
+明天计划
+
+- [ ] 
+- [ ] 读完paper: selector; 继续读logTM[下午可看]
+- [ ] 运筹学凸优化 stanford[毛概课前]
+- [ ] CSAPP chapter3 some[晚10点左右]
+- [ ] leetcode 一题[毛概课可做]
+- [ ] head first java[毛概课可看]
+- [ ] 可能可以做一下OS实验哦
+
+
+
 ## 2019-10-15
 
 - [x] paper读完
 - [x] ppt维护
 - [ ] 计网上节课内容复习完
 - [x] 运筹学作业还剩一题做了，看了mit视频发现根本没有张国川老师讲的好emmmm
-- [ ] leetcode 一题， 约瑟夫环相关
+- [x] leetcode 一题， 约瑟夫环相关
 - [ ] java没看kkkkkk
 
 靠，今天效率真低下
@@ -39,7 +72,7 @@ key: page-timeline
 - [ ] 计网上节课内容复习完[零碎]
 - [ ] head first Java[10:00-11:00]
 - [ ] C++ STL[12:00-13:00]
-- [ ] CSAPP chapter some pages[零碎]
+- [ ] CSAPP chapter2 some pages[零碎]
 - [ ] 明天必须去运动
 
 <br/>
