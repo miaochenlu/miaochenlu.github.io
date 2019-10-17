@@ -22,7 +22,28 @@ key: page-timeline
 
 一天可以不走很远，但是每一天都要在路上！
 
+## 2019-10-17
 
+- [ ] 读完paper: selector; logTM没有读wok
+- [x] 运筹学凸优化 stanford[毛概课前]
+- [ ] CSAPP chapter3 some 也没看yyy
+- [x] leetcode 3题 超额完成
+- [x] head first java
+- [x] OS linux module
+- [x] socket programming some basics
+
+明天计划
+
+- [ ] 读完paper: distributed selector 继续读DAMMP
+- [ ] logTM part
+- [ ] 运筹学凸优化 lec2
+- [ ] OS实验做完
+- [ ] socket编程至少可以连接上
+- [ ] C++ STL lec3
+- [ ] CSAPP chapter3 some
+- [ ] Head first java
+
+<br/>
 
 ## 2019-10-16
 
