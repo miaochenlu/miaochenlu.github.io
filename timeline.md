@@ -22,19 +22,35 @@ key: page-timeline
 
 一天可以不走很远，但是每一天都要在路上！
 
+## 2019-10-19
+
+- [x] Distributed selector part
+- [x] 凸优化理论
+- [x] 读MUA interpreter code and start coding
+
+真菜啊
+
+明天
+
+- [ ] Distributed selector part, DAMMP, discussion
+- [ ] LogTM读完
+- [ ] 操作系统复习
+- [ ] 体系结构复习
+- [ ] MUA BasicElement
+- [ ] Socket pthread
+
 ## 2019-10-18
 
 - [x] logTM part
 - [x] OS实验做完
 - [x] socket编程client差不多了，server还不能多线程
-- [ ] 读MUA interpreter part code
+- [x] 读MUA interpreter part code
 
 今天去西湖玩了，很多事情都没有做完，哎呀，改变一下心情嘛
 
 为plxjj拍照
 
 <center><img src="https://miaochenlu.github.io/picture/FDDE217660AF15F233663342B52FBC7B.png" alt="FDDE217660AF15F233663342B52FBC7B" style="zoom:10%;" /></center>
-
 ## 2019-10-17
 
 - [ ] 读完paper: selector; logTM没有读wok
@@ -154,4 +170,3 @@ wow, 效率不错
 <center><img src="https:///miaochenlu.github.io/picture/A1BB6411086BB318D116285299E767C4.png" alt="A1BB6411086BB318D116285299E767C4" style="zoom:10%;" /><center>
 
 <center><img src="https://miaochenlu.github.io/picture/292EF9ECEC03431D707514F77CBEA7B9.png" alt="292EF9ECEC03431D707514F77CBEA7B9" style="zoom:50%;" /></center>
-
