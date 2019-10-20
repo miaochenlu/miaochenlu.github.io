@@ -22,6 +22,24 @@ key: page-timeline
 
 一天可以不走很远，但是每一天都要在路上！
 
+## 2019-10-20
+
+- [x] Distributed selector part, DAMMP, discussion
+- [ ] cache coherence  MSI MOSI MOESI
+- [ ] MUA BasicElement
+
+今天建了一个托福push群，找了一个外国哥哥来做口语指导，希望能够push大家一起进步，都能战胜托福
+
+明天计划
+
+- [ ] LogTM读完
+- [ ] 操作系统复习
+- [ ] 体系结构复习
+- [ ] Socket pthread
+- [ ] MUA operation
+- [ ] TOEFL 一篇听力
+- [ ] 早起
+
 ## 2019-10-19
 
 - [x] Distributed selector part
