@@ -20,13 +20,35 @@ key: page-timeline
 
 ## <br/>
 
-一天可以不走很远，但是每一天都要在路上！
+一天可以不需要走很远，但是每一天都要在路上！积跬步以成千里
+
+
+
+## 2019-10-21
+
+- [x] 早起
+- [x] LogTM读完
+- [x] MUA part1做完 wwwwwwow
+- [x] CA 流水线
+- [x] TOEFL 两篇听力 vocabulary.com打卡
+- [ ] 操作系统复习
+- [ ] Socket pthread
+
+明天
+
+- [ ] 早起
+- [ ] TOEFL
+- [ ] 读LAD 维护ppt
+- [ ] 运筹学作业完成
+- [ ] 有空把socket多线程写完
+
+<br/>
 
 ## 2019-10-20
 
 - [x] Distributed selector part, DAMMP, discussion
-- [ ] cache coherence  MSI MOSI MOESI
-- [ ] MUA BasicElement
+- [x] cache coherence  MSI MOSI MOESI
+- [x] MUA BasicElement
 
 今天建了一个托福push群，找了一个外国哥哥来做口语指导，希望能够push大家一起进步，都能战胜托福
 
@@ -111,7 +133,6 @@ wow, 效率不错
 
 明天计划
 
-- [ ] 
 - [ ] 读完paper: selector; 继续读logTM[下午可看]
 - [ ] 运筹学凸优化 stanford[毛概课前]
 - [ ] CSAPP chapter3 some[晚10点左右]
@@ -160,8 +181,6 @@ wow, 效率不错
 - [ ] ppt维护
 - [ ] 计网上节课内容复习完
 - [ ] 运筹学作业还剩一题做了
-
-
 
 ## 2019-10-13
 
