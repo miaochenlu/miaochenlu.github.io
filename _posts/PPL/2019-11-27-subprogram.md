@@ -55,10 +55,23 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 这样是不能支持递归的
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" />
-Code and activation records of a program with 3 simple subprograms:A, B, C.These parts mey be separately compiled and put together by linker
+<center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" /></center>
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 30%;" /></center>
+<table>
+  <tr>
+    <td><p>
+      Code and activation records of a program with 3 simple subprograms:A, B, C.
+      </p>
+      <p>
+        These parts mey be separately compiled and put together by linker
+      </p></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%"; /></td>
+  </tr>
+</table>
+
+
+
+Code and activation records of a program with 3 simple subprograms:A, B, C.These parts mey be separately compiled and put together by linker
 
 <br/>
 
@@ -170,7 +183,6 @@ dynamic link
 # 4. Nested subprograms
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127124749204.png" alt="image-20191127124749204" style="zoom:50%;" /></center>
-
 
 <table>
   <tr>
