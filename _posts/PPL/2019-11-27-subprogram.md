@@ -26,7 +26,7 @@ key: page-PPLsubprogram
 
 返回值的子程序通常被称为函数，不返回值的子程序通常被称为过程。
 
-
+<br/>
 
 
 
@@ -43,7 +43,7 @@ requirements
   * subprogram code
   * ***node-code part***(local variables and above data for calls and returns)
 
-
+<br/>
 
 ***Activation record:***
 
@@ -56,7 +56,6 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 这样是不能支持递归的
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" />
-
 <table>
   <tr>
     <td><p>
@@ -66,7 +65,7 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
         These parts mey be separately compiled and put together by linker
       </p>
     </td>
-    <td><img src="/Users/jones/Desktop/miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 33%;" /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 33%;" /></td>
   </tr>
 </table>
 
@@ -81,10 +80,13 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 * compiler must generate code for ***implicit allocation and deallocation*** of local variables on the stack
 * Recursion adds possibility of multiple simultaneous activations of a subprogram. That is "***multiple instances of activations records***".
 
+<br/>
+
 
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:50%;" /></center>
 
+<br/>
 
 看一个例子
 
@@ -99,11 +101,13 @@ int AddTwo(int x, int y) {
 ```
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127120114207.png" alt="image-20191127120114207" style="zoom: 33%;" /></center>
+<br/>
+
 ### ii. accessing activation record
 
 When `AddTwo` is called, its AR is dynamically created and pushed onto the run-time stack
 
-
+<br/>
 
 #### 如下图，怎么去寻找stack中的变量呢，比如x,y,sum?
 
