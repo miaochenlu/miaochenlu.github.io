@@ -56,14 +56,9 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 这样是不能支持递归的
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" />
-<table>
-  <tr>
-    <td><p>Code and activation records of a program with 3 simple subprograms:A, B, C.</p>
-      <p>These parts mey be separately compiled and put together by linker</p>
-    </td>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 33%;" /></td>
-  </tr>
-</table>
+Code and activation records of a program with 3 simple subprograms:A, B, C.These parts mey be separately compiled and put together by linker
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 30%;" /></center>
 
 <br/>
 
@@ -82,7 +77,7 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:40%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:35%;" /></center>
 
 <br/>
 
@@ -98,7 +93,8 @@ int AddTwo(int x, int y) {
 }
 ```
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127120114207.png" alt="image-20191127120114207" style="zoom: 33%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127120114207.png" alt="image-20191127120114207" style="zoom: 30%;" /></center>
+
 <br/>
 
 ### ii. accessing activation record
@@ -111,8 +107,8 @@ When `AddTwo` is called, its AR is dynamically created and pushed onto the run-t
 
 <table>
   <tr>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127120644756.png" alt="image-20191127120644756" style="zoom:50%;" /></td>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:50%;" /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127120644756.png" alt="image-20191127120644756" style="zoom:40%;" /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:40%;" /></td>
   </tr>
 </table>
 
@@ -131,15 +127,23 @@ Base pointer(BP)
 这样就可以寻址了，比如BP+8
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121121729.png" alt="image-20191127121121729" style="zoom: 33%;" /></center>
+
+<br/>
+
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121808159.png" alt="image-20191127121808159" style="zoom: 33%;" /></center>
+
+<br/>
+
+
 <center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 28%;" /></center>
 
 
 
 #### 看一下一个没有递归的例子
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127123111611.png" alt="image-20191127123111611" style="zoom: 30%;" /></center>
-<center><img src="https://miaochenlu.github.io/picture/image-20191127123149311.png" alt="image-20191127123149311" style="zoom:33%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127123111611.png" alt="image-20191127123111611" style="zoom: 25%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127123149311.png" alt="image-20191127123149311" style="zoom:25%;" /></center>
+
 static link
 
 > 在那些允许嵌套子程序和静态作用域的语言中，对象有可能出现在外围的子程序只能够，通过维护一个静态链，就可以找到这些既非局部也非全局的对象。每个AR都包含一个词法上位于其外围的帧的引用
@@ -170,8 +174,8 @@ dynamic link
 
 <table>
   <tr>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127125214414.png" alt="image-20191127125214414" style="zoom:50%;" /></td>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127125249115.png" alt="image-20191127125249115" style="zoom:50%;" /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127125214414.png" alt="image-20191127125214414" style="zoom:40%;" /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127125249115.png" alt="image-20191127125249115" style="zoom:40%;" /></td>
   </tr>
 </table>
 
