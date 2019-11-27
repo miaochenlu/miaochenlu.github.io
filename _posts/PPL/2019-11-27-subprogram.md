@@ -43,7 +43,7 @@ requirements
   * subprogram code
   * ***node-code part***(local variables and above data for calls and returns)
 
-<br/>
+<br/>  
 
 ***Activation record:***
 
@@ -58,12 +58,8 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 <center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" />
 <table>
   <tr>
-    <td><p>
-      Code and activation records of a program with 3 simple subprograms:A, B, C.
-      </p>
-      <p>
-        These parts mey be separately compiled and put together by linker
-      </p>
+    <td><p>Code and activation records of a program with 3 simple subprograms:A, B, C.</p>
+      <p>These parts mey be separately compiled and put together by linker</p>
     </td>
     <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" alt="image-20191127114939416" style="zoom: 33%;" /></td>
   </tr>
@@ -71,7 +67,9 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 <br/>
 
-# 2 Implementing Subprograms with Stack-Dynamic Local Variables
+​     
+
+# 2. Implementing Subprograms with Stack-Dynamic Local Variables
 
 这样做的一个好处就是： 支持递归
 
@@ -84,7 +82,7 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:50%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:40%;" /></center>
 
 <br/>
 
@@ -135,6 +133,7 @@ Base pointer(BP)
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121121729.png" alt="image-20191127121121729" style="zoom: 33%;" /></center>
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121808159.png" alt="image-20191127121808159" style="zoom: 33%;" /></center>
 <center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 28%;" /></center>
+
 
 
 #### 看一下一个没有递归的例子
