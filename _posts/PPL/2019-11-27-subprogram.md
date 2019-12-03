@@ -51,7 +51,7 @@ requirements
 >
 > 包含参数、返回值、局部变量、临时量和一些簿记信息
 
-For a simple subprogram, AR has fixed size, and can be ***statically allocated***(not int stack)
+For a simple subprogram, AR has fixed size, and can be ***statically allocated*** [not in stack]
 
 这样是不能支持递归的
 
@@ -120,8 +120,8 @@ When `AddTwo` is called, its AR is dynamically created and pushed onto the run-t
 
 <table>
   <tr>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127120644756.png" alt="image-20191127120644756" style="zoom:40%;" /></td>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:40%;" /></td>
+    <td><center><img src="https://miaochenlu.github.io/picture/image-20191127120644756.png" alt="image-20191127120644756" style="zoom:40%;" /></center></td>
+    <td><center><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:40%;" /></center></td>
   </tr>
 </table>
 
@@ -143,18 +143,19 @@ Base pointer(BP)
 
 <br/>
 
-<center><img src="https://miaochenlu.github.io/picture/image-20191127121808159.png" alt="image-20191127121808159" style="zoom: 33%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/image-20191127121808159.png" alt="image-20191127121808159" style="zoom: 25%;" /></center>
 
 <br/>
 
-
-<center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 28%;" /></center>
+<center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 25%;" /></center>
 
 
 
 #### 看一下一个没有递归的例子
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127123111611.png" alt="image-20191127123111611" style="zoom: 25%;" /></center>
+<br/>
+
 <center><img src="https://miaochenlu.github.io/picture/image-20191127123149311.png" alt="image-20191127123149311" style="zoom:25%;" /></center>
 
 static link
