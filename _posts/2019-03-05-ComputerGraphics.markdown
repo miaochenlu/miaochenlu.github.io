@@ -38,7 +38,7 @@ key: page-graphics
 ## 1 三维空间中的旋转  
 
 <video id="video" controls="" preload="none" width="400">
-      <source id="mp4" src="http://miaochenlu.github.io/video/Jietu20190907-093543.mp4" type="video/mp4" >
+      <source id="mp4" src="http://miaochenlu.github.io/video/201909250093440.mov" type="video/mp4" >
       <p>Your user agent does not support the HTML5 Video element.</p>
     </video>
 
@@ -450,7 +450,6 @@ v'&=v_{\parallel}'+v_{\perp}'\\
 
 
 <h1><a name="scan_convert_line">光栅扫描图形学</a></h1>
-
 ## Scan converting lines
 <center><img src="http://miaochenlu.github.io/picture/20190306scanconverting.png" width = "300"></center>
 * Question 1: How to draw the line?
