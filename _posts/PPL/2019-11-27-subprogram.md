@@ -1,13 +1,31 @@
 ---
+layout: article
 title: PPL-subprogram
 tags: PPL
 key: page-PPLsubprogram
-
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image:
+    gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
+  background_image:
+    src: https://miaochenlu.github.io/picture/EDD6F47E7DDE25D08BB6320511A6F0BD.png
 ---
 
+principles of programming language--子程序和控制抽象
+
+<!--more-->
+
+<style>
+  .page__header .header__brand path {
+    fill: rgba(255, 255, 255, .95);
+  }
+</style>
+
+<br/>
 
 
-# 子程序和控制抽象
 
 什么是抽象：
 
@@ -56,7 +74,6 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 这样是不能支持递归的
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" /></center>
-
 <table>
   <tr>
     <td><p>
@@ -91,7 +108,6 @@ Code and activation records of a program with 3 simple subprograms:A, B, C.These
 
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127115905686.png" alt="image-20191127115905686" style="zoom:35%;" /></center>
-
 <br/>
 
 看一个例子
@@ -107,7 +123,6 @@ int AddTwo(int x, int y) {
 ```
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127120114207.png" alt="image-20191127120114207" style="zoom: 30%;" /></center>
-
 <br/>
 
 ### ii. accessing activation record
@@ -140,15 +155,12 @@ Base pointer(BP)
 这样就可以寻址了，比如BP+8
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121121729.png" alt="image-20191127121121729" style="zoom: 33%;" /></center>
-
 <br/>
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127121808159.png" alt="image-20191127121808159" style="zoom: 25%;" /></center>
-
 <br/>
 
 <center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 25%;" /></center>
-
 
 
 #### 看一下一个没有递归的例子
@@ -157,7 +169,6 @@ Base pointer(BP)
 <br/>
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127123149311.png" alt="image-20191127123149311" style="zoom:25%;" /></center>
-
 static link
 
 > 在那些允许嵌套子程序和静态作用域的语言中，对象有可能出现在外围的子程序只能够，通过维护一个静态链，就可以找到这些既非局部也非全局的对象。每个AR都包含一个词法上位于其外围的帧的引用
@@ -180,11 +191,9 @@ dynamic link
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127124238076.png" alt="image-20191127124238076" style="zoom:40%;" /></center>
 
-
 # 4. Nested subprograms
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127124749204.png" alt="image-20191127124749204" style="zoom:50%;" /></center>
-
 <table>
   <tr>
     <td><img src="https://miaochenlu.github.io/picture/image-20191127125214414.png" alt="image-20191127125214414" style="zoom:40%;" /></td>
