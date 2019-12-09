@@ -5,6 +5,8 @@ key: page-image
 
 ---
 
+<!--more-->
+
 # <center> digital image processing</center>
 
 
