@@ -1,33 +1,168 @@
-# JVM Architecture
+---
+layout: article
+title: PPL-inside JVM
+tags: PPL
+key: page-PPLjvm
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image:
+    gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
+  background_image:
+    src: https://miaochenlu.github.io/picture/EDD6F47E7DDE25D08BB6320511A6F0BD.png
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204083236386.png" alt="image-20191204083236386" style="zoom: 33%;" />
+---
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204084034342.png" alt="image-20191204084034342" style="zoom: 33%;" />
+principles of programming language--inside JVM
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204084049545.png" alt="image-20191204084049545" style="zoom: 33%;" />
+<!--more-->
+
+# 1. JDK, JRE and JVM
+
+{:.success}
+
+The ***<u>Java Development Kit</u>*** (JDK) is a software development environment used for developing Java applications and applets. It includes the <u>Java Runtime Environment</u> (JRE), an <u>interpreter/loader</u> (Java), a <u>compiler</u> (javac), an <u>archiver</u> (jar), a <u>documentation generator</u> (Javadoc) and other tools needed in Java development.
+
+{:.info}
+
+**JRE** stands for **“Java Runtime Environment”** and may also be written as **“Java RTE.”** The Java Runtime Environment provides the minimum requirements for executing a Java application; it consists of the   <u>Java Virtual Machine</u> (JVM), *<u>core classes</u>*, and *<u>supporting files</u>*.
+
+{:.warning}
+
+**JVM**: Whatever Java program you run using JRE or JDK goes into JVM and JVM is responsible for **executing the java program line by line** hence it is also known as interpreter.
+
+<center><img src="https://miaochenlu.github.io/picture/jdkjrejvm.jpg"  style="zoom: 80%;" /></center>
+
+## How does JRE work?
+
+1. ***Compile***: We have a source file named "Example.java". At compile time, The file is compiled into a set of Byte Code stored in "Example.class".
+
+2. Class Loader: The Class Loader loads all necessary classes needed for the execution of a program. It provides security by separating the namespaces of the local file system from that imported through the network. These files are loaded either from a hard disk, a network or from other sources.
+
+3. ***Byte Code Verifier*** The JVM puts the code through the Byte Code Verifier that checks the format and checks for an illegal code. Illegal code, for example, is code that violates access rights on objects or violates the implementation of pointers.
+
+4. ***Interpreter*** At runtime the Byte Code is loaded, checked and run by the interpreter. The interpreter has the following two functions:
+
+5. - Execute the Byte Code
+   - Make appropriate calls to the underlying hardware
+
+- 
+
+<center><img src="https://miaochenlu.github.io/picture/JRE_JDK_JVM_2.jpg"  style="zoom: 80%;" /></center>
+
+
+
+# 2. JVM
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191204083236386.png" alt="image-20191204083236386" style="zoom: 33%;" /></center>
+
+
+
+
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191204084049545.png" alt="image-20191204084049545" style="zoom: 33%;" /></center>
 
 ## Class Loader
 
+The **Java ClassLoader**  dynamically loads Java classes into the [**Java Virtual Machine**](https://www.geeksforgeeks.org/jvm-works-jvm-architecture/). The Java run time system does not need to know about files and file systems because of classloaders.
+
+[Java classes](https://www.geeksforgeeks.org/classes-objects-java/) aren’t loaded into memory all at once, but when required by an application. At this point, the **Java ClassLoader** is called by the **JRE** and these ClassLoaders load classes into memory dynamically.
 
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204084346851.png" alt="image-20191204084346851" style="zoom: 33%;" />
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191204084346851.png" alt="image-20191204084346851" style="zoom: 33%;" /></center>
+
+A Java Classloader is of **three types**: 
+
+1. **BootStrap ClassLoader[Primodial ClassLoader]:** A Bootstrap Classloader is a Machine code which kickstarts the operation when the JVM calls it. It is not a java class. Its job is to load the first pure Java ClassLoader. Bootstrap ClassLoader loads classes from the location ***rt.jar***. Bootstrap ClassLoader doesn’t have any parent ClassLoaders.
+2. **Extension ClassLoader:** The Extension ClassLoader is a child of Bootstrap ClassLoader and loads the extensions of core java classes from the respective JDK Extension library. It loads files from ***jre/lib/ext*** directory or any other directory pointed by the system property ***java.ext.dirs***.
+3. **System ClassLoader[Application ClassLoader]:**  It loads the Application type classes found in the environment variable ***CLASSPATH, -classpath or -cp command line option***. The Application ClassLoader is a child class of Extension ClassLoader.
+
+<center><img src="https://miaochenlu.github.io/picture/jvmclassloader.jpg" style="zoom: 33%;" /></center>
+
+{:.success}
+
+**1. Delegation Model**: The Java Virtual Machine and the Java ClassLoader use an algorithm called the to Load the classes into the Java file.
+
+> - ClassLoader always follows the **Delegation Hierarchy Principle**.
+> - Whenever JVM comes across a class, it checks whether that class is already loaded or not.
+> - If the Class is already loaded in the method area then the JVM proceeds with execution.
+> - If the class is not present in the method area then the JVM asks the Java ClassLoader Sub-System to load that particular class, then ClassLoader sub-system hands over the control to **Application ClassLoader**.
+> - Application ClassLoader then delegates the request to Extension ClassLoader and the **Extension ClassLoader** in turn delegates the request to **Bootstrap ClassLoader**.
+> - Bootstrap ClassLoader will search in the Bootstrap classpath(JDK/JRE/LIB). If the class is available then it is loaded, if not the request is delegated to Extension ClassLoader.
+> - Extension ClassLoader searches for the class in the Extension Classpath(JDK/JRE/LIB/EXT). If the class is available then it is loaded, if not the request is delegated to the Application ClassLoader.
+> - Application ClassLoader searches for the class in the Application Classpath. If the class is available then it is loaded, if not then a **ClassNotFoundException** exception is generated.
+
+<center><img src="/Users/jones/Library/Application Support/typora-user-images/image-20191211083627810.png" alt="image-20191211083627810" style="zoom:40%;" /></center>
+
+{:.success}
+
+**2. Visibility Principle**:  A class loaded by a parent ClassLoader is visible to the child ClassLoaders but a class loaded by a child ClassLoader is not visible to the parent ClassLoaders. 
+
+> Suppose a class GEEKS.class has been loaded by the Extension ClassLoader, then that class is only visible to the Extension ClassLoader and Application ClassLoader but not to the Bootstrap ClassLoader. If that class is again tried to load using Bootstrap ClassLoader it gives an exception ***java.lang.ClassNotFoundException***.
+
+{:.success}
+
+**3. Uniqueness Property**: The classes are unique and there is no repetition of classes. 
+
+> This also ensures that the classes loaded by parent classloaders are not loaded by the child classloaders. If the parent class loader isn’t able to find the class, only then the current instance would attempt to do so itself.
+
+
+
+
 
 
 
 ## Java API
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204085137303.png" alt="image-20191204085137303" style="zoom:50%;" />
-
-<img src="/Users/jones/Desktop/miaochenlu.github.io/picture/image-20191204085701970.png" alt="image-20191204085701970" style="zoom:50%;" />
+<center><img src="https://miaochenlu.github.io/picture/image-20191204085137303.png" alt="image-20191204085137303" style="zoom:50%;" /></center>
 
 
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191204090031006.png" alt="image-20191204090031006" style="zoom: 33%;" />
+# JVM memory
+
+{:.success}
+
+**Method area :**
+
+In method area, all class level information like class name, immediate parent class name, methods and variables information etc. are stored, including static variables. There is only one method area per JVM, and it is a shared resource. 
 
 method area是静态数据，生成的class对象在heap中，这个对象里面没有东西，只是说明有这样一种对象
 
 静态变量放在memory area中
 
+{:.success}
+
+**Heap area :**
+
+Information of all objects is stored in heap area. There is also one Heap Area per JVM. It is also a shared resource.
+
+{:.success}
+
+**Stack area :**
+
+For every thread, JVM create one run-time stack which is stored here. Every block of this stack is called activation record/stack frame which store methods calls. All local variables of that method are stored in their corresponding frame. After a thread terminate, it’s run-time stack will be destroyed by JVM. It is not a shared resource.
+
+{:.success}
+
+**PC Registers :**
+
+Store address of current execution instruction of a thread. Obviously each thread has separate PC Registers.
+
+{:.success}
+
+**Native method stacks :**
+
+For every thread, separate native stack is created. It stores native method information.
+
+<center><img src="https://miaochenlu.github.io/picture/jvm-memory-2.jpg" style="zoom: 33%;" /></center>
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191204085701970.png" alt="image-20191204085701970" style="zoom:50%;" /></center>
+
+
+
+<center><img src="https://miaochenlu.github.io/picture/image-20191204090031006.png" alt="image-20191204090031006" style="zoom: 33%;" /></center>
 
 
 
@@ -35,6 +170,11 @@ method area是静态数据，生成的class对象在heap中，这个对象里面
 
 
 
+
+
+references
+
+[1] https://codepumpkin.com/typesof-class-loader/
 
 
 
