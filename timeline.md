@@ -28,13 +28,17 @@ hmmmm, 时隔很久又回来了，发现还是需要每天一个计划来督促�
 
 今天
 
-- [ ] 心理学导论视觉+知觉part 1+语言
-- [ ] PPL MUA
+- [x] 心理学导论视觉+知觉part 1+语言
+- [x] PPL MUA
+- [x] COMNET lab part
+- [x] OS进程
+
+明天
+
+- [ ] COMNET transport layer
 - [ ] COMNET lab part
-- [ ] OS进程
-- [ ] 
-
-
+- [ ] OS thread
+- [ ] paper undo+redo log
 
 ## 2019-10-21
 
