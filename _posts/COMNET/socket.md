@@ -282,7 +282,7 @@ struct addrinfo {
 
 ### B. getnameinfo
 
-getnameinfo将一个套接字地址转换成响应的主机和服务名字符串。
+getnameinfo将一个套接字地址转换成相应的主机和服务名字符串。
 
 ```cpp
 int getnameinfo(const struct sockaddr* sa, socklen_t salen,
@@ -292,5 +292,38 @@ int getnameinfo(const struct sockaddr* sa, socklen_t salen,
 
 
 
+```cpp
+#include "csapp.h"
+
+int main(int argc, char** argv) {
+    struct addrinfo *p, *listp, hints;
+    char buf[MAXLINE];
+    int rc, flags;
 
 
+    //get a list of addrinfo records
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    if((rc = getaddrinfo("www.baidu.com", NULL, &hints, &listp)) != 0) {
+        fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(rc));
+        exit(1);
+    }
+
+    //walk the list and display each IP address
+    flags = NI_NUMERICHOST;
+    for(p = listp; p; p = p->ai_next) {
+        getnameinfo(p->ai_addr, p->ai_addrlen, buf, MAXLINE, NULL, 0, flags);
+        printf("%s\n", buf);
+    }
+    //clean up
+    freeaddrinfo(listp);
+    exit(0);
+}
+```
+
+首先初始化hints结构，使得getaddrinfo返回我们想要的地址。
+
+
+
+## 2.5 套接字接口的辅助函数
