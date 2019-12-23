@@ -1,4 +1,90 @@
-## SIFT
+![image-20191222140538507](/Users/jones/Library/Application Support/typora-user-images/image-20191222140538507.png)
+
+<br/>
+
+<br/>
+
+<br/>
+
+| 作业名称 | Image Stitching   |
+| -------- | ----------------- |
+| 姓名     | 缪晨露            |
+| 学号     | 3170102668        |
+| 电子邮箱 | clmiao@zju.edu.cn |
+| 联系电话 | 18888920826       |
+| 指导老师 | 潘纲              |
+
+<br/>
+
+<br/>
+
+<br/>
+
+<center>2019年12月22日</center>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+# <center>Image Stitching</center>
+
+## **1.** 作业已实现的功能简述及运行简要说明 
+
+1. 阅读Image Stitching课件，理解其基本过程。在此基础上，编程实现全景图片的自动 拼接功能; 
+
+2. 可直接调用OpenCV的一些函数(如梯度、特征点检测、特征描述子计算、 RANSAC等子步骤)，但不能直接使用OpenCV或其他SDK的拼接功能函数; 
+
+3. 程序在拼接过程中，必须显示关键的几个中间步骤的结果; 
+
+4. 实验报告中至少包括Yosemite测试图像(课程主页下载)以及自己拍摄(不能跟任 
+
+   何其他同学一样)的不少于五张图片的拼接结果，同时展示关键的中间步骤结果; 
+
+5. 学有余力的同学可以阅读相关资料与论文，将结果做得尽量好，比如用更好的 
+
+   Blending方法。 
+
+ 
+
+## 2. 作业的开发与运行环境 
+
+**操作系统**: MacOS 10.15 
+
+**openCV**:3.4.2
+
+ **IDE**: Visual Studio Code
+
+
+
+## 3. Image stitching原理
+
+### A. SIFT
 
 SIFT[scale-invariant feature transform]特征是图像的局部特征，其对旋转、尺度缩放、亮度变化保持不变性，对视角变化、仿射变换、噪声也保持一定程度的稳定性；
 
@@ -17,7 +103,7 @@ SIFT算法可以分解为四步
 
 
 
-### A. 尺度空间极值检测
+#### A. 尺度空间极值检测
 
 $$G(x,y)=\frac{1}{2\pi \sigma ^2}e^{-\frac{(x-m/2)^2+(y-n/2)^2}{2\sigma ^2}}$$
 
@@ -29,7 +115,7 @@ $$G(x,y)=\frac{1}{2\pi \sigma ^2}e^{-\frac{(x-m/2)^2+(y-n/2)^2}{2\sigma ^2}}$$
 
 
 
-#### 尺度空间的表示
+##### 尺度空间的表示
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219104245912.png" alt="image-20191219104245912" style="zoom:40%;" />
 
@@ -111,7 +197,7 @@ $$\begin{aligned}D(x,y,\sigma)=&(G(x,y,k\sigma)-G(x,y,\sigma))*I(x,y)\\=&L(x,y,k
 
 方向直方图的峰值则代表了该特征点处邻域梯度的方向，以直方图中最大值作为该关键点的主方向。为了增强匹配的鲁棒性，只保留峰值大于主方向峰值80％的方向作为该关键点的辅方向。因此，对于同一梯度值的多个峰值的关键点位置，在相同位置和尺度将会有多个关键点被创建但方向不同。仅有15％的关键点被赋予多个方向，但可以明显的提高关键点匹配的稳定性。
 
-### D. 关键点特征描述
+#### D. 关键点特征描述
 
 通过以上步骤，对于每一个关键点，拥有三个信息：***位置、尺度以及方向***。接下来就是为每个关键点建立一个***描述符***，用一组向量将这个关键点描述出来，使其不随各种变化而改变，比如光照变化、视角变化等等。这个描述子不但包括关键点，也包含关键点周围对其有贡献的像素点，并且描述符应该有较高的独特性，以便于提高特征点正确匹配的概率。
 
@@ -123,7 +209,7 @@ $$\begin{aligned}D(x,y,\sigma)=&(G(x,y,k\sigma)-G(x,y,\sigma))*I(x,y)\\=&L(x,y,k
 
 
 
-## RANSAC
+### B. RANSAC
 
 We have found point matches between two images, and we think they are related by some parametric transformation (e.g. translation; scaled Euclidean; affine). How do we estimate the parameters of that transformation? 
 
@@ -133,15 +219,46 @@ We have found point matches between two images, and we think they are related by
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219115312299.png" alt="image-20191219115312299" style="zoom:50%;" />
 
+RANSAC可以得到更好的匹配效果
 
 
 
 
 
+## 4. 思路与实现过程
 
-# 实现
+### 总体过程：
 
-## A. get the transformation
+1. detect key points & build the SIFT descriptors
+2. Match SIFT descriptors
+3. RANSAC & Fitting the transformation
+4. Blending
+
+### 4.1 detect key points & build the SIFT descriptors
+
+```python
+sift = cv2.xfeatures2d.SIFT_create()
+keypoints1, descriptor1 = sift.detectAndCompute(img1, None)
+keypoints2, descriptor2 = sift.detectAndCompute(img2, None)
+```
+
+
+
+### 4.2 Match SIFT descriptors
+
+```python
+bf = cv2.BFMatcher()
+    matches = bf.knnMatch(descriptor1, descriptor2, k = 2)
+    pointsGood = []
+    matchGood = []
+    for m, n in matches:
+        if m.distance < 0.8 * n.distance:
+            pointsGood.append([m])
+            matchGood.append(m)
+
+    img3 = cv2.drawMatchesKnn(img1, keypoints1, img2, keypoints1, pointsGood[:20], None, flags = 2)
+    cv2.imshow("match", img3)
+```
 
 `BFmatcher`
 
@@ -155,34 +272,19 @@ We have found point matches between two images, and we think they are related by
 
 
 
-```python
-def getGoodMatch(img1, img2): 
-    sift = cv2.xfeatures2d.SIFT_create()
-    keypoints1, descriptor1 = sift.detectAndCompute(img1, None)
-    keypoints2, descriptor2 = sift.detectAndCompute(img2, None)
+### 4.3 RANSAC & Fitting the transformation
 
-    bf = cv2.BFMatcher()
-    matches = bf.knnMatch(descriptor1, descriptor2, k = 2)
-    pointsGood = []
-    matchGood = []
-    for m, n in matches:
-        if m.distance < 0.8 * n.distance:
-            pointsGood.append([m])
-            matchGood.append(m)
-    img3 = cv2.drawMatchesKnn(img1, keypoints1, img2, keypoints1, pointsGood[:20], None, flags = 2)
-    cv2.imshow("match", img3)
-    
-    if len(matchGood) > 10:
+```python
+if len(matchGood) > 5:
         img1kp = np.float32([keypoints1[m.queryIdx].pt for m in matchGood]).reshape(-1,1,2)
         img2kp = np.float32([keypoints2[m.trainIdx].pt for m in matchGood]).reshape(-1,1,2)
 
         M, mask = cv2.findHomography(img2kp, img1kp, cv2.RANSAC, 5.0)
-    return M
 ```
 
 
 
-## B. stitching and blending
+### 4.4 stitching & blending
 
 新建一个dst矩阵，将变换过后的imgcolor2图像[右侧图像[拷贝到矩阵中，然后将imgcolor1图像[左侧图像]拷贝到矩阵中
 
@@ -192,12 +294,10 @@ def getGoodMatch(img1, img2):
 >
 > 图像交叉的区域做一个混合 `dst[i, j, k] = img1color[i, j, k] + (1 - ratio) * img2[i, j, k]`
 
-```python
-def warp(img1color, img2color, M):
-    height = img1color.shape[0]
-    widthImg1 = img1color.shape[1]
-    widthImg2 = img2color.shape[1]
-    dst = cv2.warpPerspective(img2color, M, (img2color.shape[1] + img1color.shape[1], img1color.shape[0]))
+```cpp
+dst = cv2.warpPerspective(img2color, M, (img2color.shape[1] + img1color.shape[1], img1color.shape[0]))
+    dst[0:img1color.shape[0], 0:img1color.shape[1], :] = img1color
+
     ratio = 0.5
 
     for i in range(img1color.shape[0]):
@@ -217,30 +317,21 @@ def warp(img1color, img2color, M):
                 dst[i, j, 0] = img1color[i, j, 0]
                 dst[i, j, 1] = img1color[i, j, 1]
                 dst[i, j, 2] = img1color[i, j, 2]
-
-    rows, cols = np.where(dst[:, :, 0] != 0)
-    min_row, max_row = min(rows), max(rows) + 1
-    min_col, max_col = min(cols), max(cols) + 1
-    fdst = dst[min_row:max_row, min_col:max_col, :]
-    cv2.imwrite("stitch.jpg", fdst)
-    return fdst
 ```
 
 
 
 
 
+# 5 实验结果
 
-
-# 实验结果
+### A. 
 
 ## 1. Matching
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191221234041220.png" alt="image-20191221234041220" style="zoom:40%;" />
+![image-20191222171733515](/Users/jones/Library/Application Support/typora-user-images/image-20191222171733515.png)
 
 ## 2. Before blending
-
-
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191221234318129.png" alt="image-20191221234318129" style="zoom:50%;" />
 
@@ -252,8 +343,30 @@ def warp(img1color, img2color, M):
 
 
 
-# 实验心得
+## B.
+
+### 1. Matching
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191222172032827.png" alt="image-20191222172032827" style="zoom:50%;" />
+
+### 2. before blending
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191222170754988.png" alt="image-20191222170754988" style="zoom:50%;" />
+
+### 3. after blending
+
+![image-20191222170611042](/Users/jones/Library/Application Support/typora-user-images/image-20191222170611042.png)
+
+
+
+# 6 实验心得
 
 可以发现在blending之后，光线方面的差别确实变小了，但是图像的拼接处出现了缝隙。
 
-这是因为在tu xia
+这是因为经过变换后的右侧图像带了并不是纯黑的边框，导致检测起来比较复杂。
+
+
+
+Reference:
+
+[1]https://blog.csdn.net/zddblog/article/details/7521424

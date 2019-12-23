@@ -303,8 +303,8 @@ int main(int argc, char** argv) {
 
     //get a list of addrinfo records
     memset(&hints, 0, sizeof(struct addrinfo));
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_family = AF_INET;				//IPv4 only
+    hints.ai_socktype = SOCK_STREAM;	//Connections only
     if((rc = getaddrinfo("www.baidu.com", NULL, &hints, &listp)) != 0) {
         fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(rc));
         exit(1);
@@ -322,8 +322,200 @@ int main(int argc, char** argv) {
 }
 ```
 
-首先初始化hints结构，使得getaddrinfo返回我们想要的地址。
+首先初始化hints结构，使getaddrinfo返回我们想要的地址。在这里，我们想要查找32位IP地址`AF_INET`，用作连接的端点`SOCK_STREAM`。
+
+因为只想`getaddrinfo`转换域名，所以用`service`参数为NULL来调用它
+
+调用`getaddrinfo`之后，会遍历`addrinfo`结构，用`getnameinfo`将每个套接字地址转换成点分十进制字符串
+
+遍历完列表之后，调用`freeaddrinfo`释放列表
 
 
 
 ## 2.5 套接字接口的辅助函数
+
+### A. open_clientfd
+
+```cpp
+#include "csapp.h"
+int open_clientfd(char* hostname, char* port);//成功则为描述符，出错为-1
+```
+
+
+
+### B. open_listenfd
+
+```cpp
+#include "csapp.h"
+int open_listenfd(char* port);
+```
+
+
+
+`client.c`
+
+```cpp
+#include "csapp.h"
+
+int main(int argc, char** argv) {
+  int clientfd;
+  char* host, *port, buf[MAXLINE];
+  rio_t rio;//也是一个descriptor
+  if(argc != 3) {
+    fprintf(stderr, "usage: %s <host> <port>\n", argv[0]);
+    exit(0);
+  }
+  host = argv[1];
+  port = argv[2];
+  client = open_clientfd(host, port);
+  Rio_readinitb(&rio, clientfd);
+  while(fgets(buf, MAXLINE, stdin) != NULL) {
+    Rio_writen(clientfd, buf, strlen(buf));	//发送给server
+    Rio_readlineb(&rio, buf, MAXLINE);			//读取server
+  
+    fputs(buf, stdout);
+  }
+  close(clientfd);
+  exit(0);
+}
+```
+
+`server.c`
+
+```cpp
+#include "csapp.h"
+void echo(int connfd) {
+  int listenfd, connfd;
+  socklen_t clientlen;
+  
+  struct sockaddr_storage clientaddr;	//enough space for any address
+  char client_hostname[MAXLINE], client_port[MAXLINE];
+  if(argc != 2) {
+    fprintf(stderr, "usage: %s <port>\n", argv[0]);
+    exit(0);
+  }
+  listenfd = open_listenfd(argv[1]);
+  while(1) {
+    clientlen = sizeof(struct sockaddr_storage);
+    connfd = Accept(listenfd, (SA*)&clientaddr, &clientlen);
+    getnameinfo((SA*)&clientaddr, clientlen, client_hostname, MAXLINE, client_port, MAXLINE, 0);
+    printf("Connected to (%s, %s)\n", client_hostname, client_port);
+    echo(connfd);
+    close(connfd);
+  }
+  exit(0);
+}
+
+void echo(int connfd) {
+  size_t n;
+  char buf[MAXLINE];
+  rio_t rio;
+  Rio_readinitb(&rio, connfd);
+  while((n = Rio_read_readlineb(&reo, buf, MAXLINE)) != 0) {
+    printf("server received %d bytes\n", (int)n);
+    Rio_writen(connfd, buf, n);
+  }
+}
+```
+
+
+
+# 5. Web server
+
+## 5.2 Web内容
+
+对于Web客户端和服务器而言，内容是与一个MIME[Multipurpose Internet Mail Extensions]类型相关的字节序列
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191222044007513.png" alt="image-20191222044007513" style="zoom:50%;" />
+
+Web服务器以两种不同的方式向客户端提供内容
+
+* serving static content
+
+> 取一个磁盘文件，并将它的内容返回给客户端。磁盘文件称为静态内容
+
+* serving dynamic content
+
+> 运行一个可执行文件，并将它的输出返回给客户端。运行时可执行文件产生的输出称为动态内核
+
+每条Web服务器返回的内容都是和它管理的某个文件相关联的。这些文件中的每一个都有一个唯一的名字，叫做***<u>URL</u>[universal resource locator]***,例如URL
+
+`http://www.google.com:80/index.html`
+
+表示因特网主机www.google.com上一个称为/index.html的html文件
+
+
+
+可执行文件的URL可以在文件名后面包括程序参数。?字符分割文件名和参数，而且每个参数都用&字符分隔开，如
+
+`http://bluefish.ics.cs.cmu.edu:8000/cgi-bin/adder?15000&213`
+
+标识了一个叫做`/cgi-bin/adder`的可执行文件，会带两个参数字符串15000和213来调用它。
+
+
+
+在事务过程中，client和server使用的是URL的不同部分。例如：
+
+* 客户端使用前缀`http://www.google.com:80`来决定与哪类服务器联系，服务器在哪里，它监听的port是多少。
+* 服务器使用后缀`/index.html`来发现他文件系统中的文件，并确定请求的是静态内容还是动态内容
+
+{:.warning}
+
+最小的URL后缀是"/"字符，所有服务器将其扩展为某个默认的主页，例如/index.html。这也解释了后面的GET / HTTP/1.1
+
+## 5.3 HTTP事务
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191222045146848.png" alt="image-20191222045146848" style="zoom:50%;" />
+
+* 第一行，从linux shell运行TELNET, 要求打开一个到AOL Web服务器的连接
+* TELNET打印三行输出，打开连接，等待我们输入文本
+* 每次输入一个文本行，并回车，TELNET会读取该行，在后面加上回车和换行符号"\r\n", 并且将这一行发送到服务器
+
+
+
+### A. HTTP请求
+
+一个HTTP请求的组成
+
+* 一个请求行request line
+* 后面跟随0个或者多个请求报头request header
+* 再跟随一个空的文本行来终止报头列表
+
+
+
+***I. request line形式***
+
+`method URI version`
+
+`method`: GET POST OPTIONS HEAD PUT DELETE TRACE
+
+GET方法指导服务器生成和返回URI[uniform resource identifier统一资源标识符]标识的内容。***URI是相应的URL后缀***，包括文件名和可选的参数
+
+`version`字段表明了该请求遵循的HTTP版本
+
+
+
+***II. 请求报头***
+
+为服务器提供了额外的信息
+
+`header-name: header-data`
+
+
+
+### B. HTTP响应
+
+一个HTTP响应的组成
+
+* 一个响应行
+* 后面跟随着0个或者更多的响应报头
+* 再跟随一个终止报头的空行
+* 再跟随一个响应主题
+
+response header
+
+`version status-code status-message`
+
+
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191222050547989.png" alt="image-20191222050547989" style="zoom:50%;" />
