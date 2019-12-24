@@ -1,4 +1,22 @@
-## SIFT
+# SIFT
+
+## 1.
+
+## 2. 为什么使用梯度信息而不直接使用像素值
+
+## 3. 各种不变性的解释
+
+**1.  平移不变：**SIFT是局部特征，只提取关键点点附近矩形区域的sample，所以该物体移动到任何地方提取的feature都是类似的。同时因为是划grid去提取，即便关键点稍微偏移一下feature也基本没有变化，有点类似于HOG或者CNN的pooling。
+
+**2.  旋转不变：**在计算grid里面的梯度bin前需要旋转到主方向，因此有了一定的旋转不变性。
+
+**3. 光照不变**： 计算feature vector的时候进行了归一化、卡阈值之后又一次归一化，抵消了部分光照的影响。
+
+**4. 尺度不变：**通过前一步算LoG得到的尺度来确定计算feature的范围，所以特征对应了一个尺度。所以原本不同尺度的图片能转换到相似的尺度提取相似的特征
+
+
+
+## 3. SIFT步骤
 
 SIFT[scale-invariant feature transform]特征是图像的局部特征，其对旋转、尺度缩放、亮度变化保持不变性，对视角变化、仿射变换、噪声也保持一定程度的稳定性；
 
@@ -50,6 +68,8 @@ $$G(x,y)=\frac{1}{2\pi \sigma ^2}e^{-\frac{(x-m/2)^2+(y-n/2)^2}{2\sigma ^2}}$$
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219105034161.png" alt="image-20191219105034161" style="zoom:40%;" />
 
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191223164353053.png" alt="image-20191223164353053" style="zoom:50%;" />
+
 图像的金字塔模型是指，将原始图像不断降阶采样，得到一系列大小不一的图像，由大到小，从下到上构成的塔状模型。原图像为金子塔的第一层，每次降采样所得到的新图像为金字塔的一层(每层一张图像)，每个金字塔共n层。
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219105337581.png" alt="image-20191219105337581" style="zoom:50%;" />
@@ -83,7 +103,7 @@ $$\begin{aligned}D(x,y,\sigma)=&(G(x,y,k\sigma)-G(x,y,\sigma))*I(x,y)\\=&L(x,y,k
 
 为了在每组中检测S个尺度的极值点，则DOG金字塔每组需S+2层图像，而DOG金字塔由高斯金字塔相邻两层相减得到，则高斯金字塔每组需S+3层图像
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219111629345.png" alt="image-20191219111629345" style="zoom:50%;" />
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191223164421850.png" alt="image-20191223164421850" style="zoom:50%;" />
 
 ***空间极值点检测***
 
@@ -109,29 +129,105 @@ $$\begin{aligned}D(x,y,\sigma)=&(G(x,y,k\sigma)-G(x,y,\sigma))*I(x,y)\\=&L(x,y,k
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219113757045.png" alt="image-20191219113757045" style="zoom:50%;" />
 
-方向直方图的峰值则代表了该特征点处邻域梯度的方向，以直方图中最大值作为该关键点的主方向。为了增强匹配的鲁棒性，只保留峰值大于主方向峰值80％的方向作为该关键点的辅方向。因此，对于同一梯度值的多个峰值的关键点位置，在相同位置和尺度将会有多个关键点被创建但方向不同。仅有15％的关键点被赋予多个方向，但可以明显的提高关键点匹配的稳定性。
+方向直方图的峰值则代表了该特征点处邻域梯度的方向，以直方图中最大值作为该关键点的***<u>主方向</u>***。
+
+为了增强匹配的鲁棒性，只保留峰值大于主方向峰值80％的方向作为该关键点的辅方向。因此，对于同一梯度值的多个峰值的关键点位置，在相同位置和尺度将会有多个关键点被创建但方向不同。仅有15％的关键点被赋予多个方向，但可以明显的提高关键点匹配的稳定性。
 
 ### D. 关键点特征描述
 
-通过以上步骤，对于每一个关键点，拥有三个信息：***位置、尺度以及方向***。接下来就是为每个关键点建立一个***描述符***，用一组向量将这个关键点描述出来，使其不随各种变化而改变，比如光照变化、视角变化等等。这个描述子不但包括关键点，也包含关键点周围对其有贡献的像素点，并且描述符应该有较高的独特性，以便于提高特征点正确匹配的概率。
+通过以上步骤，对于每一个关键点，拥有三个信息：
+
+***<u>（位置，尺度，方向）</u>***。
+
+接下来就是为每个关键点建立一个***描述符***，用一组向量将这个关键点描述出来，使其不随各种变化而改变，比如光照变化、视角变化等等。这个描述子不但包括关键点，也包含关键点周围对其有贡献的像素点，并且描述符应该有较高的独特性，以便于提高特征点正确匹配的概率。
+
+SIFI 描述子h(x, y,θ)是对特征点附近邻域内高斯图像梯度统计结果的一种表示，它是一个三维的阵列，但通常将它表示成一个矢量。矢量是通过对三维阵列按一定规律进行排列得到的。特征描述子与特征点所在的尺度有关，因此，对梯度的求取应在特征点对应的高斯图像上进行。
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191223164625763.png" alt="image-20191223164625763" style="zoom: 33%;" />
+
+为了保证特征矢量具有***旋转不变性***，需要以特征点为中心，将特征点附近邻域内图像梯度的位置和方向旋转一个方向角θ，即将原图像x轴转到与主方向相同的方向。
+
+旋转公式
+
+$$\left[\begin{matrix}x'\\y'\end{matrix} \right]=\left[\begin{matrix}cos\theta & -sin\theta\\ sin\theta & cos\theta\end{matrix}\right]$$
+
+$$W=\left[\begin{matrix}0&w_{12}&w_{13}\\  w_{21}&0&w_{23}\\ w_{31}&w_{32}&0\end{matrix}\right]$$
+
+然后
 
 - Divide the 16x16 window into a 4x4 grid of cells (2x2 case shown below) 
 - Compute an orientation histogram for each cell 
 - 16 cells * 8 orientations = 128 dimensional descriptor 
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219114435596.png" alt="image-20191219114435596" style="zoom:50%;" />
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191223170837231.png" alt="image-20191223170837231" style="zoom:50%;" />
+
+***<u>在最后，对特征向量进行归一化处理，去除光照变化的影响</u>。***
 
 
 
-## RANSAC
+# Ransac
 
-We have found point matches between two images, and we think they are related by some parametric transformation (e.g. translation; scaled Euclidean; affine). How do we estimate the parameters of that transformation? 
+## A. 核心思想
 
-**Outlier**
+## B. 优点
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219115215698.png" alt="image-20191219115215698" style="zoom:50%;" />
+## C. 基本步骤
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191219115312299.png" alt="image-20191219115312299" style="zoom:50%;" />
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191223172555445.png" alt="image-20191223172555445" style="zoom:50%;" />
+
+给定的参数是：
+
+* n: 点点数量
+* k: 迭代的次数
+* t: 可以被认为是内点的范围
+* d: 被认为fit well的model需要的内点数
+
+1. 在数据中随机均匀地选择几个点设置为hypothetical inliers
+2. 计算拟合inliers的模型
+3. 把其他没有选择的点带入模型，计算其是否为内点
+4. 记录内点数量
+5. 重复上述步骤k次
+6. 比较各次拟合模型的内点数量, 选择内点数量最多的模型
+
+# Image Stitching
+
+## A. 步骤
+
+1. detect key points 
+2. build the SIFT descriptors 
+3. Match SIFT descriptors
+4. Fitting the transformation
+5. RANSAC
+6. Blending 
+
+
+
+# 光流
+
+## A. 光流解决的问题
+
+是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法.
+
+评估从H到I到像素运动，给出图像H中的一个像素， 找到图像I中相同颜色的相近像素，解决的是像素对应问题
+
+
+
+## B. 光流的三个基本假设
+
+* brightness constancy 亮度恒定性
+
+$$I(x+u, y+v, t+1) = I(x,y,t)$$
+
+* spatial coherence 空间相干性
+* small motion 细微运动
+
+
+
+
+
+## C. optical flow equation
+
+$$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\; Tarlor\\ \approx & (I(x,y)-H(x,y)) +I_x u+I_y u\\ \approx &I_t+uI_x+vI_y \\ \approx &I_t+\nabla I\cdot[u,v]^T\end{aligned} $$
 
 
 
@@ -139,42 +235,15 @@ We have found point matches between two images, and we think they are related by
 
 
 
-# 实现
-
-`BFmatcher`
-
-它取第一个集合里一个特征的描述子并用第二个集合里所有其他的特征和他通过一些距离计算进行匹配。最近的返回。
-
-`cv2.drawMatches(imageA, kpsA, imageB, kpsB, matches[:10], None, flags=2) `
-
-对两个图像关键点进行连线操作
-
-参数说明：imageA和imageB表示图片，kpsA和kpsB表示关键点， matches表示进过`cv2.BFMatcher`获得的匹配的索引值，也有距离， flags表示有几个图像
 
 
 
-```python
-def getGoodMatch(img1, img2): 
-    sift = cv2.xfeatures2d.SIFT_create()
-    keypoints1, descriptor1 = sift.detectAndCompute(img1, None)
-    keypoints2, descriptor2 = sift.detectAndCompute(img2, None)
 
-    bf = cv2.BFMatcher()
-    matches = bf.knnMatch(descriptor1, descriptor2, k = 2)
-    pointsGood = []
-    matchGood = []
-    for m, n in matches:
-        if m.distance < 0.8 * n.distance:
-            pointsGood.append([m])
-            matchGood.append(m)
-    img3 = cv2.drawMatchesKnn(img1, keypoints1, img2, keypoints1, pointsGood[:20], None, flags = 2)
-    cv2.imshow("match", img3)
-    
-    if len(matchGood) > 10:
-        img1kp = np.float32([keypoints1[m.queryIdx].pt for m in matchGood]).reshape(-1,1,2)
-        img2kp = np.float32([keypoints2[m.trainIdx].pt for m in matchGood]).reshape(-1,1,2)
 
-        M, mask = cv2.findHomography(img2kp, img1kp, cv2.RANSAC, 5.0)
-    return M
-```
+
+
+
+
+
+
 
