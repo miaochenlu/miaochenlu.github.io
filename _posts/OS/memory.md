@@ -1,3 +1,54 @@
+<br/>
+
+<br/>
+
+<br/>
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191228202119129.png" alt="image-20191228202119129" style="zoom:50%;" />
+
+<center>2019年12月28日</center>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+# ***一、研究问题***
+
+1. 分析Linux的do_page_fault()函数
+
+
+
+
+# 二、*内核版本*
+
+Linux内核版本2.6.18
+
+
+
+# 三、*研究分析*
+
+# 1. do_page_fault
+
 处理page fault时需要考虑的几个问题
 
 * 缺页异常是由于访问用户地址空间中的有效地址而引起，还是应用程序试图访问内核的受保护区域？ 
@@ -14,7 +65,7 @@
 fastcall void __kprobes do_page_fault(struct pt_regs * regs, unsigned long error_code);
 ```
 
-# 1. 参数
+## 1. 参数
 
 * `struct pt_regs* regs`
 
@@ -34,7 +85,7 @@ fastcall void __kprobes do_page_fault(struct pt_regs * regs, unsigned long error
 
 
 
-# 2. 代码
+## 2. 代码
 
 ```cpp
 struct task_struct* tsk;
@@ -103,14 +154,7 @@ static noinline int vmalloc_fault(unsigned long address)
 	//确定触发异常的地址是否处于VMALLOC区域
 	if (!(address >= VMALLOC_START && address < VMALLOC_END))
 		return -1;
- 
-	/*
-	 * Synchronize this task's top level page-table
-	 * with the 'reference' page table.
-	 *
-	 * Do _not_ use "current" here. We might be inside
-	 * an interrupt in the middle of a task switch..
-	 */
+
 	pgd_paddr = read_cr3();//获取当前的PGD地址
 	pmd_k = vmalloc_sync_one(__va(pgd_paddr), address);//将当前使用的页表和内核页表同步
 	if (!pmd_k)
@@ -128,7 +172,7 @@ static noinline int vmalloc_fault(unsigned long address)
 
 
 
-bad_area_nosemaphore表明这次异常是由于对非法的地址访问造成的
+`bad_area_nosemaphore`表明这次异常是由于对非法的地址访问造成的
 
 ```cpp
 mm = tsk->mm;
@@ -150,8 +194,6 @@ no_context:
 ```
 
 
-
-## 2.4
 
 如果异常并非出现在中断期间，也有相关的上下文，则内核检查进程的地址空间是否包含异常地址所在的区域。它调用了`find_vma`函数
 
@@ -356,12 +398,7 @@ if (address < PAGE_SIZE)
 	page = read_cr3();
 	page = ((unsigned long *) __va(page))[address >> 22];
 	printk(KERN_ALERT "*pde = %08lx\n", page);
-	/*
-	 * We must not directly access the pte in the highpte
-	 * case, the page table might be allocated in highmem.
-	 * And lets rather not kmap-atomic the pte, just in case
-	 * it's allocated already.
-	 */
+
 #ifndef CONFIG_HIGHPTE
 	if (page & 1) {
 		page &= PAGE_MASK;
@@ -435,13 +472,6 @@ do_sigbus:
 ```cpp
 vmalloc_fault:
 	{
-		/*
-		 * Synchronize this task's top level page-table
-		 * with the 'reference' page table.
-		 *
-		 * Do _not_ use "tsk" here. We might be inside
-		 * an interrupt in the middle of a task switch..
-		 */
 		int index = pgd_index(address);
 		unsigned long pgd_paddr;
 		pgd_t *pgd, *pgd_k;
@@ -455,12 +485,6 @@ vmalloc_fault:
 
 		if (!pgd_present(*pgd_k))
 			goto no_context;
-
-		/*
-		 * set_pgd(pgd, *pgd_k); here would be useless on PAE
-		 * and redundant with the set_pmd() on non-PAE. As would
-		 * set_pud.
-		 */
 
 		pud = pud_offset(pgd, address);
 		pud_k = pud_offset(pgd_k, address);
@@ -483,7 +507,9 @@ vmalloc_fault:
 
 
 
-# 用户空间page fault
+# 2. 用户空间page fault
+
+在结束对缺页异常的特定于体系结构的分析之后，确认异常是在允许的地址触发，内核必须确定将所需数据读取到物理内存的适当方法。该任务委托给`handle_mm_fault`。`handle_pte_fault`函数分析缺页异常的原因。
 
 ```cpp
 static inline int handle_pte_fault(struct mm_struct *mm, struct vm_area_struct *vma, 
@@ -512,5 +538,111 @@ static inline int handle_pte_fault(struct mm_struct *mm, struct vm_area_struct *
 * 如果没有对应的page table entry, 内核从头开始加载这个页。在Linux虚拟内存中，如果页对应的vma映射的是文件，则称为映射页，如果不是映射的文件，则称为匿名页。
   * `vma->vm_ops`为true, 说明是映射页，调用`do_linear_fault`
   * `vma->vm_ops`为false, 说明是匿名页，调用`do_anonymous_fault`
-* 如果该页标记为不存在，而页表中保存了相关的信息，则意味着该页已经换出，因而必须从 系统的某个交换区换入（换入或按需调页）。
+* 如果该页标记为不存在，而页表中保存了相关的信息，则意味着该页已经换出，因而必须从系统的某个交换区换入（换入或按需调页）。
 * 非线性映射已经换出的部分不能像普通页那样换入， 因为必须正确地恢复非线性关联。 `pte_file`函数可以检查页表项是否属于非线性映射，`do_nonlinear_fault`在这种情况下可用于处理异常。
+
+如果该区域对页授予了写权限，而硬件的存取机制没有授予（因此触发异常），则会发生另一种潜在的情况。请注意，此时对应的页已经在内存中，因而执行上述的第一个if语句之后，内核将直接跳到下述代码：
+
+```cpp
+if(write_access) {
+  if(!pte_write(entry)) {
+    return do_wp_page(mm, vma, address, pte, ptl, entry);
+  	entry = ptr_mkdirty(entry);
+  }
+}
+```
+
+`do_wp_page`会创建副本，并插入到进程的页表中（在硬件层具备写权限）。
+
+这是一种写时复制机制（copy on write）。在进程发生分支时，页并不是立即复制的，而是映射到进程的地址空间中作为read only副本，以免在复制信息时花费太多时间。在实际发生写访问之前，都不会为进程创建页的独立副本。
+
+
+
+## 2.1 按需分配/调页
+
+按需分配页的工作委托给`do_linear_fault`。在转换一些参数之后，其余的工作委托给`__do_fault`
+
+首先，内核必须确保将所需数据读入到发生异常的页。具体的处理依赖于映射到发生异常的地址空间中的文件，因此需要调用特定于文件的方法来获取数据。通常该方法保存在`vm->vm_ops->fault`。 由于较早的内核版本没有fault方法。 因此，如果没有注册fault方法，则调用旧的`vm->vm_ops->nopage`。
+
+大多数文件都使用`filemap_fault`读入所需数据。该函数不仅读入所需数据, 而且即提前读入在未来很可能需要的页。内核使用address_space对象中的信息，从后备存储器将数据读取到物理内存页。
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191228192651087.png" alt="image-20191228192651087" style="zoom:50%;" />
+
+
+
+```cpp
+static int __do_fault(struct mm_struct *mm, struct vm_area_struct *vma, unsigned long address, pmd_t *pmd, pgoff_t pgoff, unsigned int flags, pte_t orig_pte) { 
+  ...
+  //应该进行写时复制吗?
+  if (flags & FAULT_FLAG_WRITE) { 
+    if (!(vma->vm_flags & VM_SHARED)) { 
+      anon = 1;
+      if(unlikely(anon_vma_prepare(vma))) {
+        ret = VM_FAULT_OOM;
+        goto out;
+      }
+      page = alloc_page_vma(GFP_HIGHUSER_MOVABLE, vma, address);
+    }
+    copy_user_highpage(page, vmf.page, address, vma);
+  }
+  ...
+}
+```
+
+在用anon_vma_prepare（指向原区域的指针，在anon_vma_prepare中会重定向到新的区域）为区域建立一个新的anon_vma实例之后，必须分配一个新的页。这里会优先使用高端内存域，因为该内存域对用户空间页是没有问题的。`copy_user_highpage`接下来创建数据的一份副本。
+
+既然已经知道页的位置，则需要将其加入进程的页表，再合并到逆向映射数据结构中。在完成这 些之前，需要用`flush_icache_page`更新缓存，确保页的内容在用户空间可见。
+
+指向只读页的页表项通常使用mk_pte函数产生。如果建立具有写权限的页，内核必须用pte_mkwrite显式设置写权限。
+
+页集成到逆向映射的具体方式，取决于其类型。如果在处理写访问权限时生成的页是匿名的，则 使用lru_cache_add_active将其加入到LRU缓存的活动区域中， 然后用page_add_new_anon_rmap集成到逆向映射中。所有其他与基于文件的映射关联的页，则调用 page_add_file_rmap。最后，必须更新处理器的MMU缓存，因为 表已经修改。
+
+
+
+## 2.2 写时复制
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191228195306472.png" alt="image-20191228195306472" style="zoom:50%;" />
+
+在用`page_cache_get`获取页之后，接下来`anon_vma_prepare`准备好逆向映射机制的数据结构， 以接受一个新的匿名区域。由于异常的来源是需要将一个充满有用数据的页复制到新页，因此内核调用`alloc_page_vma`分配一个新页。`cow_user_page`接下来将异常页的数据复制到新页，进程随后可以对新页进行写操作。
+
+然后使用`page_remove_rmap`，删除到原来的只读页的逆向映射。新页添加到页表，此时也必须更新CPU的高速缓存。
+
+最后， 使用 `lru_cache_add_active` 将新分配的页放置到LRU缓存的活动列表上， 并通过 `page_add_anon_rmap`将其插入到逆向映射数据结构。此后，用户空间进程可以向页写入数据。
+
+
+
+## 2.3 获取非线性映射
+
+```cpp
+static int do_nonlinear_fault(struct mm_struct *mm, struct vm_area_struct *vma, unsigned long address, pte_t *page_table, pmd_t *pmd, int write_access, pte_t orig_pte) { 
+  ...
+  pgoff = pte_to_pgoff(orig_pte);
+	return __do_fault(mm, vma, address, pmd, pgoff, flags, orig_pte); 
+}
+```
+
+由于异常地址与映射文件的内容并非线性相关，因此必须从先前用`pgoff_to_pte`编码的页表项中，获取所需位置的信息。现在就需要获取并使用该信息：pte_to_pgoff分析页表项并获取所需的文件中的偏移量（以页为单位）。
+
+在获得文件内部的地址之后，读取所需数据类似于普通的缺页异常。因此内核将工作移交`__do_page_fault`。
+
+
+
+## 四、*总结*
+
+通过此次linux内核源码分析学习到了关于linux处理page fault的相关知识
+
+
+
+
+
+references:  
+
+[1]https://blog.csdn.net/gatieme/article/details/51702662
+
+[2]https://blog.csdn.net/gatieme/article/details/51872659
+
+[2]深入linux内核架构
+
+[3]linux内核设计与实现
+
+[4]边干边学linux内核指导
