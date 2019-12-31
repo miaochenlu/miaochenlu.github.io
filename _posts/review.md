@@ -235,6 +235,47 @@ $$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\;
 
 
 
+# 立体视觉
+
+双目视觉求解深度
+
+
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230163100997.png" alt="image-20191230163100997" style="zoom:40%;" />
+
+<img src="/Users/jones/Downloads/image-20191230163620697.png" alt="image-20191230163620697" style="zoom:40%;" />
+
+$x_r$是负值， $x_l$是正值，两个三角形相似。
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230171631357.png" alt="image-20191230171631357" style="zoom:30%;" />
+
+
+
+# 结构光
+
+## 利用结构光获取三位数据的基本原理
+
+一只眼睛一束光
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230182319140.png" alt="image-20191230182319140" style="zoom:50%;" />
+
+可以得到
+
+$tan\theta=\frac{z}{b+x}$
+
+根据三角形相似
+
+$\frac{x}{x'}=\frac{(b+x)tan\theta}{f}$
+
+解得：$x=\frac{b}{fcot\theta-x'}$
+
+<br/>
+
+
+
+ICP algorithm
+
+https://www.zhihu.com/question/34170804/answer/121533317
 
 
 
@@ -242,8 +283,100 @@ $$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\;
 
 
 
+# Egienface
+
+## 1. Covariance
+
+考虑多维随机变量$\mathbf{x}=(x_1, x_2, \cdots, x_d)$
+
+协方差定义为
+
+$cov(x_i, x_j)=E{[x_i-E(x_i)][x_j-E(x_j)]}=E(x_ix_j)-E(x_i)E(x_j)$
+
+#### 协方差的一些性质
+
+* Variance as a measure of the deviation from the mean for points in one dimension
+
+* Covariance from the mean as a measure of how much the dimensions vary with respect to each other 
+
+* Covariance is a relationship between the 2 dimensions 
+
+* The covariance between one dimension and itself is the variance 
+
+#### 协方差的含义：符号
+
++: ***B<u>oth dimensions increase or decrease together</u>*** e.g. as the number of hours studied increases, the marks in that subject increase.  
+
+−: ***<u>While one increases the other decreases</u>*** , or vice-versa 
+
+0: ***<u>No correlation</u>*** of each other. e.g. heights of students vs the marks obtained in a subject 
+
+### 协方差矩阵covariance matrix
+
+$$c=\left[\begin{matrix}cov(x,x)&cov(x,y)&cov(x,z)\\cov(y,x)&cov(y,y)&cov(y,z)\\cov(z,x)&cov(z,y)&cov(z,z)\end{matrix}\right]$$
+
+#### 性质
+
+* 这是一个对称矩阵，因为$cov(x,y)=cov(y,x)$
+* 对角线上就是方差
+
+## 2. PCA principal component analysis
+
+### A.基本思想
+
+用于数据降维。选择一个新的坐标系进行线性降维，使得第一轴上是最大投影方向，第二轴上是第二大投影方向....以此类推
 
 
 
+### B. PCA定义
+
+* d-维空间:$\mathbf{x}=(x_1,x_2,\cdots, x_d)$
+* 投影方向:$a_1=(a_1^1,a_1^2,\cdots,a_1^d)$ 其中$a_1^Ta_1=1$
+* 投影值: $z_1=a_1^tx=\sum_{i=1}^da_1^ix_i$
+* 问题：
+  * 最大化$var(z1)$
+  * 求投影方向$arg\;\underset{a}{max}\;var(z_1)$
+
+### C. PCA求解
+
+$$\begin{aligned}var(z_1)&=E(z_1^2)-[E(z_1)]^2=E[(\sum_{i=1}^da_1^ix_i)^2]-[E(\sum_{i=1}^da_1^ix_i)]^2\\&=\sum_{i,j=1}^da_1^ia_1^jE(x_ix_j)-\sum_{i,j=1}^da_1^ia_1^jE(x_i)E(x_j)\\&=\sum_{i,j=1}^da_1^ia_1^j[E(x_ix_j)-E(x_i)E(x_j)]\\&=\sum_{i,j=1}^da_1^ia_1^jS_{ij}\quad\quad S_{ij}=E(x_ix_j)-E(x_i)E(x_j)\\&=a_1^TSa_1\quad\quad cov(x_i,x_j)=E(x_ix_j)-E(x_i)E(x_j)\end{aligned}$$
 
 
+
+我们要最大化$var(z_1)=a_1^TSa_1$  subject to $a_1^Ta_1=1$
+
+可以用拉格朗日乘子法，设$\lambda$为拉格朗日乘子，则转为最大化
+
+$a_1^TSa_1-\lambda(a_1^Ta_1-1)$
+
+对$a_1^T$求微分，得必要条件$Sa_1-\lambda a_1=0\Rightarrow Sa_1=\lambda a_1$
+
+因此
+
+$$var(z_1)=a_1^TSa_1=a_1^T\lambda a_1=\lambda a_1^Ta_1=\lambda$$
+
+
+
+为了使$var(z_1)$取得最大值，必须用最大特征值对应的特征向量! 
+
+
+
+### Eigenface
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230191544548.png" alt="image-20191230191544548" style="zoom:50%;" />
+
+步骤
+
+* 获得人脸图像的训练集，通常为整个人脸数据库
+
+* 预处理：确定模版，根据人脸两只眼睛的中心位置，缩放平移旋转，使得所有训练人脸图像与模板对其，根据模版，且出脸部区域。对所有人脸图像做灰度值归一化处理
+
+  <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230192212662.png" alt="image-20191230192212662" style="zoom:50%;" />
+
+  <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230192248291.png" alt="image-20191230192248291" style="zoom:50%;" />
+
+* 通过PCA计算获得一组特征向量（特征脸）。通常一百个特征向量就足够
+
+* 将每幅人脸图像都投影到由该特征脸张成的子空间中，得到在该子空间坐标
+
+* 对输入的一幅待测图像，归一化后，将其映射到特征脸子空间中。然后用某种距离度量来描述两幅人脸图像的相似性，如欧式距离。
