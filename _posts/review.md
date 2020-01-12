@@ -233,27 +233,100 @@ $$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\;
 
 
 
+# 相机模型
+
+## A. 理解：景深/光圈/焦距/视场
+
+### 景深depth of field
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112111521768.png" alt="image-20200112111521768" style="zoom:50%;" />
+
+### 视场field of view
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112103140704.png" alt="image-20200112103140704" style="zoom: 25%;" />
+
+镜头光圈：光圈越大，景深越小；光圈越小，景深越大；
+
+镜头焦距镜头焦距越长，景深越小；焦距越短，景深越大;
+
+- 一般说来，在同样的光圈下，焦距越长的镜头其景深就越小，相反则越大。所以广角镜头有很大的景深，超广角镜头在其最大光圈下几厘米外都会有清晰的成像，但长焦镜头或望远镜头则景深很小，有时仅是几厘米景深，拍人像时弄不好就会出现一只眼睛是清晰的而另一只眼睛则虚化了
+
+拍摄距离距离越远，景深越大；距离越近，景深越小。
+
+- 而当拍摄时的光圈大小不变，所使用的镜头焦距也不改变时，被摄体越远，画面中的前后清晰范围就越大；反之，被摄体越近，前后的清晰范围也就相对越小。
+
+视场field of view：
+
+
+
 
 
 # 立体视觉
 
-双目视觉求解深度
+## A. 立体视觉三角测量的基本原理
 
 
 
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230163100997.png" alt="image-20191230163100997" style="zoom:40%;" />
 
-<img src="/Users/jones/Downloads/image-20191230163620697.png" alt="image-20191230163620697" style="zoom:40%;" />
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200111190444904.png" alt="image-20200111190444904" style="zoom:50%;" />
 
-$x_r$是负值， $x_l$是正值，两个三角形相似。
+https://blog.csdn.net/Qzx9059/article/details/89204971
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20191230171631357.png" alt="image-20191230171631357" style="zoom:30%;" />
+向右👉是正方向，$x^r$应该是个负数
+
+用相似做
+
+$\frac{T-x^l+x^r}{Z-f}=\frac{T}{Z}\Rightarrow$
+
+$Z=\frac{fT}{x^l-x^r}$
 
 
 
-# 结构光
+## B. 立体视觉的基本步骤
 
-## 利用结构光获取三位数据的基本原理
+1. 消除畸变
+
+2. 相机矫正(rectification)
+
+   > 根据对极几何，左右观测对于同一物体的投影处在同一水平线上
+   >
+   > 使左右观测所得图像行对齐
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200111192444640.png" alt="image-20200111192444640" style="zoom:50%;" />
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200111192500919.png" alt="image-20200111192500919" style="zoom:50%;" />
+
+3. stereo matching 
+
+   > 匹配：在1D的epipolar line直线上搜索匹配值函数的极值位置
+
+   <img src="/Users/jones/Library/Application Support/typora-user-images/image-20200111192802246.png" alt="image-20200111192802246" style="zoom:50%;" />
+
+```cpp
+FOR each epipolar line
+	FOR each pixel in the left image
+		compare with every pixel on same epipolar line in right image
+  	pick pixel with minimum match cost
+		This will never work, so:
+```
+
+
+
+4. 计算深度——Triangulation $Z=\frac{fT}{x^l-x^r}$
+
+
+
+# 结构光三维成像原理
+
+## A. 结构光成像系统的构成
+
+* 结构光投影仪
+
+* CCD相机
+* 深度信息重建系统
+
+## B. 利用结构光获取三位数据的基本原理
 
 一只眼睛一束光
 
@@ -273,9 +346,31 @@ $\frac{x}{x'}=\frac{(b+x)tan\theta}{f}$
 
 
 
-ICP algorithm
+## C. ICP algorithm
 
 https://www.zhihu.com/question/34170804/answer/121533317
+
+### 要解决什么问题
+
+> 计算两组数据（两帧图像）间的旋转平移量，使之形成最佳匹配
+>
+> registeration点云配准问题
+
+
+
+### 基本步骤
+
+输入：点集P, P' 输出：最佳匹配的旋转平移量$R, t, s.t. \forall i, p_i=Rp_i'+t$
+
+给定两个三维点集X与Y,将Y配准到X：
+
+① 计算Y中的每一个点在X中的对应最近点； 这是根据最近领域规则建立Y和X中点的关联——即初始化一个R和t
+
+② 求使上述对应对点的平均距离最小的刚体变换，获得刚体变换参数（平移参数与旋转参数）；
+
+③ 对Y应用上一步求得的刚体变换（平移与旋转），更新Y；
+
+④ 如果X与Y的对应点对平均距离大于阈值，Goto ①，否则， 停止计算
 
 
 
@@ -380,3 +475,83 @@ $$var(z_1)=a_1^TSa_1=a_1^T\lambda a_1=\lambda a_1^Ta_1=\lambda$$
 * 将每幅人脸图像都投影到由该特征脸张成的子空间中，得到在该子空间坐标
 
 * 对输入的一幅待测图像，归一化后，将其映射到特征脸子空间中。然后用某种距离度量来描述两幅人脸图像的相似性，如欧式距离。
+
+
+
+# 图像分割
+
+## A. 基于k-means聚类的图像分割
+
+### 基本原理
+
+> 基于区域间的不连续性(不同区域间)和相似性(同一区域内)
+>
+> 已知观测集![(x_{1},x_{2},...,x_{n})](https://wikimedia.org/api/rest_v1/media/math/render/svg/2730974584852a817e6ca24fda937c5896540888)，其中每个观测都是一个![d](https://wikimedia.org/api/rest_v1/media/math/render/svg/e85ff03cbe0c7341af6b982e47e9f90d235c66ab)-维实向量，*k*-平均聚类要把这![n](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)个观测划分到*k*个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类![S_{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e)，
+>
+> $$arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2$$
+>
+> 其中![\mu _{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/dea0a0293841cce9eef98b55e53a92b82ae59ee4)是![S_{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e)中所有点的均值
+>
+> **总之：思想是最小化类内距离平方之和**
+
+### 步骤
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200111182152756.png" alt="image-20200111182152756" style="zoom:50%;" />
+
+>1. 随机选择K个聚类中心$c^0$
+>2. 对图像上所有点，根据其与聚类中心的距离，将其划分到距离最近对应的中心的聚类簇
+>3. 重新计算每一簇的均值来更新中心（簇内均值）
+>4. 重复2，3步，知道no points are re-assigned
+
+
+
+### Pros
+
+* Simple and fast
+
+* Easy to implement
+
+Cons
+
+* Need to choose K 
+* <u>Sensitive to outliers</u>
+
+Usage
+
+* Rarely used for pixel segmentation
+
+## B. 基于Mean Shift的图像分割
+
+### 基本原理
+
+> 将聚类看作密度的局部最大值
+
+
+
+### 步骤
+
+> 1. Choose kernel and bandwidth
+> 2. For each point
+>    * center a window on that point
+>    * compute the mean of the data in the search window
+>    * center the search window at the new mean location
+>    * Repeat (b, c) until convergence
+>
+> 3. Assign points that lead to nearby modes to the same cluster
+>
+> 
+
+
+
+### Pros
+
+* Good general-purpose segmentation
+
+* Flexible in number and shape of regions
+
+* <u>Robust to outliers</u>
+
+Cons
+
+* Have to choose kernel size in advance
+* Not suitable for high-dimensional features
