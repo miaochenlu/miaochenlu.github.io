@@ -202,13 +202,19 @@ $$W=\left[\begin{matrix}0&w_{12}&w_{13}\\  w_{21}&0&w_{23}\\ w_{31}&w_{32}&0\end
 
 
 
-# 光流
+# 深度学习
+
+## A. 深度学习
+
+# 光流-->运动跟踪
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112151210825.png" alt="image-20200112151210825" style="zoom: 33%;" />
 
 ## A. 光流解决的问题
 
-是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法.
-
-评估从H到I到像素运动，给出图像H中的一个像素， 找到图像I中相同颜色的相近像素，解决的是像素对应问题
+> 是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法.
+>
+> 评估从H到I到像素运动，给出图像H中的一个像素， 找到图像I中相同颜色的相近像素，解决的是像素对应问题
 
 
 
@@ -218,18 +224,22 @@ $$W=\left[\begin{matrix}0&w_{12}&w_{13}\\  w_{21}&0&w_{23}\\ w_{31}&w_{32}&0\end
 
 $$I(x+u, y+v, t+1) = I(x,y,t)$$
 
-* spatial coherence 空间相干性
+* spatial coherence 空间相干性 相似像素拥有相似运动
 * small motion 细微运动
 
 
 
+## C. 一个点的约束公式会推导optical flow equation
+
+$$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y v-H(x,y)\;\; Tarlor\\ \approx & (I(x,y)-H(x,y)) +I_x u+I_y v\\ \approx &I_t+uI_x+vI_y \\ \approx &I_t+\nabla I\cdot[u,v]^T\end{aligned} $$
 
 
-## C. optical flow equation
 
-$$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\; Tarlor\\ \approx & (I(x,y)-H(x,y)) +I_x u+I_y u\\ \approx &I_t+uI_x+vI_y \\ \approx &I_t+\nabla I\cdot[u,v]^T\end{aligned} $$
+## D. 哪些位置的光流比较可靠？为什么？
 
+尽量避免用边缘上的点计算光流
 
+使用***<u>纹理复杂区域</u>***， 梯度比较大且方向不同， 求出来的特征值比较大
 
 
 
@@ -239,11 +249,19 @@ $$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\;
 
 ### 景深depth of field
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112111521768.png" alt="image-20200112111521768" style="zoom:50%;" />
+> 相机镜头能够取得清晰图像的成像所测定的被摄物体前后范围距离
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112111521768.png" alt="image-20200112111521768" style="zoom:30%;" />
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112111758310.png" alt="image-20200112111758310" style="zoom:30%;" />
 
 ### 视场field of view
 
+> 镜头能够观察到的最大范围
+
 <img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112103140704.png" alt="image-20200112103140704" style="zoom: 25%;" />
+
+### 光圈对景深的影响
 
 镜头光圈：光圈越大，景深越小；光圈越小，景深越大；
 
@@ -255,7 +273,193 @@ $$\begin{aligned}0=&I(x+u,y+v)-H(x,y)\\ \approx & I(x,y) +I_x u+I_y u-H(x,y)\;\;
 
 - 而当拍摄时的光圈大小不变，所使用的镜头焦距也不改变时，被摄体越远，画面中的前后清晰范围就越大；反之，被摄体越近，前后的清晰范围也就相对越小。
 
-视场field of view：
+### 焦距对视场的影响
+
+> 焦距越短，视场角越大
+
+
+
+## B. 理想的针孔pinhole camera模型
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112135340340.png" alt="image-20200112135340340" style="zoom:30%;" />
+
+这里f,z都是距离
+
+
+
+不妨把成像平面放到针孔前
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112112825190.png" alt="image-20200112112825190" style="zoom:50%;" />
+
+### 基本投影公式及其其极坐标形式下的透视投影公式
+
+> We will use the pin-hole model as an approximation
+>
+> * Put the optical center(Center Of Projection) at the origin
+> * Put the image plane(Projection Plane) in front of the COP
+> * The camera looks down the negative z axis
+
+这边d是个正数，但是在Z轴负半轴
+
+$$(x,y,z)\rightarrow (-d\frac{x}{z}, -d\frac{y}{z}, -d)$$
+
+We get the projection by throwing out the last coordinate: $(x,y,z)\rightarrow (-d\frac{x}{z}, -d\frac{y}{z})$
+
+对于假想的针孔照相机，针孔到屏幕的距离就是焦距
+
+#### 齐次坐标
+
+convert to homogeneous coordinates
+
+$$(x,y,z)\Rightarrow \left[\begin{matrix}x \\ y\\z\\1\end{matrix}\right]$$
+
+convert from homogeneous coordinates
+
+$$(x,y,z,w)\Rightarrow \left[\begin{matrix}x/w \\ y/w\\z/w\end{matrix}\right]$$
+
+透视矩阵
+
+$$\left[\begin{matrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&-1/d&0\end{matrix}\right]\left[\begin{matrix}x \\ y\\z\\1\end{matrix}\right]=\left[\begin{matrix}x\\y\\z\\-z/d\end{matrix}\right]\Rightarrow (-d\frac{x}{z}, -d\frac{y}{z})$$
+
+
+
+### 齐次坐标的好处
+
+？
+
+### Camera Parameters内参矩阵
+
+<a href="https://www.jianshu.com/p/7d97fccd79bb">excellent article</a>
+
+$$(f_u,f_v, u_0,v_0)$$
+
+#### 第一步：相机坐标系-->成像坐标系其中f为焦距
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112112825190.png" alt="image-20200112112825190" style="zoom:50%;" />
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112140843480.png" alt="image-20200112140843480" style="zoom:50%;" />
+
+如果不考虑上面S的齐次坐标的话
+
+$$Z^{(c)}\left[\begin{matrix}u^{(c)}\\v^{(c)}\\1\end{matrix}\right]=\left[\begin{matrix}-f&0&0\\0&-f&0\\0&0&1\end{matrix}\right]\left[\begin{matrix}X^{(c)}\\Y^{(c)}\\Z^{(c)}\end{matrix}\right]$$
+
+
+
+#### 第二步： 物理单位与像素单位变换矩阵
+
+考虑度量单位（mm->pixel）的不同， 以及两坐标系原点不同
+
+其中u,v为像素坐标系坐标， x,y为成像坐标系坐标
+
+$k_u,k_v$是一个单位物理长度对应的像素数量
+
+$(u_0,v_0)$是成像坐标系相对于像素坐标系的偏移量
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112141120961.png" alt="image-20200112141120961" style="zoom:50%;" />
+
+
+
+#### 第三步：整合
+
+$\left[\begin{matrix}u\\v\\w\end{matrix}\right]=\left[\begin{matrix}k_u&0&u_0\\0&k_v&v_0\\0&0&1\end{matrix}\right]\left[\begin{matrix}-f&0&0\\0&-f&0\\0&0&1\end{matrix}\right]\left[\begin{matrix}X^{(c)}\\Y^{(c)}\\Z^{(c)} \end{matrix}\right]$
+
+最终物体的像素坐标是$(u/w, v/w)$
+
+中间两个矩阵相乘的结果为
+
+$\left[\begin{matrix}-fk_u&0&u_0\\0&-fk_v&v_0\\0&0&1\end{matrix}\right]=\left[\begin{matrix}-f_u&0&u_0\\0&-f_v&v_0\\0&0&1\end{matrix}\right]$
+
+其中$f_u=fk_u, f_v=fk_v$
+
+
+
+
+
+## C. Distortion畸变
+
+两种类型：Radial distortion, tangential distortion
+
+### Radial distortation
+
+原因：
+
+> * The geometry of the lens
+>
+> * Aperture position
+
+分类：
+
+> * 枕形畸变：中间向外凸起
+>
+> * 桶形畸变：中间向内凹陷
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112124243564.png" alt="image-20200112124243564" style="zoom:30%;" />
+
+<img src="/Users/jones/Desktop/miaochenlu.github.io/assets/images/image-20200112124331639.png" alt="image-20200112124331639" style="zoom:40%;" />
+
+### Tangential Distortion
+
+原因
+
+> 透镜平面和成像平面不平行引起的畸变
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112124739443.png" alt="image-20200112124739443" style="zoom:50%;" />
+
+#### distortion parameters
+
+$(k_1,k_2,p_1,p_2,k_3)$
+
+### 外参
+
+![image-20200112130319485](/Users/jones/Library/Application Support/typora-user-images/image-20200112130319485.png)
+
+二维旋转公式比较显然，三维怎么做呢？
+
+先绕X轴旋转，这就相当于在YZ平面内绕原点旋转
+
+然后分别绕Y轴,Z轴旋转。
+
+这就得到了上图中$R_x(\psi), R_y(\varphi), R_z(\theta)$三个旋转矩阵
+
+三个矩阵相乘$R_x(\psi)\cdot R_y(\varphi)\cdot R_z(\theta)$，就得到了最终的旋转矩阵
+
+
+
+外参一共有6个$(\psi, \varphi,\theta,t_x,t_y,t_z)$前面三个是旋转参数，后面三个是平移参数
+
+$$\left[\begin{matrix}X\\Y\\Z\end{matrix}\right]=\left[\begin{matrix}R_{3\times 3}&t_{3\times 1}\\0_{1\times 3}&1\end{matrix}\right]\left[\begin{matrix}X_{world}\\Y_{world}\\Z_{world}\end{matrix}\right]$$
+
+
+
+## D. 相机定标 camera calibration
+
+Given N correspondences b/w scene and images
+
+Recover the camera parameters
+
+* Distortion coeffients畸变系数
+* 内参
+* 外参
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112144807949.png" alt="image-20200112144807949" style="zoom: 33%;" />
+
+#### 解决这个问题的基本思想是什么
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112145958831.png" alt="image-20200112145958831" style="zoom:50%;" />
+
+
+
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112145742722.png" alt="image-20200112145742722" style="zoom:40%;" />
+
+$$p_{dst}=Hp_{src}\;\;\;\; p_{src}=H^{-1}p_{dst}$$
+
+
+
+Each view:
+
+> Gives 8 equations, because a square can described by 4 points.
+
+
 
 
 
@@ -555,3 +759,48 @@ Cons
 
 * Have to choose kernel size in advance
 * Not suitable for high-dimensional features
+
+
+
+
+
+
+
+
+> * 像素坐标系
+>
+> 像素坐标就是像素在图像中的位置。一般像素坐标系的左上角的顶点就是远点，水平向右是u，垂直向下是v轴。
+>
+> 如下图，任意一个像素点的坐标可以表示为$(u_i,v_i)$。 
+>
+> <img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112120511372.png" alt="image-20200112120511372" style="zoom: 33%;" />
+>
+> * 图像坐标系
+>
+> 在像素坐标系中，每个像素的坐标是用像素来表示的，然而，像素的表示方法却不能反应图像中物体的物理尺寸，因此，有必要将像素坐标转换为图像坐标。
+>
+> 将像素坐标系的原点平移到图像的中心，就定为图像坐标系的原点，图像坐标系的x轴与像素坐标系的u轴平行，方向相同，而图像坐标系的y轴与像素坐标系的v轴平行，方向相同。
+>
+> <img src="/Users/jones/Library/Application Support/typora-user-images/image-20200112120627823.png" alt="image-20200112120627823" style="zoom: 35%;" />
+>
+> 
+>
+> 因此我们可以得到
+>
+> $x=uk_u-u_0k_u$
+>
+> $y=vk_v-v_0k_v$
+>
+> 写成矩阵形式
+>
+> $\left[\begin{matrix}x\\y\end{matrix}\right]=\left[\begin{matrix}k_u&0\\0&k_v\end{matrix}\right]\left[\begin{matrix}u\\v\end{matrix}\right]+\left[\begin{matrix}-u_0k_u\\-v_ok_v\end{matrix}\right]$
+>
+> 写成齐次坐标的形式
+>
+> $\left[\begin{matrix}x\\y\\1\end{matrix}\right]=\left[\begin{matrix}k_u&0&0\\0&k_v&0\\0&0&0\end{matrix}\right]\left[\begin{matrix}u\\v\\0\end{matrix}\right]+\left[\begin{matrix}-u_0k_u\\-v_ok_v\\1\end{matrix}\right]=\left[\begin{matrix}k_u&0&-u_0k_u\\0&k_v&-v_0k_v\\0&0&1\end{matrix}\right]\left[\begin{matrix}u\\v\\1\end{matrix}\right]$
+>
+> 
+
+reference:
+
+[1]http://www.360doc.com/content/18/0104/17/50354283_719051589.shtml
