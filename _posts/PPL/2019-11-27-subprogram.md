@@ -76,13 +76,13 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 <center><img src="https://miaochenlu.github.io/picture/image-20191127111726393.png" alt="image-20191127111726393" style="zoom: 33%;" /></center>
 <table>
   <tr>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%"; /></td>
     <td><p>
       Code and activation records of a program with 3 simple subprograms:A, B, C.
       </p>
       <p>
         These parts mey be separately compiled and put together by linker
       </p></td>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%"; /></td>
   </tr>
 </table>
 
