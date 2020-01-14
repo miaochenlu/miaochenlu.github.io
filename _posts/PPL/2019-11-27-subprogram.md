@@ -136,7 +136,7 @@ When `AddTwo` is called, its AR is dynamically created and pushed onto the run-t
 <table>
   <tr>
     <td><center><img src="https://miaochenlu.github.io/picture/image-20191127120644756.png" alt="image-20191127120644756" style="zoom:40%;" /></center></td>
-    <td><center><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:40%;" /></center></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127121052887.png" alt="image-20191127121052887" style="zoom:40%;" /></td>
   </tr>
 </table>
 
@@ -161,7 +161,6 @@ Base pointer(BP)
 <br/>
 
 <center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 25%;" /></center>
-
 
 #### 看一下一个没有递归的例子
 
@@ -190,7 +189,6 @@ dynamic link
 调用返回时
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127124238076.png" alt="image-20191127124238076" style="zoom:40%;" /></center>
-
 # 4. Nested subprograms
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127124749204.png" alt="image-20191127124749204" style="zoom:50%;" /></center>
