@@ -77,9 +77,11 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 
 
+
+
 <table>
   <tr>
-    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%"; /></td>
+    <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%;" /></td>
     <td><p>
       Code and activation records of a program with 3 simple subprograms:A, B, C.
       </p>
@@ -173,7 +175,7 @@ Base pointer(BP)
 <center><img src="https://miaochenlu.github.io/picture/image-20191127123149311.png" alt="image-20191127123149311" style="zoom:25%;" /></center>
 static link
 
-> 在那些允许嵌套子程序和静态作用域的语言中，对象有可能出现在外围的子程序只能够，通过维护一个静态链，就可以找到这些既非局部也非全局的对象。每个AR都包含一个词法上位于其外围的帧的引用
+> 在那些允许嵌套子程序和静态作用域的语言中，对象有可能出现在外围的子程序中，通过维护一个静态链，就可以找到这些既非局部也非全局的对象（像变量什么的）。每个AR都包含一个词法上位于其外围的帧的引用
 
 dynamic link
 

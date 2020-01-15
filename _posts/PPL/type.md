@@ -175,7 +175,7 @@ Type binding dynamic ---> type checking dynamic
 
 如JavaScript中，运算中操作数的类型不会静态限定。在解释或编译产生的代码动态执行中，类型的判断、转换会提高复杂度。
 
-
+<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200115104227994.png" alt="image-20200115104227994" style="zoom:50%;" />
 
 
 
