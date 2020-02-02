@@ -10,9 +10,9 @@ key: page-primedual
 
 <!--more-->
 
-<img src="../../../assets/images/image-20200202233303222.png" alt="image-20200202233303222" style="zoom:50%;" />
+<center><img src="../../../assets/images/image-20200202233303222.png" alt="image-20200202233303222" style="zoom:70%;" /></center>
 
-<img src="../../../assets/images/image-20200202233328673.png" alt="image-20200202233328673" style="zoom:50%;" />
+<center><img src="../../../assets/images/image-20200202233328673.png" alt="image-20200202233328673" style="zoom:70%;" /></center>
 
-<img src="../../../assets/images/image-20200202233348607.png" alt="image-20200202233348607" style="zoom:50%;" />
+<center><img src="../../../assets/images/image-20200202233348607.png" alt="image-20200202233348607" style="zoom:70%;" /></center>
 
