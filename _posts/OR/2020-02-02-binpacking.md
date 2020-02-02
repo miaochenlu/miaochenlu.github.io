@@ -1,7 +1,7 @@
 ---
-title: "贪心算法"
+title: "Bin Packing的近似算法"
 tags: Optional_Research
-key: page-greedy
+key: page-binpacking
 
 
 
