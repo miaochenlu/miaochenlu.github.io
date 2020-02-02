@@ -78,7 +78,6 @@ For a simple subprogram, AR has fixed size, and can be ***statically allocated**
 
 
 
-
 <table>
   <tr>
     <td><img src="https://miaochenlu.github.io/picture/image-20191127114939416.png" style="zoom: 33%;" /></td>
@@ -166,7 +165,6 @@ Base pointer(BP)
 <br/>
 
 <center><img src="https://miaochenlu.github.io/picture/截屏2019-11-27下午12.18.38的副本.png" alt="截屏2019-11-27下午12.18.38的副本" style="zoom: 25%;" /></center>
-
 #### 看一下一个没有递归的例子
 
 <center><img src="https://miaochenlu.github.io/picture/image-20191127123111611.png" alt="image-20191127123111611" style="zoom: 25%;" /></center>
