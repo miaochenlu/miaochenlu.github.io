@@ -17,12 +17,29 @@ titles:
   ko-KR   : *KO
 key: page-about
 ---
+<style>
+  p#introduction{
+   float:right;
+   font-family:      Georgia, "Times New Roman", Times, serif;
+   width: 500px;
+   clear: left;
+ }
+ #allcontent {
+  width: 800px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div id="allcontent">
+  <div>
+  <p id="introduction">Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. My research interest is in computer architecture.<br><br>
+  You can reach me at clmiao@zju.edu.cn .</p>
 
-
-
-Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. 
+  <img src="../../assets/images/me.JPG" width=200 />
+  </div>
 
   <br/>
-
-You can reach me at jones.mcl1999@gmail.com
+</div>
 
