@@ -22,7 +22,7 @@ key: page-about
    float:right;
    font-family:      Georgia, "Times New Roman", Times, serif;
    font-weight: bold;
-   font-size: 150%;
+   font-size: 110%;
    width: 500px;
    clear: left;
  }
@@ -36,12 +36,12 @@ key: page-about
 </style>
 <div id="allcontent">
   <div>
-  <p id="introduction">Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. My research interest is in computer architecture.<br><br>
-  You can reach me at clmiao@zju.edu.cn .</p>
+  <p id="introduction">Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. <br>My research interest is in computer architecture.<br><br>
+  You can reach me at <a href="mailto:clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>. </p>
 
   <img src="../../assets/images/me.JPG" width="200" />
   </div>
-
-  <br/>
 </div>
+<br>
+<br>
 
