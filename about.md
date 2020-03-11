@@ -21,6 +21,8 @@ key: page-about
   p#introduction{
    float:right;
    font-family:      Georgia, "Times New Roman", Times, serif;
+   font-weight: bold;
+   font-size: 150%;
    width: 500px;
    clear: left;
  }
@@ -37,7 +39,7 @@ key: page-about
   <p id="introduction">Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. My research interest is in computer architecture.<br><br>
   You can reach me at clmiao@zju.edu.cn .</p>
 
-  <img src="../../assets/images/me.JPG" width=200 />
+  <img src="../../assets/images/me.JPG" width="200" />
   </div>
 
   <br/>
