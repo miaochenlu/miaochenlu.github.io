@@ -6,7 +6,7 @@
 
 If $f\in C[a,b]$ and K is any number between $f(a)$ and $f(b)$, then there exists a number $p\in(a,b)$ for which $f(p)=K$
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200302180701643.png" alt="image-20200302180701643" style="zoom:50%;" />
+<img src="../../assets/images/image-20200302180701643.png" alt="image-20200302180701643" style="zoom:50%;" />
 
 ### Algorithm
 
@@ -45,7 +45,7 @@ When to stop?
 >
 > 虽然$\vert p_N-p_{N-1}\vert<\epsilon$, 但是数列$\{p_N\}$发散， 如下图所示，$\vert f(p_N)\vert \leq \epsilon$, 但是$p_N$和真实解相差很远
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200302182506576.png" alt="image-20200302182506576" style="zoom:50%;" />
+<img src="../../assets/images/image-20200302182506576.png" alt="image-20200302182506576" style="zoom:50%;" />
 
 但是根据二分这种方法，我们依然可以将误差限定在一个范围内，看以下定理
 
@@ -77,7 +77,7 @@ Or use a subroutine to **partition the interva**l into several sub-intervals $[a
 
 
 
-
+<br/>
 
 
 
@@ -108,7 +108,7 @@ Find an approximation to $\sqrt[3]{25}$ correct to within $10^{-4}$ using the Bi
 
 Use Theorem 2.1 to ﬁnd a bound for the number of iterations needed to achieve an approximation with accuracy $10^{−4}$ to the solution of $x^3 −x−1 = 0$ lying in the interval [1, 2]. Find an approximation to the root with this degree of accuracy
 
-
+<br/>
 
 # Fixed-point iteration
 
@@ -128,13 +128,13 @@ $f(x)=0\Rightarrow x=g(x)$
 
 $0=f(x)\Rightarrow x+0=x+f(x)\triangleq g(x)$
 
-
+<br>
 
 ### algorithm
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200302220736077.png" alt="image-20200302220736077" style="zoom:50%;" />
+<img src="../../assets/images/image-20200302220736077.png" alt="image-20200302220736077" style="zoom:50%;" />
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200302221454857.png" alt="image-20200302221454857" style="zoom:50%;" />
+<img src="../../assets/images/image-20200302221454857.png" alt="image-20200302221454857" style="zoom:50%;" />
 
 这个方法不一定是收敛的
 
@@ -242,7 +242,7 @@ $$p_n=p_{n-1}-\frac{f(p_{n-1})}{f'(p_{n-1})}, for\; n\geq1$$
 
 
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200303225514573.png" alt="image-20200303225514573" style="zoom:50%;" />
+<img src="../../assets/images/image-20200303225514573.png" alt="image-20200303225514573" style="zoom:50%;" />
 
 
 
@@ -282,103 +282,29 @@ Let $f\in C^2[a,b]$. If $p\in[a,b]$ is such that $f(p)=0$ and $f'(p)\not= 0$, th
 >
 > 
 >
-> 
->
-> 
->
-> 
 
 
 
+<br/>
 
+# Error Analysis for Iterative Methods
 
-$$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$
+Suppose $\{p_n\}\;(n=0,1,\cdots)$ is a sequence that  converges to $p$, with $p_n\not=p$ for all n. If positive constants $\alpha$ and $\lambda$ exist with
 
+$$\underset{n\rightarrow \infty}{lim}\frac{|p_{n+1}-p|}{|p_n-p|^{\alpha}}=\lambda$$
 
+then $\{p_n\}\;(n=0,1,\cdots)$ converges to p of order $\alpha$, with asymptotic error constant $\lambda$
 
-$$\begin{aligned}f_1(x_1,x_2)&=0\\f_2(x_1,x_2)&=0\end{aligned}$$
+* If $\alpha=1$, the sequence is <font color=red>linearly</font> convergent 
+* If $\alpha=2$, the sequence is <font color=red>quadratically</font> convergent
 
+{:.warning}
 
+The larger the value of $alpha$, the faster the convergence.
 
-$$\begin{aligned}f_1(x_1,x_2)=&f_1(x_{10},x_{20})+(x_1-x_{10})\frac{\partial f_1}{\partial x_1}(x_{10},x_{20})+(x_2-x_{20})\frac{\partial f_1}{\partial x_2}(x_{10},x_{20})\\ +&\frac{1}{2!}(x_1-x_{10})^2\frac{\partial^2 f_1}{\partial x_1^2}(\xi_{x_1},\xi_{x_2})+\frac{1}{2!}(x_1-x_{10})(x_2-x_{20})\frac{\partial^2 f_1}{\partial x_1\partial x_2}(\xi_{x_1},\xi_{x_2})\\+&\frac{1}{2!}(x_1-x_{10})(x_2-x_{20})\frac{\partial^2 f_1}{\partial x_2\partial x_1}(\xi_{x_1},\xi_{x_2})+\frac{1}{2!}(x_2-x_{20})^2\frac{\partial^2 f_1}{\partial x_2^2}(\xi_{x_1},\xi_{x_2})\end{aligned}$$
 
 
 
-$\xi_{x_2}$
-
-$$\begin{aligned}=\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]\left[\begin{matrix}x_1-x_{10}\\x_2-x_{20}\end{matrix}\right]\end{aligned}$$
-
-
-
-$$=\left[\begin{matrix}x_1-x_{10} & x_2-x_{20}\end{matrix}\right]\left[\begin{matrix}\frac{\partial f_1^2}{\partial x_1^2} & \frac{\partial f_1^2}{\partial x_1x_2}\\ \frac{\partial f_1^2}{\partial x_1x_2}& \frac{\partial f_1^2}{\partial x_2^2}\end{matrix}\right] \left[\begin{matrix}x_1-x_{10} \\ x_2-x_{20}\end{matrix}\right]$$
-
-
-
-$$\begin{aligned}f_2(x_1,x_2)=&f_2(x_{10},y_{10})+(x-x_{10})\frac{\partial f_2}{\partial x_1}(x_{10},x_{20})+(y-y_{10})\frac{\partial f_2}{\partial x_2}(x_{10},x_{20})\\ +&\frac{1}{2!}(x-x_{10})^2\frac{\partial^2 f_2}{\partial x_2^2}(x_{10},x_{20})+\frac{1}{2!}(x-x_{10})(y-y_{10})\frac{\partial^2 f_2}{\partial x_1\partial x_2}(x_{10},x_{20})\\+&\frac{1}{2!}(x-x_{10})(y-y_{10})\frac{\partial^2 f_2}{\partial x_2\partial x_1}(x_{10},x_{20})+\frac{1}{2!}(y-y_{10})^2\frac{\partial^2 f_2}{\partial x_2^2}(x_{10},x_{20})\end{aligned}$$
-
-
-
-
-
-$$\begin{aligned} & f_1(x_1,x_2)\approx f_1(x_{10},y_{10})+(x_1-x_{10})\frac{\partial f_1}{\partial x_1}(x_{10},x_{20})+(x_2-x_{20})\frac{\partial f_1}{\partial x_2}(x_{10},x_{20})\\ & f_2(x_1,x_2)\approx f_2(x_{10},y_{10})+(x_1-x_{10})\frac{\partial f_2}{\partial x_1}(x_{10},x_{20})+(x_2-x_{20})\frac{\partial f_2}{\partial x_2}(x_{10},x_{20})\end{aligned}$$
-
-
-
-雅可比矩阵
-
-$$\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}f_1 \\ f_2\end{matrix}\right]\approx \left[\begin{matrix}f_1 (a_0,b_0)\\ f_2(a_0,b_0)\end{matrix}\right]+\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]\left[\begin{matrix}x_1-a_0\\x_2-b_0\end{matrix}\right]$$
-
-黑塞矩阵
-
-
-
-$0=\left[\begin{matrix}f_1(a,b) \\ f_2(a,b)\end{matrix}\right]\approx \left[\begin{matrix}f_1 (a_0,b_0)\\ f_2(a_0,b_0)\end{matrix}\right]+\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]\left[\begin{matrix}a-a_0\\b-b_0\end{matrix}\right]$
-
-
-
-
-
-
-
-$$\left[\begin{matrix}a\\b\end{matrix}\right]\approx\left[\begin{matrix}a_0\\b_0\end{matrix}\right]-\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]^{-1}\left[\begin{matrix}f_1(a_0,b_0)\\f_2(a_0,b_0)\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}a_n\\b_n\end{matrix}\right]=\left[\begin{matrix}a_{n-1}\\b_{n-1}\end{matrix}\right]-\left[\begin{matrix}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\ \frac{\partial f_2}{\partial x_1}& \frac{\partial f_2}{\partial x_2}\end{matrix}\right]^{-1}\left[\begin{matrix}f_1(a_{n-1},b_{n-1})\\f_2(a_{n-1},b_{n-1})\end{matrix}\right]$$
-
-
-
-
-
-$$\left[\begin{matrix}a_n\\b_n\end{matrix}\right]=\left[\begin{matrix}a_{n-1}\\b_{n-1}\end{matrix}\right]-\left[\begin{matrix}1 & -1 \\ 2a_{n-1}& 2b_{n-1}\end{matrix}\right]^{-1}\left[\begin{matrix}f_1(a_{n-1},b_{n-1})\\f_2(a_{n-1},b_{n-1})\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}a_0\\b_0\end{matrix}\right]=\left[\begin{matrix}0.8\\1.8\end{matrix}\right]$$
-
-$$J=\left[\begin{matrix}1 & -1 \\ 2a_{n-1}& 2b_{n-1}\end{matrix}\right]=\left[\begin{matrix}1 & -1 \\1.6&3.6\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}a_1\\b_1\end{matrix}\right]=\left[\begin{matrix}0.8\\1.8\end{matrix}\right]-\left[\begin{matrix}1 & -1 \\ 1.6& 3.6\end{matrix}\right]^{-1}\left[\begin{matrix}0\\-0.12\end{matrix}\right]=\left[\begin{matrix}0.8230769\\ 1.8230769\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}a_2\\b_2\end{matrix}\right]=\left[\begin{matrix}0.8230769\\ 1.8230769\end{matrix}\right]-\left[\begin{matrix}1 & -1 \\ 1.6461538 & 3.6461538 \end{matrix}\right]^{-1}\left[\begin{matrix}0\\0.0010651\end{matrix}\right]=\left[\begin{matrix}0.8228757\\ 1.8228757\end{matrix}\right]$$
-
-
-
-$$\left[\begin{matrix}a_3\\b_3\end{matrix}\right]=\left[\begin{matrix}0.82287565553230 \\ 1.82287565553230 \end{matrix}\right]$$
-
-
-
-
-
-$$\left[\begin{matrix}a\\b\end{matrix}\right]=\left[\begin{matrix}\frac{1}{2}(\sqrt7-1)\\ \frac{1}{2}(\sqrt7+1) \end{matrix}\right]$$
 
 
 
