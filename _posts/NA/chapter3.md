@@ -58,3 +58,71 @@ $(n-i)(n-i+1)$代表有$n-i$行，每一行乘法计算是$(n-i+1)$    $+1$是�
 
 所以总共$1+\sum_{i=1}^{n-1}(n-i+1)=\frac{n^2}{2}+\frac{n}{2}$
 
+
+
+
+
+
+
+
+
+### Scaled Partial Pivoting(or scaled-column pivoting)
+
+Place the element in the pivot position that is largest relative to the entries in its row.
+
+&emsp; Step1: 
+
+&emsp;Step2: Determine the smallest $p\geq k$ such that $\frac{|a_{pk}^{(k)}|}{s_p}=\underset{k\leq i\leq n}{max}\frac{|a_{ik}^{(k)}|}{s_i}$ and interchange the pth and the kth rows.
+
+
+
+### Complete Pivoting(or maximal pivoting)
+
+Search all the entries $a_{ij}$ for $i,j=k\cdots,n$ to find the entry with the largest magnitude. Both row and column interchanges are performed to bring this entry to the pivot position.
+
+
+
+
+
+
+
+# Matrix Factorization
+
+### A. Matrix Form of Gaussian Elimination
+
+Step1: $m_{i1}=\frac{a_{i1}}{a_{11}}\quad(a_{11}\not=0)$
+
+
+
+
+
+
+
+Theorem: If Gaussian elimination can be performed on the linear system $A\vec{x}=\vec{b}$ without row interchanges, then the matrix A can be factored into the product of a lower-triangular matrix L and an upper-triangular matrix U.
+
+If L has to be unitary, then the factorization is unique.
+
+Proof: If the factorization is NOT unique, then there exist $L_1,U_1,L_2,U_2$ such that $A=L_1U_1=L_2U_2$.
+
+$$U_1U_2^{-1}=L_1^{-1}L_2U_2U_2^{-1}=L_1^{-1}L_2$$
+
+<br>
+
+# Special Types of Matrices
+
+### Strictly Diagonally Dominant Matrix
+
+$$|a_{ii}|>\sum_{j=1,j\not=i}^n|a_{ij}|\;for\;each \;i=1,\cdots,n$$
+
+
+
+check suitesparse
+
+cholmod solver
+
+very popular, famous and 
+
+
+
+
+
