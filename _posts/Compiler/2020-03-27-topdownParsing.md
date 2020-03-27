@@ -61,6 +61,7 @@ Procedure factor
 BEGIN
   case token of
   (: 						//case '('
+  	
   	match((); 	//match '(' , true->getNextToken
     expr;				//函数调用，无参数
     match());		//match ')', 
@@ -180,7 +181,7 @@ The recursive-descent method is quite powerful and adequate to construct a compl
 
 <br>
 
-# 2. LL(1) Parsing
+<br>
 
 最左匹配的自顶向下语法分析器中，低效的主要原因是回溯。如果语法分析器用错误的产生式扩展语法分析树的下边缘，在语法分析树的下边缘与词法分析器返回的单词之间，最终会出现不匹配的情况。在语法分析器发现这种不匹配情形时，它必须撤销构建出错误的语法分析树下边缘的操作，并尝试产生其他产生式。扩展，收缩，再扩展语法分析树下边缘的操作费时费力。
 
@@ -250,11 +251,27 @@ end;
 
 但是规则4，会产生一些问题。FIRST($\varepsilon$)是$\{\varepsilon\}$, 无法匹配分析器返回的任何单词。直观看来，在look ahead symbol不是任何其他备选产生式的FIRST set的成员时，语法分析器应该应用$\varepsilon$产生式。为区分合法输入和语法错误，语法分析器必须知道在正确地应用了规则4之后，哪些单词可能作为第一个符号出现。因此提出了FOLLOW set
 
-
+<br>
 
 `Follow`{:.error}
 
 > 对于非终结符$\alpha$, Follow($\alpha$)是在语句中紧接$\alpha$出现的单词的集合
+
+<img src="../../../assets/images/image-20200327131725193.png" alt="image-20200327131725193" style="zoom:50%;" />
+
+在语法分析器试图扩展Expr'时。如果look ahead symbol是+，语法分析器使用规则2进行扩展；如果是-, 使用规则3。如果前瞻符号在FOLLOW(Expr')中，则应用规则4。任何其他符号都会导致语法错误。
+
+<br>
+
+使用FIRST和FOLLOW集合，我们可以准确地规定使得某个语法对自顶向下语法分析器无回溯的条件。对于产生式$A\rightarrow\beta$, 定义其增强FIRST集合FIRST+
+
+$$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\notin FIRST(\beta)\\ &FIRST(\beta)\cup FOLLOW(A)\end{aligned}$$
+
+<br>
+
+
+
+# 2. LL(1) Parsing
 
 
 
@@ -283,9 +300,13 @@ Want to decide which production to apply based on next symbol
 
 因为每次只能向前看一个字符，所以很难去做选择
 
-
+<br>
 
 ### A. The Basic Method of LL(1) Parsing
+
+主要用到了stack
+
+<br>
 
 $S\rightarrow (S)S\vert \varepsilon$
 
@@ -295,14 +316,19 @@ Parsing这一列是stack, $代表栈底的意思
 
 Input是要分析的目标串，$代表end of input
 
-第一步,S是start symbol, action代表这一步采取的动作。S从stack中pop, 然后将(S)S push进stack, 进入的顺序是S)S(
+第一步,`S`是start symbol, action代表这一步采取的动作。`S`从stack中pop, 然后将`(S)S` push进stack, 进入的顺序是`S)S(`
 
 当栈顶是终结符的时候，执行match操作，非终结符则要使用一个产生式规则
 
-> The two actions:
->
-> * Generate: replace a non-termal A at the top of the stack by a string $\alpha$ (in reverse) using a grammar rule $A\rightarrow \alpha$
-> * Match: match a token on top of the stack with the next input token
+<br>
+
+`The two actions`{:.error}
+
+`Generate`{:.success}: replace a non-termal A at the top of the stack by a string $\alpha$ (in reverse) using a grammar rule $A\rightarrow \alpha$
+
+`Match`{:.success} : match a token on top of the stack with the next input token
+
+<br>
 
 The list of generating actiosn in the above table:
 
@@ -322,15 +348,13 @@ Constructing a parse tree:
 
 Adding node constructin **actions** as each non-terminal or terminal is push onto the stack.
 
-
-
 <br>
 
 ### B. The LL(1) Parsing Table and Algorithm
 
 Purpose of the LL(1) parsing table:
 
-&emsp; To express the possible rule choices for a non-terminal A: A is at the top of parsing stack, based on the current input token(the look-ahead). 也就是根据parsing table来选择对应的分析表应该采取什么样的动作
+&emsp;&emsp; To express the possible rule choices for a non-terminal A: A is at the top of parsing stack, based on the current input token(the look-ahead). 也就是根据parsing table来选择对应的分析表应该采取什么样的动作
 
 <br>
 
@@ -348,16 +372,18 @@ N表示non-terminal , T表示terminal.
 
 <br>
 
-The table-constructing rule:
+`The table-constructing rule`{:.error}
 
 * If $A\rightarrow \alpha$ is a production choice, and there is a derivation $\alpha\Rightarrow^*a\beta$, where `a` is a token ,then add $A\rightarrow\alpha$ to the table entry $M[A,a]$ 这条关注第一个终结符是什么 first set
 * If $A\rightarrow \alpha$ is a production choice, and there are derivations $\alpha\Rightarrow^*\varepsilon$ and $S\$\Rightarrow^*\beta A\alpha\gamma $,  where S is the start symbol and a is a token(or \$), then add $A\rightarrow\alpha$ to the table entry $M[A,a]$. 这条说明如果非终结符可以为空的话，后面可以跟什么终结符 follow set
+
+相当于构建前面所述FIRST+ set
 
 <img src="../../../assets/images/image-20200321214342763.png" alt="image-20200321214342763" style="zoom:40%;" />
 
 <br>
 
-Definition of LL(1) Grammar:
+`Definition of LL(1) Grammar`{:.error}
 
 * A grammar is an LL(1) grammar  if the associated LL(1) parsing table has ***at most one*** production in each table entry
 * An LL(1) grammar cannot be ***ambiguous***
@@ -389,11 +415,11 @@ else error.
 
 <img src="../../../assets/images/image-20200321215232370.png" alt="image-20200321215232370" style="zoom:50%;" />
 
-这个表存在问题，在else-part 行 else列，有两个产生式，违反了LL(1) grammar, 但是我们增加了消除歧义的规则
+这个表存在问题，在else-part 行 else列，有两个产生式，违反了LL(1) grammar, 但是我们增加了消除歧义的规则. The  entry  M[else-part,  else]  contains  two  entries,  i.e.  the **dangling else ambiguity**
 
-the  entry  M[else-part,  else]  contains  two  entries,  i.e.  the **dangling else ambiguity**
+`Disambiguating  rule`{:.error}
 
-Disambiguating  rule:   always  prefer   the   rule   that generates the current look-ahead token over any other.
+always  prefer   the   rule   that generates the current look-ahead token over any other.
 
 the production:  else-part → else statement preferred over the production  else-part →ε
 
@@ -530,6 +556,8 @@ end
 Left recursion removal not changes the language, but change the grammar and the parse tree.
 
 The change causes a complication for the parser.
+
+<br>
 
 #### ii. Left Factoring
 
