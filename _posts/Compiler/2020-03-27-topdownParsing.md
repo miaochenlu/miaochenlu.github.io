@@ -46,15 +46,15 @@ $A\rightarrow\alpha$
 
 > Example: the expression Grammar
 >
-> expr→ expr addop term|term
+> expr→ expr addop term$\vert$term
 >
 > addop → + -
 >
-> term→ term mulop factor | factor
+> term→ term mulop factor $\vert$ factor
 >
 > mulop → *
 >
-> factor → (expr) | number
+> factor → (expr) $\vert$ number
 
 ```pascal
 Procedure factor
@@ -89,7 +89,7 @@ It requires the use of EBNF. {} 循环 []一次或者0次
 
 > Example
 >
-> `If-stmt → if ( exp ) statement | if ( exp ) statement else statement`
+> `If-stmt → if ( exp ) statement $\vert$  if ( exp ) statement else statement`
 >
 > The EBNF of the if-statement is as follows:
 >
@@ -200,43 +200,43 @@ The recursive-descent method is quite powerful and adequate to construct a compl
 
 for each $\alpha\in(T\cup EOF\cup\varepsilon)$ do: 	//对于终结符和EOF和$\varepsilon$, FIRST set就是本身
 
-​	FIRST($\alpha$)$\leftarrow\alpha$
+&emsp;FIRST($\alpha$)$\leftarrow\alpha$
 
 end;
 
 for each $A\in NT$ do:		//将非终结符的First set清空
 
-​	FIRST(A)$\leftarrow\varnothing$
+&emsp;FIRST(A)$\leftarrow\varnothing$
 
 end;
 
 while(FIRST sets are still changing) do:
 
-​	for each $p\in P$, where p has the from $A\rightarrow\beta$ do:
+&emsp;for each $p\in P$, where p has the from $A\rightarrow\beta$ do:
 
-​		if $\beta$ is $\beta_1\beta_2\cdots\beta_k$, where $\beta_i\in T\cup NT$, then begin:
+&emsp;&emsp;if $\beta$ is $\beta_1\beta_2\cdots\beta_k$, where $\beta_i\in T\cup NT$, then begin:
 
-​			$rhs\leftarrow FIRST(\beta_1)-\{\varepsilon\}$
+&emsp;&emsp;&emsp;$rhs\leftarrow FIRST(\beta_1)-\{\varepsilon\}$
 
-​			$i\leftarrow 1$
+&emsp;&emsp;&emsp;$i\leftarrow 1$
 
-​			while($\varepsilon\in FIRST(\beta_i)$ and $i\leq k-1$)  do:
+&emsp;&emsp;&emsp;while($\varepsilon\in FIRST(\beta_i)$ and $i\leq k-1$)  do:
 
-​				$rhs\leftarrow rhs\cup (FIRST(\beta_{i+1})-\{\varepsilon\})$
+&emsp;&emsp;&emsp;&emsp;$rhs\leftarrow rhs\cup (FIRST(\beta_{i+1})-\{\varepsilon\})$
 
-​				$i\leftarrow i+1$
+&emsp;&emsp;&emsp;&emsp;$i\leftarrow i+1$
 
-​			end;
+&emsp;&emsp;&emsp;end;
 
-​		end;
+&emsp;&emsp;end;
 
-​		if $i=k$ and $\varepsilon\in FIRST(\beta_k)$
+&emsp;&emsp;if $i=k$ and $\varepsilon\in FIRST(\beta_k)$
 
-​			then $rhs\leftarrow rhs\cup\{\varepsilon\}$
+&emsp;&emsp;&emsp;then $rhs\leftarrow rhs\cup\{\varepsilon\}$
 
-​		$FIRST(A)\leftarrow FIRST(A)\cup rhs$
+&emsp;&emsp;$FIRST(A)\leftarrow FIRST(A)\cup rhs$
 
-​	end;
+&emsp;end;
 
 end;
 
@@ -270,9 +270,9 @@ LL(1) Parsing uses an **explicit stack** rather than recursive calls to perform 
 
 > Example:
 >
-> $S\rightarrow E+S|E$
+> $S\rightarrow E+S\vert E$
 >
-> $E\rightarrow num|(S)$
+> $E\rightarrow num\vert (S)$
 
 <img src="../../../assets/images/image-20200321204355184.png" alt="image-20200321204355184" style="zoom:30%;" />
 
@@ -351,9 +351,9 @@ N表示non-terminal , T表示terminal.
 The table-constructing rule:
 
 * If $A\rightarrow \alpha$ is a production choice, and there is a derivation $\alpha\Rightarrow^*a\beta$, where `a` is a token ,then add $A\rightarrow\alpha$ to the table entry $M[A,a]$ 这条关注第一个终结符是什么 first set
-* If $A\rightarrow \alpha$ is a production choice, and there are derivations $\alpha\Rightarrow^*\varepsilon$ and $S\$\Rightarrow^*\beta A\alpha\gamma $, where S is the start symbol and a is a token(or \$), then add $A\rightarrow\alpha$ to the table entry $M[A,a]$. 这条说明如果非终结符可以为空的话，后面可以跟什么终结符 follow set
+* If $A\rightarrow \alpha$ is a production choice, and there are derivations $\alpha\Rightarrow^*\varepsilon$ and $S\$\Rightarrow^*\beta A\alpha\gamma $,  where S is the start symbol and a is a token(or \$), then add $A\rightarrow\alpha$ to the table entry $M[A,a]$. 这条说明如果非终结符可以为空的话，后面可以跟什么终结符 follow set
 
-<img src="/Users/jones/Library/Application Support/typora-user-images/image-20200321214342763.png" alt="image-20200321214342763" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200321214342763.png" alt="image-20200321214342763" style="zoom:40%;" />
 
 <br>
 
@@ -417,13 +417,13 @@ the production:  else-part → else statement preferred over the production  els
 
 Immediate left recursion: the left recursion occurs only within the production of a single non-terminal.
 
-&emsp;exp → exp + term | exp - term |term
+&emsp;exp → exp + term $\vert $  exp - term $\vert$ term
 
 Indirect left recursion: 
 
-&emsp;A → Bb |...
+&emsp;A → Bb $\vert $ ...
 
-&emsp;B → Aa |... 
+&emsp;B → Aa $\vert $ ... 
 
 <br>
 
@@ -548,6 +548,7 @@ while there are changes to the grammar do
 		If a != epsilon then 
 			Let A->a1|a2|...|an be all the production choices for A
 			And suppose that a1, a2, ..., ak share a, so that A->ab1|ab2|...|abk|ak+1|...|an, the bj's share no common prefix, and ak+1,...an do not share a
+			
 			A->aA'|aK+1|...|an
 			A'->b1|b2|...|bk
 ```
