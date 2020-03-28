@@ -187,90 +187,6 @@ The recursive-descent method is quite powerful and adequate to construct a compl
 
 如果语法分析器在选择下一条规则时，可以同时考虑当前关注的符号以及下一个输入符号(lookahead symbol)，可以消除在解析右递归表达式语法时多种选择造成的不确定性。因而，我们说该语法在look ahead 1个符号时是无回溯的。无回溯语法也称预测性语法。
 
-`First Set`{:.error}
-
-> 对于语法符号 $\alpha$, FIRST($\alpha$ )是从 $\alpha$推导出的语句开头可能出现的终结符的集合。EOF隐含地出现在语法中每个语句的末尾，因而，它同时出现在FIRST的定义域和值域中。
-
-<img src="../../../assets/images/image-20200327111130047.png" alt="image-20200327111130047" style="zoom:50%;" />
-
-<img src="../../../assets/images/image-20200327111314528.png" alt="image-20200327111314528" style="zoom:50%;" />
-
-我们已经对单个语法符号定义了FIRST set, 将该定义扩展到符号串也是很方便的。对于符号串$s=\beta_1\beta_2\cdots\beta_k$, 假设$\beta_n$是FIRST集合中不包含$\varepsilon$的第一个符号，我们定义FIRST(s)为$\beta_1,\beta_2,\cdots,\beta_n$的FIRST集合的并集，而且$\varepsilon\in FIRST(s)$到充分必要条件是：对于$1\leq i\leq k$, 都有$\epsilon\in\beta_i$
-
-<br>
-
-for each $\alpha\in(T\cup EOF\cup\varepsilon)$ do: 	//对于终结符和EOF和$\varepsilon$, FIRST set就是本身
-
-&emsp;FIRST($\alpha$)$\leftarrow\alpha$
-
-end;
-
-for each $A\in NT$ do:		//将非终结符的First set清空
-
-&emsp;FIRST(A)$\leftarrow\varnothing$
-
-end;
-
-while(FIRST sets are still changing) do:
-
-&emsp;for each $p\in P$, where p has the from $A\rightarrow\beta$ do:
-
-&emsp;&emsp;if $\beta$ is $\beta_1\beta_2\cdots\beta_k$, where $\beta_i\in T\cup NT$, then begin:
-
-&emsp;&emsp;&emsp;$rhs\leftarrow FIRST(\beta_1)-\{\varepsilon\}$
-
-&emsp;&emsp;&emsp;$i\leftarrow 1$
-
-&emsp;&emsp;&emsp;while($\varepsilon\in FIRST(\beta_i)$ and $i\leq k-1$)  do:
-
-&emsp;&emsp;&emsp;&emsp;$rhs\leftarrow rhs\cup (FIRST(\beta_{i+1})-\{\varepsilon\})$
-
-&emsp;&emsp;&emsp;&emsp;$i\leftarrow i+1$
-
-&emsp;&emsp;&emsp;end;
-
-&emsp;&emsp;end;
-
-&emsp;&emsp;if $i=k$ and $\varepsilon\in FIRST(\beta_k)$
-
-&emsp;&emsp;&emsp;then $rhs\leftarrow rhs\cup\{\varepsilon\}$
-
-&emsp;&emsp;$FIRST(A)\leftarrow FIRST(A)\cup rhs$
-
-&emsp;end;
-
-end;
-
-<br>
-
-<img src="../../../assets/images/image-20200327124232470.png" alt="image-20200327124232470" style="zoom:50%;" />
-
-看上图例子，可以根据look ahead symbol和FIRST set在规则2,3,4中做出选择。
-
-如果look ahead symbol是+，语法分析器使用规则2进行扩展；如果是-, 使用规则3
-
-但是规则4，会产生一些问题。FIRST($\varepsilon$)是$\{\varepsilon\}$, 无法匹配分析器返回的任何单词。直观看来，在look ahead symbol不是任何其他备选产生式的FIRST set的成员时，语法分析器应该应用$\varepsilon$产生式。为区分合法输入和语法错误，语法分析器必须知道在正确地应用了规则4之后，哪些单词可能作为第一个符号出现。因此提出了FOLLOW set
-
-<br>
-
-`Follow`{:.error}
-
-> 对于非终结符$\alpha$, Follow($\alpha$)是在语句中紧接$\alpha$出现的单词的集合
-
-<img src="../../../assets/images/image-20200327131725193.png" alt="image-20200327131725193" style="zoom:50%;" />
-
-在语法分析器试图扩展Expr'时。如果look ahead symbol是+，语法分析器使用规则2进行扩展；如果是-, 使用规则3。如果前瞻符号在FOLLOW(Expr')中，则应用规则4。任何其他符号都会导致语法错误。
-
-<br>
-
-使用FIRST和FOLLOW集合，我们可以准确地规定使得某个语法对自顶向下语法分析器无回溯的条件。对于产生式$A\rightarrow\beta$, 定义其增强FIRST集合FIRST+
-
-$$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\notin FIRST(\beta)\\ &FIRST(\beta)\cup FOLLOW(A)\end{aligned}$$
-
-<br>
-
-
-
 # 2. LL(1) Parsing
 
 
@@ -580,6 +496,343 @@ while there are changes to the grammar do
 			A->aA'|aK+1|...|an
 			A'->b1|b2|...|bk
 ```
+
+
+
+# 3. FIRST and FOLLOW set
+
+### A. FIRST set
+
+`First Set`{:.error}
+
+> 对于语法符号 $\alpha$, FIRST($\alpha$ )是从 $\alpha$推导出的语句开头可能出现的终结符的集合。EOF隐含地出现在语法中每个语句的末尾，因而，它同时出现在FIRST的定义域和值域中。
+
+Let X be a grammar symbol(a terminal or non-terminal) or $\varepsilon$. Then FIRST(X) is a set of terminals or $\varepsilon$, which is defined as follows.
+
+1. If X is a terminal or $\varepsilon$, then FIRST(X)={X};
+2. If X is a non-terminal, then for each production choice $X\rightarrow X_1X_2\cdots X_n$, FIRST(X) contains $FIRST(X_1)-\{\varepsilon\}$
+
+继续考虑2的情况
+
+Let $ \alpha=X_1X_2\cdots X_n$ be a string of terminals and non-terminals, First($\alpha$) is defined as follows:
+
+* First($\alpha$) contains First($X_1$)-{$\varepsilon$}
+* For each $i=2,\cdots,n$, if for all $k=1,\cdots ,i-1$, First($X_k$) contains $\varepsilon$, then First($\alpha$) contains $First(X_{k+1})-\{\varepsilon\}$
+* If all the set $First(X_1),\cdots,First(X_n)$ contains $\varepsilon$, then $First(\alpha)$ contains $\varepsilon$
+
+<br>
+
+<img src="../../../assets/images/image-20200327111130047.png" alt="image-20200327111130047" style="zoom:50%;" />
+
+<img src="../../../assets/images/image-20200327111314528.png" alt="image-20200327111314528" style="zoom:50%;" />
+
+
+
+`Algorithm: `{:.error}
+
+<br>
+
+for each $ \alpha\in(T\cup EOF\cup\varepsilon)$ do: 	//对于终结符和EOF和$\varepsilon$, FIRST set就是本身
+
+&emsp;FIRST($\alpha$)$ \leftarrow\alpha$
+
+end;
+
+for each $A\in NT$ do:		//将非终结符的First set清空
+
+&emsp;FIRST(A)$ \leftarrow\varnothing$
+
+end;
+
+while(FIRST sets are still changing) do:
+
+&emsp;for each $p\in P$, where p has the from $A\rightarrow X $ do:
+
+&emsp;&emsp;if $X $ is $X _1X _2\cdots X_n$, where $X _i\in T\cup NT$, then begin:
+
+&emsp;&emsp;&emsp;$rhs\leftarrow FIRST(X_1)-\{\varepsilon\}$
+
+&emsp;&emsp;&emsp;$i\leftarrow 1$
+
+&emsp;&emsp;&emsp;while($\varepsilon\in FIRST(X_i)$ and $i\leq n-1$)  do:
+
+&emsp;&emsp;&emsp;&emsp;$rhs\leftarrow rhs\cup (FIRST(X_{i+1})-\{\varepsilon\})$
+
+&emsp;&emsp;&emsp;&emsp;$i\leftarrow i+1$
+
+&emsp;&emsp;&emsp;end;
+
+&emsp;&emsp;end;
+
+&emsp;&emsp;if $i=n$ and $\varepsilon\in FIRST(X_n)$
+
+&emsp;&emsp;&emsp;then $rhs\leftarrow rhs\cup\{\varepsilon\}$
+
+&emsp;&emsp;$FIRST(A)\leftarrow FIRST(A)\cup rhs$
+
+&emsp;end;
+
+end;
+
+<br>
+
+Definition:
+
+&emsp; A non-terminal A is ***nullable*** if there exists a derivation $A\Rightarrow^*\varepsilon$
+
+Theorem:
+
+&emsp; A non-terminal A is ***nullable*** if and only if First(A) contains $\varepsilon$.
+
+<br>
+
+<img src="../../../assets/images/image-20200327124232470.png" alt="image-20200327124232470" style="zoom:50%;" />
+
+看上图例子，可以根据look ahead symbol和FIRST set在规则2,3,4中做出选择。
+
+如果look ahead symbol是+，语法分析器使用规则2进行扩展；如果是-, 使用规则3
+
+但是规则4，会产生一些问题。FIRST($\varepsilon$)是$\{\varepsilon\}$, 无法匹配分析器返回的任何单词。直观看来，在look ahead symbol不是任何其他备选产生式的FIRST set的成员时，语法分析器应该应用$\varepsilon$产生式。为区分合法输入和语法错误，语法分析器必须知道在正确地应用了规则4之后，哪些单词可能作为第一个符号出现。因此提出了FOLLOW set
+
+<br>
+
+### B. FOLLOW set
+
+`Follow`{:.error}
+
+> 对于非终结符$\alpha$, Follow($\alpha$)是在语句中紧接$\alpha$出现的单词的集合
+
+Given a non-terminal A, the set Follow(A):
+
+1. if A is the start symbol, the \$ (represent EOF) is in the Follow(A)
+2. if there is a production $B\rightarrow\alpha A\gamma$, then $First(\gamma)-\{\varepsilon\}$ is in Follow(A) [和计算FIRST set不同，计算FOLLOW set要看产生式右边有A的情况，然后计算A后面式子的FIRST set]
+3. if there is a production $B\rightarrow\alpha A\gamma$, such that $\varepsilon$ in $First(\gamma)$, then Follow(A) contains Follow(B).[因为$\gamma$可以为$\varepsilon$, 所以有$B\rightarrow\alpha A$, 因此可以跟在A后面的符号也一定可以跟在B(=$\alpha A$) 后面]
+
+{:.warning}
+
+Follow sets are defined only for non-terminal. The empty "pesudotoken" $\varepsilon$ is never an element of a follow set.
+
+<br>
+
+`Algorithm:`{:.error}
+
+Follow(start-symbol) := {\$};
+
+for all non-terminals $A\not=$ start-symbol do:
+
+&emsp;Follow(A) := $\varnothing$;
+
+while there changes to any Follow sets do:
+
+&emsp; for each production $A\rightarrow X_1X_2\cdots X_n$ do:
+
+&emsp;&emsp; for each $X_i$ that is a non-terminal do:
+
+&emsp;&emsp;&emsp;add First($X_{i+1}X_{i+2}\cdots X_n$)-$\{\varepsilon\}$ to Follow($X_i$);	//规则2
+
+&emsp;&emsp;&emsp;if $\varepsilon$ is in First($X_{i+1}X_{i+2}\cdots X_n$) then:
+
+&emsp;&emsp;&emsp;&emsp;add Follow(A) to Follow($X_i$);							//规则3
+
+<br>
+
+<img src="../../../assets/images/image-20200327131725193.png" alt="image-20200327131725193" style="zoom:50%;" />
+
+在语法分析器试图扩展Expr'时。如果look ahead symbol是+，语法分析器使用规则2进行扩展；如果是-, 使用规则3。如果前瞻符号在FOLLOW(Expr')中，则应用规则4。任何其他符号都会导致语法错误。
+
+<br>
+
+Example
+
+$S\rightarrow ES'$
+
+$S'\rightarrow\varepsilon\vert +S$
+
+$E\rightarrow num\vert (S)$
+
+<br>
+
+* 首先将产生式分解开来
+
+$S\rightarrow ES'$
+
+$S'\rightarrow\varepsilon$
+
+$S'\rightarrow +S$
+
+$E\rightarrow num$
+
+$E\rightarrow (S)$
+
+* 判定Nullable: Only S' is nullable
+
+* FIRST
+
+$First(ES')=\{num,(\}$
+
+$First(+S)=\{+\}$
+
+$First(num)=\{num\}$
+
+$First((S))=\{(\}$
+
+$First(S')=\{+,\varepsilon\}$
+
+$First(S)=\{num,(\}$
+
+* FOLLOW
+
+$Follow(S)=\{),\$\}$
+
+$Follow(S')=\{),\$\}$
+
+$Follow(E)=\{+,),\$\}$
+
+<br>
+
+<br>
+
+使用FIRST和FOLLOW集合，我们可以准确地规定使得某个语法对自顶向下语法分析器无回溯的条件。对于产生式$A\rightarrow\beta$, 定义其增强FIRST集合FIRST+
+
+$$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\notin FIRST(\beta)\\ &FIRST(\beta)\cup FOLLOW(A)\end{aligned}$$
+
+<br>
+
+
+
+### Constructing LL(1) Parsing Tables
+
+The following algorithmic construction of the LL(1) parsing table:
+
+Repreawt the following 2 steps for each non-terminal A and production choice $A\rightarrow\alpha$
+
+1. For each token a in $First(\alpha)$, add $A\rightarrow\alpha$ to the entry M[A,a]
+2. If $\varepsilon$ is in $First(\alpha)$, for each element a of Follow(A) (a token or \$), add $A\rightarrow\alpha$ to M[A,a]
+
+这相当于
+
+$$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\notin FIRST(\beta)\\ &FIRST(\beta)\cup FOLLOW(A)\end{aligned}$$
+
+<br>
+
+如何判定LL(1)语法
+
+Theorem:
+
+A grammar in BNF is LL(1) if the following conditions are satisfied.
+
+1. For every production $A\rightarrow\alpha_1\vert\alpha_2\vert\cdots\vert\alpha_n$, $First(\alpha_i)\cap First(\alpha_j)$ is empty for all i and j, $1\leq i,j\leq n,i\not=j$
+2. For every non-terminal A such that First(A) contains $\varepsilon$, $First(A)\cap Follow(A)$ is empty.
+
+<img src="../../../assets/images/image-20200328164147883.png" alt="image-20200328164147883" style="zoom:50%;" />
+
+
+
+# Error Recovery in Top-Down Parsers
+
+Different levels of response to errors:
+
+> Give a meaningful error message;
+>
+> &emsp; Determine as closely as possible the ***location*** where that error has occured.
+>
+> &emsp; Some form of ***error correction***;(error repair)
+>
+> &emsp; The parser attempts to ***infer*** a correct program from the incorrect one given.
+
+Most of the techniques for error recovery are ad hoc, and general principles are hard to come by.
+
+<br>
+
+Some important considerations taht apply are the following:
+
+1. To determine that an error has occurred as soon as possible.
+2. After an error has occurred
+
+&emsp; pick a likely place to resume the parse
+
+&emsp;try to parse as much of the code as possible
+
+3. To avoid the error ***cascade*** problem
+4. To avoid ***infinite loop***s on error
+
+<br>
+
+Some goals conflict with each other, so that a compiler writer is forced to make trade-offs during the construction of an error handler:
+
+`Panic Mode`{:.error}
+
+> A standard form of error recovery in recursive-decent parsers.
+>
+> The error handler will ***consume*** a possibly large number of tokens in an attempt to find a place to resume parsing.
+
+The basic mechanism of panic mode:
+
+* A set of ***synchronizing tokens***  are provided to each recursive procedure[非终结符];
+* If an error is encountered, the parser scans ahead, throwing away tokens until one of the synchronized tokens is seen in the input, and then parsing is resumed.也就是说当错误发生时，就一直scan去寻找同步符号
+
+The important decisions to be made in this error recovery method:
+
+1. What tokens to add to the synchronizing set at each point in the parse?
+
+&emsp;&emsp; Follow sets are important candidates[为什么呢？试想遇到一个if语句，知道他的Follow set后就知道后面可以跟着什么了，然后可以将中间不在Follow set中的不合法符号给扔掉，直到遇到Follow set中的符号]
+
+2. First sets:
+
+&emsp;&emsp;Prevent the error handler from skipping important tokens that begin major new constructs[在error handle的过程中，会consume一些token, 但是需要注意的是：不能把很重要的token consume掉，比如for,while, 扔掉这些token会影响后面的语句]
+
+&emsp;&emsp;Detect errors early in the parse
+
+
+
+`check-input`{:.error} procedure: performs the early look-ahead checking
+
+```pascal
+//检查token是否在first set里面；如果不在就consume一些token直到遇到first set或者follow set中的token
+procedure checkinput(Firstset, Followset)
+begin
+	if not (token in firstset) then
+		error;
+		scanto(first ∪ followset)
+	endif;
+end
+```
+
+`scanto`{:.error} procedure:
+
+```pascal
+//consume一些token直到遇到synchronization set里面的元素
+procedure scanto(synchset)
+begin
+	while not (token in synchset ∪ {$}) do
+		gettoken;
+end scanto
+```
+
+来看一下递归下降分析程序+错误处理后的代码
+
+<img src="../../../assets/images/image-20200328172021098.png" alt="image-20200328172021098" style="zoom:50%;" />
+
+```pascal
+procedure expr(synchset)
+begin
+	checkinput({(,number}, synchset);
+	if not (token in synchset) then
+		term(synchset);
+		while token = + or token = - do
+			match(token);
+			term(synchset);
+		end while
+    checkinput(synchset, {(,number});
+   end if;
+end exp;
+```
+
+
+
+
+
+
 
 
 
