@@ -389,3 +389,78 @@ This public-key scheme must satisfy two requirements. The **first requirement** 
 * A   problem   can   be   solved   in non-deterministic polynomial time if the answer can be checked in polynomial time. I.e., you could do it in polyno-mial time if you guessed the answer.
 
 * A problem is said to be NP-Complete if any polynomial time technique for solving it could be used to solve all NP-time problems in polynomial time.
+
+#### Traveling Salesman  Problem
+
+The traveling salesman problem:  Find the  shortest  way  of  visiting  a  number of  cities,  is  harder  than  NP.  Even  if you know the answer, you have no easy way of  verifying it.
+
+
+
+### Difficulty  of  Cryptanalysis
+
+Theorem:   The  cryptanalytic  problem for usable cryptosystems can never be more  than  NP-hard.
+
+Proof:  Encrypt and decrypt in P-time ⇒ check  answer in  P-time. On the other hand, since the knapsack problem  is  NP-complete,  there  is  an NP-complete  cryptanalytic  problem.
+
+
+
+### Criteria of Cryptosystem  Performance
+
+* Security
+
+* Cost  of Encryption
+
+* Size  (Cost) of  Key
+
+* Message  Expansion
+
+* Error  Propagation
+
+
+
+#### Polyalphabetic  Ciphers
+
+* Substitution must change from character  to character
+
+#### Homophonic  Substitution
+
+The  ciphertext  is  not  uniquely  determined  by  the plaintext.  P goes  to:
+
+$$C_{11}\; or\; C_{12}\;or\; C_{13}\cdots\;under\; K_1$$
+
+$$C_{21}\; or\; C_{22}\;or\; C_{23}\cdots\;under\; K_2$$
+
+$$C_{31}\; or\; C_{32}\;or\; C_{33}\cdots\;under\; K_3$$
+
+This is not a mapping
+
+#### Basics  of Symmetric  Cryptography
+
+* Two   ideas:
+
+arithmetic   and   table lookup
+
+* Q:  Why so  slow  to  develop?
+
+* A:   You   couldn’t   really   do   them without  machine computing.
+
+#### Pre-machine Ciphers
+
+* Codes dominate
+
+* Vigen`ere and  multiple  Vigen`ere
+
+* Playfair  —  19th Century
+
+* ADFGVX  — WWI
+
+#### Addition Modulo n
+
+Two  numbers  are  added  modulo n by adding them as integers and subtracting n if the result is larger than n.  For example  19 + 7 = 2  (mod 12).
+
+Addition  modulo  26  can  be  used  to combine  letters  of  the  alphabet  in  a manner  equivalent  to  the  substitution alphabets above by setting A=0,B=1,C=2,...Z=25
+
+#### Vigenere System with  Full  Substitution
+
+<a href="https://blog.csdn.net/MaxineZhou/article/details/89374929">可以见这篇blog</a>
+
