@@ -17,11 +17,6 @@ titles:
   ko-KR   : *KO
 key: page-about
 ---
-
-<base target="_blank">
-
-
-<div>
 <meta name="theme-color" content="#3F51B5">
 <script src="https://cdn.bootcss.com/material-design-lite/1.3.0/material.min.js"></script>
 <script>
