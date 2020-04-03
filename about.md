@@ -19,18 +19,13 @@ key: page-about
 ---
 
 
-
-<!doctype html>
-<html lang="en">
-
 <head>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Hai Zhang's resume">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.png">
-<title>Hai Zhang - Android &amp; Web Developer</title>
+<title>Chenlu Miao</title>
 <meta name="msapplication-tap-highlight" content="no">
 <meta name="theme-color" content="#3F51B5">
 
@@ -70,176 +65,54 @@ window.onload = function() {
 
 <header class="mdl-color--indigo-700 mdl-color-text--white mdl-shadow--4dp">
     <section class="title mdl-color--indigo-500">
-        <h1 class="mdl-typography--display-2">Hai Zhang</h1>
-        <p class="mdl-typography--body-1">Android &amp; Web Developer</p>
-    </section>
-    <section class="about">
-        <i class="mdi mdi-account mdi-24px"></i>
-        <div>
-            <h2 class="mdl-typography--title">About</h2>
-            <p>Software Engineer at Google</p>
-        </div>
+        <h1 class="mdl-typography--display-2">Chenlu Miao</h1>
     </section>
     <section class="contact">
-        <i class="mdi mdi-phone mdi-24px"></i>
         <div>
             <h2 class="mdl-typography--title">Contact</h2>
             <ul>
                     <li>
                         <i class="mdi mdi-email mdi-18px"></i>
-                        <a href="mailto:zhanghai@berkeley.edu">zhanghai@berkeley.edu</a>
+                        <a href="clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>
                     </li>
                     <li>
                         <i class="mdi mdi-github-circle mdi-18px"></i>
-                        <a href="https://github.com/zhanghai">github.com/zhanghai</a>
+                        <a href="https://github.com/miaochenlu">github.com/miaochenlu</a>
                     </li>
                     <li>
                         <i class="mdi mdi-link mdi-18px"></i>
-                        <a href="http://blog.zhanghai.me/">blog.zhanghai.me</a>
+                        <a href="https://miaochenlu.github.io/">https://miaochenlu.github.io</a>
                     </li>
             </ul>
         </div>
     </section>
-    <section class="skills">
-        <i class="mdi mdi-chart-bar mdi-24px"></i>
-        <div>
-            <h2 class="mdl-typography--title">Skills</h2>
-            <ul>
-                <li>
-                    <p class="mdl-typography--caption mdl-typography--caption-color-contrast">Programming Languages</p>
-                    <p class="mdl-typography--body-1">Java, JavaScript, C/C++, Python, Bash</p>
-                </li>
-                <li>
-                    <p class="mdl-typography--caption mdl-typography--caption-color-contrast">Development Skills</p>
-                    <p class="mdl-typography--body-1">Android Development, Web Development, React, Vue.js, Express.js, OpenGL</p>
-                </li>
-                <li>
-                    <p class="mdl-typography--caption mdl-typography--caption-color-contrast">Tools</p>
-                    <p class="mdl-typography--body-1">Emacs, Git, Android Studio, WebStorm, CLion, PyCharm, Visual Studio</p>
-                </li>
-                <li>
-                    <p class="mdl-typography--caption mdl-typography--caption-color-contrast">System Maintenance</p>
-                    <p class="mdl-typography--body-1">Linux</p>
-                </li>
-            </ul>
-        </div>
-    </section>
+    
 </header>
 <main class="mdl-color--blue-grey-50">
     <section class="mdl-color--white mdl-shadow--2dp">
         <h2 class="mdl-typography--display-1">Education</h2>
         <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">University of California, Berkeley</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Master of Engineering, Electrical Engineering and Computer Sciences</p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Aug 2017 – May 2018, Berkeley, CA
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Overall GPA: 3.71/4</li>
-                <li>Concentration on Visual Computing and Computer Graphics</li>
-            </ul>
-        </section>
-        <section>
             <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Zhejiang University</h3>
             <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Bachelor of Engineering, Computer Science and Technology</p>
             <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Sep 2013 – Jun 2017, Hangzhou, China
+                August 2017 – Present, Hangzhou, China
             </p>
             <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Overall GPA: 3.93/4, Major GPA: 3.95/4, Rank: Top 3% among 205</li>
-                <li>Honors Degree Program, 200 selected from 3500 in Class of 2017</li>
-                <li>Scholarship for Outstanding Students (Top 10%), Scholarship for Outstanding Merit (Top 10%), twice 2013, 2015</li>
+              	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
+              <li>Overall GPA: 3.98/4, 91.08/100</li>
+              <ul>
+                SELECTED COURSES(4.0/4.0 in all of them)
+                <li>Systems: Digital Logic Design, Computer Organization, Computer Architecture, Computer Networks, Operating System</li>
+                <li>Math: Mathematical Analysis, Linear Algebra, Stochastic Process, Probability and Mathematical Statistics, Applied Operation Research</li>
+              </ul>
+              <li>RESEARCH INTEREST: Computer Architecture and Hardware Security, recent projects focused on hardware transactional memory.</li>
             </ul>
         </section>
     </section>
-    <section class="mdl-color--white mdl-shadow--2dp">
-        <h2 class="mdl-typography--display-1">Experience</h2>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Google LLC</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Software Engineer</p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Jul 2018 – Present, Mountain View, CA
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Working on the Android Core Framework team</li>
-                <li>Developing and maintaining system functionalities related to Android app permissions</li>
-            </ul>
-        </section>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Beijing Douban Interactive Technology Co., Ltd.</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Mobile Software Development Engineer Intern (Android)</p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Jul 2016 – Aug 2016, Beijing, China
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Worked on the Android team and developed the mobile app <a href="https://play.google.com/store/apps/details?id=com.douban.frodo">Douban</a> with 10 million users</li>
-                <li>Investigated and fixed over 50 issues and implemented over 10 features for the app</li>
-            </ul>
-        </section>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Taobao (China) Software Co., Ltd.</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Software Engineer Intern, Mobile Applications (Android)</p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Jul 2015 – Aug 2015, Hangzhou, China
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Worked on the Android platform team, developed for the mobile shopping app <a href="https://play.google.com/store/apps/details?id=com.taobao.taobao">Taobao</a> with 400 million users</li>
-                <li>Cooperated with colleagues to develop an internal mobile application for communication among Alibaba employees</li>
-            </ul>
-        </section>
-    </section>
-    <section class="mdl-color--white mdl-shadow--2dp">
-        <h2 class="mdl-typography--display-1">Projects</h2>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Android campus application for Zhejiang University</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast"><a href="https://play.google.com/store/apps/details?id=com.myqsc.mobile3">https://play.google.com/store/apps/details?id=com.myqsc.mobile3</a></p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Sep 2013 – Jun 2016
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Designed and developed the app which provided academic and campus information for students, synchronizing local database with server and provided powerful calendar system incorporating classes, exams and custom events</li>
-                <li>Used by over 30000 students in Zhejiang University with over 6000 daily active users</li>
-            </ul>
-        </section>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Material Design Android application for douban.com</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast"><a href="https://github.com/zhanghai/Douya">https://github.com/zhanghai/Douya</a></p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Sep 2015 – Present
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Designed based on Material Design Guidelines and implemented core functionality of the website, featuring beautiful and consistent design, meaningful transitions, night mode, and tablet multi-pane support</li>
-                <li>Open-sourced on GitHub with over 4000 stars as a complete sample project covering accounts, network and UI</li>
-            </ul>
-        </section>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Android library for Material Design ProgressBar on Android 4.x</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast"><a href="https://github.com/zhanghai/MaterialProgressBar">https://github.com/zhanghai/MaterialProgressBar</a></p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                Jun 2015 – Present
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Backported the Material Design ProgressBar to Android 4.x with additional customizable features</li>
-                <li>Open-sourced on GitHub with over 1700 stars and used by over 6000 projects on GitHub</li>
-            </ul>
-        </section>
-        <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Other Open-Source Projects</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast"><a href="https://github.com/zhanghai">https://github.com/zhanghai</a></p>
-            <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                May 2013 – Present
-            </p>
-            <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
-                <li>Developed <a href="https://github.com/zhanghai">other projects and libraries</a> with over 3000 stars in total</li>
-                <li>Maintaining <a href="https://aur.archlinux.org/packages/?SeB=m&K=dreamingincode">12 packages</a> for Arch Linux including the Android SDK package with over 1400 votes</li>
-            </ul>
-        </section>
-    </section>
+
 </main>
 </div>
-<a href="resume.pdf" title="Download PDF" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-    <i class="mdi mdi-download mdi-24px"></i>
-</a>
+
 <footer>
 </footer>
 </body>
