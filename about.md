@@ -33,7 +33,7 @@ key: page-about
 }
 </style>
 <div id="allcontent">
-  <img src="../../assets/images/me.JPG" width="200" align=center />
+ <center><img src="../../assets/images/me.JPG" width="200"/></center> 
   <div id="introduction">
    <p>Zhejiang University Bachelor of Engineering, Computer Science and Technology.</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;August 2017-Present</p>
     <ul>
