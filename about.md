@@ -19,6 +19,9 @@ key: page-about
 ---
 
 <base target="_blank">
+
+
+<div>
 <meta name="theme-color" content="#3F51B5">
 <script src="https://cdn.bootcss.com/material-design-lite/1.3.0/material.min.js"></script>
 <script>
@@ -42,8 +45,6 @@ window.onload = function() {
     }
 }
 </script><link rel="stylesheet" href="index.css">
-
-<div>
 <header class="mdl-color--indigo-700 mdl-color-text--white mdl-shadow--4dp">
     <section class="title mdl-color--indigo-500">
         <h1 class="mdl-typography--display-2">Chenlu Miao</h1>
