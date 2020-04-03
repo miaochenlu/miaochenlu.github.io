@@ -24,7 +24,6 @@ key: page-about
    font-weight: bold;
    font-size: 110%;
    width: 500px;
-   clear: left;
  }
  #allcontent {
   width: 800px;
@@ -36,9 +35,6 @@ key: page-about
 </style>
 <div id="allcontent">
   <div id="introduction">
-    <h1>
-      Education
-    </h1>
    <p>Zhejiang University Bachelor of Engineering, Computer Science and Technology.</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;August 2017-Present</p>
     <ul>
     	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
@@ -55,5 +51,11 @@ key: page-about
    <img src="../../assets/images/me.JPG" width="200" />
 </div>
 <br>
+<br>
+
+<br>
+
+<br>
+
 <br>
 
