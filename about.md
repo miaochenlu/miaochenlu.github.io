@@ -63,13 +63,13 @@ window.onload = function() {
 <body>
 <div>
 
-<header class="mdl-color--indigo-700 mdl-color-text--white mdl-shadow--4dp">
-    <section class="title mdl-color--indigo-500">
-        <h1 class="mdl-typography--display-2">Chenlu Miao</h1>
+<header >
+    <section>
+        <center><h1 >Chenlu Miao</h1></center>
     </section>
-    <section class="contact">
+    <section>
         <div>
-            <h2 class="mdl-typography--title">Contact</h2>
+            <h2 >&emsp;Contact</h2>
             <ul>
                     <li>
                         <i class="mdi mdi-email mdi-18px"></i>
@@ -86,16 +86,15 @@ window.onload = function() {
             </ul>
         </div>
     </section>
-    
 </header>
 <main class="mdl-color--blue-grey-50">
     <section class="mdl-color--white mdl-shadow--2dp">
-        <h2 class="mdl-typography--display-1">Education</h2>
+        <h2 class="mdl-typography--display-1">&emsp;&emsp;Education</h2>
         <section>
-            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">Zhejiang University</h3>
-            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">Bachelor of Engineering, Computer Science and Technology</p>
+            <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">&emsp;Zhejiang University</h3>
+            <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">&emsp;Bachelor of Engineering, Computer Science and Technology</p>
             <p class="mdl-typography--body-1 mdl-typography--body-1-color-contrast">
-                August 2017 – Present, Hangzhou, China
+                &emsp;August 2017 – Present, Hangzhou, China
             </p>
             <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
               	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
@@ -107,15 +106,12 @@ window.onload = function() {
               </ul>
               <li>RESEARCH INTEREST: Computer Architecture and Hardware Security, recent projects focused on hardware transactional memory.</li>
             </ul>
+            <br>
         </section>
     </section>
 
 </main>
 </div>
-
-<footer>
-</footer>
 </body>
-</html>
 
 
