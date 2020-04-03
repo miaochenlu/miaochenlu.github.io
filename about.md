@@ -19,7 +19,6 @@ key: page-about
 ---
 <style>
   div#introduction{
-   float:right;
    font-family:      Georgia, "Times New Roman", Times, serif;
    font-weight: bold;
    font-size: 110%;
@@ -34,6 +33,7 @@ key: page-about
 }
 </style>
 <div id="allcontent">
+  <img src="../../assets/images/me.JPG" width="200" align=center />
   <div id="introduction">
    <p>Zhejiang University Bachelor of Engineering, Computer Science and Technology.</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;August 2017-Present</p>
     <ul>
@@ -48,7 +48,6 @@ key: page-about
     </ul>
     <p>You can reach me at <a href="mailto:clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>. </p>
   </div>
-   <img src="../../assets/images/me.JPG" width="200" />
 </div>
 <br>
 <br>
