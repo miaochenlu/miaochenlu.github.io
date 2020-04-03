@@ -69,7 +69,6 @@ window.onload = function() {
     </section>
     <section>
         <div>
-            <h2 >&emsp;Contact</h2>
             <ul>
                     <li>
                         <i class="mdi mdi-email mdi-18px"></i>
@@ -89,7 +88,7 @@ window.onload = function() {
 </header>
 <main class="mdl-color--blue-grey-50">
     <section class="mdl-color--white mdl-shadow--2dp">
-        <h2 class="mdl-typography--display-1">&emsp;&emsp;Education</h2>
+        <h2 class="mdl-typography--display-1">&emsp;Education</h2>
         <section>
             <h3 class="mdl-typography--title mdl-typography--title mdl-color-text--indigo-500">&emsp;Zhejiang University</h3>
             <p class="mdl-typography--subhead mdl-typography--subhead-color-contrast">&emsp;Bachelor of Engineering, Computer Science and Technology</p>
