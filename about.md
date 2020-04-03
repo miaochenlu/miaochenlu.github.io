@@ -18,7 +18,7 @@ titles:
 key: page-about
 ---
 <style>
-  p#introduction{
+  div#introduction{
    float:right;
    font-family:      Georgia, "Times New Roman", Times, serif;
    font-weight: bold;
@@ -35,12 +35,24 @@ key: page-about
 }
 </style>
 <div id="allcontent">
-  <div>
-  <p id="introduction">Currently I am a third year undergraduate student from Pursuit Science Class (Computer), Chu Kochen Honors College and College of Computer Science and Technology, Zhejiang University. <br>My research interest is in computer architecture.<br><br>
-  You can reach me at <a href="mailto:clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>. </p>
-
-  <img src="../../assets/images/me.JPG" width="200" />
+  <div id="introduction">
+    <h1>
+      Education
+    </h1>
+   <p>Zhejiang University Bachelor of Engineering, Computer Science and Technology.</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;August 2017-Present</p>
+    <ul>
+    	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
+      <li>Overall GPA:3.98/4, 91.08/100</li>
+      <ul>
+        SELECTED COURSES(4.0/4.0 in all of them)
+        <li>Systems: Digital Logic Design, Computer Organization, Computer Architecture, Computer Networks, Operating System</li>
+        <li>Math: Mathematical Analysis, Linear Algebra, Stochastic Process, Probability and Mathematical Statistics, Applied Operation Research</li>
+      </ul>
+      <li>RESEARCH INTEREST: Computer Architecture and Hardware Security, recent projects focused on hardware transactional memory.</li>
+    </ul>
+    <p>You can reach me at <a href="mailto:clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>. </p>
   </div>
+   <img src="../../assets/images/me.JPG" width="200" />
 </div>
 <br>
 <br>
