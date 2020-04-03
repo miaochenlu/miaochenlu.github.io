@@ -1,20 +1,5 @@
 ---
 layout: article
-titles:
-  en      : &EN       About
-  en-GB   : *EN
-  en-US   : *EN
-  en-CA   : *EN
-  en-AU   : *EN
-  zh-Hans : &ZH_HANS  关于
-  zh      : *ZH_HANS
-  zh-CN   : *ZH_HANS
-  zh-SG   : *ZH_HANS
-  zh-Hant : &ZH_HANT  關於
-  zh-TW   : *ZH_HANT
-  zh-HK   : *ZH_HANT
-  ko      : &KO       소개
-  ko-KR   : *KO
 key: page-about
 ---
 
@@ -67,24 +52,6 @@ window.onload = function() {
     <section>
         <center><h1 >Chenlu Miao</h1></center>
     </section>
-    <section>
-        <div>
-            <ul>
-                    <li>
-                        <i class="mdi mdi-email mdi-18px"></i>
-                        <a href="clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>
-                    </li>
-                    <li>
-                        <i class="mdi mdi-github-circle mdi-18px"></i>
-                        <a href="https://github.com/miaochenlu">github.com/miaochenlu</a>
-                    </li>
-                    <li>
-                        <i class="mdi mdi-link mdi-18px"></i>
-                        <a href="https://miaochenlu.github.io/">https://miaochenlu.github.io</a>
-                    </li>
-            </ul>
-        </div>
-    </section>
 </header>
 <main class="mdl-color--blue-grey-50">
     <section class="mdl-color--white mdl-shadow--2dp">
@@ -98,7 +65,7 @@ window.onload = function() {
             <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
               	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
               <li>Overall GPA: 3.98/4, 91.08/100</li>
-              <ul>
+              <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
                 SELECTED COURSES(4.0/4.0 in all of them)
                 <li>Systems: Digital Logic Design, Computer Organization, Computer Architecture, Computer Networks, Operating System</li>
                 <li>Math: Mathematical Analysis, Linear Algebra, Stochastic Process, Probability and Mathematical Statistics, Applied Operation Research</li>
@@ -109,6 +76,24 @@ window.onload = function() {
         </section>
     </section>
 
+ <section>
+        <div>
+            <ul>
+                <li>
+                    <i class="mdi mdi-email mdi-18px"></i>
+                    <a href="clmiao@zju.edu.cn">clmiao@zju.edu.cn</a>
+                </li>
+                <li>
+                    <i class="mdi mdi-github-circle mdi-18px"></i>
+                    <a href="https://github.com/miaochenlu">github.com/miaochenlu</a>
+                </li>
+                <li>
+                    <i class="mdi mdi-link mdi-18px"></i>
+                    <a href="https://miaochenlu.github.io/">https://miaochenlu.github.io</a>
+                </li>
+            </ul>
+        </div>
+</section>
 </main>
 </div>
 </body>
