@@ -241,7 +241,9 @@ goto(I,X), 其中I是一个项集$A\rightarrow\alpha X\cdot\beta$的闭包，X�
 
 $s_i$表示shift并将状态i压栈
 
-$r_j$表示按照编号为j的产生式进行reduce
+将每条规则标上号
+
+$r_j$表示按照编号为j的产生式规则进行reduce
 
 <img src="../../../assets/images/image-20200403225900491.png" alt="image-20200403225900491" style="zoom:50%;" />
 
@@ -398,7 +400,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
 考虑到LR(1) item构建的DFA的size太大，我们是不是可以进行一些状态合并呢？
 
-比如下图中$A\rightarrow a \cdot,\$$和$A\rightarrow a\cdot,)$就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$/)$
+比如下图中$A\rightarrow a \cdot,\$ $和$A\rightarrow a\cdot,)$就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
 
 <img src="../../../assets/images/image-20200405184111768.png" alt="image-20200405184111768" style="zoom:50%;" />
 
