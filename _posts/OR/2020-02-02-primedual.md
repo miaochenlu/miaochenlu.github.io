@@ -1,6 +1,6 @@
 ---
 title: "原始对偶算法"
-tags: Optional_Research
+tags: Operation_Research
 key: page-primedual
 
 

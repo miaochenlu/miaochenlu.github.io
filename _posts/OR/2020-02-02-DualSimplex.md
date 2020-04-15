@@ -1,6 +1,6 @@
 ---
 title: "对偶单纯形法"
-tags: Optional_Research
+tags: Operation_Research
 key: page-dualsimplex
 
 ---

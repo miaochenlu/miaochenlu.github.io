@@ -1,6 +1,6 @@
 ---
 title: "Bin Packing的近似算法"
-tags: Optional_Research
+tags: Operation_Research
 key: page-binpacking
 
 
