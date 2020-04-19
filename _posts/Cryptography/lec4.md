@@ -98,3 +98,19 @@ Sbox是唯一一个非线性组件
 
 <img src="/Users/jones/Downloads/IMG_872EE16043F8-1.jpeg" alt="IMG_872EE16043F8-1" style="zoom:30%;" />
 
+# 3. Linear cryptanalysis
+
+* 令 $X=(x_1,\cdots,x_{lm})$对应为为plaintext随机变量， $X_i\in\{0,1\}$, 假设$X_i$相互独立
+
+$$Pr[X_{i_1}=c_1,X_{i_2}=c_2,\cdots,X_{i_r}=c_r]=Pr[X_{i_1}=c_1]\cdot Pr[X_{i_2}=c_2]\cdots Pr[X_{i_r}=c_r]$$
+
+$a\in \mathbb{Z}_2^{lm}$, $a\cdot X=a_1X_1+\cdots+a_{ml}X_{ml}$, 这是一个定义在$\{0,1\}$上的随机变量
+
+* 我们用$U^{Nr}$来表示随机变量$u^{Nr}$, 他的取值为$\mathbb{Z}_2^{lm}$, 他的概率分布是根据$X,K$得到的
+
+* 对于一个定义在$\{0,1\}$上的随机变量$Z$。Pr$[Z=0]=\frac{1}{2}$
+
+linear cryptanalysis的策略是
+
+1. 通过理论分析得到$a\cdot X+b\cdot U^{Nr}$的线性组合，it has a large bias(in absolute eevalue)
+2. 
