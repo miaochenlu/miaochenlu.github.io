@@ -180,6 +180,8 @@ LR(0) item的闭包:
 
 那为什么要这样做呢？
 
+{:.warning}
+
 CLOSURE(I)中的项$A\rightarrow\alpha\cdot B\beta$表明在语法分析过程的某点上,$\alpha$已经在栈中，我们期待后面是$B\beta$，这样就可以归约到A。因为B是一个非终结符，我们认为可能会在输入中看到一个能够从B推导得到的子串，而推导时需要应用某个B产生式。因此将各个B产生式对应的项加入闭包中
 
 <br>
@@ -255,21 +257,21 @@ SLR(1): S--> simple
 
 SLR(1) parsing algorithm:
 
-输入: 一个增光文法G'
+输入: 一个增广文法G'
 
 方法:
 
 1. 构造G'的规范LR(0)项集族$C=\{I_0,I_1,\cdots,I_n\}$
 
-2. 根据$I_i$构造得到状态i. 状态i的语法分析动作按照下面的方法决定
+2. 根据$I_i$构造得到状态$i$. 状态$i$的语法分析动作按照下面的方法决定
 
-   * 如果$[A\rightarrow\alpha\cdot a\beta]$在$I_i$中并且$GOTO(I_i,a)=I_j$,即$I_i$字串接收a之后转移到$I_j$子串，那么将$ACTION[i,a]$设置为shift j. 注意，这里的a是一个终结符
-   * 如果$[A\rightarrow\alpha\cdot]$在$I_i$中，那么对于$FOLLOW(A)$中的所有a, 将$ACTION[i,a]$设置为reduce $A\rightarrow\alpha$。注意，这里A不等于S'
-   * 如果$[S'\rightarrow S\cdot]$在$I_i$中，那么将$ACTION[i,\$]$设置为accept
+   * 如果$[A\rightarrow\alpha\cdot a\beta]$在$I_i$中并且$GOTO(I_i,a)=I_j$,即$I_i$字串接收a之后转移到$I_j$子串，那么将$ACTION[i,a]$设置为`shift j`. 注意，这里的$a$是一个终结符
+   * 如果$[A\rightarrow\alpha\cdot]$在$I_i$中，那么对于$FOLLOW(A)$中的所有$a$, 将$ACTION[i,a]$设置为reduce $A\rightarrow\alpha$。注意，这里A不等于S'
+   * 如果$[S'\rightarrow S\cdot]$在$I_i$中，那么将$$ACTION[i,\$ ]$$设置为accept
 
    如果根据上面的规则生成了任何冲突动作，那么这个文法就不是SLR(1)的
 
-3. 状态i对于非终结符A的GOTO转换使用下面的规则构造得到: 如果$GOTO(I_i,A)=I_j$, 那么$GOTO[i,A]=j$
+3. 状态$i$对于非终结符A的GOTO转换使用下面的规则构造得到: 如果$GOTO(I_i,A)=I_j$, 那么$GOTO[i,A]=j$
 
 4. 如果规则2和3没有定义的所有条目都设置为报错
 
@@ -279,16 +281,16 @@ SLR(1) parsing algorithm:
 
 一个文法是SLR(1)文法如果他的SLR(1) parsing rules是无二义性的
 
-一个文法是SLR(1)文法当且仅当，对任何状态s, 以下两个条件满足:
+一个文法是SLR(1)文法当且仅当，对任何状态$s$, 以下两个条件满足:
 
-1. For any item $A\rightarrow\alpha\cdot X\beta$ in state `s` with $X$ a terminal, there is no complete item $B\rightarrow\gamma\cdot$ in `s` with $X$ in Follow(B)
-2. For any two complete items $A\rightarrow\alpha\cdot$ and $B\rightarrow\beta\cdot$ in s, $Follow(A)\cap Follow(B)$ is empty. 
+1. For any item $A\rightarrow\alpha\cdot X\beta$ in state $s$ with $X$ a terminal, there is no complete item $B\rightarrow\gamma\cdot$ in $s$  with $X$ in $Follow(B)$
+2. For any two complete items $A\rightarrow\alpha\cdot$ and $B\rightarrow\beta\cdot$ in $s$ , $Follow(A)\cap Follow(B)$ is empty. 
 
 看一下LR(0)和SLR(1)的条件
 
-LR(0)要求不能存在shift-reduce冲突，也就是shift和reduce对应的字串不能共存于一个状态中，但是SLR(1)放松了这个限制，见规则1。也就是说$A\rightarrow \alpha\cdot X\beta$这个shift对应的字串和$B\rightarrow\gamma\cdot$这个reduce对应的字串可以共存于一个状态，但是X不能在FOLLOW(B)中，否则就会产生shift X和reduce B这两个动作的矛盾。
+LR(0)要求不能存在shift-reduce冲突，也就是shift和reduce对应的字串不能共存于一个状态中，但是SLR(1)放松了这个限制，见规则1。也就是说$A\rightarrow \alpha\cdot X\beta$这个shift对应的字串和$B\rightarrow\gamma\cdot$这个reduce对应的字串可以共存于一个状态，但是$X$不能在$FOLLOW(B)$中，否则就会产生`shift X`和`reduce B`这两个动作的矛盾。
 
-LR(0)要求不能存在reduce-reduce冲突。也就是说两个complete item不能共存于一个状态。SLR(1)也放松了这个限制，见规则2。$A\rightarrow\alpha\cdot$和$B\rightarrow\beta\cdot$共存于状态s。 如果后面的文法符号在FOLLOW(A)中，就根据$A\rightarrow\alpha\cdot$进行reduce;如果后面的文法符号在FOLLOW(B)中,就根据$B\rightarrow\beta\cdot$进行reduce。因此为了不产生冲突,FOLLOW(A)和FOLLOW(B)就不能有交集。
+LR(0)要求不能存在reduce-reduce冲突。也就是说两个complete item不能共存于一个状态。SLR(1)也放松了这个限制，见规则2。$A\rightarrow\alpha\cdot$和$B\rightarrow\beta\cdot$共存于状态s。 如果后面的文法符号在$FOLLOW(A)$中，就根据$A\rightarrow\alpha\cdot$进行reduce;如果后面的文法符号在$FOLLOW(B)$中,就根据$B\rightarrow\beta\cdot$进行reduce。因此为了不产生冲突,$FOLLOW(A)$和$FOLLOW(B)$就不能有交集。
 
 <br>
 
@@ -327,7 +329,7 @@ Write LR(1) items using square brackets as
 
 $$[A\rightarrow\alpha\cdot\beta,a]$$
 
-这里$A\rightarrow\alpha\cdot\beta$是一个LR(0) item并且a是一个token(lookahead), a代表的是A后面可以跟着的符号
+这里$A\rightarrow\alpha\cdot\beta$是一个LR(0) item并且$a$是一个token(lookahead), $a$代表的是$A$后面可以跟着的符号
 
 <br>
 
@@ -339,13 +341,13 @@ LR(1) transitions:
 
 * 给定一个LR(1) item $[A\rightarrow\alpha\cdot X\gamma,a]$, $X$可以是终结符也可以是非终结符,通过$X$可以转移到$[A\rightarrow\alpha X\cdot\gamma,a]$
 
-* 给定一个LR(1) item $[A\rightarrow\alpha\cdot B\gamma,a]$, 这里B是一个非终结符，存在$\varepsilon$-transitions转移到$[B\rightarrow\cdot\beta,b]$, 这里b属于集合$First(\gamma a)$
+* 给定一个LR(1) item $[A\rightarrow\alpha\cdot B\gamma,a]$, 这里$B$是一个非终结符，存在$\varepsilon$-transitions转移到$[B\rightarrow\cdot\beta,b]$, 这里b属于集合$First(\gamma a)$
 
 <br>
 
 对于LR(1)文法的自动机
 
-The start state: Augmenting the grammar with a new start symbol S', $S'\rightarrow S$
+The start state: Augmenting the grammar with a new start symbol $S'$, $S'\rightarrow S$
 
 The start symbol of the NFA of LR(1) items becomes the item
 
@@ -359,9 +361,8 @@ The general LR(1) parsing algorithm:
 
 令s为当前状态(a在parsing stack的栈顶). 定义如下操作
 
-* 如果LR(1) item的形式为$[A\rightarrow\alpha\cdot X\beta,a]$, X是一个终结符，并且X是输入串的next token
-* complete LR(1) item $[A\rightarrow\alpha\cdot,a]$, 输入串的next token是a
-* 
+* 如果LR(1) item的形式为$[A\rightarrow\alpha\cdot X\beta,a]$, $X$是一个终结符，并且$X$是输入串的next token
+* complete LR(1) item $[A\rightarrow\alpha\cdot,a]$, 输入串的next token是$a$
 
 Let s be the current state (a the top of the parsing stack). Then actions are defined as follows:
 
@@ -373,7 +374,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
 2. 语法分析器的状态i根据$I_i$构造得到。状态i的语法分析动作按照下面的规则确定
 
-   * 如果$[A\rightarrow\alpha\cdot a\beta,b]$在$I_i$中，并且$GOTO(I_i,a)=I_j$, 那么将$ACTION[i,a]$设置为shift 到状态j。 注意，这里`a`是一个终结符
+   * 如果$[A\rightarrow\alpha\cdot a\beta,b]$在$I_i$中，并且$GOTO(I_i,a)=I_j$, 那么将$ACTION[i,a]$设置为shift 到状态j。 注意，这里$a$是一个终结符
    * 如果$[A\rightarrow\alpha\cdot,a]$在$I_i$中并且$A\not=S'$, 那么$ACTION[i,a]$设置为reduce $A\rightarrow\alpha$
    * 如果$[S'\rightarrow S\cdot,\$]$在$I_i$中，那么将$ACTION[i,\$]$设置为accept
 
@@ -400,7 +401,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
 考虑到LR(1) item构建的DFA的size太大，我们是不是可以进行一些状态合并呢？
 
-比如下图中$A\rightarrow a \cdot,\$ $和$A\rightarrow a\cdot,)$就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
+比如下图中$A\rightarrow a \cdot,\$ $和$A\rightarrow a\cdot,)$ 就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
 
 <img src="../../../assets/images/image-20200405184111768.png" alt="image-20200405184111768" style="zoom:50%;" />
 
@@ -411,7 +412,7 @@ LALR(1) parsing algorithm就是识别上述状态并且将它们的lookaheads进
 接下来介绍principles of LALR(1) parsing
 
 1. The core of state of DFA of LR(1) items is the state of the DFA of LR(0) items, 也就是LR(1) item中的第一部分
-2. 如果LR(1)项的DFA中的两个状态$s_1,s_2$相同的core, 假设从状态$s_1$接收$X$后转移到到状态$t_1$。那么同样有状态$s_2$接收$X$后转移到状态$t_2$, 并且$t_1$和$t_2$有相同的core。
+2. 如果LR(1)项的DFA中的两个状态$s_1,s_2$有相同的core, 假设从状态$s_1$接收$X$后转移到到状态$t_1$。那么同样有状态$s_2$接收$X$后转移到状态$t_2$, 并且$t_1$和$t_2$有相同的core。
 
 <img src="../../../assets/images/image-20200405185222796.png" alt="image-20200405185222796" style="zoom:50%;" />
 
