@@ -187,11 +187,11 @@ Example:
 
 
 
-### D. classification of the attributes
+## 2.2 Synthesized and inherited attributes
 
 * #### ***synthesized attributes***
 
-在parse tree中从孩子指向父亲的属性是synthesized attributes
+在parse tree中从孩子指向父亲的属性是synthesized attributes. 在分析树节点N上的非终结符A的综合属性是由N上的产生式所关联的语义规则来定义的。这个产生式的头一定是A。<u>节点N上的综合属性只能通过N的子节点或N本身的属性值来定义</u>
 
 给定语法规则$A\rightarrow X_1X_2\cdots X_n$, the only associated attribute equation with an `a` on the left-hand side is of the form
 
@@ -216,6 +216,8 @@ end
 
 不是synthesized attributes就是inherited attributes
 
+在分析树节点N上的非终结符B的继承属性是由N的父节点上的产生式所关联的语义规则来定义的。这个产生式的体中必含符号B。<u>节点N上的综合属性只能通过N的父节点, N本身和N的兄弟节点上的属性值来定义</u>
+
 <img src="../../assets/images/image-20200425234201883.png" alt="image-20200425234201883" style="zoom:40%;" />
 
 ***计算***：
@@ -236,4 +238,11 @@ Remark:
 * The order in which the inherited attributes of the children are computed is important.
 
 * It must adhere to any requirements of the dependencies
+
+<br>
+
+## 2.3 Attributes as parameters and returned values
+
+* Inherited attributes: 经常是通过preorder遍历计算，所以将其作为调用的参数
+* synthesized attributes: 经常通过postorder遍历计算，所以将其作为return values
 
