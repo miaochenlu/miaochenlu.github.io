@@ -78,7 +78,7 @@ $X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_n.a_1,\cd
 
 ### B. 形式
 
-| Grammar Rule | Semantics Rules                |
+| Grammar Rule | Semantic Rules                 |
 | ------------ | ------------------------------ |
 | Rule 1       | Associated attribute equations |
 | ...          | ...                            |
@@ -245,4 +245,66 @@ Remark:
 
 * Inherited attributes: 经常是通过preorder遍历计算，所以将其作为调用的参数
 * synthesized attributes: 经常通过postorder遍历计算，所以将其作为return values
+
+
+
+# 3. The symbol table
+
+为什么要有符号表：这是一个外部存储结构，存储了符号的相关信息
+
+符号表包含的内容
+
+* the name of an identifier
+* additional information: kind, type, constant
+
+| NAME | KIND | TYPE               | ATTRIBUTES |
+| ---- | ---- | ------------------ | ---------- |
+| foo  | fun  | int x int --> bool | extern     |
+| m    | arg  | int                |            |
+| n    | arg  | int                | const      |
+| tmp  | var  | bool               | const      |
+
+## 3.1 The structure of the symbol table
+
+符号表可以有多种实现方式
+
+### A. Linear List
+
+* insert: constant time
+* look: linear time
+* delete: linear time
+
+线性表实现简单，但是效率不高
+
+
+
+### B. Various Search Tree Structures
+
+binary search tree, AVL tree, B tree
+
+这种实现效率不是最高的
+
+删除操作非常复杂
+
+
+
+### C. Hash Tables
+
+insert, look, delete几乎都可以在常数时间完成
+
+The size of the hash table: 几百到1000， 并且bucket array的长度应该选择一个素数
+
+
+
+#### The process of the hash function
+
+1. Converts a character string(the identifier name) into a nonnegative integer.
+2. These integers are combined in someway to form a single integer
+3. The result integer is scaled to the range 0,... ,size-1
+
+<br>
+
+#### The algorithm of the hash function
+
+repeatedly use a constant number $\alpha$ as a multiplying factor when adding in the value of the next character.
 
