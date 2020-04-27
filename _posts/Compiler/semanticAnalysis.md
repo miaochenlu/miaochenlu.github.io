@@ -308,3 +308,110 @@ The size of the hash table: 几百到1000， 并且bucket array的长度应该�
 
 repeatedly use a constant number $\alpha$ as a multiplying factor when adding in the value of the next character.
 
+$h_{i+1}=\alpha h_i+c_i,h_0=0$
+
+final hash value $h=h_n\mod{size}$
+
+n是这个string中字符的数量
+
+$h=(\alpha^{n-1}c_1+\alpha^{n-2}c_2+\cdots+\alpha c_{n-1}+c_n)\mod {size}$
+
+$\alpha$的选择会影响效率，一般选择$\alpha$为2的幂次，这样的话可以用移位实现乘法，效率更高。
+
+
+
+## 3.2 Declarations
+
+分类
+
+* 常量声明
+* 类型声明
+* 变量声明
+* procedure/function声明
+
+
+
+### A. Constant Declarations
+
+Value binding: associate values to names
+
+The values that ca be bound determine how the compiler treats them
+
+* Pascal, Modula-2: the values in a constant declaration be **static**, computable by the compiler
+* C, Ada: permit constants to be **dynamic**, only computable during execution
+
+### B. Type Declarations
+
+Bind names to newly constructed types and may also create aliases for existing named types
+
+Type names are used in conjunction with a type equivalence algorithm(perform type checking of a program)
+
+### C. Variable Declarations
+
+Bind names to data types
+
+变量声明时可能绑定了其他隐藏属性，比如变量作用域
+
+### D. Procedure/Function Declarations
+
+
+
+
+
+### E. The strategies
+
+* 用一张symbol table来存储所有类型的声明
+* 用不同的symbol table来存储不同类型的声明
+* symbol table对应程序的不同区域，并且将这些symbol table根据文法规则连接起来
+
+
+
+## 3.3 Scope rules and block structure
+
+two rules:
+
+* Declarations before use
+* The most closely nested rule for block structure
+
+### A. Declaration Before Use
+
+* 符号表在parsing过程中建立
+
+* lookups to be performed as soon as a name reference is encountered in the code
+
+  * If the lookup fails
+    * a violation of declaration before use has occurred
+    * the compiler will issue an appropriate error message
+
+  ### B. The most closely nested rule for block structure
+
+  Block: any construct that can contain declarations, such as procedure/function declarations.
+
+  
+
+  * Pascal
+    * the blocks are the main program
+    * pr
+
+  
+
+```cpp
+int i, j;
+int f(int size) 
+{
+  {
+    char i, temp; ...
+  }
+  {
+    double j; ...
+  }
+  {
+    char* j; ...
+  }
+}
+```
+
+
+
+## 3.4 Interation of same-level declarations
+
