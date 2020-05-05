@@ -117,3 +117,27 @@ key schedule从原始的56位密码中得到16个round key $k_i$, 其中每个$k
 
 ### A. 逆向密钥编排
 
+
+
+
+
+
+
+# 1. Bulge function
+
+下图是两个32位的二进制串
+
+<img src="../../assets/images/image-20200502084109430.png" alt="image-20200502084109430" style="zoom:50%;" />
+
+这两个二进制串有17个位置的取值相同(已经用x在下方标出),成为aggrements，剩下15个位置的取值不同，称为disaggrements。
+
+我们可以用aggrements-disaggrements来表示index of coincidence.
+
+在统计上，衡量两个二进制串的关系的方法称为correlation, 在统计学上，称为bulge
+
+在上面的case中，有17个aggrements和15个disaggrements, 那么这两个序列的bulge是17-15=2
+
+
+
+
+
