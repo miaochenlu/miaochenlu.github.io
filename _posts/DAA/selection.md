@@ -398,5 +398,35 @@ Does an n-bits string B contain the substring 01?
 
 ### B. Finding 01 Patterns in Even-Length
 
-假设$n=6$
+如果一个二进制串不含01， B=11...100...0
+
+adversary维护两个指针$s,t$ 并且$ s<t$
+
+<img src="../../assets/images/image-20200505152704088.png" alt="image-20200505152704088" style="zoom:50%;" />
+
+为了不含01
+
+* 所有$<s$的位需要检查，因为他们可能是0
+* 所有$>t$的位需要检查，因为他们可能是1
+* 开始时，$s=0,t=n+1$
+* Adversary始终保持$s,t$中间的二进制串的长度$t-s-1$是奇数
+* 判断中间奇数长度的串是否含有01
+
+<br>
+
+### C. Adversary for bit strings of even length
+
+Query B(i)
+
+&emsp;$=1$ if $i<s$
+
+&emsp;$=0$ if $i>t$
+
+&emsp;$=1$ and let $s=i$  if $s<i<t$ and $(i-s)$ even
+
+&emsp;$=0$ and let $t=i$  if $s<i<t$ and $(i-s)$ odd
+
+因此每个bit都要被检查
+
+<br>
 
