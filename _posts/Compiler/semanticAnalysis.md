@@ -1,10 +1,27 @@
+在一个典型的静态类型的语言 (如C语言)中， 语义分析包括
+
+* 构造符号表
+* 记录声明中建立的名字的含义
+* 在表达式和语句中进行类型推断和类型检查
+* 在语言的类型规则作用域内判断它们的正确性
+
+语义分析可以分为两类，这两类不是相互排斥的
+
+* 程序的分析
+
+> 要求根据编程语言的规则建立其正确性， 并保证其正确执行
+>
+> LISP和Smalltalk这类动态制导的语言中，可能完全没有静态语义分析；而在 Ada这类语言中就 有很强的需求，程序必须提交执行
+
+* 编译程序执行的分析
+
+> 提高翻译程序执行的效率。通常包括对“最优化”或代码改进技术的讨论
+
 # 1. Attributes and attribute grammars
 
-## 1.1 Some Conceptions
+## 1.1 Attributes
 
-### A. Attributes
-
-那些是属性？
+#### 哪些是Attributes？
 
 * The ***data type*** of a variable
 * The ***value*** of an expression
@@ -12,24 +29,24 @@
 * The ***object code*** of a procedure
 * The ***numbers*** of significant digits in a number
 
+#### 什么时候确定属性?
+
 属性可以在编译过程中确定也可以在程序执行过程中确定
 
-### B. Binding
+如: 一个数的有效位数可以在编译时确定; (非常数)表达式的值， 或者动态分配的数据结构的位置在执行时确定
+
+#### 什么时候binding?
 
 绑定是计算属性的值并且将属性值绑定到属性名
 
 Binding Time:  绑定发生的时间 compilation/execution
-
-
 
 根据绑定时间可以将属性分类
 
 * ***static attributes***: be bound prior to execution
 * ***dynamic attributes***: be bound during exectuion
 
-
-
-### C. Type check
+#### Type check
 
 A type checker的工作
 
@@ -58,19 +75,17 @@ Type checking=set of rules that ensure the type consistency of different constru
 
 ### A. 定义
 
-`X.a`: the value of a associated to `X`
+在***Syntax-directed semantics***(语法制导语义)中, 属性直接和语法符号关联绑定
 
-`X`是语法符号,`a`是`X`绑定的一个属性
+如果`X`是一个文法符号,`a`是`X`的一个属性, 那么我们把与 X关联的a的值 记作`X.a`
 
 <br>
 
-所谓***Syntax-directed semantics***: 属性直接和语法符号关联绑定
+给定属性$a_1,a_2,\cdots$, 对于一个语法规则$X_0\rightarrow X_1X_2\cdots X_n$($X_0$是非终结符,其他$X_i$是任意符号)，$X_i.a_j$的值和其他符号的属性值相关
 
-给定属性$a_1,a_2,\cdots$, 对于一个语法规则$X_0\rightarrow X_1X_2\cdots X_n$($X_0$是非终结符)，$X_i.a_j$和其他符号的属性相关
+因为这种相关，我们可以写出attribute equation
 
-因为这种相关，我们可以写出数学表达式
-
-$X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_n.a_1,\cdots,X_n.a_k)$
+$$X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_n.a_1,\cdots,X_n.a_k)$$
 
 我们称这样的语法规则为为attribute grammar
 
@@ -84,9 +99,9 @@ $X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_n.a_1,\cd
 | ...          | ...                            |
 | Rule n       | Associated attribute equations |
 
-Example1：
+<br>
 
-Given grammar rules
+***Example1：*** Given grammar rules
 
 $number\rightarrow number\;digit\vert digit$
 
@@ -107,26 +122,21 @@ $digit\rightarrow 0\vert 1\vert 2\vert 3\vert 4\vert 5\vert 6\vert 7\vert 8\vert
 | $digit\rightarrow 8$                | digit.val=8                                |
 | $digit\rightarrow 9$                | digit.val=9                                |
 
-**注意第一行$number1\rightarrow number2\;digit$, 因为左右两边number有重复，因此改写为number1, number2来做一个区分**
+**注意第一行$number1\rightarrow number2\;digit$, 在这个 文法规则中对number 的两次出现必须进行区分，因为右边的 number 和左边的number的值不相 同因此改写为number1, number2**
 
 give number 345
 
 <img src="../../assets/images/image-20200425192538263.png" alt="image-20200425192538263" style="zoom:50%;" />
 
-
-
-
-
 ## 1.3 Simplifications and Extensions to Attribute Grammars
 
 ### A. 一些概念
 
-* attribute grammar的***Metalanguage***(元语言): the collection of expressions allowable in an attribute equation
+* 在属性等式中，原序出现的表达式的集合称为属性文法的元语言(metalanguage)
 
-  * 限制算术型，逻辑型表达式
+  * 算术式，逻辑式
   * if-then-else表达式，switch-case表达式
-
-* ***Functions***可以被加入到元语言中，他的定义可以在另外的地方
+  * ***Functions***可以被加入到元语言中，必须在别处说明其作为属性文法的补充的定义
 
   $digit\rightarrow D$
 
@@ -136,7 +146,7 @@ give number 345
 
 ### B. 简化的方法
 
-1. 使用歧义文法(所有歧义都在parser阶段处理了)
+1. 使用原始文法二义性的但简单的形式(事实上，所有歧义都在parser阶段处理了)
 
 <img src="../../assets/images/image-20200425194213074.png" alt="image-20200425194213074" style="zoom:35%;" />
 
@@ -144,9 +154,19 @@ give number 345
 
 <img src="../../assets/images/image-20200425194042640.png" alt="image-20200425194042640" style="zoom:40%;" />
 
-2. 用抽象语法树来代替语法树
+2. 在显示属性值时，用抽象语法树来代替语法树
 
 <img src="../../assets/images/image-20200425194122636.png" alt="image-20200425194122636" style="zoom:40%;" />
+
+使用两个辅助函数
+
+* mkOpNode
+  * 3个参数(构成一个树节点)
+    * 一个操作符标记
+    * 两个语法树
+* mkNumNode(构成一个叶子节点)
+  * 1个参数
+  * 数字值
 
 <img src="../../assets/images/image-20200425194348302.png" alt="image-20200425194348302" style="zoom:40%;" />
 
@@ -158,31 +178,74 @@ give number 345
 
 ### A. dependency graph
 
+给定一个属性文法，每个文法规则选择有一个相关依赖图 (associated dependency graph)。 文法规则中的每个符号在这个图中都有用每个属性 $X_i.a_j$ 标记的节点，对每个属性等式
+
+$$X_i.a_j=f_{ij}(\cdots,X_m.a_k,\cdots)$$
+
+相当于文法规则从在右边的每个节点$X_m.a_k$到节点$X_i.a_j$有一条边(表示$X_i.a_j$对$X_m.a_k$的依赖)
 
 
-$X_i.a_j=f_{ij}(\cdots,X_m.a_k,\cdots)$
-
-An edge from each node $X_m.a_k$ to $X_i.a_j$ expressing the dependency of $X_i.a_j$ on $X_m.a_k$
-
-
-
-<img src="../../assets/images/image-20200425232017467.png" alt="image-20200425232017467" style="zoom:50%;" />
 
 Example:
 
+$decl\longrightarrow type\; var-list$
 
+$type\longrightarrow int\vert float$
+
+$var-list\longrightarrow id,var-list\vert id$
+
+<br>
+
+* 文法规则$var-list\longrightarrow id,var-list\vert id$对应两个属性等式
+
+&emsp;$id.dtype = var-list_1 .dtype$
+
+&emsp;$var-list_2 .dtype = var-list_1.dtype$
+
+&emsp;画出依赖图
+
+<img src="../../assets/images/image-20200508155649508.png" alt="image-20200508155649508" style="zoom:50%;" /><img src="../../assets/images/image-20200508155702892.png" alt="image-20200508155702892" style="zoom:50%;" />
+
+要注意的是：在画语法树节点时我们不使用属性的圆点符号，而是通过写出与其相连的下一个节点来表示属性。这样，在这个例子中第一个相关 也可以画作
+
+<img src="../../assets/images/image-20200508160044295.png" alt="image-20200508160044295" style="zoom:50%;" />
+
+* $type\longrightarrow int\vert float$无关紧要
+* $decl\longrightarrow type\; var-list$
+
+&emsp;$var-list.dtype=type.dtype$
+
+&emsp;画出依赖图
+
+<img src="../../assets/images/image-20200508155836697.png" alt="image-20200508155836697" style="zoom:50%;" />
+
+&emsp;在这种情况中，因为decl不直接包含在相关图中，所以这个相关图相关的文法规则并不完全清晰。我们通常**重叠在相应的文法规则的语法树片段上绘制相关图**。这样，上面的相关图就可以画作
+
+<img src="../../assets/images/image-20200508155926030.png" alt="image-20200508155926030" style="zoom:50%;" />
+
+`float x,y`的相关图是
+
+<img src="../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:50%;" />
 
 ### B. Directed acyclic graphs(DAG)
 
-算法必须计算出dependency graph中每个node的属性值后才能计算后续属性
+算法必须计算出dependency graph中每个node的属性值后才能计算后续属性。因此可以用拓扑排序得到一个计算顺序，拓扑排序要求图无环
 
-可以用拓扑排序来计算一下顺序，拓扑排序要求图无环
+给节点编号
 
+<img src="../../assets/images/image-20200508160448119.png" alt="image-20200508160448119" style="zoom:50%;" />
 
+<br>
 
-### C. find attribute values at roots
+### Comments
 
-* Parse tree method:  construction of the dependency graph is based on the specific parse tree at compile time, add complexity and need circularity detective.
+* Parse tree method:  
+
+  这种方法存在问题
+
+  * 在编译时构造相关图增加了额外的复杂性
+  * 这种方法在编译时确定相关图是否非循环时，它通常不恰当地等待发现一个环，直到到达编译时间，因为在原始的属性文法中， 环几乎都是表示错误。 换句话说， 属性文法必须预先进行无环测试。有一个算法进行这个工作，但这是一个时间***指数级增长***的算法。
+
 * Rule based method: fix an order for attribute evaluation at compiler construction time. It depends on an analysis of the attribute equations, or semantics rules.
 
 
@@ -212,9 +275,7 @@ begin
 end
 ```
 
-* ***inherited attributes***
-
-不是synthesized attributes就是inherited attributes
+* #### ***inherited attributes***
 
 在分析树节点N上的非终结符B的继承属性是由N的父节点上的产生式所关联的语义规则来定义的。这个产生式的体中必含符号B。<u>节点N上的综合属性只能通过N的父节点, N本身和N的兄弟节点上的属性值来定义</u>
 
@@ -229,7 +290,7 @@ procedure preEval(T:treenode)
 begin
 	for each child C of T do
 		computed all inherited attributes of C
-	preEval(C)
+		preEval(C)
 end
 ```
 
@@ -241,10 +302,141 @@ Remark:
 
 <br>
 
+#### Example:
+
+<img src="../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:50%;" />
+
+代码中混合了前序和中序操作
+
+* Inorder: decl node
+* Preorder: var-list node
+
+```pascal
+procedure evalType(T:treenode);
+begin
+	case nodekind of T of //根据node的类型
+	decl:
+				//判断type.dtype
+				evalType(type child of T)	
+				//将type.dtype赋值给var-list
+				assign dtype of type child of T to var-list child of T
+				//为var-list的dtype赋值
+				evalType(var-list child of T)
+	type: 
+				if child of T = int then T.dtype := integer
+				else T.dtype := real;
+	var-list:
+				//将var-list.dtype赋值给第一个儿子
+				assign T.dtype to first child of T;
+				//如果有第三个儿子，继续赋值
+				if third child of T is not nil then
+							assign T.dtype to third child;
+							evalType(third child of T);
+	end case;
+end EvalType;
+```
+
+
+
+<img src="../../assets/images/image-20200508175426749.png" alt="image-20200508175426749" style="zoom:50%;" />
+
+```cpp
+typedef enum {decl, type, id} nodekind;
+typedef enum {integer, real} typekind;
+typedef struct treenode {
+  nodekind kind;
+  //sibling是给var-list用的
+  struct treenode *lchild, *rchild, *sibling;
+  typekind dtype;
+  char* name;
+}*Syntaxtree;
+
+void evaltype(syntaxtree t) {
+  switch(t->kind) {
+    case decl:
+      t->rchild->dtype = t->lchild->dtype;
+      evaltype(t->rchild);
+      break;
+    case id:
+      if(t->sibling != NULL) {
+        t->sibling->dtype = t->dtype;
+        evaltype(t->sibling);
+      }
+      break;
+  }
+}
+```
+
+
+
 ## 2.3 Attributes as parameters and returned values
 
-* Inherited attributes: 经常是通过preorder遍历计算，所以将其作为调用的参数
-* synthesized attributes: 经常通过postorder遍历计算，所以将其作为return values
+* Inherited attributes: 经常是通过preorder遍历计算，所以将其作为调用的参数(从上往下传)
+* synthesized attributes: 经常通过postorder遍历计算，所以将其作为return values(从下往上传)
+
+## 2.4 使用扩展数据结构存储属性值
+
+对那些不能方便地把属性值作为参数或返回值使用的情况 (特别是当属性值有重要的结构时，在翻译时可能专门需要 )， 把属性值存储在语法树节点也是不合理的。 在这些情况中， 如查表、图以及其他一些数据结构对于获得属性值的正确活动和可用性都是有用的。
+
+## 2.5 语法分析时属性的计算
+
+提出问题：在分析阶段的同时要计算哪种扩展属性，而无须等到通过语法树的递归遍历进行对源代码的多遍处理?
+
+在一次分析中哪些属性能成功地计算在很大程度上要取决于使用分析方法的能力和性质。 这样一个重要的限制是所有主要的分析方法都***从左向右处理输入程序*** (这也是前面两章研究LL 和LR分析技术的第1个L的内容)。它等价于要求属性能通过从左向右遍历分析树进行赋值。
+
+对于合成属性这不是一个限制，因为节点的子节点可以用任意顺序赋值，特别是从左向右。但是对于继承属性，这就意味着在相关图中没有“向后”的依赖 (在分析树中依赖从右指向左 )。
+
+`definition`{:.error}
+
+定义$a_1,\cdots,a_k$的一个属性文法是**L-attributed**, 如果对每个继承属性$a_j$和每个文法规则
+
+$$X_0\longrightarrow X_1X_2\cdots X_n$$
+
+$a_j$的相关等式都有以下形式
+
+$X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_{i-1}.a_1,\cdots,X_{i-1}.a_k)$
+
+在$X_i$处$a_j$的值只依赖于在文法规则中$X_i$左边出现的符号$X_0,\cdots,X_{i-1}$的属性
+
+<br>
+
+给定一个L-属性文法， 其继承属性不依赖于合成属性， 如前所述， 通过把继承属性转换成参数以及把合成属性转换成返回值，递归下降的分析程序可以对所有的属性赋值。
+
+然而， LR分析程序，如Yacc产生的LALR(1)分析程序，适合于处理主要的**合成属性**。反过来说，其原因在于LR分析程序的功能强于 LL分析程序。当已知在一个派生中使用的文法规则时，属性才变成可计算的，这是因为只有在那时才能确定属性计算的等式。但是， LR分析程序将确定在派生中使用的文法规则推迟到文法规则的右部完全形成时才使用。这使得使用继承属性十分困难，除非它们的特性对于所有可能的右部选择都是固定的。
+
+<br>
+
+* LR分析中合成属性的计算: LR分析程序中,通常由一个value stack存储合成属性。value stack将和parsing stack并行操作，根据属性等式每次在分析栈出现shift或reduce来计算新值。
+
+<img src="../../assets/images/image-20200508224900790.png" alt="image-20200508224900790" style="zoom:50%;" />
+
+* Inheriting a previously computed synthesized attributes during LR parsing
+
+比如$A\longrightarrow B\;C$ 
+
+$C.i=f(B.s)$ 其中s是合成属性
+
+处理方法是在B,C中间插入空产生式D, 处理D时暂存B的属性值
+
+<img src="../../assets/images/image-20200508225812526.png" alt="image-20200508225812526" style="zoom:50%;" />
+
+在Yacc中处理起来就容易了, 直接 
+
+```flex
+A:B{saved_i=f($1);}C;
+```
+
+这里伪变量$1指的是B的值，动作执行时它在栈顶)
+
+* 如果我们能够预测以前计算的合成属性在什么位置的话，可以在value stack中直接访问来解决一些继承属性的计算问题
+
+<img src="../../assets/images/image-20200508230350269.png" alt="image-20200508230350269" style="zoom:50%;" />
+
+
+
+### 2.6 The Dependence of Attribute Computation on the Syntax
+
+> Knuth: Given an attribute grammar, **all inherited attributes can be changed into synthesized attributes** by suitable modification of the grammar, without changing the language of the grammar.
 
 
 
@@ -266,6 +458,10 @@ Remark:
 
 ## 3.1 The structure of the symbol table
 
+符号表的作用是将标识符映射到他们的类型和存储位置。在处理类型，变量和函数的声明时，这些标识符便与其在符号表中的含义相绑定。每当发现标识符的使用时，便在符号表中查看他们的含义。
+
+符号表的主要操作有：插入，查找，删除
+
 符号表可以有多种实现方式
 
 ### A. Linear List
@@ -282,9 +478,7 @@ Remark:
 
 binary search tree, AVL tree, B tree
 
-这种实现效率不是最高的
-
-删除操作非常复杂
+这种实现效率不是最高的并且删除操作非常复杂
 
 
 
@@ -318,7 +512,12 @@ $h=(\alpha^{n-1}c_1+\alpha^{n-2}c_2+\cdots+\alpha c_{n-1}+c_n)\mod {size}$
 
 $\alpha$的选择会影响效率，一般选择$\alpha$为2的幂次，这样的话可以用移位实现乘法，效率更高。
 
+#### Deal with collisions
 
+* open addressing 
+* separate chaining
+
+<img src="../../assets/images/image-20200509225410307.png" alt="image-20200509225410307" style="zoom:50%;" />
 
 ## 3.2 Declarations
 
