@@ -51,7 +51,7 @@ Else begin
 
 $$T(n)=\begin{aligned}&2T(n/2)+2&n>2\\&1&n=2\\&0&n=1\end{aligned}$$
 
-$\begin{aligned}T(n)=&2T(n/2)+2\\=&2(2T(n/4)+2)+2\\&\vdots\\=&2^{m-1}T(2)+2^{m-1}+2^{m-2}+\cdots+2^2+2\\=&2^{m-1}+2^m-2\\=&\frac{3n}{2}-2 \end{aligned}$
+$$\begin{aligned}T(n)=&2T(n/2)+2\\=&2(2T(n/4)+2)+2\\&\vdots\\=&2^{m-1}T(2)+2^{m-1}+2^{m-2}+\cdots+2^2+2\\=&2^{m-1}+2^m-2\\=&\frac{3n}{2}-2 \end{aligned}$$
 
 接下来我们说明这个下界是紧的
 
@@ -106,7 +106,7 @@ step 2: 剩下n-2个unit的信息可以通过做n-2次比较得到
 
 比如一个含有$n=255$元素的集合, 我们想找他的median( rank k=128). 假设拆分后$S_1$有96个元素，$S_2$有159个元素。那么median就在$S_2$中，并且在$S_2$中rank 32位。
 
-这个例子也向我们说明了，找median和找第k大大元素本质上是一样就大。因此我们去求解general selection problem.
+这个例子也向我们说明了，找median和找第k大的元素本质上是一样就大。因此我们去求解general selection problem.
 
 ## 4.2 A Linear-Time Selection Algorithm
 
@@ -114,11 +114,13 @@ algorithm
 
 ***Input：***
 
-​	 **S**， a set of keys；
+&emsp;&emsp; **S**， a set of keys；
 
-​	 **k**， an integer such that $1\leq k\leq n$
+&emsp;&emsp;**k**， an integer such that $1\leq k\leq n$
 
-***Output:*** The kth smallest key in **S**
+***Output:*** 
+
+&emsp;&emsp;The kth smallest key in **S**
 
 
 
@@ -130,41 +132,41 @@ Element selection(SetOfElements S, int k)
 
 1. 将keys分成组，每组5个元素，找到每个组的median(最后一个组可能少于5个元素，但是我们也称其为一个5元集合)。令每个集合的median为M。令$n_M=\vert M\vert =\lceil n/5\rceil$.  我们可以得到下图。每个5元组中，2个较大的出现在median上面，2个较小的出现在median下方
 
-<img src="../../../assets/images/image-20200503225822352.png" alt="image-20200503225822352" style="zoom: 33%;" />
+<img src="../../../assets/images/image-20200503225822352.png" alt="image-20200503225822352" style="zoom: 40%;" />
 
 2. $m^*=select(M,\lceil\frac{\vert M\vert}{2}\rceil)$
 
 ($m^*$ 是M的median)
 
-加下来，我们将这些5元组重新排列，median大于$m^*$的放在他右边，median小于$m^*$放在他左边。排列后我们将这些数分区，B区都是$>m^*$, C区都是$<m^*$
+加下来，我们将这些5元组重新排列，median大于$m^*$ 的放在他右边，median小于$m^*$放在他左边。排列后我们将这些数分区，B区都是$>m^*$, C区都是$<m^*$
 
 <img src="../../../assets/images/image-20200503232127308.png" alt="image-20200503232127308" style="zoom: 40%;" />
 
 3. 将A区，D区元素和$m^*$进行比较, 结合B区和C区后，得到如下两个集合
 
-$S_1=C\cup\{$ keys from $A\cup D$ that are smaller than $m^*\}$ 
+$$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;smaller \;than\;m^*\}$$
 
-$S_2=B\cup\{$ keys from $A\cup D$ that are larger than $m^*\}$ 
+$$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;slarger \;than\;m^*\}$$
 
 4. Divide and Conquer
 
 if ($k=\vert S_1\vert +1$)
 
-&emsp; $m^*$ is the kth-smallest key
+&emsp;&emsp; $m^*$ is the kth-smallest key
 
-&emsp; return $m^*$
+&emsp;&emsp; return $m^*$
 
 else if ($k\leq\vert S_1\vert$)
 
-&emsp;the kth-smallest key is in $S_1$
+&emsp;&emsp;the kth-smallest key is in $S_1$
 
-&emsp;return select($S_1$, k)
+&emsp;&emsp;return select($S_1$, k)
 
 else 
 
-&emsp;the kth-smallest key is in $S_2$
+&emsp;&emsp;the kth-smallest key is in $S_2$
 
-&emsp;return select($S_2,k-\vert S_1\vert -1$)
+&emsp;&emsp;return select($S_2,k-\vert S_1\vert -1$)
 
 ## 4.3 Analysis
 
@@ -177,8 +179,7 @@ else
 1. 找到每个5元组的median: 每组需要6次比较，一共需要$6(n/5)$次比较
 2. 递归去找median of medians, 找到$m^*$: $W(n/5)$
 3. 将A和D区的元素与$m^*$比较: 一共需要$4r$次比较
-
-4. 递归select， 在最坏的情况下，A和D的4r个元素都比$m^*$大或者都比$m^*$小，B和C各有$3r+2$个元素，所以select的最大规模为$7r+2$: $W(7r+2)$
+4. 递归select， 在最坏的情况下，A和D的4r个元素都比$m*$大或者都比$m*$小，B和C各有$3r+2$个元素，所以select的最大规模为$7r+2$: $W(7r+2)$
 
 $W(n)\leq 1.2n+W(0.2n)+0.4n+W(0.7n)=1.6n+W(0.2n)+W(0.7n)$
 
@@ -238,7 +239,6 @@ Comparisons of x and y where $x>median$ and $y<median$ are noncrucial
 | N, N         | (S, L) Make one key larger than median ,the other smaller |
 | L, N or N, L | (L, S) Assign a value smaller than median to N            |
 | S, N or N, S | (L, S) Assign a value larger than median to N             |
-|              |                                                           |
 
 adversary采取的策略如上表格所示
 
