@@ -1,4 +1,23 @@
+---
+layout: article
+title: Probelm Reduction
+tags: DAA
+key: page-DAA
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image:
+    gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
+  background_image:
+    src: https://miaochenlu.github.io/picture/EDD6F47E7DDE25D08BB6320511A6F0BD.png
 
+
+
+
+---
+
+<!--more-->
 
 # 1. What is problem reduction
 
@@ -27,13 +46,23 @@ Upper bound for $P_1$: $time(A_1)\leq conversion\;time(input\;and \;output) +tim
 
 # 2. limits: If $P_1$ is hard, then so is $P_2$
 
-$P_1,P_2$是一个难度级别的。
+The general "reducing" algorithm, $P_1\propto P_2$
+
+1. 对于问题$P_1$的实例$I_1$, 生成问题$P_2$的实例$I_2$
+
+2. 用算法$A_2$解决问题$P_2$的实例$I_2$, 得到解$S_2$
+
+3. 将$S_2$转换成$I_1$的解$S_1$
+
+step 1 and 3 need to be dominated by step 2's runtime. 这个时候我们可以说$P_1, P_2$是一样难的
 
 如果可以很容易的解决$P_2$, 那么我们也可以很容易的解决$P_1$
 
 同样，如果解决$P_1$很难，那么解决$P_2$也很难。
 
 做reduction的目的就在于说明$P_2$ hard, 并不是真的要用它去解决问题
+
+
 
 ## 2.1 Examples
 
@@ -138,17 +167,7 @@ $$x_1<x_2<\cdots<x_i<x_{i+1}<\cdots<x_n$$
 
 
 
-## 2.2 Refining Reduction
 
-The general "reducing" algorithm, $P_1\propto P_2$
-
-1. 对于问题$P_1$的实例$I_1$, 生成问题$P_2$的实例$I_2$
-
-2. 用算法$A_2$解决问题$P_2$的实例$I_2$, 得到解$S_2$
-
-3. 将$S_2$转换成$I_1$的解$S_1$
-
-step 1 and 3 need to be dominated by step 2's runtime. 这个时候我们才可以说$P_1, P_2$是一样难的
 
 
 
@@ -190,3 +209,10 @@ Hamiltonian Cycle: (decision problem)
 
 > Given an unweighted graph G=(V,E), does the graph have a tour which visits every vertex exactly once?
 
+
+
+
+
+Reference
+
+[1] https://www.cs.princeton.edu/~rs/AlgsDS07/23Reductions.pdf

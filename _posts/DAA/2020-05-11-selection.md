@@ -1,4 +1,23 @@
-# Selection Problem
+---
+layout: article
+title: Selection
+tags: DAA
+key: page-DAA1
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image:
+    gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
+  background_image:
+    src: https://miaochenlu.github.io/picture/EDD6F47E7DDE25D08BB6320511A6F0BD.png
+
+
+
+
+---
+
+<!--more-->
 
 这里我们会讨论几个问题，这几个问题都可以归类到selection。除了找到解法外，我们还会讨论lower bounds。
 
@@ -111,7 +130,7 @@ Element selection(SetOfElements S, int k)
 
 1. 将keys分成组，每组5个元素，找到每个组的median(最后一个组可能少于5个元素，但是我们也称其为一个5元集合)。令每个集合的median为M。令$n_M=\vert M\vert =\lceil n/5\rceil$.  我们可以得到下图。每个5元组中，2个较大的出现在median上面，2个较小的出现在median下方
 
-<img src="../../assets/images/image-20200503225822352.png" alt="image-20200503225822352" style="zoom: 33%;" />
+<img src="../../../assets/images/image-20200503225822352.png" alt="image-20200503225822352" style="zoom: 33%;" />
 
 2. $m^*=select(M,\lceil\frac{\vert M\vert}{2}\rceil)$
 
@@ -119,7 +138,7 @@ Element selection(SetOfElements S, int k)
 
 加下来，我们将这些5元组重新排列，median大于$m^*$的放在他右边，median小于$m^*$放在他左边。排列后我们将这些数分区，B区都是$>m^*$, C区都是$<m^*$
 
-<img src="../../assets/images/image-20200503232127308.png" alt="image-20200503232127308" style="zoom: 40%;" />
+<img src="../../../assets/images/image-20200503232127308.png" alt="image-20200503232127308" style="zoom: 40%;" />
 
 3. 将A区，D区元素和$m^*$进行比较, 结合B区和C区后，得到如下两个集合
 
@@ -165,7 +184,7 @@ $W(n)\leq 1.2n+W(0.2n)+0.4n+W(0.7n)=1.6n+W(0.2n)+W(0.7n)$
 
 画出recursive tree
 
-<img src="../../assets/images/image-20200504183721696.png" alt="image-20200504183721696" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200504183721696.png" alt="image-20200504183721696" style="zoom:50%;" />
 
 <br>
 
@@ -173,11 +192,11 @@ $W(n)\leq 1.2n+W(0.2n)+0.4n+W(0.7n)=1.6n+W(0.2n)+W(0.7n)$
 
 为了找到中位数，我们必须知道每一个数与中位数的关系。也就是说，对任意一个数$x$, 我们必须知道$x>median$或者$x<median$。这样我们就可以建立如下的这样一棵树。每个节点代表一个key, 每条边代表一次比较，比较高的节点代表比较大的数值。
 
-<img src="../../assets/images/image-20200430142235098.png" alt="image-20200430142235098" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200430142235098.png" alt="image-20200430142235098" style="zoom:40%;" />
 
 如果有一些未知的key, 比如y, adversary可以改变y的值，从而改变median的值
 
-<img src="../../assets/images/image-20200430142641347.png" alt="image-20200430142641347" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200430142641347.png" alt="image-20200430142641347" style="zoom:50%;" />
 
 
 
@@ -253,13 +272,15 @@ Step 5: compare c and b, greater one is the median
 
 
 
-# Find X in a sorted matrix
+# 4. Selection problems
+
+## 4.1 Find X in a sorted matrix
 
 什么是sorted matrix?
 
 给定一个矩阵M，每一行每一列都是升序的
 
-<img src="../../assets/images/image-20200505131134816.png" alt="image-20200505131134816" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200505131134816.png" alt="image-20200505131134816" style="zoom:50%;" />
 
 我们的问题是：Find whether x is in sorted matrix M
 
@@ -267,7 +288,7 @@ Step 5: compare c and b, greater one is the median
 
 ### A. a solution
 
-<img src="../../assets/images/image-20200505132034647.png" alt="image-20200505132034647" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200505132034647.png" alt="image-20200505132034647" style="zoom:50%;" />
 
 algorithm: Find(x)
 
@@ -284,19 +305,19 @@ Example: Find(84)
 
 1. e=49, 比较49和84
 
-<img src="../../assets/images/image-20200505132631418.png" alt="image-20200505132631418" style="zoom:30%;" />
+<img src="../../../assets/images/image-20200505132631418.png" alt="image-20200505132631418" style="zoom:30%;" />
 
 2. 84>49, move down
 
-<img src="../../assets/images/image-20200505132931574.png" alt="image-20200505132931574" style="zoom:30%;" />
+<img src="../../../assets/images/image-20200505132931574.png" alt="image-20200505132931574" style="zoom:30%;" />
 
 3. 84>54, move down
 
-<img src="../../assets/images/image-20200505133035989.png" alt="image-20200505133035989" style="zoom:30%;" />
+<img src="../../../assets/images/image-20200505133035989.png" alt="image-20200505133035989" style="zoom:30%;" />
 
 4. 84<86, move left
 
-<img src="../../assets/images/image-20200505133139140.png" alt="image-20200505133139140" style="zoom:30%;" />
+<img src="../../../assets/images/image-20200505133139140.png" alt="image-20200505133139140" style="zoom:30%;" />
 
 5. 84=84, found!
 
@@ -308,17 +329,17 @@ Adversary的目标是: eliminate as less elements as possible
 
 我们可以发现每个6或者8的位置都可以被7代替。你可以不断去访问这些位置，在最后一次访问，adversary回答7在这个位置
 
-<img src="../../assets/images/image-20200505133321050.png" alt="image-20200505133321050" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200505133321050.png" alt="image-20200505133321050" style="zoom:50%;" />
 
 因此至少需要2n-1次比较
 
 
 
-# Merge Sorted Lists
+## 4.2 Merge Sorted Lists
 
 Problem: 合并两个有序列表$X_1<X_2<\cdots X_n$和$Y_1<Y_2<\cdots Y_n$到一个有序列表
 
-<img src="../../assets/images/image-20200505134230036.png" alt="image-20200505134230036" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200505134230036.png" alt="image-20200505134230036" style="zoom:50%;" />
 
 复杂度为$2n-O(n)$
 
@@ -354,7 +375,7 @@ X列表和Y列表保持顺序不变，但是最后形成的合并列表的顺序
 
 <br>
 
-# Graph Connectivity
+## 4.3 Graph Connectivity
 
 给定一个无向图$G=(V,E)$的邻接矩阵A, A是$n\times n$的, $A[i,j]=1\;or\;0$, query $Q(i,j)=1$ iff $A[i,j]=1$
 
@@ -374,11 +395,11 @@ Adversary策略：
 
 我们需要考虑A中所有的entry
 
-<img src="../../assets/images/image-20200505150449223.png" alt="image-20200505150449223" style="zoom:15%;" /><img src="../../assets/images/image-20200505150606133.png" alt="image-20200505150606133" style="zoom:15%;" /><img src="../../assets/images/image-20200505150727074.png" alt="image-20200505150727074" style="zoom:15%;" />
+<img src="../../../assets/images/image-20200505150449223.png" alt="image-20200505150449223" style="zoom:15%;" /><img src="../../../assets/images/image-20200505150606133.png" alt="image-20200505150606133" style="zoom:15%;" /><img src="../../../assets/images/image-20200505150727074.png" alt="image-20200505150727074" style="zoom:15%;" />
 
 
 
-# Finding Patterns in Bit Strings
+## 4.4 Finding Patterns in Bit Strings
 
 Does an n-bits string B contain the substring 01?
 
@@ -402,7 +423,7 @@ Does an n-bits string B contain the substring 01?
 
 adversary维护两个指针$s,t$ 并且$ s<t$
 
-<img src="../../assets/images/image-20200505152704088.png" alt="image-20200505152704088" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200505152704088.png" alt="image-20200505152704088" style="zoom:50%;" />
 
 为了不含01
 
