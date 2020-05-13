@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").select do |f|
     f.match(%r{^((_data|_includes|_layouts|_sass|assets)/|(LICENSE|README|CHANGELOG)((\.(txt|md|markdown)|$)))}i)
   end
-
+  spec.add_dependency "rake", ">= 12.3.3"
   spec.add_runtime_dependency "jekyll", "~> 3.5"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
   spec.add_runtime_dependency "jekyll-sitemap", "~> 1.0"
