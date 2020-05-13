@@ -25,7 +25,7 @@ Reducing $P_1$ to $P_2$ ($P_2$)
 
 我们想要解决问题 $P_1$， 手上有解决问题$P_2$的算法$A_2$。将问题$P_1$的实例$I_1$变换成问题$P_2$的实例$I_2$。用算法$A_2$解决$I_2$, 得到解$S_2$。再将$S_2$变换成$I_1$的解$S_1$.
 
-<img src="../../../assets/images/image-20200510093212231.png" alt="image-20200510093212231" style="zoom:50%;" />
+<img src="../../../../assets/images/image-20200510093212231.png" alt="image-20200510093212231" style="zoom:50%;" />
 
 这个合成的算法就是问题$P_1$的算法$A_1$
 
@@ -210,6 +210,154 @@ Hamiltonian Cycle: (decision problem)
 > Given an unweighted graph G=(V,E), does the graph have a tour which visits every vertex exactly once?
 
 
+
+### 4.2 Two more graph problems
+
+Max Independent set
+
+> 给定图$G=(V,E)$, 找到最大的集合$S\subseteq V$是的S中的任意一对点之间都没有边连接。
+
+Max-Clique
+
+> 给定图$G=(V,E)$, 找到最大的集合$S\subseteq V$使得S中的任意两个顶点都是邻接的
+
+`Theorem`{:.error}
+
+$Max-Clique\propto_p Max-Iin-Set$
+
+$Max-Ind-Set\propto_p Max-Clique$
+
+定义G'是G的complementary graph
+
+<img src="../../../assets/images/image-20200513130026713.png" alt="image-20200513130026713" style="zoom:50%;" />
+
+可以发现在G中的clique和在G'中的independent set是相同的
+
+<br>
+
+Algorithm:
+
+给定Max-Clique的算法$A_2$, 那么就有Max-Ind-Set的算法
+
+1. 根据G计算complementary graph G'
+2. 在G'中计算Max-Clique S
+3. 返回S，S也是G的Max-Ind-Set
+
+同理，Max-Clique的算法
+
+
+
+### 4.3 3SUM and Collinear
+
+#### A. 3SUM Problem
+
+3SUM
+
+> Given a set S of n distinct integers, are there $a,b,c\in S$ with $a+b+c=0$ ?
+
+Algorithm: $O(n^2)$
+
+1. Sort S in increasing order
+2. Consider $x_i,x_j, x_k$, start with $i=1,j=2,k=n$
+3. If $x_i+x_j+x_k<0$, then $j=j+1$ else $k=k-1$
+4. If no solution $i=i+1$ (and repeat)
+
+<img src="../../../assets/images/image-20200513131348193.png" alt="image-20200513131348193" style="zoom:30%;" />
+
+Example for 3SUM
+
+<img src="../../../assets/images/image-20200513131648712.png" alt="image-20200513131648712" style="zoom:40%;" />
+
+
+
+#### B. Collinearity
+
+Collinearity
+
+> Given a set of n points in the plane,  
+
+$3SUM\propto Collinearity$
+
+* 给定3SUM中的集合S, 将S中的整数$a$替换成3个点$(a,0),(-\frac{a}{2},1),(a,2)$
+* 那么我们在$y=0,y=1,y=2$这几条horizontal line上总共有3n个点
+* 任何一条non-horizontal line一定会和$y=0,y=1,y=2$相交于3个点，比如$(a,0),(\frac{-b}{2},1),(c,2)$
+* $slope=-\frac{b}{2}-a=c+\frac{b}{2}$, 因此如果collinear, 则有$a+b+c=0$
+* 如果$x,y,z\in S$, $x+y+z=0$, 那么$(x,0),(-\frac{y}{2},1), (z,2)$ are collinear
+
+<img src="../../../assets/images/image-20200513143232468.png" alt="image-20200513143232468" style="zoom:50%;" />
+
+当然这里存在一个问题，如果$x=y$, 那么这三个点就不是collinear的
+
+<br>
+
+复杂度
+
+$$T_{3SUM}(n)\leq T_{collinear}(3n)+O(n)$$
+
+$$T_{collinear}(n)\geq T_{3SUM}(\frac{n}{3})-O(n)$$
+
+<img src="../../../assets/images/image-20200513133711119.png" alt="image-20200513133711119" style="zoom:40%;" />
+
+#### C. Looking Back at 3SUM
+
+> Given a set S of n distinct integers, are there $a,b,c\in S$(***repetition allowed***) with $a+b+c=0$ ?
+
+Algorithm:  $O(n^2)$
+
+double S，S里面的元素复制一份，一共2n个元素
+
+1. Sort S in  increasing order
+2. Consider $x_i,x_j, x_k$, start with $i=1,j=2,k=n$
+3. If $x_i+x_j+x_k<0$, then $j=j+1$ else $k=k-1$
+4. If no solution $i=i+1$ (and repeat)
+
+<img src="../../../assets/images/image-20200513142041162.png" alt="image-20200513142041162" style="zoom:30%;" />
+
+
+
+### 4.4 Segment Splitting Problem
+
+Segment Splitting Problem
+
+> 给定一个平面上的line segments的集合，是否存在一条line既不和任何一条line segment相交，又能将这些line segment 分割成两个非空子集
+
+<img src="../../../assets/images/image-20200513142334774.png" alt="image-20200513142334774" style="zoom:50%;" />
+
+$3SUM\propto Collinearity\propto Segment Splitting$
+
+从3SUM变换到Collinearity的点集开始。
+
+点集如何和line segments集合扯上关系呢？
+
+将每个点用horizontal line segments之间的hole来表示
+
+我们可以发现：如果有3个点collinear，就存在直线分离line segments
+
+<img src="../../../assets/images/image-20200513143644153.png" alt="image-20200513143644153" style="zoom:30%;" />
+
+但是如果存在直线分离line segments，要推出3个点collinear就会有问题。
+
+因为我们的分离line segments的直线不一定能精准的经过那3个点。
+
+一个重要的问题是，这个hole应该画多大呢?
+
+应该为最近两点之间的距离那么大
+
+因此，在$O(nlogn)$时间内通过计算closest pair of points之间的距离来计算hole size
+
+除了3n line segments外，我们还要再加上这13个line segments
+
+<img src="../../../assets/images/image-20200513150223284.png" alt="image-20200513150223284" style="zoom:50%;" />
+
+
+
+<img src="../../../assets/images/image-20200513150040567.png" alt="image-20200513150040567" style="zoom:50%;" />
+
+复杂度
+
+$$T_{3SUM}(n)\leq T_{split}(3n+13)+O(nlogn)$$
+
+$$T_{split}(n)\geq T_{3SUM}(\frac{n-13}{3})-O(nlogn)$$
 
 
 
