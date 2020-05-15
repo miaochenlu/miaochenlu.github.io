@@ -471,7 +471,7 @@ It actually turns out that Matrix Inversion $\propto$ Matrix Multiplication
 
 我们可以在$O(n^{2.81})$的时间内计算matrix multiplication, 因此我们也可以在$O(n^{2.81})$的时间内计算matrix inversion
 
-
+<br>
 
 <br>
 
