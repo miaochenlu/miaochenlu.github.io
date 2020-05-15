@@ -1,3 +1,27 @@
+
+
+<img src="../../assets/images/image-20200515135555779.png" alt="image-20200515135555779" style="zoom:50%;" />
+
+
+
+Lex输入文件由3个部分组成：definition, rules, auxiliary routine
+
+```lex
+{definition}
+%%
+{rules}
+%%
+{auxiliary routines}
+```
+
+
+
+<img src="../../assets/images/image-20200515140528491.png" alt="image-20200515140528491" style="zoom:50%;" />
+
+
+
+
+
 YACC基于LSLR(1)
 
 ### How YACC Works

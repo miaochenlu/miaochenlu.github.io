@@ -361,6 +361,120 @@ $$T_{split}(n)\geq T_{3SUM}(\frac{n-13}{3})-O(nlogn)$$
 
 
 
+
+
+### 4.5 More Reductions: Knapsack
+
+knapsack problem
+
+> Given $n$ objects with weights and values, and a knapsack capacity $W$, find the maximum-value collection of objects with total weight $\leq W$.
+
+一个新问题：Partition
+
+> Given $n$ positive integers $a_1,a_2,\cdots,a_n$ , find a way of dividing them into two subsets, such that both subsets have the same sum.
+>
+> 也就是说找一个$I\subseteq\{1,\cdots,n\}$使得$\underset{i\in I}{\sum}a_i=\underset{i\notin I}{\sum}a_i$
+
+
+
+我们想要reduce Partition to Knapsack来考察Partition
+
+Claim: $Partition\propto Knapsack$
+
+Proof:
+
+给定Partition的实例$I_1$: $a_1,a_2,\cdots,a_n$, $a_i\geq 0$
+
+我们需要从$I_1$创建Knapsack的实例$I_2$, 这样我们就可以通过寻找Knapsack的解来寻找Partition的解了
+
+Basic Idea:
+
+设定knapsack capacity为$\frac{1}{2}\sum a_i$, 当他完全装满的时候价值最大
+
+然后我们构造weight和value
+
+对每个$I_1$中的数$a_i$ , 构造一个物品，他的weight和value都为$a_i$. 如果knapsack的max-value是$\frac{1}{2}\sum a_i$, 那么这是perfect partition.
+
+<br>
+
+Algorithm:
+
+给定Partition问题的实例$A=\{a_1,a_2,\cdots,a_n\}$
+
+1.构建一个n个物品的Knapsack问题实例，每个物品$O[i]$的weight和value都为$a_i$, knapsack的capacity $W=\frac{1}{2}\sum a_i$
+
+2.用DP解决knapsack问题
+
+如果optimal knapsack取到的value为$\frac{1}{2}(\sum a_i)$, 返回optimal knapsack的indices; 否则，返回"No perfect partition"
+
+Knapsack=$\frac{1}{2}\sum a_i $ iff Perfect Partition exists
+
+令$\sum a_i=A$
+
+Runtime: $O(n)+O(n\frac{1}{2}(\sum a_i))+O(n)=O(nA)$
+
+
+
+### 4.6 Example on Matrix
+
+Matrix inversions and matrix multiplication
+
+**Inversion:**
+
+给定A, 计算$A^{-1}$, i.e. $AA^{-1}=A^{-1}A=I$
+
+**Multiplication:** 给定$A,B$, 计算$A\cdot B$
+
+
+
+Matrix Multiplication $\propto$ Matrix Inversion
+
+Idea:
+
+假设有Matrix inversion的算法$A_2$, 那么Matrix multiplication的算法$A_1$可以由如下方式构造
+
+1.计算矩阵
+
+$$D=\left[\begin{matrix}I_n&A&0\\0&I_n&B\\0&0&I_n\end{matrix}\right]$$
+
+2.用算法$A_2$计算D的逆矩阵
+
+$$D^{-1}=\left[\begin{matrix}I_n&-A&AB\\0&I_n&-B\\0&0&I_n\end{matrix}\right]$$
+
+3.注意$D^{-1}$的右上角:$AB$就是结果
+
+复杂度
+
+Step1: $O(n^2)$
+
+Step2: Time to invert a $3n\times 3n$ matrix
+
+Step3: $O(n^2)$
+
+
+
+令$I(n)$为inversion algorithm $A_2$的时间复杂度。那么Matrix Multiplication的时间复杂度为$O(n^2+I(3n))$
+
+假定$I(3n)$是$O(I(n))$的，这在$I(n)$是多项式的时候是成立的，那么runtime就是$O(n^2+I(n))$
+
+因为$I(n)$是$\Omega(n^2)$, matrix multiplication $A_1$是$O(I(n))$
+
+<br>
+
+Other way around
+
+通过高斯消元可以在$O(n^3)$计算逆矩阵。更快的计算逆矩阵的算法也可以得到更快的matrix multiplication算法
+
+<br>
+
+It actually turns out that Matrix Inversion $\propto$ Matrix Multiplication
+
+我们可以在$O(n^{2.81})$的时间内计算matrix multiplication, 因此我们也可以在$O(n^{2.81})$的时间内计算matrix inversion
+
+
+
+<br>
+
 Reference
 
 [1] https://www.cs.princeton.edu/~rs/AlgsDS07/23Reductions.pdf
