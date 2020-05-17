@@ -83,9 +83,9 @@ It requires the use of EBNF. {} 循环 []一次或者0次
 
 <img src="../../../assets/images/image-20200326201319268.png" alt="image-20200326201319268" style="zoom:50%;" />
 
-从Expr开始，试图匹配a, 他应用规则1，在语法分析树的下边缘创建句型$Expr+Term$。现在，语法分析器再次面临非终结符Expr和输入单词a。 如果选择是一致的，他应该应用规则1，用$Expr+Term$替换Expr。不断重复
+从Expr开始，试图匹配a, 他应用规则1，在语法分析树的下边缘创建句型$Expr+Term$。现在，语法分析器再次面临非终结符Expr和输入单词a。 如果选择是一致的，他应该应用规则1，用$Expr+Term$替换$Expr$。不断重复
 
-之所以会出现这个问题，是因为语法在产生式中使用了左递归。在使用左递归的情况下，自顶向下语法分析器可能会无限循环，而不会生成与输入匹配的起始终结符(也不会前移输入位置)。
+之所以会出现这个问题，是因为语法在产生式中使用了**左递归**。在使用左递归的情况下，自顶向下语法分析器可能会无限循环，而不会生成与输入匹配的起始终结符(也不会前移输入位置)。
 
 > Example
 >
@@ -133,15 +133,11 @@ Begin
 End term;
 ```
 
-
-
 <br>
 
-**Q**: whether the **left associativity** implied by the curly bracket(花括号，循环) (and explicit in the original BNF) can still be maintained within this code.
+**Q**: 由花括号(和原始的BNF中的显式)表示的左**left associative**是否仍然保留
 
-<br>
-
-A recursive-descent calculator for the simple integer arithmetic of our grammar:
+如下所示temp := temp+term
 
 ```pascal
 function expr : integer;
@@ -180,8 +176,6 @@ The recursive-descent method is quite powerful and adequate to construct a compl
 
 <br>
 
-<br>
-
 最左匹配的自顶向下语法分析器中，低效的主要原因是回溯。如果语法分析器用错误的产生式扩展语法分析树的下边缘，在语法分析树的下边缘与词法分析器返回的单词之间，最终会出现不匹配的情况。在语法分析器发现这种不匹配情形时，它必须撤销构建出错误的语法分析树下边缘的操作，并尝试产生其他产生式。扩展，收缩，再扩展语法分析树下边缘的操作费时费力。
 
 如果语法分析器在选择下一条规则时，可以同时考虑当前关注的符号以及下一个输入符号(lookahead symbol)，可以消除在解析右递归表达式语法时多种选择造成的不确定性。因而，我们说该语法在look ahead 1个符号时是无回溯的。无回溯语法也称预测性语法。
@@ -190,7 +184,7 @@ The recursive-descent method is quite powerful and adequate to construct a compl
 
 
 
-first L--> from left to right
+first L--> from left to right(比如有一个expr $3+4+5$, 我们就会从3开始处理，最后是5)
 
 second L--> leftmost derivation
 
@@ -219,21 +213,17 @@ Want to decide which production to apply based on next symbol
 
 ### A. The Basic Method of LL(1) Parsing
 
-主要用到了stack
-
-<br>
-
 $S\rightarrow (S)S\vert \varepsilon$
 
 <img src="../../../assets/images/image-20200321204904747.png" alt="image-20200321204904747" style="zoom:30%;" />
 
-Parsing这一列是stack, $代表栈底的意思
+Parsing这一列是stack, $代表栈底
 
 Input是要分析的目标串，$代表end of input
 
 第一步,`S`是start symbol, action代表这一步采取的动作。`S`从stack中pop, 然后将`(S)S` push进stack, 进入的顺序是`S)S(`
 
-当栈顶是终结符的时候，执行match操作，非终结符则要使用一个产生式规则
+当栈顶是terminal的时候，执行match操作，nonterminal则要使用一个产生式规则
 
 <br>
 
@@ -275,7 +265,7 @@ Purpose of the LL(1) parsing table:
 
 N表示non-terminal , T表示terminal.
 
-横向摆放的是终结符, $表示结束状态，纵向摆放非终结符
+横向摆放的是terminal, $表示结束状态，纵向摆放non-terminal
 
 如果表项中存在空项，表明一个潜在的错误
 
@@ -289,10 +279,10 @@ N表示non-terminal , T表示terminal.
 
 `The table-constructing rule`{:.error}
 
-* If $A\rightarrow \alpha$ is a production choice, and there is a derivation $\alpha\Rightarrow^*a\beta$, where `a` is a token ,then add $A\rightarrow\alpha$ to the table entry $M[A,a]$ 这条关注第一个终结符是什么 first set
-* If $A\rightarrow \alpha$ is a production choice, and there are derivations $\alpha\Rightarrow^*\varepsilon$ and $S\$\Rightarrow^*\beta A\alpha\gamma $,  where S is the start symbol and a is a token(or \$), then add $A\rightarrow\alpha$ to the table entry $M[A,a]$. 这条说明如果非终结符可以为空的话，后面可以跟什么终结符 follow set
+* If $A\rightarrow \alpha$ is a production choice, and there is a derivation $\alpha\Rightarrow^*a\beta$, where `a` is a token ,then add $A\rightarrow\alpha$ to the table entry $M[A,a]$ 这条关注第一个terminal是什么 [first set]
+* If $A\rightarrow \alpha$ is a production choice, and there are derivations $\alpha\Rightarrow^*\varepsilon$ and S\$$\Rightarrow^*\beta A\alpha\gamma $,  where S is the start symbol and a is a token(or \$), then add $A\rightarrow\alpha$ to the table entry $M[A,a]$. 这条说明如果非终结符可以为空的话，后面可以跟什么终结符 follow set
 
-相当于构建前面所述FIRST+ set
+相当于构建前面后面讲的FIRST+ set
 
 <img src="../../../assets/images/image-20200321214342763.png" alt="image-20200321214342763" style="zoom:40%;" />
 
@@ -354,7 +344,7 @@ the production:  else-part → else statement preferred over the production  els
 
 {:.warning}
 
-对于CFG中的一个规则来说，如果其右侧第一鹅符号与左侧符号相同或者能够推导出左侧符号，那么成为该规则是左递归的。前一种情况称为直接左递归，后一种情况称为间接左递归。
+对于CFG中的一个规则来说，如果其右侧第一个符号与左侧符号相同或者能够推导出左侧符号，那么成为该规则是左递归的。前一种情况称为直接左递归，后一种情况称为间接左递归。
 
 Immediate left recursion: the left recursion occurs only within the production of a single non-terminal.
 
@@ -438,7 +428,7 @@ end
 >
 > Where A1=A, A2=B, and n = 2
 >
-> 1. When i = 1, the inner loop does not execute, so only to remove the immediate left recursion of A
+> 1.When i = 1, the inner loop does not execute, so only to remove the immediate left recursion of A
 >
 > $A\rightarrow BaA'\vert cA'$
 >
@@ -446,7 +436,7 @@ end
 >
 > $B\rightarrow Bb\vert Ab\vert d$
 >
-> 2. When i = 2, the inner loop execute once, with j = 1.
+> 2.When i = 2, the inner loop execute once, with j = 1.
 >
 > To eliminate the rule $B\rightarrow Ab$ by replacing A with its choices
 >
@@ -456,7 +446,7 @@ end
 >
 > $B\rightarrow Bb\vert BaA'b\vert cA'b\vert d$
 >
-> 3. remove the immediate left recursion
+> 3.remove the immediate left recursion
 >
 > $A\rightarrow BaA'\vert cA'$
 >
@@ -480,7 +470,7 @@ Left factoring is required when two or more grammar rule choices share a common 
 
 因为对于LL(1)来说，只看一个符号并不能从$\alpha\beta$和$\alpha\gamma$中做出选择。用提取左公因子的方法可以延迟选择
 
-$$A\rightarrow\alpha\beta\vert\alpha\gamma\Rightarrow\begin{aligned}A&\rightarrow\alpha A'\\A'&\rightarrow\beta\gamma\end{aligned}$$
+$$A\rightarrow\alpha\beta\vert\alpha\gamma\Rightarrow\begin{aligned}A&\rightarrow\alpha A'\\A'&\rightarrow\beta\vert\gamma\end{aligned}$$
 
 Algorithm
 
@@ -504,19 +494,19 @@ while there are changes to the grammar do
 
 `First Set`{:.error}
 
-> 对于语法符号 $\alpha$, FIRST($\alpha$ )是从 $\alpha$推导出的语句开头可能出现的终结符的集合。EOF隐含地出现在语法中每个语句的末尾，因而，它同时出现在FIRST的定义域和值域中。
+> 对于语法符号 $\alpha$, $FIRST(\alpha )$是从 $\alpha$推导出的语句开头可能出现的终结符的集合。EOF隐含地出现在语法中每个语句的末尾，因而，它同时出现在FIRST的定义域和值域中。
 
-Let X be a grammar symbol(a terminal or non-terminal) or $\varepsilon$. Then FIRST(X) is a set of terminals or $\varepsilon$, which is defined as follows.
+Let $X$ be a grammar symbol(a terminal or non-terminal) or $\varepsilon$. Then $FIRST(X)$ is a set of terminals or $\varepsilon$, which is defined as follows.
 
-1. If X is a terminal or $\varepsilon$, then FIRST(X)={X};
-2. If X is a non-terminal, then for each production choice $X\rightarrow X_1X_2\cdots X_n$, FIRST(X) contains $FIRST(X_1)-\{\varepsilon\}$
+1. If $X$ is a terminal or $\varepsilon$, then $FIRST(X)=\{X\}$;
+2. If $X$ is a non-terminal, then for each production choice $X\rightarrow X_1X_2\cdots X_n$, $FIRST(X)$ contains $FIRST(X_1)-\{\varepsilon\}$
 
 继续考虑2的情况
 
 Let $ \alpha=X_1X_2\cdots X_n$ be a string of terminals and non-terminals, First($\alpha$) is defined as follows:
 
-* First($\alpha$) contains First($X_1$)-{$\varepsilon$}
-* For each $i=2,\cdots,n$, if for all $k=1,\cdots ,i-1$, First($X_k$) contains $\varepsilon$, then First($\alpha$) contains $First(X_{k+1})-\{\varepsilon\}$
+* $First(\alpha)$ contains $First(X_1)-\{\varepsilon\}$
+* For each $i=2,\cdots,n$, if for all $k=1,\cdots ,i-1$, $First(X_k)$ contains $\varepsilon$, then $First(\alpha)$ contains $First(X_{k+1})-\{\varepsilon\}$
 * If all the set $First(X_1),\cdots,First(X_n)$ contains $\varepsilon$, then $First(\alpha)$ contains $\varepsilon$
 
 <br>
@@ -528,8 +518,6 @@ Let $ \alpha=X_1X_2\cdots X_n$ be a string of terminals and non-terminals, First
 
 
 `Algorithm: `{:.error}
-
-<br>
 
 for each $ \alpha\in(T\cup EOF\cup\varepsilon)$ do: 	//对于终结符和EOF和$\varepsilon$, FIRST set就是本身
 
@@ -575,13 +563,13 @@ end;
 
 <br>
 
-Definition:
+`Definition`{:.warning}
 
 &emsp; A non-terminal A is ***nullable*** if there exists a derivation $A\Rightarrow^*\varepsilon$
 
-Theorem:
+`Theorem`{:.error}
 
-&emsp; A non-terminal A is ***nullable*** if and only if First(A) contains $\varepsilon$.
+&emsp; A non-terminal A is ***nullable*** if and only if $First(A)$ contains $\varepsilon$.
 
 <br>
 
@@ -597,15 +585,15 @@ Theorem:
 
 ### B. FOLLOW set
 
-`Follow`{:.error}
+`Follow Set`{:.error}
 
 > 对于非终结符$\alpha$, Follow($\alpha$)是在语句中紧接$\alpha$出现的单词的集合
 
 Given a non-terminal A, the set Follow(A):
 
 1. if A is the start symbol, the \$ (represent EOF) is in the Follow(A)
-2. if there is a production $B\rightarrow\alpha A\gamma$, then $First(\gamma)-\{\varepsilon\}$ is in Follow(A) [和计算FIRST set不同，计算FOLLOW set要看产生式右边有A的情况，然后计算A后面式子的FIRST set]
-3. if there is a production $B\rightarrow\alpha A\gamma$, such that $\varepsilon$ in $First(\gamma)$, then Follow(A) contains Follow(B).[因为$\gamma$可以为$\varepsilon$, 所以有$B\rightarrow\alpha A$, 因此可以跟在A后面的符号也一定可以跟在B(=$\alpha A$) 后面]
+2. if there is a production $B\rightarrow\alpha A\gamma$, then $First(\gamma)-\{\varepsilon\}$ is in $Follow(A)$ [和计算FIRST set不同，计算FOLLOW set要看产生式右边有A的情况，然后计算A后面式子的FIRST set]
+3. if there is a production $B\rightarrow\alpha A\gamma$, such that $\varepsilon$ in $First(\gamma)$, then $Follow(A)$ contains $Follow(B)$.[因为$\gamma$可以为$\varepsilon$, 所以有$B\rightarrow\alpha A$, 因此可以跟在A后面的符号也一定可以跟在B(=$\alpha A$) 后面]
 
 {:.warning}
 
@@ -641,7 +629,7 @@ while there changes to any Follow sets do:
 
 <br>
 
-Example
+***Example***：
 
 $S\rightarrow ES'$
 
@@ -703,10 +691,10 @@ $$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\
 
 The following algorithmic construction of the LL(1) parsing table:
 
-Repreawt the following 2 steps for each non-terminal A and production choice $A\rightarrow\alpha$
+Repreat the following 2 steps for each non-terminal A and production choice $A\rightarrow\alpha$
 
 1. For each token a in $First(\alpha)$, add $A\rightarrow\alpha$ to the entry M[A,a]
-2. If $\varepsilon$ is in $First(\alpha)$, for each element a of Follow(A) (a token or \$), add $A\rightarrow\alpha$ to M[A,a]
+2. If $\varepsilon$ is in $First(\alpha)$, for each element a of $Follow(A)$ (a token or \$\), add $A\rightarrow\alpha$ to M[A,a]
 
 这相当于
 
@@ -716,12 +704,12 @@ $$FIRST^+(A\rightarrow \beta)=\begin{aligned}&FIRST(\beta)\quad if\;\varepsilon\
 
 如何判定LL(1)语法
 
-Theorem:
+`Theorem`{:.error}
 
 A grammar in BNF is LL(1) if the following conditions are satisfied.
 
-1. For every production $A\rightarrow\alpha_1\vert\alpha_2\vert\cdots\vert\alpha_n$, $First(\alpha_i)\cap First(\alpha_j)$ is empty for all i and j, $1\leq i,j\leq n,i\not=j$
-2. For every non-terminal A such that First(A) contains $\varepsilon$, $First(A)\cap Follow(A)$ is empty.
+1. For every production $A\rightarrow\alpha_1\vert\alpha_2\vert\cdots\vert\alpha_n$, $First(\alpha_i)\cap First(\alpha_j)$ is empty for all i and j, $1\leq i,j\leq n,i\not=j$ (否则在$First(\alpha_i)$这个格子里既可以写$A\rightarrow \alpha_i$也可以写$A\rightarrow\alpha_j$)
+2. For every non-terminal A such that $First(A)$ contains $\varepsilon$, $First(A)\cap Follow(A)$ is empty. (否则在这个格子里既可以写$A\rightarrow \alpha$,也可以写$A\rightarrow\epsilon$)
 
 <img src="../../../assets/images/image-20200328164147883.png" alt="image-20200328164147883" style="zoom:50%;" />
 

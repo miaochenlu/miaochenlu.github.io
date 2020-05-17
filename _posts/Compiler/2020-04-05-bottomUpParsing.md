@@ -153,7 +153,7 @@ Construct the DFA of sets of LR(0) items directly.
 
 * 如果X是一个token, 那么这个状态转移就相当于把在input string中X移动到了分析栈的栈顶
 * 如果X是一个nonterminal
-  * X不会作为input symbol出现，只可能通过一个$X\rightarrow\beta$的归约出现。
+  * X不会作为input symbol出现，只可能通过一个$X\rightarrow\beta$的归约出现(从$\beta$归约到$X$)。
 
 <img src="../../../assets/images/image-20200403194518092.png" alt="image-20200403194518092" style="zoom:50%;" />
 
@@ -219,7 +219,7 @@ CLOSURE(I)中的项$A\rightarrow\alpha\cdot B\beta$表明在语法分析过程�
 * Each state is a shift state(只含有shift items的状态)
 * A reduce state containing a single complete item
 
-因为LR(0)并不超前查看，因此每个状态只能对应一个动作，否则就会产生歧义。这个动作要么是shift, 要么是reduce,也就是不能有shift-reduce conflict。同时，一个状态也不能含有两个以上的归约项目，否则就会需要look ahead看要选择哪方式，也就是不存在reduce-reduce conflict.
+因为LR(0)并不超前查看，因此每个状态只能对应一个动作，否则就会产生歧义。这个动作要么是shift, 要么是reduce,也就是不能有shift-reduce conflict。同时，一个状态也不能含有两个以上的归约项目，否则就会需要look ahead看要选择哪种方式。也就是不能存在reduce-reduce conflict.
 
 <br>
 
@@ -376,7 +376,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
    * 如果$[A\rightarrow\alpha\cdot a\beta,b]$在$I_i$中，并且$GOTO(I_i,a)=I_j$, 那么将$ACTION[i,a]$设置为shift 到状态j。 注意，这里$a$是一个终结符
    * 如果$[A\rightarrow\alpha\cdot,a]$在$I_i$中并且$A\not=S'$, 那么$ACTION[i,a]$设置为reduce $A\rightarrow\alpha$
-   * 如果$[S'\rightarrow S\cdot,\$]$在$I_i$中，那么将$ACTION[i,\$]$设置为accept
+   * 如果[$S'\rightarrow S\cdot$,\$]在$I_i$中，那么将$ACTION[i,$\$]​设置为accept
 
    如果根据上述规则会产生任何冲突动作，我们据说这个文法不是LR(1)的
 
@@ -401,7 +401,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
 考虑到LR(1) item构建的DFA的size太大，我们是不是可以进行一些状态合并呢？
 
-比如下图中$A\rightarrow a \cdot,\$ $和$A\rightarrow a\cdot,)$ 就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
+比如下图中$A\rightarrow a \cdot,$\$​和$A\rightarrow a\cdot,)$ 就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
 
 <img src="../../../assets/images/image-20200405184111768.png" alt="image-20200405184111768" style="zoom:50%;" />
 
@@ -430,11 +430,7 @@ If the grammar is already LALR(1), the only consequence of usign LALR(1) parsing
 
 Compute the DFA of LALR(1) items directly from the DFA of LR(0) items through a process of propagating lookaheads.
 
-
-
-
-
-
+<br>
 
 
 
