@@ -60,11 +60,11 @@ $A\rightarrow\alpha$
 Procedure factor
 BEGIN
   case token of
-  (: 						//case '('
-  	match((); 	//match '(' , true->getNextToken
-    expr;				//函数调用，无参数
-    match());		//match ')', 
-  number:				//case number
+  (: 						{case '('}
+	  match((); 	{ match '(' , true->getNextToken}
+    expr;				{函数调用，无参数}
+    match());		{match ')' }
+  number:				{case number}
     match(number);
   else error;
   end case;
