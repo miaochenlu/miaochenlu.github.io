@@ -32,7 +32,7 @@ Top-Down Parsing
 
 # 1. Top-Down Parsing by Recursive-Descent
 
-### A. The idea of Recursive-Descent Parsing
+## 1.1 The idea of Recursive-Descent Parsing
 
 $A\rightarrow\alpha$
 
@@ -61,7 +61,6 @@ Procedure factor
 BEGIN
   case token of
   (: 						//case '('
-  	
   	match((); 	//match '(' , true->getNextToken
     expr;				//函数调用，无参数
     match());		//match ')', 
@@ -90,7 +89,7 @@ It requires the use of EBNF. {} 循环 []一次或者0次
 
 > Example
 >
-> `If-stmt → if ( exp ) statement $\vert$  if ( exp ) statement else statement`
+> `If-stmt → if ( exp ) statement |  if ( exp ) statement else statement`
 >
 > The EBNF of the if-statement is as follows:
 >
