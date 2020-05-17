@@ -401,7 +401,7 @@ Let s be the current state (a the top of the parsing stack). Then actions are de
 
 考虑到LR(1) item构建的DFA的size太大，我们是不是可以进行一些状态合并呢？
 
-比如下图中$A\rightarrow a \cdot,$\$​和$A\rightarrow a\cdot,)$ 就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
+比如下图中$A\rightarrow a \cdot,$ \$和 $A\rightarrow a\cdot,)$ 就比较相似， 他们的first component是一样的，但是second component(也就是lookahead symbols)不相同，是不是可以将它们合并为$A\rightarrow a\cdot,\$ /)$
 
 <img src="../../../assets/images/image-20200405184111768.png" alt="image-20200405184111768" style="zoom:50%;" />
 

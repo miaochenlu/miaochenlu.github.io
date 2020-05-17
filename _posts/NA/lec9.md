@@ -110,7 +110,81 @@ $x_i=a+th,h=\frac{b-a}{n},t=0,1,\cdots,n$
 
 $$\begin{aligned}A_i=&\int_{x_0}^{x_0}\Pi_{j\not=i}\frac{x-x_j}{x_i-x_j}dx\\=&\int_0^n\Pi_{i\not=j}\frac{(t-j)h}{(i-j)h}hdt\\=&\frac{(b-a)(-1)^{n-i}}{ni!(n-i)!}\int_0^n\Pi_{i\not=j}(t-j)dt \end{aligned}$$
 
+我们称$\frac{(-1)^{n-i}}{ni!(n-i)!}\int_0^n\Pi_{i\not=j}(t-j)dt$为cote coefficients $C_i^{(n)}$, n表示最大插值点下标，i表示当前插值点下标
 
+这个系数既不依赖于$f(x)$, 也不依赖于$[a,b]$, 仅仅有$n,i$决定。
+
+因此我们可以构建一张表，然后查表获得这些系数的值。
+
+<br>
+
+$n=1$时，也就是有两个插值点
+
+$C_0^{(1)}=\frac{1}{2},C_1^{(1)}=\frac{1}{2}$
+
+$\int_a^b f(x)dx\approx \frac{b-a}{2}[f(a)+f(b)]$
+
+$R[f]=\int_a^b\frac{f''(\xi_x)}{2!}(x-a)(x-b)dx=-\frac{1}{12}h^3f''(\xi)$
+
+其中$\xi\in[a,b],h=b-a$
+
+Precision=1
+
+<br>
+
+$n=2$时
+
+$C_0^{(2)}=\frac{1}{6},C_1^{(2)}=\frac{2}{3},C_2^{(2)}=\frac{1}{6}$
+
+$\int_a^b f(x)dx=\frac{1}{6}(b-a)f(a)+\frac{2}{3}(b-a)f(\frac{a+b}{2})+\frac{1}{6}(b-a)f(b)$
+
+Precision=3
+
+<br>
+
+$n=3$, precision=3
+
+$n=4$, precision=5
+
+
+
+
+
+# Composite Numerical Integration
+
+在spline插值中，我们知道高阶多项式会振荡，所以可以一小段一小段的去approximate $f(x)$
+
+#### Composite Trapezoidal Rule:
+
+$h=\frac{b-a}{n},x_k=a+kh\;(k=0,\cdots,n)$
+
+用梯形公式计算$[x_{k-1},x_k]$区间的面积
+
+$$\int_{x_{k-1}}^{x_k}f(x)dx\approx \frac{x_k-x_{k-1}}{2}[f(x_{k-1})+f(x_k)]\quad k=1,2,\cdots,n$$
+
+因此
+
+$$\int_a^bf(x)dx\approx \sum_{k=1}^n\frac{h}{2}[f(x_{k-1})+f(x_k)]=\frac{h}{2}[f(a)+2\sum_{k=1}^{n-1}f(x_k)+f(b)]=T_n$$
+
+$R[f]=\sum_{k=1}^n[-\frac{h^3}{12}f''(\xi_k)]=-\frac{h^2}{12}(b-a)\frac{\sum_{k=1}^nf''(\xi_k)}{n}$
+
+$=-\frac{h^2}{12}(b-a)f''(\xi)\quad \xi\in(a,b)$
+
+#### Composite Simpson's Rule:
+
+$h=\frac{b-a}{n},x_k=a+kh\;(k=0,\cdots,n)$
+
+$$\int_a^bf(x)dx\approx\frac{h}{6}[f(a)+4\sum_{k=0}^{n-1}f(x_{k+\frac{1}{2}})+2\sum_{k=0}^{n-2}f(x_{k+1}) +f(b)]=S_n$$
+
+$R[f]=-\frac{b-a}{180}(\frac{h}{2})^4f^{(4)}(\xi)$
+
+为了简化表示，不如令$n'=2n$, 那么$h'=\frac{b-a}{n'}=\frac{h}{2},x_k=a+kh'$
+
+$$S_n=\frac{h'}{3}[f(a)+4\sum_{odd\;k}f(x_k)+2\sum_{even\;k}f(x_k)+f(b)]$$
+
+
+
+结论：Composite integration techniques are all **stable**
 
 
 
