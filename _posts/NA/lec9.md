@@ -132,11 +132,15 @@ Precision=1
 
 <br>
 
-$n=2$时
+$n=2$时, 有三个插值点
 
 $C_0^{(2)}=\frac{1}{6},C_1^{(2)}=\frac{2}{3},C_2^{(2)}=\frac{1}{6}$
 
-$\int_a^b f(x)dx=\frac{1}{6}(b-a)f(a)+\frac{2}{3}(b-a)f(\frac{a+b}{2})+\frac{1}{6}(b-a)f(b)$
+$$\begin{aligned}\int_a^b f(x)dx=&\frac{1}{6}(b-a)f(a)+\frac{2}{3}(b-a)f(\frac{a+b}{2})+\frac{1}{6}(b-a)f(b)\\=&\frac{b-a}{6}[f(a)+4f(\frac{a+b}{2})+f(b)] \end{aligned}$$
+
+$R[f]=-\frac{1}{90}h^5f^{(4)}(\xi)$
+
+其中$\xi\in(a,b),h=\frac{b-a}{2}$
 
 Precision=3
 
@@ -145,10 +149,6 @@ Precision=3
 $n=3$, precision=3
 
 $n=4$, precision=5
-
-
-
-
 
 # Composite Numerical Integration
 
@@ -166,13 +166,21 @@ $$\int_{x_{k-1}}^{x_k}f(x)dx\approx \frac{x_k-x_{k-1}}{2}[f(x_{k-1})+f(x_k)]\qua
 
 $$\int_a^bf(x)dx\approx \sum_{k=1}^n\frac{h}{2}[f(x_{k-1})+f(x_k)]=\frac{h}{2}[f(a)+2\sum_{k=1}^{n-1}f(x_k)+f(b)]=T_n$$
 
+<br>
+
+$$T_n=\frac{h}{2}[f(a)+2\sum_{k=1}^{n-1}f(x_k)+f(b)]$$
+
 $R[f]=\sum_{k=1}^n[-\frac{h^3}{12}f''(\xi_k)]=-\frac{h^2}{12}(b-a)\frac{\sum_{k=1}^nf''(\xi_k)}{n}$
 
 $=-\frac{h^2}{12}(b-a)f''(\xi)\quad \xi\in(a,b)$
 
+<br>
+
 #### Composite Simpson's Rule:
 
 $h=\frac{b-a}{n},x_k=a+kh\;(k=0,\cdots,n)$
+
+$$\int_{x_k}^{x_{k+1}}f(x)dx\approx \frac{h}{6}[f(x_k)+4f(x_{k+\frac{1}{2}})+f(x_{k+1})]$$
 
 $$\int_a^bf(x)dx\approx\frac{h}{6}[f(a)+4\sum_{k=0}^{n-1}f(x_{k+\frac{1}{2}})+2\sum_{k=0}^{n-2}f(x_{k+1}) +f(b)]=S_n$$
 
@@ -186,5 +194,184 @@ $$S_n=\frac{h'}{3}[f(a)+4\sum_{odd\;k}f(x_k)+2\sum_{even\;k}f(x_k)+f(b)]$$
 
 结论：Composite integration techniques are all **stable**
 
+<br>
 
+Example:
+
+Use Trapezoidal rule and Simpson's rule with $n=8$ to approximate $\pi=\int_0^1\frac{4}{1+x^2}dx$
+
+Solution:
+
+$$T_8=\frac{1}{16}[f(0)+2\sum_{k=1}^7f(x_k)+f(1)]=3.138988494$$
+
+where $x_k=\frac{k}{8}$
+
+$$S_4=\frac{1}{24}[f(0)+4\sum_{odd}f(x_k)+2\sum_{even}f(x_k)+f(1)]=3.141592502$$
+
+where $x_k=\frac{k}{8}$
+
+<br>
+
+HW: Determine the values of $n$ and $h$ required to approximate
+
+$$\int_0^2 e^{2x}sin3x\;dx$$
+
+to within $10^{-4}$
+
+a. Use the Composite Trapezoidal rule
+
+> Let $f(x)=e^{2x}sin3x$
+>
+> $x\in[0,2]$
+>
+> $f'(x)=2e^{2x}sin3x+3e^{2x}cos3x=e^{2x}(2sin3x+3cos3x)$
+>
+> $f''(x)=2e^{2x}(2sin3x+3cos3x)+e^{2x}(6cos3x-9sin3x)=e^{2x}(12cos3x-5sin3x)$
+>
+> $\vert f''(x)\vert \leq e^4\sqrt{12^2+5^2}=709.7759504$
+>
+> $\vert R[f]\vert =\vert -\frac{h^2}{12}(b-a)f''(\xi)\vert=\vert -\frac{h^2}{6}f''(\xi)\vert <10^{-4}$
+>
+> $h<9.194\times 10^{-4}$
+>
+> $h=\frac{b-a}{n}=\frac{2}{n}$
+>
+> 因此$n=\frac{2}{h}\geq 2176$
+
+b. Use the Composite Trapezoidal rule
+
+> $f^{(3)}(x)=2e^{2x}(12cos3x-5sin3x)+e^{2x}(-36sin3x-15cos3x)=e^{2x}(9cos3x-46sin3x)$
+>
+> $f^{(4)}(x)=2e^{2x}(9cos3x-46sin3x)+e^{2x}(-27sin3x-138cos3x)=e^{2x}(-119sin3x-120cos3x)$
+>
+> $\vert f^{4}(x)\vert\leq e^4\sqrt{119^2+120^2}=9227.087356$
+>
+> $\vert R[f]\vert=\vert-\frac{b-a}{180}(h)^4f^{(4)}(\xi)\vert=\vert\frac{1}{90}(h)^4f^{(4)}(\xi)\vert<10^{-4}$
+>
+> $h<0.031426$
+>
+> $n=\frac{b-a}{h}>64$
+
+总结一下解题步骤
+
+* 如果算积分，则根据插值点数量写出积分公式并计算
+* 如果根据误差要求计算插值点数量
+  * 写出误差公式
+  * 求误差公式中导数最大值
+  * 根据误差公式求出$h$
+  * 根据$h$求$n$
+
+# Romberg Integration
+
+error of Trapezoidal rule
+
+$$R_n[f]=-\frac{h^2}{12}(b-a)f''(\xi)$$
+
+reduce the length of each subinterval into a half:
+
+$$R_{2n}[f]=-(\frac{h}{2})^2\frac{1}{12}(b-a)f''(\xi)\approx \frac{1}{4}R_n[f]$$
+
+这也就是说
+
+$\frac{I-T_{2n}}{I-T_n}\approx \frac{1}{4}$
+
+解出$I$: 
+
+$$I\approx \frac{4T_{2n}-T_n}{4-1}=\frac{4}{3}T_{2n}-\frac{1}{3}T_n=S_n$$
+
+In general:
+
+$$\frac{4T_{2n}-T_n}{4-1}=S_n$$
+
+$$\frac{4^2S_{2n}-S_n}{4^2-1}=C_n$$
+
+$$\frac{4^3C_{2n}-C_n}{4^3-1}=R_n$$
+
+<img src="../../assets/images/image-20200519143133401.png" alt="image-20200519143133401" style="zoom:50%;" />
+
+<img src="../../assets/images/image-20200518143506969.png" alt="image-20200518143506969" style="zoom:50%;" />
+
+<br>
+
+Example: Use the Composite Trapezoidal rule to ﬁnd approximations to $\int_0^\pi sinx \;dx$ with $n = 1, 2, 4, 8,16$
+
+$$T_n=\frac{h}{2}[f(a)+2\sum_{k=1}^{n-1}f(x_k)+f(b)]$$
+
+$h=\frac{b-a}{n}$
+
+<br>
+
+$T_1=\frac{\pi}{2}[sin0+sin\pi]=0$
+
+$T_2=\frac{\pi/2}{2}[sin0+2(sin\frac{\pi}{2})+sin\pi]=1.57079633$
+
+$T_4=\frac{\pi/4}{2}[sin0+2(sin\frac{\pi}{4}+sin\frac{\pi}{2}+sin\frac{3\pi}{4})+sin\pi]=1.89611890$
+
+$$T_8=\frac{\pi/2}{2}[sin0+2(sin\frac{\pi}{8}+sin\frac{\pi}{4}+\cdots+sin\frac{7\pi}{8})+sin\pi]=1.97423160$$
+
+$$T_{16}=\frac{\pi/2}{2}[sin0+2(sin\frac{\pi}{16}+sin\frac{\pi}{8}+\cdots+sin\frac{15\pi}{16})+sin\pi]=1.99357034$$
+
+<br>
+
+$S_1=\frac{4T_2-T_1}{4-1}=2.09439511$
+
+$S_2=\frac{4T_4-T_2}{4-1}=2.00455976$
+
+$S_4=\frac{4T_{8}-T_{4}}{4-1}=2.00026917$
+
+$S_8=\frac{4T_{8}-T_{4}}{4-1}=2.00001659$
+
+<br>
+
+$C_1=\frac{16S_2-S_1}{16-1}=1.99857073$
+
+$C_2=\frac{16S_4-S_2}{16-1}=1.99998313$
+
+$C_4=\frac{16S_8-S_4}{16-1}=1.99999975$
+
+<br>
+
+$R_1=\frac{64C_2-C_1}{64-1}=2.00000555$
+
+$R_2=\frac{64C_4-C_2}{64-1}=2.00000001$
+
+and Finally
+
+$$\frac{256R_2-R_1}{256-1}=1.99999999$$
+
+<br>
+
+# Richardson's Extrapolation
+
+我们想要用low-order formulae来得到high-accuracy的结果
+
+假设对于某个$h\not=0$, 我们有formula $T_0(h)$ approximate一个未知的函数$I$, truncation error的形式为
+
+$$T_0(h)-I=\alpha_1h+\alpha_2h^2+\cdots$$
+
+如果将$h$替换为$\frac{h}{2}$， 那么有
+
+$$T_0(\frac{h}{2})-I=\alpha_1\frac{h}{2}+\alpha_2(\frac{h}{2})^2+\alpha_3(\frac{h}{2})^3+\cdots$$
+
+<br>
+
+Q: How to improve the accuracyy from $O(h)$ to $O(h^2)$?
+
+$$\frac{2T_0(\frac{h}{2})-T_0(h)}{2-1}-I=-\frac{1}{2}\alpha_2h^2-\frac{3}{4}\alpha h^3-\cdots$$
+
+$$T_1(h)=\frac{2T_0(\frac{h}{2})-T_0(h)}{2-1}=I+\beta_1h^2+\beta_2h^3+\cdots$$
+
+$$\begin{aligned}T_2(h)=&\frac{2^2T_1(\frac{h}{2})-T_1(h)}{2^2-1}\\=&\frac{4I+4\beta_1(\frac{h}{2})^2+4\beta_2(\frac{h}{2})^3+\cdots-(I+\beta_1h^2+\beta_2h^3)}{4-1} \\=&I+\gamma_1h^3+\gamma_2 h^4+\cdots\end{aligned}$$
+
+$$T_m(h)=\frac{2^mT_{m-1}(\frac{h}{2})-T_{m-1}(h)}{2^m-1}=I+\delta_1 h^{m+1}+\delta_2 h^{m+2}+\cdots$$
+
+
+
+从这里我们去思考Romberg Integration
+
+事实上，梯形公式可以写作
+
+$$\int_a^bf(x)dx=\frac{h}{2}[f(a)+2\sum_{k=1}^{n-1}f(x_k)+f(b)]+K_1h^2+K_2h^4+K_3h^6+\cdots$$
+
+<img src="../../assets/images/image-20200518143506969.png" alt="image-20200518143506969" style="zoom:50%;" />
 
