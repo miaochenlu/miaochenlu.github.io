@@ -200,13 +200,194 @@ An important benefit of static allocation for globals is that declared procedure
 
 
 
-如果有嵌套，一个过程能够访问能一个过程的变量，只要后一个过程的生命包含了前一过程的声明即可。
+如果有嵌套，一个过程能够访问能一个过程的变量，只要被访问变量所属的过程的声明包含了访问过程的声明即可。
+
+`definition`{:.error}
+
+嵌套深度：如果不内嵌在其他过程中的过程，其嵌套深度为1。一个在嵌套深度为i的过程中定义的过程p, p的嵌套深度为i+1
+
+```lisp
+fun sort(inputFile, outputFile) = 
+	let
+		val a = array(11, 0);
+		fun readArray(inputFile) = ...
+			... a ...;
+		fun exchange(i, j) = 
+			... a ...;
+		fun quicksort(m, n) = 
+			let 
+				val v = ... ;
+				fun partition(y, z) =
+					... a ... v ... exchange ...
+			in
+				... a ... v ... partition ... quicksort
+			end
+	in
+		... a ... readArray ... quicksort ...
+end;
+```
+
+在sort中声明的函数有
+
+* readArray(嵌套深度2)
+* exchange(嵌套深度2)
+* quicksort(嵌套深度2)
+  * partition(嵌套深度3)
+
+readArray和exchange都访问了数组a
+
+在quicksort中定义了局部变量v(数组分割值), 并给出了partition的定义。
+
+partition访问了数组a以及数组分割值v, 并且调用了函数exchange
 
 
 
-## 3.5 access link
 
-如果过程p在源代码中直接嵌套在过程q中，那么p的任何活动访问链都指向最近的q的活动。q的嵌套深度比p的嵌套深度恰好少1.
 
-访问链形成了一条链路，他从栈顶活动记录开始，经过嵌套深度逐步递减的活动的序列。沿着这条链路找到的活动就是其数据和对应过程可以被当前正在运行的过程访问的所有活动。
+## 3.3 access link
+
+在每个AR中增加一个access link指针。如果过程p在源代码中直接嵌套在过程q中，那么p的任何活动access link都指向最近的q的活动。q的嵌套深度比p的嵌套深度恰好少1.
+
+access link形成了一条链路，他从栈顶活动记录开始，经过嵌套深度逐步递减的活动的序列。沿着这条链路找到的活动就是其数据和对应过程可以被当前正在运行的过程访问的所有活动。
+
+<img src="../../assets/images/image-20200523144408556.png" alt="image-20200523144408556" style="zoom:50%;" />
+
+* (a) sort调用readArray()将输入加载到数组a上，结束后调用了quicksort(1, 9)对数组进行排序。
+  * quicksort(1,9) 中的access link指向sort的AR, 因为sort是quicksort外围的离他最近的嵌套quicksort的函数。
+* (b),(c) 对quicksort(1,3)的一次递归调用，然后调用partition, partition又调用exchange
+  * quicksort(1,3)的access link指向sort, 这和quicksort(1,9)指向sort的理由相同
+  * partition(1,3)的access link指向quicksort(1,3)。因为partition函数被嵌套在quicksort中，而quicksort(1,3)离partition(1,3)最近
+
+* (d) partition(1,3)调用了exhange(1,3)
+  * exchange(1,3)的access link指向sort(), 因为exchange直接嵌套在sort()中。这样很合理，因为exchange需要访问的外部元素只有数组a.
+
+
+
+## 3.4 处理access link
+
+两种情况
+
+* 一个过程调用另一个过程，而被调用过程的名字在此次调用中明确给出
+* 调用的对戏那个是一个过程型参数，要在运行时刻才能知道被调用的是那个过程
+
+### 3.4.1 case 1: 过程q显式调用过程p
+
+#### A. 过程p的嵌套深度>过程q的嵌套深度
+
+可以确定：p一定是直接在q中定义的
+
+否则，q是无法直接调用p的
+
+因此
+
+* p的嵌套深度=q的嵌套深度+1;
+* p的access link一定指向q
+
+所以，只需要在calling sequence中增加一个步骤，也就是在p的access link中放置一个指向q的AR的指针。
+
+例子：sort调用quicksort, quicksort调用partition
+
+
+
+#### B. 递归调用 p=q
+
+新的AR的access link和他下面AR的access link是相同的。
+
+例如quicksort(1,9)调用quicksort(1,3)
+
+
+
+#### C. p的嵌套深度$n_p$<q的嵌套深度$n_q$
+
+为了让q的调用处理p作用域的内容，过程q必定嵌套在r的某个过程中，而p是一个直接在r中定义的过程
+
+所以，从q的活动记录开始，沿着access link经过$n_q-n_p+1$步就可以找到栈中最高的r的活动记录。p的access link必须指向r的这个活动记录
+
+如上图(d)中partition(1,3)调用exchange(1,3)
+
+
+
+
+
+### 3.4.2 case2 过程型参数
+
+当一个过程p作为参数传递给了另一个过程q, 并且q随后调用了这个参数。
+
+当过程被用作参数的时候，调用者除了传递过程参数的名字，同时害需要传递这个参数对应的正确的access link
+
+使用3.4.1的case1来确定access link
+
+```lisp
+fun a(x) = 
+	let 
+		fun b(f) = 
+			... f ...;
+		fun c(y) = 
+			let
+				fun d(z) = ...
+			in
+				... b(d) ...
+			end
+	in
+		... c(1) ...
+	end;
+```
+
+
+
+<img src="../../assets/images/image-20200525105923057.png" alt="image-20200525105923057" style="zoom:50%;" />
+
+
+
+## 3.5 显示表(display)
+
+使用access link, 如果嵌套深度变大，我们就必须沿着一段很长的访问链路才能找到需要的数据。
+
+一个更高效的实现方式是使用一个称为显示表的辅助数组d, 他为每个嵌套深度保存了一个指针。
+
+我们设法在任何时刻，指针d[i]都指向栈中最高的对应于某个嵌套深度为i的过程的活动记录。
+
+如下图
+
+* d[1]保存了一个指向sort的活动记录的指针，该活动记录是嵌套深度为1的函数中最高的活动记录(下边是栈底)
+
+* d[2]保存了指向exchange的活动记录的指针，该记录是嵌套深度为2的最高活动记录
+* d[3]指向partition, 是嵌套深度为3的最高活动记录
+
+<img src="../../assets/images/image-20200525113612581.png" alt="image-20200525113612581" style="zoom:50%;" />
+
+这样的优势在于，如果过程p正在运行，并且他需要某个嵌套深度为i的过程q的元素x, 那么只需要查看d[i]就可以了。我们沿着d[i]找到q的活动记录，根据偏移量就可以找到x
+
+
+
+# 4. 堆管理
+
+堆用来存储
+
+* 生命周期不确定数据
+* 生存到被程序显示删除位置的数据
+
+## 4.1 存储管理器
+
+存储管理器跟踪堆汇总的空闲空间，他的两个基本功能是：
+
+* 分配：当程序为一个变量或者对象请求内存时，存储管理器产生一段连续的具有被请求大小的堆空间
+  * 首先使用堆中的空闲空间来满足分配请求
+  * 如果堆中没有被氢气大小的空间块可以分配，他试图从操作系统中获得连续的虚拟内存来增加堆区的存储空间
+  * 如果空间已经用完，存储管理器将空间耗尽的信息传给应用程序
+* 回收：存储管理器吧回收的空间反还到空闲空间的缓冲池，这样他可以复用该空间来满足其他的分配请求。存储管理器不会将内存反还给操作系统
+
+
+
+## 4.2 碎片整理
+
+程序开始执行是，堆区市一个连续的空闲空间单元。随着分配和回收过程的进行，空间被分割成若干空闲存储快和已用存储块。
+
+空闲块不一定位于连续区域。我们将空闲存储块称为"窗口"(hole)
+
+对于每个分配请求，存储管理器必须将请求的存储块放入一个足够大的hole中。除非hole的大小刚好，否则我们一定会切分某个hole, 结果创建更小的hole
+
+对于每个分配请求，被释放的存储块被放回到空闲空间的缓冲池中。我们吧连续的hole接和(coalesce)成更大的窗口，否则窗口只会越变越小。
+
+可以使用best-bit和next-fit来进行对象放置
 
