@@ -21,6 +21,8 @@ article_header:
 
 这里我们会讨论几个问题，这几个问题都可以归类到selection。除了找到解法外，我们还会讨论lower bounds。
 
+# 1. Basics
+
 ## 1.1 Adversary Arguments
 
 假设有一个算法，我们认为是有效的。想象有一个对手想证明他不是有效的。在每一个算法做判定的点，对手告诉我们判定的结果。对手选择他的回答使得算法更难找到结果，也就是说对手迫使算法做更多的判定。可以认为对手逐渐构造一个算法的坏的输入。对手的唯一限制是必须保持前后一致
@@ -29,7 +31,59 @@ article_header:
 
 使用tournament来描述比较的结果，比较中大的称为winner, 小的称为loser
 
-# 2. 查找max和min
+# 2. 查找max, min
+
+## 2.1 查找max或者min
+
+假设我们有n个数$a_1,a_2,\cdots,a_n$,
+
+为了查找他的最大值，我们需要询问
+
+* $a_1>a_2$?
+* $max(a_1,a_2)>a_3$?
+* ...
+* $max(a_1,a_2,\cdots,a_{n-1})>a_n$?
+
+一共需要n-1次比较
+
+查找最小值同理需要n-1次比较
+
+## 2.2 查找第二大元素
+
+如果我们像2.1一样考虑，
+
+* 先查找最大的元素，一共需要n-1次比较
+* 再查找次大的元素，一共需要n-2次比较
+
+总共需要2n-3次比较
+
+事实上，我们可以做得更好
+
+有结论：
+
+{:.success}
+
+第二大的元素只可能在与最大值比较过的元素中产生
+
+如果和最大值比较过的元素有M个，那么查找第二大元素只需要M-1+n-1次比较
+
+因此，为了寻找下界，我们的人物就是找到最小的M,
+
+#### 锦标赛方法
+
+将所有元素分成两两一组，每一轮进行组内比较，胜者进入下一轮。如果有一轮元素个数为奇数，则这个数直接晋级下一轮
+
+用这种方法，找到最大值依然需要n-1次比较
+
+为了决出胜负，一共需要进行$\lceil logn\rceil$轮
+
+那么和max直接比较过的数有$\lceil logn\rceil$个
+
+因此找到第二大元素总共需要$n+\lceil logn\rceil-2$次比较
+
+<img src="../../../assets/images/image-20200607113339599.png" alt="image-20200607113339599" style="zoom:40%;" />
+
+## 2.3 查找max and min
 
 稍加思索，我们发现这个任务可以通过用n-1次比较来找到max,再通过n-2次比较找到min来完成，一共是$(n-1)+(n-2)$次比较。但是我们会有更好的方法
 
@@ -42,7 +96,8 @@ case S={a, b}: return (MAX(a, b), MIN(a, b))
 Else begin
 	divide S into S1 and S2 /*equal-size subsets*/
 	(max1, min1)<-MAXMIN(S1);
-	(max1, min2)<-MAXMIN(S2);
+	(max2, min2)<-MAXMIN(S2);
+	return (MAX(max1, max2), MIN(min1, min2))
 ```
 
 接下来我们分析这个算法的复杂度
@@ -55,13 +110,15 @@ $$\begin{aligned}T(n)=&2T(n/2)+2\\=&2(2T(n/4)+2)+2\\&\vdots\\=&2^{m-1}T(2)+2^{m-
 
 接下来我们说明这个下界是紧的
 
-`theorem`{:.warning}
+`theorem`{:.error}
+
+{:.error}
 
 在n个元素中通过comparison查找max和min的任意算法在最坏情况下都必须做至少$\frac{3n}{2}-2$次比较
 
 Proof:
 
-为了建立lower bound, 不妨假设这些元素各不相同。为了确定一个key $x$是max, 一个key $y$是min, 算法必须知道其他的所有元素都直接或者间接败于$x$, 其他元素都直接简介胜于$y$。如果我们计胜和败为一个unit的信息，则算法必须知道至少2n-2个unit的信息(n-1个元素输给了x, n-1个元素赢了y)。adversary希望每次给出的结果都使获得的信息量尽可能小。
+为了建立lower bound, 不妨假设这些元素各不相同。为了确定一个key $x$是max, 一个key $y$是min, 算法必须知道其他的所有元素都直接或者间接败于$x$, 其他元素都直接间接胜于$y$。如果我们计胜和败为一个unit的信息，则算法必须知道至少2n-2个unit的信息(n-1个元素输给了x, n-1个元素赢了y)。adversary希望每次给出的结果都使获得的信息量尽可能小。
 
 我们设置如下状态
 
@@ -116,7 +173,7 @@ algorithm
 
 &emsp;&emsp; **S**， a set of keys；
 
-&emsp;&emsp;**k**， an integer such that $1\leq k\leq n$
+&emsp;&emsp; **k**， an integer such that $1\leq k\leq n$
 
 ***Output:*** 
 
@@ -124,31 +181,31 @@ algorithm
 
 
 
-Element selection(SetOfElements S, int k) 
+**Element selection(SetOfElements S, int k)** 
 
-0. if($\vert S\vert \leq 5$)
+0.if($\vert S\vert \leq 5$)
 
 &emsp;return direct solution for *k*th element of **S**
 
-1. 将keys分成组，每组5个元素，找到每个组的median(最后一个组可能少于5个元素，但是我们也称其为一个5元集合)。令每个集合的median为M。令$n_M=\vert M\vert =\lceil n/5\rceil$.  我们可以得到下图。每个5元组中，2个较大的出现在median上面，2个较小的出现在median下方
+1.将keys分成组，每组5个元素，找到每个组的median(最后一个组可能少于5个元素，但是我们也称其为一个5元集合)。每个5元集合的median组成集合为M。令$n_M=\vert M\vert =\lceil n/5\rceil$.  我们可以得到下图。每个5元组中，2个较大的出现在该组median元素上方，2个较小的出现在median下方
 
 <img src="../../../assets/images/image-20200503225822352.png" alt="image-20200503225822352" style="zoom: 40%;" />
 
-2. $m^*=select(M,\lceil\frac{\vert M\vert}{2}\rceil)$
+2.$m^*=select(M,\lceil\frac{\vert M\vert}{2}\rceil)$
 
 ($m^*$ 是M的median)
 
-加下来，我们将这些5元组重新排列，median大于$m^*$ 的放在他右边，median小于$m^*$放在他左边。排列后我们将这些数分区，B区都是$>m^*$, C区都是$<m^*$
+接下来，我们将这些5元组重新排列，median大于$m*$ 的放在他右边，median小于$m*$放在他左边。排列后我们将这些数分区，B区都是$>m*$, C区都是$<m*$
 
 <img src="../../../assets/images/image-20200503232127308.png" alt="image-20200503232127308" style="zoom: 40%;" />
 
-3. 将A区，D区元素和$m^*$进行比较, 结合B区和C区后，得到如下两个集合
+3.将A区，D区元素和$m^*$进行比较, 结合B区和C区后，得到如下两个集合
 
 $$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;smaller \;than\;m^*\}$$
 
 $$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;slarger \;than\;m^*\}$$
 
-4. Divide and Conquer
+4.Divide and Conquer
 
 if ($k=\vert S_1\vert +1$)
 
@@ -177,15 +234,17 @@ else
 <br>
 
 1. 找到每个5元组的median: 每组需要6次比较，一共需要$6(n/5)$次比较
-2. 递归去找median of medians, 找到$m^*$: $W(n/5)$
+2. 递归去找medians集合M的median元素, 找到$m^*$: $W(n/5)$
 3. 将A和D区的元素与$m^*$比较: 一共需要$4r$次比较
-4. 递归select， 在最坏的情况下，A和D的4r个元素都比$m*$大或者都比$m*$小，B和C各有$3r+2$个元素，所以select的最大规模为$7r+2$: $W(7r+2)$
+4. 递归select， 在最坏的情况下，A和D的4r个元素都比$m*$ 大或者都比$m*$ 小，B和C各有$3r+2$个元素，所以select的最大规模为$7r+2$: $W(7r+2)$
 
 $W(n)\leq 1.2n+W(0.2n)+0.4n+W(0.7n)=1.6n+W(0.2n)+W(0.7n)$
 
 画出recursive tree
 
 <img src="../../../assets/images/image-20200504183721696.png" alt="image-20200504183721696" style="zoom:50%;" />
+
+可以证明$W(n)\leq 16n$ 因此是线性时间算法
 
 <br>
 
@@ -211,11 +270,15 @@ $W(n)\leq 1.2n+W(0.2n)+0.4n+W(0.7n)=1.6n+W(0.2n)+W(0.7n)$
 
 `definition`{:.warning}
 
+{:.warning}
+
 A comparison involving a key $x$ is a crucial comparison for $x$ if it is the first comparison where $x>y$, for some $y\geq median$, or $x<y$ for some $y\leq median$.
+
+{:.warning}
 
 Comparisons of x and y where $x>median$ and $y<median$ are noncrucial
 
-我们可以看到, crucial comparison可以建立$x$与$median$的关系。另一点需要注意，这个定义并不要求$x$的crucial comparison时已经知道$y$和$median$的关系
+我们可以看到, crucial comparison可以建立$x$与$median$的关系。另一点需要注意，这个定义并不要求做$x$的crucial comparison时已经知道$y$和$median$的关系
 
 <br>
 
@@ -232,15 +295,13 @@ Comparisons of x and y where $x>median$ and $y<median$ are noncrucial
 | **S** | **Has been assigned a value Smaller than median** |
 | **N** | **Has not yet been in a comparison**              |
 
-
+adversary采取的策略如下表格所示
 
 | Comparands   | Adversary's action                                        |
 | ------------ | --------------------------------------------------------- |
 | N, N         | (S, L) Make one key larger than median ,the other smaller |
 | L, N or N, L | (L, S) Assign a value smaller than median to N            |
 | S, N or N, S | (L, S) Assign a value larger than median to N             |
-
-adversary采取的策略如上表格所示
 
 如果已经有$\frac{n-1}{2}$个key处于S状态或者L状态，adversary就会忽略上述表格中的规则，开始将剩下N赋值为L (resp. S), 直到只剩下一个N没有赋值，这个值就是median
 
@@ -256,17 +317,96 @@ Find the median of 5 elements
 
 如果用sorting的方式，可以用7次比较将5个元素排序，然后就可以知道median了
 
-但其实采取上述方式，他的lower bound$=\frac{3(n-1)}{2}=6$
+但其实采取前文所述算法，他的lower bound$=\frac{3(n-1)}{2}=6$
 
 Step 1: sort two pairs($a<b, c<d$)
 
-Step 2: order their larger elements ($b<d$) $\Rightarrow d >median$
+Step 2: order their larger elements ($b<d$)  必有$\Rightarrow d >median$， 丢弃$d$
 
 Step 3: compare c and e ($c<e$)
 
 Step 4: order the larger elements of $(c,e)$ and $(a,b)$ , ($b<e$)
 
 Step 5: compare c and b, greater one is the median
+
+
+
+
+
+# 4. Unbound Searching
+
+考虑这样一个问题
+
+$$F(i)=\begin{aligned}&0\quad 0<i<n\\&1\quad i\geq n\end{aligned}$$
+
+任务是找到定义函数F的值n
+
+对于任意k, 我们可以query $F(k)$的值
+
+那么如何才能使用最少次数的query高效地找到n呢？
+
+<br>
+
+令$S_A(n)=m$ 表示算法A用了m次queries得到n
+
+#### 方法一: Unary Search $B_0$
+
+* 连续请求$F(1), F(2),\cdots$, 直到$F(n)=1$
+
+$S_{B_0}(n)=n$
+
+#### 方法二: Binary Search $B_1$
+
+* 不断访问$F(2^i-1)$， 比如$F(1), F(3), F(7), \cdots$, 直到$F(2^m-1)=1$,  需要m次quries
+
+$2^{m-1}\leq n\leq 2^m-1$
+
+两边取对数得到$m-1\leq log_2 n\leq log_2(2^m-1)$
+
+下取整$m-1\leq \lfloor log_2n\rfloor \leq m-1$, 因此$m=\lfloor logn\rfloor +1$
+
+* 然后在$[2^{m-1}, 2^m-1)$上进行二分查找，需要$m-1$次query, 也就是$\lfloor logn\rfloor$次query
+
+总共需要$2\lfloor logn\rfloor +1$次queries
+
+#### 方法三: Double Binary Search $B_2$
+
+* 用$B_1$的方法去找m, 使得$F(2^m-1)=1$, 需要$2\lfloor log\;m\rfloor+1$次quries
+* 然后和$B_1$一样，在$[2^{m-1}, 2^m-1)$上进行二分查找，需要$m-1$次queries
+
+总共需要$m-1+2\lfloor log\;m\rfloor+1$次queries
+
+因为$m=\lfloor log\;n\rfloor+1$次queries, 因此
+
+$$\lfloor log\;n\rfloor+2\lfloor log(\lfloor log\;n\rfloor+1)\rfloor+1$$
+
+**推广：Triple Binary Search**
+
+* 用$B_1$的方法去找m, 使得$F(2^{2^{m}-1}-1)=1$, 一共需要$2\lfloor log\;m\rfloor+1$次queries, 其中$m=\lfloor log(\lfloor log\; n\rfloor+1)\rfloor+1$
+* 在$[2^{2^{m-1}}, 2^{2^m-1}-1)$上进行二分查找找到$F(2^t-1)=1$，就是相当于在$[2^{m-1}, 2^m-1)$中寻找t, 是的$F(2^t-1)=1$需要$m-1$次queries
+* 在$[2^{t-1},2^t-1)$上二分查找，最终找到n, 其中$t=\lfloor logn\rfloor +1$, 需要$t-1$次queries
+
+总共需要$t-1+m-1+2\lfloor log\;m\rfloor+1$次queries
+
+$\lfloor logn\rfloor+\lfloor log(\lfloor log\; n\rfloor+1)\rfloor+2\lfloor log(\lfloor log(\lfloor log\; n\rfloor+1)\rfloor+1)\rfloor+1$
+
+**再推广: k-binary Search $B_k$**
+
+$S_{B_k}(N)=L^1(N)+L^2(N)+\cdots+L^{k-1}(N)+2L^k(N)+1$
+
+其中$L_1(N)=\lfloor log\;n\rfloor$
+
+$j>1, L_j(N)=\lfloor log\; (L^{j-1}(N)+1)\rfloor$
+
+**那么， 怎么determine k for $B_k$呢**
+
+设$g(n)$为
+
+$$g(n)=\begin{aligned}&2\quad &n=1\\&2^{g(n-1)}&\quad n\geq 2\end{aligned}$$
+
+从小到大尝试g， 直到$F(g(k))=1$
+
+如$2, 2^2-1, 2^{2^2-1}-1,2^{2^{2^2-1}-1}-1,\cdots$
 
 
 
