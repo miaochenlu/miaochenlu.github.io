@@ -131,13 +131,13 @@ $$General\; Sorting\propto Distinct\; Integer\; Sorting$$
 
 接下来我们要分析这个问题的复杂度。
 
-如果comparison只有"equal"和"not equal"两个答案，那么复杂度: 
+* 如果comparison只有"equal"和"not equal"两个答案，那么复杂度: 
 
 Lower bound $=\Omega(n^2)$ By Adversary
 
 因为任何两个数之间都要比较一下，否则adversary就可以更改结果
 
-如果comparison有$<,=,>$的答案，那么复杂度是多少呢？
+* 如果comparison有$<,=,>$的答案，那么复杂度是多少呢？
 
 我们接下来证明
 
@@ -169,11 +169,11 @@ $$x_1<x_2<\cdots<x_i<x_{i+1}<\cdots<x_n$$
 
 因为$Integer\; distinctness\;problem\propto Closest\;pair\;problem$
 
-稍加思索可知，这个reduction是对的。如果closest pair problem得到最小的difference是0， 那么integer distinctness problem给出的答案就是"no", 如果closest pair problem得到最小的difference不是0， 那么integer distinctness problem给出的答案就是"yes"
+稍加思索可知，这个reduction是成立的。
 
+如果closest pair problem得到最小的difference是0， 那么integer distinctness problem给出的答案就是"no", 如果closest pair problem得到最小的difference不是0， 那么integer distinctness problem给出的答案就是"yes"
 
-
-
+因此: lower bound of closest pair problem $P_2$ $\geq$ lower bound of integer distinctness problem $=\Omega(n log\;n)$ 
 
 
 
@@ -199,9 +199,9 @@ A reduction from problem $P_1$ to $P_2$ in $O(f (n))$ time and an $O(g(n))$ time
 
 # 4. More Problems
 
-### 4.1 TSP and HC
+### 4.1 旅行商问题(TSP)和哈密尔顿回路问题(HC)
 
-Traveling Salesman Problem (TSP): (optimization problem)
+**旅行商问题: (optimization problem)**
 
 > A salesman aims to visit each of the *n* cities at least once and return to his starting point
 
@@ -209,29 +209,67 @@ Given: A weighted complete graph G
 
 Goal: A minimum TSP tour in G.
 
+<br>
+
+**哈密尔顿回路问题: (decision problem)**
+
+> Given an unweighted graph $G=(V,E)$, does the graph have a tour which visits every vertex exactly once?
 
 
-Hamiltonian Cycle: (decision problem)
 
-> Given an unweighted graph G=(V,E), does the graph have a tour which visits every vertex exactly once?
+#### 定理：$HC\propto TSP$
 
+哈密尔顿回路问题的无权图$G(V,E)$会被转换为TSP问题的有权图$G'(V',E')$
 
+通过解决TSP问题来解决哈密尔顿回路问题
+
+<img src="../../assets/images/image-20200608201437895.png" alt="image-20200608201437895" style="zoom:50%;" />
+
+接下来我们看如何reduce HC to TSP
+
+**1.根据哈密尔顿问题实例$I_1$，创建TSP问题实例$I_2$ (weighted complete graph)**
+
+if $(i,j)\in E$ then
+
+&emsp;&emsp;let $w_{ij}=0$
+
+else
+
+&emsp;&emsp;let $w_{ij}=1$
+
+<img src="../../assets/images/image-20200608201916907.png" alt="image-20200608201916907" style="zoom:25%;" /><img src="../../assets/images/image-20200608201928707.png" alt="image-20200608201928707" style="zoom:25%;" />
+
+**2.解决TSP问题实例$I_2$**
+
+**3.如果$I_2$的TSP tour为的长度为0，就返回答案"yes"; 否则返回答案"no"**
+
+<br>
+
+**分析overhead**
+
+实例$I_1$的size为$n+m$, 其中$n=\vert V\vert, m=\vert E\vert$
+
+$I_1\Rightarrow I_2$需要创建一张size为$n^2$的完全图 ($O(n^2)$ time)
+
+因此这并不是一个linear reduction, 而是polynomial-time reduction
+
+$$HC\propto_p TSP$$
 
 ### 4.2 Two more graph problems
 
-Max Independent set
+**Max Independent set**
 
-> 给定图$G=(V,E)$, 找到最大的集合$S\subseteq V$是的S中的任意一对点之间都没有边连接。
+> 给定图$G=(V,E)$, 找到最大的集合$S\subseteq V$使得S中的任意一对点之间都没有边连接。
 
-Max-Clique
+**Max-Clique**
 
 > 给定图$G=(V,E)$, 找到最大的集合$S\subseteq V$使得S中的任意两个顶点都是邻接的
 
 `Theorem`{:.error}
 
-$Max-Clique\propto_p Max-Iin-Set$
+Max-Clique $\propto_p$  Max-Iin-Set
 
-$Max-Ind-Set\propto_p Max-Clique$
+Max-Ind-Set $\propto_p$  Max-Clique
 
 定义G'是G的complementary graph
 
@@ -249,7 +287,7 @@ Algorithm:
 2. 在G'中计算Max-Clique S
 3. 返回S，S也是G的Max-Ind-Set
 
-同理，Max-Clique的算法
+Max-Clique的算法同样可以由Max-Ind-Set的算法得到
 
 
 
@@ -280,19 +318,19 @@ Example for 3SUM
 
 Collinearity
 
-> Given a set of n points in the plane,  
+> Given a set of n points in the plane,  do any 3 of them lie on a non-horizontal line?
 
-$3SUM\propto Collinearity$
 
-* 给定3SUM中的集合S, 将S中的整数$a$替换成3个点$(a,0),(-\frac{a}{2},1),(a,2)$
+
+#### C. 证明$3SUM\propto Collinearity$
+
+* 给定3SUM中的集合S, 将S中的整数$a$转换成3个点$(a,0),(-\frac{a}{2},1),(a,2)$
 * 那么我们在$y=0,y=1,y=2$这几条horizontal line上总共有3n个点
-* 任何一条non-horizontal line一定会和$y=0,y=1,y=2$相交于3个点，比如$(a,0),(\frac{-b}{2},1),(c,2)$
+* 任何一条non-horizontal line一定会和$y=0,y=1,y=2$相交于3个点，$(a,0),(\frac{-b}{2},1),(c,2)$
 * $slope=-\frac{b}{2}-a=c+\frac{b}{2}$, 因此如果collinear, 则有$a+b+c=0$
-* 如果$x,y,z\in S$, $x+y+z=0$, 那么$(x,0),(-\frac{y}{2},1), (z,2)$ are collinear
+* 如果$x,y,z\in S$, $x+y+z=0$, 那么$(x,0),(-\frac{y}{2},1), (z,2)$ are collinear (当然这里存在一个问题，如果两个数相等$x=z$, 那么这三个点就不是collinear的)
 
 <img src="../../../assets/images/image-20200513143232468.png" alt="image-20200513143232468" style="zoom:50%;" />
-
-当然这里存在一个问题，如果$x=y$, 那么这三个点就不是collinear的
 
 <br>
 
@@ -304,13 +342,13 @@ $$T_{collinear}(n)\geq T_{3SUM}(\frac{n}{3})-O(n)$$
 
 <img src="../../../assets/images/image-20200513133711119.png" alt="image-20200513133711119" style="zoom:40%;" />
 
-#### C. Looking Back at 3SUM
+#### D. Looking Back at 3SUM
 
 > Given a set S of n distinct integers, are there $a,b,c\in S$(***repetition allowed***) with $a+b+c=0$ ?
 
 Algorithm:  $O(n^2)$
 
-double S，S里面的元素复制一份，一共2n个元素
+double S：将S里面的元素复制一份，一共2n个元素
 
 1. Sort S in  increasing order
 2. Consider $x_i,x_j, x_k$, start with $i=1,j=2,k=n$
@@ -322,6 +360,8 @@ double S，S里面的元素复制一份，一共2n个元素
 
 
 ### 4.4 Segment Splitting Problem
+
+这块还不是很理解hmmmm
 
 Segment Splitting Problem
 
@@ -371,7 +411,7 @@ $$T_{split}(n)\geq T_{3SUM}(\frac{n-13}{3})-O(nlogn)$$
 
 ### 4.5 More Reductions: Knapsack
 
-knapsack problem
+回忆背包问题
 
 > Given $n$ objects with weights and values, and a knapsack capacity $W$, find the maximum-value collection of objects with total weight $\leq W$.
 

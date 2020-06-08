@@ -676,9 +676,154 @@ lab L2
 
 
 
+## 4.4 if和while语句的代码生成过程样例
+
+stmt → if-stmt | while-stmt | break | other 
+
+if-stmt → if( exp ) stmt | if( exp ) stmt else stmt 
+
+while-stmt → while( exp ) stmt 
+
+exp → true | false
 
 
 
+tbc
+
+
+
+# 5. 过程和函数调用的代码生成
+
+## 5.1 Intermediate Code for Procedures and Functions
+
+函数调用的中间代码表示的要求可明确地表述如下：
+
+* 首先， 有两个实际的机制需要说明 —
+  * 函数过程的定义definition (也叫声明declaration) 
+    * 定义产生了函数名、参数和代码，但函数却不在那点执行。
+  * 函数过程的调用(call) 。
+    * 调用产生了参数的实际值，并且执行一个到函数代码的转移。函数代码被执行和返回。当产生函数代码时，除了它的一般结构，执行的运行时环境还不知道其他情况。这个运行时环境部分由调用者建造，部分也由被调用函数代码建造。 任务的分隔是调用次序(calling sequence) 的一部分，
+
+
+
+函数定义的intermediate code必须
+
+* 有一条标志函数定义开始的指令(也称为函数代码的entry point)
+* 有一条标志函数定义结束的指令(也称为函数返回点return point)
+
+```
+Entry instruction
+<code for function body}
+Return instruction
+```
+
+
+
+函数调用的intermediate code必须
+
+* 有一条指令指示参数计算的开始 (为调用而准备的)
+* 然后实际调用指令指示已经参数已经构成，到函数代码的actual jump可以发生
+
+```
+Begin-argument-computation instruction 
+<code to compute the arguments> 
+Call instruction
+```
+
+
+
+### A. Three-Address Code for Procedures and Functions   
+
+#### i. 定义
+
+* 在三地址码中， 入口指令需要给出一个procedure entry point的名字， 这类似于label指令，因此，这是一条one-address instruction。我们将其简单地称作entry
+* 类似地把返回指令叫作return。这个指令也是一条one-address instructio，假如有返回值，那么它必须给出返回值的名字
+
+```cpp
+int f(int x, int y) {
+    return x + y + 1;
+}
+```
+
+翻译成如下三地址码
+
+```
+entry f
+t1 = x + y
+t2 = t1 + 1
+return t2
+```
+
+
+
+#### ii. 调用
+
+在调用的情况下，实际需要 3个不同的三地址指令：
+
+* 一个标志参数计算的起点，称作begin_args(是一个zero-address instruction)；
+* 一个被用于重复地说明参数值的名字的指令，我们称其为arg(它必须包括参数值, 地址或名字 )；
+* 最后是实际调用指令，简单地写成 call，它也是一个一地址指令(被调用函数的名字或入口点必须给出)。
+
+例如前面所述函数定义`f`的调用
+
+```
+f(2 + 3, 4)
+```
+
+翻译成三地址码
+
+```
+begin_args
+t1 = 2 + 3
+arg t1
+arg 4
+call f
+```
+
+这里我们从左到右列出参数，但实际上可以有不同的顺序
+
+
+
+### B. P-Code for Procedures and Functions 
+
+#### i. 定义
+
+P-代码的入口指令是`ent`，返回指令是`ret`，前面C函数`f`的定义可以翻译成P-Code如下
+
+```
+ent f
+lod x
+lod y
+adi
+ldc 1
+adi
+ret
+```
+
+`ret`指令不需要一个参数用来指示返回的值, 返回值默认在栈顶
+
+#### ii. 调用
+
+p-code中使用`mst`和`cup`指令
+
+* `mst` (mark stack): 对应于`begin_args`
+* `cup` (call user procedure) 对应于`call`
+
+在遇到`cup`指令时，将所有参数值都假想成出现在栈顶 (按适当的顺序)
+
+
+
+## 5.2 函数定义和调用的代码生成过程
+
+
+
+
+
+# 代码优化技术
+
+## 1 代码优化的主要来源
+
+下面将列出某些代码生成器不能产生好代码的地方， 粗略地减少"代价"，也就是在这些地方代码可以获得多大改进
 
 
 
