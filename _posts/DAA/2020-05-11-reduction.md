@@ -44,7 +44,7 @@ Upper bound for $P_1$: $time(A_1)\leq conversion\;time(input\;and \;output) +tim
 
 <br>
 
-# 2. limits: If $P_1$ is hard, then so is $P_2$
+# 2. Lower Bound by Reduction
 
 The general "reducing" algorithm, $P_1\propto P_2$
 
@@ -54,13 +54,17 @@ The general "reducing" algorithm, $P_1\propto P_2$
 
 3. 将$S_2$转换成$I_1$的解$S_1$
 
-step 1 and 3 need to be dominated by step 2's runtime. 这个时候我们可以说$P_1, P_2$是一样难的
+step 1 and 3 need to be dominated by step 2's runtime. 
 
-如果可以很容易的解决$P_2$, 那么我们也可以很容易的解决$P_1$
+<br>
 
-同样，如果解决$P_1$很难，那么解决$P_2$也很难。
+$P_1\propto P_2$则
 
-做reduction的目的就在于说明$P_2$ hard, 并不是真的要用它去解决问题
+lower bound($P_1$) $\leq$ lower bound($P_2$)
+
+做reduction的目的就在于说明$P_2$ 比 $P_1$hard, 并不是真的要用它去解决问题
+
+事实上, P1转换过去的input是P2的special case。比如所有的NP问题都可以规约到NPC问题
 
 
 
@@ -69,6 +73,8 @@ step 1 and 3 need to be dominated by step 2's runtime. 这个时候我们可以�
 ### A. Distinct Integers Sorting
 
 `Theorem`{:.error}
+
+{:.error}
 
 Any algorithm for sorting distinct integers has worst case runtime $\Omega(nlogn)$
 

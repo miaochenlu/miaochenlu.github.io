@@ -412,7 +412,7 @@ $$g(n)=\begin{aligned}&2\quad &n=1\\&2^{g(n-1)}&\quad n\geq 2\end{aligned}$$
 
 
 
-# 4. Selection problems
+# 4. More about Adversary Strategy
 
 ## 4.1 Find X in a sorted matrix
 
@@ -463,6 +463,12 @@ Example: Find(84)
 
 ### B. Lower Bound
 
+上述算法需要2n-1次comparisons
+
+事实上，lower bound 也是2n-1
+
+一下进行证明：
+
 Adversary的目标是: eliminate as less elements as possible
 
 考虑如下例子
@@ -495,9 +501,9 @@ Adversary: 2n-1 comparison
 
 Adversary采取的策略：
 
-* query $Y_i<X_j(i<j)$: yes
+* query $Y_i<X_j(i<j)$:  回答yes
 
-* query $Y_i<X_j(i\geq j)$: no
+* query $Y_i<X_j(i\geq j)$:  回答no
 
 令$X_i=2i-1, Y_i=2i$
 
@@ -531,7 +537,7 @@ Adversary策略：
 * Y包含了已知在G中的边，$A[i,j]=1$
 * M包含了所有在Y中的边以及没有被测试的边
 * 一开始，Y是空的，M是满的
-* $Q(i,j)$ return 0 如果在删掉了边$e(i,j)$后M仍然是连通的； 否则return 1并且加入Y
+* $Q(i,j)$ return 0 如果在删掉了边$e(i,j)$后M仍然是连通的； 否则return 1并且将这条边加入Y 
 
 我们需要考虑A中所有的entry
 
@@ -540,6 +546,8 @@ Adversary策略：
 
 
 ## 4.4 Finding Patterns in Bit Strings
+
+这块还得仔细看看
 
 Does an n-bits string B contain the substring 01?
 
@@ -570,12 +578,12 @@ adversary维护两个指针$s,t$ 并且$ s<t$
 * 所有$<s$的位需要检查，因为他们可能是0
 * 所有$>t$的位需要检查，因为他们可能是1
 * 开始时，$s=0,t=n+1$
-* Adversary始终保持$s,t$中间的二进制串的长度$t-s-1$是奇数
-* 判断中间奇数长度的串是否含有01
+* Adversary始终保持$s,t$中间的二进制串的长度$t-s-1$是偶数
+* 判断中间偶数长度的串是否含有01
 
 <br>
 
-### C. Adversary for bit strings of even length
+#### Adversary for bit strings of even length
 
 Query B(i)
 
