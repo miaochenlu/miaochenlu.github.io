@@ -515,7 +515,7 @@ $\alpha$的选择会影响效率，一般选择$\alpha$为2的幂次，这样的
 #### Deal with collisions
 
 * open addressing 
-* separate chaining
+* **separate chaining**
 
 <img src="../../assets/images/image-20200509225410307.png" alt="image-20200509225410307" style="zoom:50%;" />
 
@@ -555,8 +555,6 @@ Bind names to data types
 
 
 
-
-
 ### E. The strategies
 
 * 用一张symbol table来存储所有类型的声明
@@ -590,17 +588,18 @@ two rules:
 
   * Pascal
     * the blocks are the main program
-    * pr
-
+    * procedure/function declarations
+* C
+    * the blocks are the compilation units, procedure/function declarations.
+    * the compound statements
   
+  一种语言是block structured，如果它允许在其他块的内部嵌入块， 并且如果一个块中说明的作用域限制在本块以及包含在本块的其他块中，服从最近嵌套规则 (most closely nested rule)：为同一个名字给定几个不同的说明，被引用的说明是最接近引用的那个嵌套块。
 
 ```cpp
 int i, j;
 int f(int size) 
 {
-  {
     char i, temp; ...
-  }
   {
     double j; ...
   }
@@ -610,7 +609,60 @@ int f(int size)
 }
 ```
 
+为了实现嵌套作用域和最近嵌套规则
 
+* 符号表插入操作不必改写前面的说明，但必须临时隐藏它们，这样查找操作只能找到名字最近插入的说明。
+* 删除操作不应删除与这个名字相应的所有说明，只需删除最近的一个，而显示前面任何的说明。
+
+符号表在处理嵌套作用域期间的行为类似于stack的方式
+
+* 进入f函数后
+
+<img src="../../assets/images/image-20200609234914602.png" alt="image-20200609234914602" style="zoom: 50%;" />
+
+* 处理到第二个嵌套block
+
+<img src="../../assets/images/image-20200609235247226.png" alt="image-20200609235247226" style="zoom:50%;" />
+
+* 退出函数f
+
+<img src="../../assets/images/image-20200609235319244.png" alt="image-20200609235319244" style="zoom:50%;" />
+
+但是也可以每个作用域维护独立的符号表，从内到外链接在一起，这样如果查找操作在当前表中没有找到名字，就自动用附上的表继续搜索
+
+<img src="../../assets/images/image-20200609235539060.png" alt="image-20200609235539060" style="zoom:50%;" />
 
 ## 3.4 Interation of same-level declarations
+
+***在同一 层中不能使用名字相同的declarations。***
+
+比如下面的例子引发error
+
+```cpp
+typedef int i;
+int i;
+```
+
+为检查这个要求，在每次插入前编译器必须执行一次查找，通过某种机制 (如嵌套层)确定在同 一层中任何已存在的说明是否有相同的名字
+
+***在相同层的序列中名字相互之间有多少可用的信息***
+
+```cpp
+int i = 1;
+void f() {
+    int i = 2, j = i + 1;
+}
+```
+
+f内部`j`的值是初始化成 2还是3，即使用的是i的局部declaration还是非局部declaration。 
+
+根据最近嵌套规则，应该是使用最近的declaration—局部declaration
+
+* sequential declaration: each declaration is added to the symbol table as it is processed
+* Collateral[并列] declaration: 
+  * declarations not be added immediately to the existing symbol table
+  * accumulated in a new table(or temporary structure)
+  * added to the existing table after all declarations have been processed.
+* Recursive declaration
+  * declaration may refer to themselves or each other
 
