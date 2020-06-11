@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Probelm Reduction
+title: Problem Reduction
 tags: DAA
 key: page-DAA
 article_header:
@@ -25,7 +25,7 @@ Reducing $P_1$ to $P_2$ ($P_2$)
 
 我们想要解决问题 $P_1$， 手上有解决问题$P_2$的算法$A_2$。将问题$P_1$的实例$I_1$变换成问题$P_2$的实例$I_2$。用算法$A_2$解决$I_2$, 得到解$S_2$。再将$S_2$变换成$I_1$的解$S_1$.
 
-<img src="../../../../assets/images/image-20200510093212231.png" alt="image-20200510093212231" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200510093212231.png" alt="image-20200510093212231" style="zoom:50%;" />
 
 这个合成的算法就是问题$P_1$的算法$A_1$
 
@@ -223,7 +223,7 @@ Goal: A minimum TSP tour in G.
 
 通过解决TSP问题来解决哈密尔顿回路问题
 
-<img src="../../assets/images/image-20200608201437895.png" alt="image-20200608201437895" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200608201437895.png" alt="image-20200608201437895" style="zoom:50%;" />
 
 接下来我们看如何reduce HC to TSP
 
@@ -237,7 +237,7 @@ else
 
 &emsp;&emsp;let $w_{ij}=1$
 
-<img src="../../assets/images/image-20200608201916907.png" alt="image-20200608201916907" style="zoom:25%;" /><img src="../../assets/images/image-20200608201928707.png" alt="image-20200608201928707" style="zoom:25%;" />
+<img src="../../../assets/images/image-20200608201916907.png" alt="image-20200608201916907" style="zoom:25%;" /><img src="../../../assets/images/image-20200608201928707.png" alt="image-20200608201928707" style="zoom:25%;" />
 
 **2.解决TSP问题实例$I_2$**
 
@@ -397,7 +397,7 @@ $3SUM\propto Collinearity\propto Segment Splitting$
 
 
 
-<img src="../../../assets/images/image-20200513150040567.png" alt="image-20200513150040567" style="zoom:50%;" />
+<img src="../../assets/images/image-20200513150040567.png" alt="image-20200513150040567" style="zoom:50%;" />
 
 复杂度
 

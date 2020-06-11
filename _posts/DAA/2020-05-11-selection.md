@@ -67,7 +67,7 @@ article_header:
 
 如果和最大值比较过的元素有M个，那么查找第二大元素只需要M-1+n-1次比较
 
-因此，为了寻找下界，我们的人物就是找到最小的M,
+因此，为了寻找下界，我们的任务就是找到最小的M,
 
 #### 锦标赛方法
 
@@ -203,7 +203,7 @@ algorithm
 
 $$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;smaller \;than\;m^*\}$$
 
-$$S_1=C\cup\{ keys\;from\;A\cup D\;that\;are\;slarger \;than\;m^*\}$$
+$$S_2=B\cup\{ keys\;from\;A\cup D\;that\;are\;larger \;than\;m^*\}$$
 
 4.Divide and Conquer
 
@@ -383,7 +383,7 @@ $$\lfloor log\;n\rfloor+2\lfloor log(\lfloor log\;n\rfloor+1)\rfloor+1$$
 **推广：Triple Binary Search**
 
 * 用$B_1$的方法去找m, 使得$F(2^{2^{m}-1}-1)=1$, 一共需要$2\lfloor log\;m\rfloor+1$次queries, 其中$m=\lfloor log(\lfloor log\; n\rfloor+1)\rfloor+1$
-* 在$[2^{2^{m-1}}, 2^{2^m-1}-1)$上进行二分查找找到$F(2^t-1)=1$，就是相当于在$[2^{m-1}, 2^m-1)$中寻找t, 是的$F(2^t-1)=1$需要$m-1$次queries
+* 在$[2^{2^{m-1}}, 2^{2^m-1}-1)$上进行二分查找找到$F(2^t-1)=1$，就是相当于在$[2^{m-1}, 2^m-1)$中寻找t, 使得$F(2^t-1)=1$需要$m-1$次queries
 * 在$[2^{t-1},2^t-1)$上二分查找，最终找到n, 其中$t=\lfloor logn\rfloor +1$, 需要$t-1$次queries
 
 总共需要$t-1+m-1+2\lfloor log\;m\rfloor+1$次queries
