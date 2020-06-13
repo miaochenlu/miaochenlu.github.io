@@ -666,3 +666,295 @@ f内部`j`的值是初始化成 2还是3，即使用的是i的局部declaration�
 * Recursive declaration
   * declaration may refer to themselves or each other
 
+
+
+# 4. 数据类型和类型检查
+
+两大任务: 
+
+* Type inference
+* Type checking
+
+**Type checking**: 
+
+> set of rules that ensure the type consistency of different constructs in the program.
+
+
+
+## 4.1 类型表达式和类型构造器
+
+### A. Simple types
+
+`int`, `double`, `boolean`, `char`
+
+> the values exhibit no explicit internal structure, and the ttypical representation is also simple and predefined.
+
+`void`: has no value, represent the empty set.
+
+new simple type defined sush as **subrange** types and **enumerated** types.
+
+<br>
+
+### B. Structured type
+
+New data types cana be created using typed constructors.
+
+Such constructors can be viewed as functions:
+
+* take existing types as parameters
+* return new types with a structure that depends on the constructor
+
+<br>
+
+#### Array
+
+**Type parameter:**
+
+* index type
+* component type
+
+Arrays are commonly allocated conriguous storage from smaller to larger indexes.
+
+Allow for the use of automatic offset calculations during execution.
+
+The amount of emory needed is $n\times size$
+
+<br>
+
+#### Record
+
+A record or structure type constructor takes a list of names and associated types and constructs a new type
+
+```cpp
+struct {
+    double r;
+    int i;
+};
+```
+
+Different types may be combined.
+
+The names are used to access the different components.
+
+<img src="../../assets/images/image-20200613190805725.png" alt="image-20200613190805725" style="zoom:50%;" />
+
+<br>
+
+#### Union
+
+correspond to the set union operation
+
+```cpp
+union {
+    double r;
+    int i;
+};
+```
+
+Disjoint union, each value is viewed as either real or an integer, but never both.
+
+如果x是给定的union类型的一个变量，那么`x.r`表示`x`是实数时的值，而`x.i`表示`x`是整数时的值。
+
+Allocate memory in parallel for each component.
+
+<img src="../../assets/images/image-20200613191045367.png" alt="image-20200613191045367" style="zoom:50%;" />
+
+
+
+#### Pointer
+
+Values that are references to values of another type. Most useful in describing recursive type.
+
+A value of a pointer type is a memory address whose location holds a value of its base type.
+
+
+
+#### Function
+
+```pascal
+VAR f: PROCEDURE (INTEGER) : INTEGER
+```
+
+这说明`f`时函数(或者过程)类型，带有一个整数参数，并产生一个整数结果。
+
+
+
+#### 类
+
+
+
+## 4.2 类型名，类型说明，递归类型
+
+Type declarations (type definition)提供了一个给类型表达式赋名的机制
+
+Such as: `typedef`, `=`
+
+```cpp
+typedef struct {
+    double r;
+    int i;
+} RealIntRec;
+```
+
+type definition使类型名进入符号表。类型名不能重用为变量名(作用域嵌套规则允许除外)。
+
+<br>
+
+Since type names can appear in type expressions, questions, arise about the recursive use of type names.
+
+Such recursive data types are extremely important in modern programming languages include lists, trees, and many other structures
+
+```cpp
+//indirect use of recursion (ML language)
+struct intBST {
+    int val;
+    struct intBST* left, *right;
+};
+typedef struct intBST* intBST;
+```
+
+
+
+
+
+## 4.3 Type equivalence
+
+**Type equivalence:** two types expression represent the same type.
+
+<br>
+
+```pascal
+record 
+	x: pointer to real;
+	y: array[10] of int;
+end
+```
+
+<img src="../../assets/images/image-20200613200828267.png" alt="image-20200613200828267" style="zoom:50%;" />
+
+```pascal
+proc(bool, union a: real, b: char end, int): void
+```
+
+<img src="../../assets/images/image-20200613200942682.png" alt="image-20200613200942682" style="zoom:50%;" />
+
+
+
+classification of type equivalence: 
+
+* structural equivalence
+* name equivalence
+* declaration equivalence
+
+
+
+#### Structural equivalence(最弱的)
+
+* Two types are the same if and only if they have the same structure (they have syntax trees that are identical in structure)
+
+两个数组时不等价的，除非他们有相同的大小和元素类型
+
+两个记录时不等价的，除非他们有相同的元素并且元素有相同的名字和顺序。
+
+
+
+#### Name equivalence(最强的)
+
+* Restricted variable declarations and type subexpressions to **simple types** and **type names**.
+
+```cpp
+t1 = int;
+t2 = int;
+//t1 and t2 are not equivalent, type names are different
+```
+
+
+
+
+
+判断代码
+
+```pascal
+function typeEqual(t1, t2: TypeExp): Boolean;
+var temp : Boolean;
+	p1, p2 : TypeExp;
+begin
+	if t1 and t2 are of simple type then
+		return t1 = t2;
+	else if t1 and t2 are type names then
+		return t1 = t2;
+	else return false;
+end;
+```
+
+
+
+#### Declaration equivalence
+
+```cpp
+t2 = t1
+```
+
+对于上述说明，用类型别名(aliase)解释，而不是新的类型。
+
+因此
+
+```cpp
+t1 = int;
+t2 = int;
+```
+
+t1和t2对int等价
+
+**every type name is equivalent to some base type name, which is either a predefined type or is given by a type expression resulting from the application of a type constructor.**
+
+```cpp
+t1 = array[10] of int;
+t2 = array[10] of int;
+t3 = t1;
+```
+
+t1和t3是等价的，但是和t2不等价
+
+
+
+* Pascal 一律使用declaration equivalence
+* C对struct和union使用declaration equivalence, 对指针和数组使用structural equivalence
+
+
+
+## 4.4 Type inference and type checking
+
+```cpp
+if not typeEqual(exp.type, boolean)
+then type-error(stmt)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
