@@ -10,9 +10,8 @@ key: page-primedual
 
 <!--more-->
 
-<center><img src="../../../assets/images/image-20200202233303222.png" alt="image-20200202233303222" style="zoom:70%;" /></center>
-
-<center><img src="../../../assets/images/image-20200202233328673.png" alt="image-20200202233328673" style="zoom:70%;" /></center>
-
-<center><img src="../../../assets/images/image-20200202233348607.png" alt="image-20200202233348607" style="zoom:70%;" /></center>
-
+<object data="../../../assets/images/primedual.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="../../../assets/images/primedual.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="../../../assets/images/primedual.pdf">Download PDF</a>.</p>
+    </embed>
+</object>

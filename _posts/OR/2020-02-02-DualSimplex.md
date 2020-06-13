@@ -9,7 +9,9 @@ key: page-dualsimplex
 
 <!--more-->
 
-<center><img src="../../../assets/images/image-20200202233008648.png" alt="image-20200202233008648" style="zoom:70%;" /></center>
-
-<center><img src="../../../assets/images/image-20200202233034330.png" alt="image-20200202233034330" style="zoom:70%;" /></center>
+<object data="../../../assets/images/dualsimplex.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="../../../assets/images/dualsimplex.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="../../../assets/images/dualsimplex.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
 
