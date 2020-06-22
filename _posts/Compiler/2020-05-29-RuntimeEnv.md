@@ -11,17 +11,19 @@ key: page-compilerruntimeenv
 
 典型计算机的存储器可分为
 
-* 寄存器区域
+* 寄存器区域(register area)
 * 较慢的直接编址的随机访问存储器 ( RAM )。 
-  * RAM区域还可再分为代码区和数据区。 在绝大多数的语言中， 执行时不可能改变代码区， 且在概念上可将代码和数据区看作是**独立**的。另外由于代码区在执行之前是固定，所以在编译时所有代码的地址都是可计算的
+  * RAM区域还可再分为code area和data area。 在绝大多数的语言中， 执行时不可能改变代码区， 且在概念上可将代码和数据区看作是**独立**的。另外由于代码区在执行之前是固定，所以在编译时所有代码的地址都是可计算的
 
-<img src="../../../assets/images/image-20200510185855839.png" alt="image-20200510185855839" style="zoom:50%;" />
+<img src="../../assets/images/image-20200510185855839.png" alt="image-20200510185855839" style="zoom:35%;" />
 
 ### The general organization of runtime storage
 
-<img src="../../../assets/images/image-20200510190011538.png" alt="image-20200510190011538" style="zoom:50%;" />
+<img src="../../assets/images/image-20200510190011538.png" alt="image-20200510190011538" style="zoom:50%;" />
 
-* 生成的目标代码的大小在编译时刻就已经固定下来了，因此编译器可以将可执行目标代码防在一个静态确定的区域: 代码区。 这个区通常位于存储的低端。(上面是低)
+(上面是高地址)
+
+* 生成的目标代码的大小在编译时刻就已经固定下来了，因此编译器可以将可执行目标代码防在一个静态确定的区域: 代码区。 
 * 程序的某些数据对象的大小在编译时刻知道，他们可以被放置在另一个称为静态区的区域中，该区域可以被静态确定。防止在这个区域的数据对象包括全局变量和编译器产生的数据，比如用于支持垃圾回收的信息。
   * 之所以要将尽可能多的对象进行静态分配，是因为这些对象的地址可以被编译到目标代码中。
 * stack和heap防在剩余空间的相对两端，是动态的。stack用来存放**活动记录**， 这些活动记录在函数调用的过程中生成。
@@ -106,9 +108,7 @@ main中有三个任务
 * 设定上下限
 * 调用quicksort
 
-<img src="../../../assets/images/image-20200510214852013.png" alt="image-20200510214852013" style="zoom:50%;" />
-
-<img src="../../../assets/images/image-20200510214927401.png" alt="image-20200510214927401" style="zoom:50%;" />
+<img src="../../assets/images/image-20200510214852013.png" alt="image-20200510214852013" style="zoom:40%;" /><img src="../../assets/images/image-20200510214927401.png" alt="image-20200510214927401" style="zoom:40%;" />
 
 * 过程调用的序列和活动树的前序遍历对应
 * 过程返回的序列和活动树的后序遍历对应
@@ -127,11 +127,9 @@ Procedure calls and returns通常由称为control stack的run-time  stack进行�
 
 #### 活动记录中可能的内容有
 
-<img src="../../../assets/images/image-20200510190943555.png" alt="image-20200510190943555" style="zoom:50%;" />
+<img src="../../assets/images/image-20200510190943555.png" alt="image-20200510190943555" style="zoom:35%;" />
 
-上面是栈底，下面是栈顶
-
-* 临时值。比如点那个表达式求值过程中产生的中间结果无法存放在寄存器中时，就会生成这些临时值。
+* 临时值。比如表达式求值过程中产生的中间结果无法存放在寄存器中时，就会生成这些临时值。
 * 局部数据。对应于这个活动记录过程的局部变量
 * 保存的机器状态。通常包含返回地址(PC的值)和寄存器的一些内容
 * 访问链。当被调用过程需要另一个活动记录的数据时需要使用访问链进行定位。
@@ -148,25 +146,45 @@ Example:
 
 
 
-<img src="../../../assets/images/image-20200510222429259.png" alt="image-20200510222429259" style="zoom:50%;" />
+<img src="../../assets/images/image-20200510222429259.png" alt="image-20200510222429259" style="zoom:30%;" />
 
 
 
-## 2.3 calling sequence
+## 2.3 Processor registers
 
-calling sequence时用来实现procedure call的代码段。他为一个活动记录在栈中分配空间，并在此记录的字段中填写信息
+Procedure registers are also part of the structure of the runtime environment.
 
-return sequence时一段类似的代码。他回复机器状态，使得调用过程能够在调用结束之后继续执行。
+Special-purpose registers to keep track of execution
 
-<img src="../../../assets/images/image-20200511152137211.png" alt="image-20200511152137211" style="zoom:50%;" />
+| PC   | program counter  |
+| ---- | ---------------- |
+| SP   | stack pointer    |
+| FP   | frame pointer    |
+| AP   | argument pointer |
+
+
+
+## 2.4 calling sequence
+
+calling sequence时用来实现procedure call的代码段。他为一个活动记录在栈中分配空间，并在此记录的字段中填写信息。即他负责
+
+* The allocation of memory for the activation record
+* The computation and storing of arguments
+* The storing and setting of necessary registers to affect the acall
+
+return sequence是一段类似的代码。他恢复机器状态，使得调用过程能够在调用结束之后继续执行。即他负责
+
+* The placing of the return value where it can be accessed by the caller
+* The readjustment of registers
+* The possible releasing for activation record memory
+
+<img src="../../assets/images/image-20200511152137211.png" alt="image-20200511152137211" style="zoom:35%;" />
 
 一个calling sequence中的代码通常被分割到调用者和被调用者中。如何分割？
 
 如果一个过程在n个不同点上被调用，分配给调用者的那部分calling sequence会被生成n次，而分配给调用者的部分只被生成一次。因此期望把calling sequence尽可能多的放到被调用者中。
 
-
-
-## 2.4 栈中的变长数据
+## 2.5 栈中的变长数据
 
 过程p有三个局部数组，他们的大小无法在编译时刻确定。
 
@@ -181,9 +199,7 @@ return sequence时一段类似的代码。他回复机器状态，使得调用�
 
 重置`top`和`top_sp`所指位置的代码可以在编译时刻生成。这些代码根据在运行时刻获知的记录大小来计算`top`和`top_sp`的新值。当q返回时，可以根据q的活动记录中的被保存的control link来恢复`top_sp`。 `top`的新值等于原来的`top_sp`的值减去q的活动记录中机器状态，control link, access link, 返回值，参数字段的总长度。这个总长度可以在编译时刻知道。
 
-<img src="../../../assets/images/image-20200511154412964.png" alt="image-20200511154412964" style="zoom:50%;" />
-
-
+<img src="../../assets/images/image-20200511154412964.png" alt="image-20200511154412964" style="zoom:30%;" />
 
 # 3. 栈中非局部数据的访问
 
@@ -259,7 +275,7 @@ partition访问了数组a以及数组分割值v, 并且调用了函数exchange
 
 access link形成了一条链路，他从栈顶活动记录开始，经过嵌套深度逐步递减的活动的序列。沿着这条链路找到的活动就是其数据和对应过程可以被当前正在运行的过程访问的所有活动。
 
-<img src="../../../assets/images/image-20200523144408556.png" alt="image-20200523144408556" style="zoom:50%;" />
+<img src="../../assets/images/image-20200523144408556.png" alt="image-20200523144408556" style="zoom:30%;" />
 
 * (a) sort调用readArray()将输入加载到数组a上，结束后调用了quicksort(1, 9)对数组进行排序。
   * quicksort(1,9) 中的access link指向sort的AR, 因为sort是quicksort外围的离他最近的嵌套quicksort的函数。
@@ -322,7 +338,7 @@ access link形成了一条链路，他从栈顶活动记录开始，经过嵌套
 
 当一个过程p作为参数传递给了另一个过程q, 并且q随后调用了这个参数。
 
-当过程被用作参数的时候，调用者除了传递过程参数的名字，同时害需要传递这个参数对应的正确的access link
+当过程被用作参数的时候，调用者除了传递过程参数的名字，同时还需要传递这个参数对应的正确的access link
 
 使用3.4.1的case1来确定access link
 
@@ -344,7 +360,7 @@ fun a(x) =
 
 
 
-<img src="../../../assets/images/image-20200525105923057.png" alt="image-20200525105923057" style="zoom:50%;" />
+<img src="../../assets/images/image-20200525105923057.png" alt="image-20200525105923057" style="zoom:30%;" />
 
 
 
@@ -354,16 +370,16 @@ fun a(x) =
 
 一个更高效的实现方式是使用一个称为显示表的辅助数组d, 他为每个嵌套深度保存了一个指针。
 
-我们设法在任何时刻，指针d[i]都指向栈中最高的对应于某个嵌套深度为i的过程的活动记录。
+我们设法在任何时刻，指针d[i]都指向栈中离栈顶最近的对应于某个嵌套深度为i的过程的活动记录。
 
 如下图
 
-* d[1]保存了一个指向sort的活动记录的指针，该活动记录是嵌套深度为1的函数中最高的活动记录(下边是栈底)
+* d[1]保存了一个指向sort的活动记录的指针，该活动记录是嵌套深度为1的函数中离栈顶最近的活动记录(下边是栈底)
 
-* d[2]保存了指向exchange的活动记录的指针，该记录是嵌套深度为2的最高活动记录
-* d[3]指向partition, 是嵌套深度为3的最高活动记录
+* d[2]保存了指向exchange的活动记录的指针，该记录是嵌套深度为2的离栈顶最近活动记录
+* d[3]指向partition, 是嵌套深度为3的离栈顶最近活动记录
 
-<img src="../../../assets/images/image-20200525113612581.png" alt="image-20200525113612581" style="zoom:50%;" />
+<img src="../../assets/images/image-20200525113612581.png" alt="image-20200525113612581" style="zoom:50%;" />
 
 这样的优势在于，如果过程p正在运行，并且他需要某个嵌套深度为i的过程q的元素x, 那么只需要查看d[i]就可以了。我们沿着d[i]找到q的活动记录，根据偏移量就可以找到x
 
@@ -380,11 +396,11 @@ fun a(x) =
 
 存储管理器跟踪堆汇总的空闲空间，他的两个基本功能是：
 
-* 分配：当程序为一个变量或者对象请求内存时，存储管理器产生一段连续的具有被请求大小的堆空间
+* 分配(allocate)：当程序为一个变量或者对象请求内存时，存储管理器产生一段连续的具有被请求大小的堆空间
   * 首先使用堆中的空闲空间来满足分配请求
   * 如果堆中没有被氢气大小的空间块可以分配，他试图从操作系统中获得连续的虚拟内存来增加堆区的存储空间
   * 如果空间已经用完，存储管理器将空间耗尽的信息传给应用程序
-* 回收：存储管理器吧回收的空间反还到空闲空间的缓冲池，这样他可以复用该空间来满足其他的分配请求。存储管理器不会将内存反还给操作系统
+* 回收(free)：存储管理器把回收的空间返还到空闲空间的缓冲池，这样他可以复用该空间来满足其他的分配请求。存储管理器不会将内存返还给操作系统
 
 
 
@@ -417,17 +433,11 @@ fun a(x) =
 
 我们总是尽可能的把存储块接合起来，那么就不会有两个连续的空闲块。因此我们总是只需要查看与整备回收的块相邻的两个块
 
-<img src="../../../assets/images/image-20200528232407624.png" alt="image-20200528232407624" style="zoom:50%;" />
+<img src="../../assets/images/image-20200528232407624.png" alt="image-20200528232407624" style="zoom:30%;" />
 
 因为要接合A,B, 所以必须从空闲列表中删除他们其中的一个。空闲列表的双重链接使得我们可以找到A和B中的前驱节点和后继节点。注意，不能假定物理上相邻的A和B在空闲列表中也相邻。知道了A和B在空闲列表中的前驱和后继的存储块，就可以操作列表中的指针并将A和B替换为一个接合后的存储块
 
-
-
-
-
 ## 4.3 垃圾回收
-
-
 
 ### A. 设计目标
 
@@ -444,8 +454,6 @@ fun a(x) =
 mutator从存储管理器获取空间，创建对象，还可以引入和消除对已有对象的引用。当mutator不能到达某些对象时，这些对象就变成了垃圾。
 
 垃圾回收器找到这些不可达对象，并将这些对象交给跟踪空闲空间的存储管理器，收回他们所占的空间。
-
-
 
 ### B. 可达性
 
@@ -474,6 +482,14 @@ tbc...
 自变量在调用时计算表达式，在执行过程中，他们的值就成为了参数的值。
 
 可以将pass by value解释为用自变量的值取代过程中的所有参数。
+
+```cpp
+void inc(int x) {
+    ++x; ++x;
+}
+```
+
+这样是不会对参数产生影响的。
 
 
 
@@ -510,6 +526,18 @@ int main() {
 
 直到在被调用的程序真正使用了自变量(作为一个参数)后才对这个自变量赋值。
 
+自变量的名称是他在调用点上的结构表示取代了他对应的参数的名字。
+
+比如:
+
+```cpp
+void p(int x) {++x;}
+```
+
+如果做出了`p(a[i])`的调用，其结果是计算`++(a[i])`。
+
+如果p总使用x之前改变i, 那么他的结果就会不同
+
 ```cpp
 int i;
 int a[10];
@@ -525,6 +553,4 @@ int main() {
 ```
 
 结果是a[2]被设置为3
-
-
 

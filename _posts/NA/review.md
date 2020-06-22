@@ -1,3 +1,55 @@
+Evaluate $f (x) = x^3 − 6.1x^2 + 3.2x + 1.5$ at $x = 4.71$ using three-digit arithmetic.
+
+|                   | $x$  | $x^2$   | $x^3$      | $6.1x^2$  | $3.2x$ |
+| ----------------- | ---- | ------- | ---------- | --------- | ------ |
+| Exact             | 4.71 | 22.1841 | 104.487111 | 135.32301 | 15.072 |
+| 3-digit(chopping) | 4.71 | 22.1    | 104.       | 134.      | 15.0   |
+| 3-digit(rounding) | 4.71 | 22.2    | 105.       | 135.      | 15.1   |
+
+To illustrate the calculations, let us look at those involved with ﬁnding $x^3$ using threedigit rounding arithmetic. First we ﬁnd 
+
+$$x^2 = 4.71^2 = 22.1841\;which\;rounds\;to\;22.2$$
+
+Then we use this value of $x^2$ to ﬁnd 
+
+$$x^3 = x^2 · x = 22.2 · 4.71 = 104.562 \;which \;rounds \;to \;105$$.
+
+Also,
+
+$$6.1x^2 = 6.1(22.2) = 135.42 \;which \;rounds \;to \;135, $$
+
+and
+
+$$3.2x = 3.2(4.71) = 15.072 \;which \;rounds \;to \;15.1.$$
+
+The exact result of the evaluation is Exact: 
+
+$$f (4.71) = 104.487111 − 135.32301 + 15.072 + 1.5 = −14.263899.$$
+
+Using ﬁnite-digit arithmetic, the way in which we add the results can effect the ﬁnal result. Suppose that we add left to right. Then for chopping arithmetic we have 
+
+$$Three-digit (chopping): f (4.71) = ((104. − 134.) + 15.0) + 1.5 = −13.5,$$
+
+and for rounding arithmetic we have 
+
+$$Three-digit (rounding): f (4.71) = ((105. − 135.) + 15.1) + 1.5 = −13.4.$$
+
+<br/>
+
+relative error
+
+$$Chopping:\vert\frac{−14.263899+13.5}{−14.263899}\vert\approx 0.05$$
+
+$$Rounding:\vert\frac{−14.263899+13.4}{−14.263899}\vert\approx 0.06$$
+
+**！单次Rounding会比Chopping精度高，但是涉及复杂运算的时候，这是不一定的**
+
+
+
+
+
+
+
 # ODE
 
 ## A. Euler & high order Euler's method

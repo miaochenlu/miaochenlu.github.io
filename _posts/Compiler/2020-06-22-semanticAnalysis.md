@@ -1,3 +1,33 @@
+---
+layout: article
+title: "Compilers--Semantics Analysis"
+tag: Compiler
+key: page-compiler_semantics_analysis
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image:
+    gradient: 'linear-gradient(135deg, rgba(34, 139, 87 , .4), rgba(139, 34, 139, .4))'
+  background_image:
+    src: https://miaochenlu.github.io/picture/image-20191208000900444.png.png
+
+
+---
+
+<!--more-->
+
+<style>
+  .page__header .header__brand path {
+    fill: rgba(255, 255, 255, .95);
+  }
+</style>
+
+
+<br/>
+
+
+
 在一个典型的静态类型的语言 (如C语言)中， 语义分析包括
 
 * 构造符号表
@@ -15,7 +45,7 @@
 
 * 编译程序执行的分析
 
-> 提高翻译程序执行的效率。通常包括对“最优化”或代码改进技术的讨论
+> 提高翻译程序执行的效率。通常包括对"最优化"或代码改进技术的讨论
 
 # 1. Attributes and attribute grammars
 
@@ -33,7 +63,7 @@
 
 属性可以在编译过程中确定也可以在程序执行过程中确定
 
-如: 一个数的有效位数可以在编译时确定; (非常数)表达式的值， 或者动态分配的数据结构的位置在执行时确定
+如: 一个数的有效位数可以在编译时确定; (非 常数)表达式的值， 或者动态分配的数据结构的位置在执行时确定
 
 #### 什么时候binding?
 
@@ -126,7 +156,7 @@ $digit\rightarrow 0\vert 1\vert 2\vert 3\vert 4\vert 5\vert 6\vert 7\vert 8\vert
 
 give number 345
 
-<img src="../../assets/images/image-20200425192538263.png" alt="image-20200425192538263" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200425192538263.png" alt="image-20200425192538263" style="zoom:30%;" />
 
 ## 1.3 Simplifications and Extensions to Attribute Grammars
 
@@ -148,15 +178,15 @@ give number 345
 
 1. 使用原始文法二义性的但简单的形式(事实上，所有歧义都在parser阶段处理了)
 
-<img src="../../assets/images/image-20200425194213074.png" alt="image-20200425194213074" style="zoom:35%;" />
+<img src="../../../assets/images/image-20200425194213074.png" alt="image-20200425194213074" style="zoom:35%;" />
 
 使用歧义文法后转化成
 
-<img src="../../assets/images/image-20200425194042640.png" alt="image-20200425194042640" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200425194042640.png" alt="image-20200425194042640" style="zoom:40%;" />
 
 2. 在显示属性值时，用抽象语法树来代替语法树
 
-<img src="../../assets/images/image-20200425194122636.png" alt="image-20200425194122636" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200425194122636.png" alt="image-20200425194122636" style="zoom:40%;" />
 
 使用两个辅助函数
 
@@ -168,7 +198,7 @@ give number 345
   * 1个参数
   * 数字值
 
-<img src="../../assets/images/image-20200425194348302.png" alt="image-20200425194348302" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200425194348302.png" alt="image-20200425194348302" style="zoom:40%;" />
 
 
 
@@ -204,11 +234,11 @@ $var-list\longrightarrow id,var-list\vert id$
 
 &emsp;画出依赖图
 
-<img src="../../assets/images/image-20200508155649508.png" alt="image-20200508155649508" style="zoom:50%;" /><img src="../../assets/images/image-20200508155702892.png" alt="image-20200508155702892" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508155649508.png" alt="image-20200508155649508" style="zoom:40%;" /><img src="../../../assets/images/image-20200508155702892.png" alt="image-20200508155702892" style="zoom:40%;" />
 
 要注意的是：在画语法树节点时我们不使用属性的圆点符号，而是通过写出与其相连的下一个节点来表示属性。这样，在这个例子中第一个相关 也可以画作
 
-<img src="../../assets/images/image-20200508160044295.png" alt="image-20200508160044295" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508160044295.png" alt="image-20200508160044295" style="zoom:40%;" />
 
 * $type\longrightarrow int\vert float$无关紧要
 * $decl\longrightarrow type\; var-list$
@@ -217,15 +247,15 @@ $var-list\longrightarrow id,var-list\vert id$
 
 &emsp;画出依赖图
 
-<img src="../../assets/images/image-20200508155836697.png" alt="image-20200508155836697" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508155836697.png" alt="image-20200508155836697" style="zoom:40%;" />
 
 &emsp;在这种情况中，因为decl不直接包含在相关图中，所以这个相关图相关的文法规则并不完全清晰。我们通常**重叠在相应的文法规则的语法树片段上绘制相关图**。这样，上面的相关图就可以画作
 
-<img src="../../assets/images/image-20200508155926030.png" alt="image-20200508155926030" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508155926030.png" alt="image-20200508155926030" style="zoom:40%;" />
 
 `float x,y`的相关图是
 
-<img src="../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:40%;" />
 
 ### B. Directed acyclic graphs(DAG)
 
@@ -233,7 +263,7 @@ $var-list\longrightarrow id,var-list\vert id$
 
 给节点编号
 
-<img src="../../assets/images/image-20200508160448119.png" alt="image-20200508160448119" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508160448119.png" alt="image-20200508160448119" style="zoom:40%;" />
 
 <br>
 
@@ -279,7 +309,7 @@ end
 
 在分析树节点N上的非终结符B的继承属性是由N的父节点上的产生式所关联的语义规则来定义的。这个产生式的体中必含符号B。<u>节点N上的综合属性只能通过N的父节点, N本身和N的兄弟节点上的属性值来定义</u>
 
-<img src="../../assets/images/image-20200425234201883.png" alt="image-20200425234201883" style="zoom:40%;" />
+<img src="../../../assets/images/image-20200425234201883.png" alt="image-20200425234201883" style="zoom:25%;" />
 
 ***计算***：
 
@@ -304,7 +334,7 @@ Remark:
 
 #### Example:
 
-<img src="../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508160159987.png" alt="image-20200508160159987" style="zoom:40%;" />
 
 代码中混合了前序和中序操作
 
@@ -338,7 +368,7 @@ end EvalType;
 
 
 
-<img src="../../assets/images/image-20200508175426749.png" alt="image-20200508175426749" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508175426749.png" alt="image-20200508175426749" style="zoom:20%;" />
 
 ```cpp
 typedef enum {decl, type, id} nodekind;
@@ -408,7 +438,7 @@ $X_i.a_j=f_{ij}(X_0.a_1,\cdots,X_0.a_k,X_1.a_1,\cdots,X_1.a_k,\cdots,X_{i-1}.a_1
 
 * LR分析中合成属性的计算: LR分析程序中,通常由一个value stack存储合成属性。value stack将和parsing stack并行操作，根据属性等式每次在分析栈出现shift或reduce来计算新值。
 
-<img src="../../assets/images/image-20200508224900790.png" alt="image-20200508224900790" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508224900790.png" alt="image-20200508224900790" style="zoom:35%;" />
 
 * Inheriting a previously computed synthesized attributes during LR parsing
 
@@ -418,7 +448,7 @@ $C.i=f(B.s)$ 其中s是合成属性
 
 处理方法是在B,C中间插入空产生式D, 处理D时暂存B的属性值
 
-<img src="../../assets/images/image-20200508225812526.png" alt="image-20200508225812526" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508225812526.png" alt="image-20200508225812526" style="zoom:30%;" />
 
 在Yacc中处理起来就容易了, 直接 
 
@@ -430,7 +460,7 @@ A:B{saved_i=f($1);}C;
 
 * 如果我们能够预测以前计算的合成属性在什么位置的话，可以在value stack中直接访问来解决一些继承属性的计算问题
 
-<img src="../../assets/images/image-20200508230350269.png" alt="image-20200508230350269" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200508230350269.png" alt="image-20200508230350269" style="zoom:35%;" />
 
 
 
@@ -517,7 +547,7 @@ $\alpha$的选择会影响效率，一般选择$\alpha$为2的幂次，这样的
 * open addressing 
 * **separate chaining**
 
-<img src="../../assets/images/image-20200509225410307.png" alt="image-20200509225410307" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200509225410307.png" alt="image-20200509225410307" style="zoom:40%;" />
 
 ## 3.2 Declarations
 
@@ -527,8 +557,6 @@ $\alpha$的选择会影响效率，一般选择$\alpha$为2的幂次，这样的
 * 类型声明
 * 变量声明
 * procedure/function声明
-
-
 
 ### A. Constant Declarations
 
@@ -553,15 +581,11 @@ Bind names to data types
 
 ### D. Procedure/Function Declarations
 
-
-
 ### E. The strategies
 
 * 用一张symbol table来存储所有类型的声明
 * 用不同的symbol table来存储不同类型的声明
 * symbol table对应程序的不同区域，并且将这些symbol table根据文法规则连接起来
-
-
 
 ## 3.3 Scope rules and block structure
 
@@ -592,6 +616,8 @@ two rules:
 * C
     * the blocks are the compilation units, procedure/function declarations.
     * the compound statements
+    
+    
   
   一种语言是block structured，如果它允许在其他块的内部嵌入块， 并且如果一个块中说明的作用域限制在本块以及包含在本块的其他块中，服从最近嵌套规则 (most closely nested rule)：为同一个名字给定几个不同的说明，被引用的说明是最接近引用的那个嵌套块。
 
@@ -618,19 +644,19 @@ int f(int size)
 
 * 进入f函数后
 
-<img src="../../assets/images/image-20200609234914602.png" alt="image-20200609234914602" style="zoom: 50%;" />
+<img src="../../../assets/images/image-20200609234914602.png" alt="image-20200609234914602" style="zoom: 40%;" />
 
 * 处理到第二个嵌套block
 
-<img src="../../assets/images/image-20200609235247226.png" alt="image-20200609235247226" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200609235247226.png" alt="image-20200609235247226" style="zoom:40%;" />
 
 * 退出函数f
 
-<img src="../../assets/images/image-20200609235319244.png" alt="image-20200609235319244" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200609235319244.png" alt="image-20200609235319244" style="zoom:40%;" />
 
 但是也可以每个作用域维护独立的符号表，从内到外链接在一起，这样如果查找操作在当前表中没有找到名字，就自动用附上的表继续搜索
 
-<img src="../../assets/images/image-20200609235539060.png" alt="image-20200609235539060" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200609235539060.png" alt="image-20200609235539060" style="zoom:40%;" />
 
 ## 3.4 Interation of same-level declarations
 
@@ -666,8 +692,6 @@ f内部`j`的值是初始化成 2还是3，即使用的是i的局部declaration�
 * Recursive declaration
   * declaration may refer to themselves or each other
 
-
-
 # 4. 数据类型和类型检查
 
 两大任务: 
@@ -678,8 +702,6 @@ f内部`j`的值是初始化成 2还是3，即使用的是i的局部declaration�
 **Type checking**: 
 
 > set of rules that ensure the type consistency of different constructs in the program.
-
-
 
 ## 4.1 类型表达式和类型构造器
 
@@ -736,9 +758,7 @@ Different types may be combined.
 
 The names are used to access the different components.
 
-<img src="../../assets/images/image-20200613190805725.png" alt="image-20200613190805725" style="zoom:50%;" />
-
-<br>
+<img src="../../../assets/images/image-20200613190805725.png" alt="image-20200613190805725" style="zoom:30%;" />
 
 #### Union
 
@@ -757,7 +777,7 @@ Disjoint union, each value is viewed as either real or an integer, but never bot
 
 Allocate memory in parallel for each component.
 
-<img src="../../assets/images/image-20200613191045367.png" alt="image-20200613191045367" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200613191045367.png" alt="image-20200613191045367" style="zoom:30%;" />
 
 
 
@@ -767,8 +787,6 @@ Values that are references to values of another type. Most useful in describing 
 
 A value of a pointer type is a memory address whose location holds a value of its base type.
 
-
-
 #### Function
 
 ```pascal
@@ -777,11 +795,7 @@ VAR f: PROCEDURE (INTEGER) : INTEGER
 
 这说明`f`时函数(或者过程)类型，带有一个整数参数，并产生一个整数结果。
 
-
-
 #### 类
-
-
 
 ## 4.2 类型名，类型说明，递归类型
 
@@ -813,10 +827,6 @@ struct intBST {
 typedef struct intBST* intBST;
 ```
 
-
-
-
-
 ## 4.3 Type equivalence
 
 **Type equivalence:** two types expression represent the same type.
@@ -830,23 +840,19 @@ record
 end
 ```
 
-<img src="../../assets/images/image-20200613200828267.png" alt="image-20200613200828267" style="zoom:50%;" />
+<img src="../../../assets/images/image-20200613200828267.png" alt="image-20200613200828267" style="zoom:25%;" />
 
 ```pascal
 proc(bool, union a: real, b: char end, int): void
 ```
 
-<img src="../../assets/images/image-20200613200942682.png" alt="image-20200613200942682" style="zoom:50%;" />
-
-
+<img src="../../../assets/images/image-20200613200942682.png" alt="image-20200613200942682" style="zoom:25%;" />
 
 classification of type equivalence: 
 
 * structural equivalence
 * name equivalence
 * declaration equivalence
-
-
 
 #### Structural equivalence(最弱的)
 
@@ -868,10 +874,6 @@ t2 = int;
 //t1 and t2 are not equivalent, type names are different
 ```
 
-
-
-
-
 判断代码
 
 ```pascal
@@ -886,8 +888,6 @@ begin
 	else return false;
 end;
 ```
-
-
 
 #### Declaration equivalence
 
@@ -920,8 +920,6 @@ t1和t3是等价的，但是和t2不等价
 
 * Pascal 一律使用declaration equivalence
 * C对struct和union使用declaration equivalence, 对指针和数组使用structural equivalence
-
-
 
 ## 4.4 Type inference and type checking
 
