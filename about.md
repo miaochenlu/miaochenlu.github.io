@@ -47,7 +47,6 @@ window.onload = function() {
 
 <body>
 <div>
-
 <header >
     <section>
         <center><h1 >Chenlu Miao</h1></center>
@@ -64,17 +63,18 @@ window.onload = function() {
             </p>
             <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
               	<li>Member of Pursuit Science Class (Computer Science), Chu Kochen Honors College</li>
-              <li>Overall GPA: 3.98/4, 91.08/100</li>
+              <li>Overall GPA: 3.98/4, 4.58/5, 91.5/100</li>
               <ul class="mdl-typography--subhead mdl-typography--subhead-color-contrast">
                 SELECTED COURSES(4.0/4.0 in all of them)
-                <li>Systems: Digital Logic Design, Computer Organization, Computer Architecture, Computer Networks, Operating System</li>
-                <li>Math: Mathematical Analysis, Linear Algebra, Stochastic Process, Probability and Mathematical Statistics, Applied Operation Research</li>
+                <li>Systems: Digital Logic Design, Computer Organization, Computer Architecture, Computer Networks, Operating System, Compiler Principles</li>
+                <li>Math: Mathematical Analysis, Linear Algebra, Stochastic Process, Probability and Mathematical Statistics, Applied Operation Research, Numerical Analysis</li>
               </ul>
               <li>RESEARCH INTEREST: Computer Architecture and Hardware Security, recent projects focused on hardware transactional memory.</li>
             </ul>
             <br>
         </section>
     </section>
+
 
  <section>
         <div>
