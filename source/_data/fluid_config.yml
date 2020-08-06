@@ -55,7 +55,7 @@ color:  # 主题颜色配置，不一定能每一处都生效，可能会被局�
   board_color: "#fff"               # 主面板背景色
 
 font:  # 主题字体配置
-  font_size: 18px                   # 全局字号
+  font_size: 16px                   # 全局字号
   font_family:             # 全局字体
   code_font_size: 85%               # 代码的字号
 
@@ -164,7 +164,7 @@ index:
   post_default_img: '' # 默认的文章封面图，当没有指定 index_img 时会使用该图片，若都为空则不显示任何图片
   slogan:  # 首页副标题的独立设置
     enable: true  # 为 false 则不显示任何内容
-    text: 'It&acute; s Us Make The World Different'
+    text: 'It&apos; s Us Make The World Different'
   auto_excerpt:
     enable: true
   post_url_target: _self  # available: _blank | _self
