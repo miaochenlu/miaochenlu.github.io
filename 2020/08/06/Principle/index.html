@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>Template Method - Explorer</title>
+  <title>面向对象设计原则 - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-05 16:10" pubdate>
-      August 5, 2020 pm
+    <time datetime="2020-08-06 15:20" pubdate>
+      August 6, 2020 pm
     </time>
   </div>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      500 字
+      124 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      1
        分钟
     </span>
   
@@ -216,132 +216,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Template Method</h1>
+            <h1 style="display: none">面向对象设计原则</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在软件构建过程中，对于某一项任务，它常常有稳定的整体操作结构，但各个子步骤却有很多改变的需求，或者由于固有的原因 （比如框架与应用之间的关系）而无法和任务的整体结构同时实现。</p>
-<p>核心在于在稳定与变化之间求得一个平衡，如果全部稳定或者全部变化都是不需要设计模式的。</p>
-<p>如何在确定<strong>稳定操作结构</strong>的前提下，来灵活应对<strong>各个子步骤的变化</strong>或者<strong>晚期实现需求</strong>？</p>
-<p>假设整个代码的操作结构如下图所示，其中红色是Library开发人员完成的，蓝色部分是Application开发人员完成的</p>
-<img src="image-20200710191024075.png" srcset="/img/loading.gif" alt="image-20200710191024075" style="zoom:33%;" />
+              <div class="note note-info">
+            <p>变化是复用的天敌！ 面向对象设计最大的优势在于：<u><strong><em>抵御变化</em></strong></u></p>
+          </div>
 
 
 
-<h2 id="结构化软件流程设计"><a href="#结构化软件流程设计" class="headerlink" title="结构化软件流程设计"></a>结构化软件流程设计</h2><img src="image-20200710191212499.png" srcset="/img/loading.gif" alt="image-20200710191212499" style="zoom:50%;" />
+<h4 id="依赖倒置原则-DIP"><a href="#依赖倒置原则-DIP" class="headerlink" title="依赖倒置原则 (DIP)"></a>依赖倒置原则 (DIP)</h4><ul>
+<li><p>高层模块(稳定)不应该依赖于低层模块(变化)，二者都应该依赖于抽象(稳定) 。</p>
+</li>
+<li><p>抽象(稳定)不应该依赖于实现细节(变化) ，实现细节应该依赖于抽象(稳定)。</p>
+</li>
+</ul>
+<br>
 
-<p>lib.cpp</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step1</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step3</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step5</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;</code></pre></div>
-
-<p>app.cpp</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//应用程序开发人员</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;</code></pre></div>
-
-<p>主程序</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-function">Library <span class="hljs-title">lib</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function">Application <span class="hljs-title">app</span><span class="hljs-params">()</span></span>;
-    
-    lib.Step1();
-    
-    <span class="hljs-keyword">if</span>(app.Step2()) &#123;
-        lib.Step3();
-    &#125;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
-        app.Step4();
-    &#125;
-    lib.Step5();
-&#125;</code></pre></div>
-
-
-
-<h2 id="用模板方法的代码重构为"><a href="#用模板方法的代码重构为" class="headerlink" title="用模板方法的代码重构为"></a>用模板方法的代码重构为</h2><img src="image-20200710191917988.png" srcset="/img/loading.gif" alt="image-20200710191917988" style="zoom:50%;" />
-
-<p>lib.cpp</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Run</span><span class="hljs-params">()</span> </span>&#123;
-        Step1();
-        <span class="hljs-keyword">if</span>(Step2()) &#123;
-            Step3();
-        &#125;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
-            Step4();
-        &#125;
-        Step5();
-    &#125;
-    
-    <span class="hljs-keyword">virtual</span> ~Library() &#123;&#125;
-<span class="hljs-keyword">protected</span>:
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//稳定</span>
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step3</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//稳定</span>
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Step5</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//稳定</span>
-        <span class="hljs-comment">//...</span>
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">//变化</span>
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">//变化</span>
-&#125;</code></pre></div>
-
-<p>app.cpp</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//应用程序开发人员</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span>:</span> <span class="hljs-keyword">public</span> Library &#123;
-<span class="hljs-keyword">protected</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;;</code></pre></div>
-
-<p>主程序</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    Library* pLib = <span class="hljs-keyword">new</span> Application();
-    lib.Run();
-    <span class="hljs-keyword">delete</span> pLib;
-&#125;</code></pre></div>
-
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两者的区别在于早绑定和晚绑定。前者属于早绑定，而template method属于晚绑定</p>
-<img src="image-20200710192039991.png" srcset="/img/loading.gif" alt="image-20200710192039991" style="zoom:50%;" />
-
-<p>定义一个操作中的算法的骨架 (稳定)，而将一些步骤延迟 (变化)到子类中。Template Method使得子类可以不改变 (复用)一个算法的结构即可重定义(override 重写)该算法的某些特定步骤。</p>
+<h4 id="开放封闭原则-OCP"><a href="#开放封闭原则-OCP" class="headerlink" title="开放封闭原则 (OCP)"></a>开放封闭原则 (OCP)</h4><ul>
+<li><p>对扩展开放，对更改封闭。</p>
+</li>
+<li><p>类模块应该是可扩展的，但是不可修改。</p>
+</li>
+</ul>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Design-Patterns/">Design Patterns</a>
-                    
-                  </div>
                 
                 
                   <div class="post-meta">
@@ -360,18 +262,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/06/DesignPatterns/Observer/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Observer 观察者模式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/05/DesignPatterns/StrategyMethod/">
-                        <span class="hidden-mobile">Strategy Method</span>
+                      <a href="/2020/08/06/DesignPatterns/Observer/">
+                        <span class="hidden-mobile">Observer 观察者模式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -512,7 +408,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Template Method&nbsp;",
+        "面向对象设计原则&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
