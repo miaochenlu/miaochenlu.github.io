@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>Decorator - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-07 06:15" pubdate>
+      August 7, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Decorator</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在某些情况下我们可能会”过度地使用继承来扩展对象的功能”， 由于继承为类型引入的<strong>静态特质</strong>，使得这种扩展方式缺乏灵活性； 并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。</p>
+<p>如何使”对象功能的扩展”能够根据需要来动态地实现？同时避免”扩展功能的增多”带来的子类膨胀问题？从而使得任何”功能扩展变化”所导致的影响将为最低？</p>
+<p>所谓静态特质, 比如在CryptoNetworkStream的Read函数中定死了调用NetworkStream::Read(), 而我们重构后的CryptoStream中的Read函数调用stream-&gt;Read(), 支持多态，可以产生变化。</p>
+<h2 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h2><p>动态（组合）地给一个对象增加一些额外的职责。就增加功能而言，Decorator模式比生成子类（继承）更为灵活（消除重复代码 &amp; 减少子类个数）。</p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>下面给出一个Stream代码示例，其继承关系如下所示</p>
+<img src="image-20200807143722316.png" srcset="/img/loading.gif" alt="image-20200807143722316" style="zoom:30%;" />
+
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//业务操作</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stream</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>= <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>= <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(<span class="hljs-keyword">char</span> data)</span> </span>= <span class="hljs-number">0</span>;
+    
+    <span class="hljs-keyword">virtual</span> ~Stream() &#123;&#125;
+&#125;;
+
+<span class="hljs-comment">//主体类</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//读文件流</span>
+	&#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//定位文件流</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(<span class="hljs-keyword">char</span> data)</span> </span>&#123;
+        <span class="hljs-comment">//写文件流</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//读网络流</span>
+	&#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//定位网络流</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(<span class="hljs-keyword">char</span> data)</span> </span>&#123;
+        <span class="hljs-comment">//写网络流</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MemoryStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//读内存流</span>
+	&#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//定位内存流</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(<span class="hljs-keyword">char</span> data)</span> </span>&#123;
+        <span class="hljs-comment">//写内存流</span>
+    &#125;
+&#125;;
+
+<span class="hljs-comment">//扩展操作</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoFileStream</span>:</span> <span class="hljs-keyword">public</span> FileStream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        FileStream::Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        FileStream::Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        FileStream::Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoNetworkStream</span>:</span> <span class="hljs-keyword">public</span> NetworkStream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        NetworkStream::Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        NetworkStream::Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        NetworkStream::Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoMemoryStream</span>:</span> <span class="hljs-keyword">public</span> MemoryStream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        MemoryStream::Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        MemoryStream::Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        MemoryStream::Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferedFileStream</span>:</span> <span class="hljs-keyword">public</span> FileStream &#123;
+    <span class="hljs-comment">//...</span>
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferedNetworkStream</span>:</span> <span class="hljs-keyword">public</span> NetworkStream &#123;
+    <span class="hljs-comment">//...</span>
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferedMemoryStream</span>:</span> <span class="hljs-keyword">public</span> MemoryStream &#123;
+    <span class="hljs-comment">//...</span>
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoBufferedFileStream</span>:</span> <span class="hljs-keyword">public</span> FileStream &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        <span class="hljs-comment">//额外的缓冲操作...</span>
+        FileStream::Read(number);<span class="hljs-comment">//读文件流</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        <span class="hljs-comment">//额外的缓冲操作...</span>
+        FileStream::Seek(position);<span class="hljs-comment">//定位文件流</span>
+        <span class="hljs-comment">//额外的加密操作...</span>
+        <span class="hljs-comment">//额外的缓冲操作...</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        <span class="hljs-comment">//额外的缓冲操作...</span>
+        FileStream::Write(position);<span class="hljs-comment">//写文件流</span>
+        <span class="hljs-comment">//额外的加密操作...</span>
+        <span class="hljs-comment">//额外的缓冲操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Process</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//编译时装配</span>
+    CryptoFileStream* fs1 = <span class="hljs-keyword">new</span> CryptoFileStream();
+    
+    BufferedFileStream* fs2 = <span class="hljs-keyword">new</span> BufferedFileStream();
+    
+    CryptoBufferedFileStream* fs3 = <span class="hljs-keyword">new</span> CryptoBufferedFileStream();
+&#125;</code></pre></div>
+
+<p>这样设计的代码存在大量的冗余，比如对于不同的stream, 无论是FileStream还是NetworkStream还是MemoryStream, 他们的加密操作都是一样的。</p>
+<ul>
+<li>重构</li>
+</ul>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//扩展操作</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoFileStream</span> &#123;</span>
+    FileStream* stream;<span class="hljs-comment">//=new FileStream()</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoNetworkStream</span> &#123;</span>
+    NetworkStream* stream;	<span class="hljs-comment">//=new NetworkStream();</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoMemoryStream</span> &#123;</span>
+    MemoryStream* stream;	<span class="hljs-comment">//=new MemoryStream();</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;</code></pre></div>
+
+<ul>
+<li>继续重构</li>
+</ul>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//扩展操作</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+    Stream* stream;<span class="hljs-comment">//...</span>
+<span class="hljs-keyword">public</span>:
+    CryptoStream(Stream* stm): stream(stm) &#123;
+        
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferedStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+    Stream* stream; <span class="hljs-comment">//...</span>
+    <span class="hljs-comment">//...</span>
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Process</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//运行时装配</span>
+    FileStream* s1 = <span class="hljs-keyword">new</span> FileStream();
+    CryptoStream* s2 = <span class="hljs-keyword">new</span> CryptoStream(s1);
+    BufferedStream* s3 = <span class="hljs-keyword">new</span> BufferedStream(s1);
+    BufferedStream* s4 = <span class="hljs-keyword">new</span> BufferedStream(s2);
+&#125;</code></pre></div>
+
+<p>很神奇，CryptoStream既有Stream基类，也有Stream字段。这里还需要继承Stream是因为他定义了基类的接口规范</p>
+<ul>
+<li>继续重构</li>
+</ul>
+<p>CryptoStream, BufferedStream都有Stream这个字段，把他们提到一个中间类中，</p>
+<p>设置一个DecoratorStream中间类</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//扩展操作</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DecoratorStream</span>:</span> <span class="hljs-keyword">public</span> Stream &#123;
+<span class="hljs-keyword">protected</span>:
+    Stream* stream; <span class="hljs-comment">//...</span>
+    DecoratorStream(Stream* stm): DecoratorStream(stm) &#123;
+        
+    &#125;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CryptoStream</span>:</span> <span class="hljs-keyword">public</span> DecoratorStream &#123;
+<span class="hljs-keyword">public</span>:
+    CryptoStream(Stream* stm): DecoratorStream(stm) &#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">char</span> <span class="hljs-title">Read</span><span class="hljs-params">(<span class="hljs-keyword">int</span> number)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Read(number);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Seek</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Seek(position);
+        <span class="hljs-comment">//额外的加密操作</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span><span class="hljs-params">(byte data)</span> </span>&#123;
+        <span class="hljs-comment">//额外的加密操作...</span>
+        stream-&gt;Write(data);
+        <span class="hljs-comment">//额外的加密操作...</span>
+    &#125;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BufferedStream</span>:</span> <span class="hljs-keyword">public</span> DecoratorStream &#123;
+    <span class="hljs-comment">//...</span>
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Process</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//运行时装配</span>
+    FileStream* s1 = <span class="hljs-keyword">new</span> FileStream();
+    CryptoStream* s2 = <span class="hljs-keyword">new</span> CryptoStream(s1);
+    BufferedStream* s3 = <span class="hljs-keyword">new</span> BufferedStream(s1);
+    BufferedStream* s4 = <span class="hljs-keyword">new</span> BufferedStream(s2);
+&#125;</code></pre></div>
+
+<p>新的类关系</p>
+<img src="image-20200807143823919.png" srcset="/img/loading.gif" alt="image-20200807143823919" style="zoom:30%;" />
+
+
+
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><img src="image-20200807160507597.png" srcset="/img/loading.gif" alt="image-20200807160507597" style="zoom:50%;" />
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>通过采用组合而非继承的手法， Decorator模式实现了在运行时动态扩展对象功能的能力，而且可以根据需要扩展多个功能。避免 了使用继承带来的”灵活性差”和”多子类衍生问题”。</p>
+</li>
+<li><p>Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又 表现为has-a Component的组合关系，即Decorator类又使用了 另外一个Component类。</p>
+</li>
+<li><p>Decorator模式的目的并非解决”多子类衍生的多继承”问题，Decorator模式应用的要点在于解决”主体类在多个方向上的扩展 功能”——是为”装饰”的含义。</p>
+</li>
+</ul>
+<h2 id="Decorator属于单一职责模式"><a href="#Decorator属于单一职责模式" class="headerlink" title="Decorator属于单一职责模式"></a>Decorator属于单一职责模式</h2><p>在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码， 这时候的关键是划清责任。</p>
+<ul>
+<li><p>典型模式</p>
+<p>• Decorator</p>
+<p>• Bridge</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Design-Patterns/">Design Patterns</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Design-Patterns/">Design Patterns</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/06/Principle/">
+                        <span class="hidden-mobile">面向对象设计原则</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Decorator&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
