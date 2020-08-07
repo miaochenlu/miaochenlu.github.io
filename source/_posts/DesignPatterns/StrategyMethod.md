@@ -3,6 +3,7 @@ title: Strategy Method
 date: 2020-08-05 15:53:57
 index_img: /img/image-20200805135526277.png
 tags: Design Patterns
+categories: Design Patterns
 ---
 
 ## 动机

@@ -3,6 +3,7 @@ title: Template Method
 date: 2020-08-05 16:10:25
 index_img: /img/image-20200710192039991.png
 tags: Design Patterns
+categories: Design Patterns
 ---
 
 ## 动机
