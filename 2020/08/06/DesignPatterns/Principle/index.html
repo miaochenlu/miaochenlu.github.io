@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>Strategy Method - Explorer</title>
+  <title>面向对象设计原则 - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-05 07:53" pubdate>
-      August 5, 2020 am
+    <time datetime="2020-08-06 07:20" pubdate>
+      August 6, 2020 am
     </time>
   </div>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      819 字
+      124 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      1
        分钟
     </span>
   
@@ -216,137 +216,27 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Strategy Method</h1>
+            <h1 style="display: none">面向对象设计原则</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂； 而且有时候支持不使用的算法也是一个性能负担</p>
-<p>如何在运行时根据需要透明地更改对象的算法？将算法与对象本身解耦，从而避免上述问题？</p>
-<h2 id="Strategy-Method定义"><a href="#Strategy-Method定义" class="headerlink" title="Strategy Method定义"></a>Strategy Method定义</h2><p>定义一系列算法，把它们一个个封装起来，并且使它们可互 相替换（变化）。该模式使得算法可独立于使用它的客户程 序(稳定)而变化（扩展，子类化）。</p>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>考虑一下计算税的例子</p>
-<ul>
-<li>第一种实现方式</li>
-</ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">enum</span> TaxBase &#123;
-    CN_Tax,
-    US_Tax,
-    DE_Tax
-&#125;;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SalesOrder</span> &#123;</span>
-    TaxBase tax;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTax</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-        
-        <span class="hljs-keyword">if</span>(tax == CN_Tax) &#123;
-            <span class="hljs-comment">//CN*****</span>
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tax == US_Tax) &#123;
-            <span class="hljs-comment">//US*****</span>
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tax == DE_Tax) &#123;
-            <span class="hljs-comment">//DE*****</span>
-        &#125;
-        <span class="hljs-comment">//***</span>
-    &#125;
-&#125;</code></pre></div>
-
-<p>有些时候，静态地去观察是看不出来的，加入时间轴，考虑到未来的动态变化，问题就会暴露出来。考虑上述例子，如果要加入一个国家，比如法国，那么我们不仅要在<code>TaxBase</code>中中增加一个<code>FR_Tax</code>, 还需要在<code>SalesOrder</code>中增加判断语句。这样的更改违背了开闭原则： 对扩展开放，对修改封闭 (避免去修改源代码</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">enum</span> TaxBase &#123;
-    CN_Tax,
-    US_Tax,
-    DE_Tax,
-    <span class="hljs-comment">/***加入France***/</span>
-    FR_Tax,
-&#125;;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SalesOrder</span> &#123;</span>
-    TaxBase tax;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTax</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-        
-        <span class="hljs-keyword">if</span>(tax == CN_Tax) &#123;
-            <span class="hljs-comment">//CN*****</span>
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tax == US_Tax) &#123;
-            <span class="hljs-comment">//US*****</span>
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tax == DE_Tax) &#123;
-            <span class="hljs-comment">//DE*****</span>
-        &#125;
-        <span class="hljs-comment">/***加入France***/</span>
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tax == FR_Tax) &#123;
-          
-        &#125;
-        <span class="hljs-comment">//***</span>
-    &#125;
-&#125;</code></pre></div>
+              <div class="note note-info">
+            <p>变化是复用的天敌！ 面向对象设计最大的优势在于：<u><strong><em>抵御变化</em></strong></u></p>
+          </div>
 
 
 
-<ul>
-<li>考虑另一种实现方式</li>
-</ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TaxStrategy</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">virtual</span> ~TaxStrategy() &#123;&#125;
-&#125;;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CNTax</span>:</span> <span class="hljs-keyword">public</span> TaxStrategy &#123;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">USTax</span>:</span> <span class="hljs-keyword">public</span> TaxStrategy &#123;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DETax</span>:</span> <span class="hljs-keyword">public</span> TaxStrategy &#123;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;</code></pre></div>
-
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SalesOrder</span> &#123;</span>
-<span class="hljs-keyword">private</span>:
-    TaxStrategy* strategy;
-<span class="hljs-keyword">public</span>:
-    SalesOrder(StrategyFactory* strategyFactory) &#123;
-        <span class="hljs-keyword">this</span>-&gt;strategy = strategyFactory-&gt;NewStrategy();
-    &#125;
-    
-    ~SalesOrder() &#123;
-        <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>-&gt;strategy;
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">CalculateTax</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-        <span class="hljs-function">Context <span class="hljs-title">context</span><span class="hljs-params">()</span></span>;
-        
-        <span class="hljs-keyword">double</span> val = 
-            	srtategy-&gt;Calculate(context);<span class="hljs-comment">//多态调用</span>
-    &#125;
-&#125;</code></pre></div>
-
-<p>如果要增加法国，只需增加一个<code>FRTax</code>类</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FRTax</span>:</span> <span class="hljs-keyword">public</span> TaxStrategy &#123;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> doubel <span class="hljs-title">Calculate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Context&amp; context)</span> </span>&#123;
-        <span class="hljs-comment">//...</span>
-    &#125;
-&#125;</code></pre></div>
-
-<p>这是一种扩展的做法，在这里只需要增加一个FRTax类，不需要更改SalesOrder。</p>
-<p>复用性一般是指二进制层面下的复用性，如果使用第一种方法，那么整个系统需要重新编译，重新测试。虽然修改后保留了一部分原来的代码，但是这个并不是复用。而策略方法不需要重新编译之前编译好的文件，只需要重新编译FRTax这个文件</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="image-20200805135526277.png" srcset="/img/loading.gif" alt="image-20200805135526277"> </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>Strategy及其子类为组件提供了一系列可重用的算法，从而可以使 得类型在运行时方便地根据需要在各个算法之间进行切换。</p>
+<h4 id="依赖倒置原则-DIP"><a href="#依赖倒置原则-DIP" class="headerlink" title="依赖倒置原则 (DIP)"></a>依赖倒置原则 (DIP)</h4><ul>
+<li><p>高层模块(稳定)不应该依赖于低层模块(变化)，二者都应该依赖于抽象(稳定) 。</p>
 </li>
-<li><p>Strategy模式提供了用条件判断语句以外的另一种选择，消除条件 判断语句，就是在解耦合。含有许多条件判断语句的代码通常都需 要Strategy模式。</p>
+<li><p>抽象(稳定)不应该依赖于实现细节(变化) ，实现细节应该依赖于抽象(稳定)。</p>
 </li>
-<li><p>如果Strategy对象没有实例变量，那么各个上下文可以共享同一个 Strategy对象，从而节省对象开销</p>
+</ul>
+<br>
+
+<h4 id="开放封闭原则-OCP"><a href="#开放封闭原则-OCP" class="headerlink" title="开放封闭原则 (OCP)"></a>开放封闭原则 (OCP)</h4><ul>
+<li><p>对扩展开放，对更改封闭。</p>
+</li>
+<li><p>类模块应该是可扩展的，但是不可修改。</p>
 </li>
 </ul>
 
@@ -354,13 +244,6 @@
             <hr>
             <div>
               <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Design-Patterns/">Design Patterns</a>
-                    
-                  </div>
                 
                 
                   <div class="post-meta">
@@ -379,9 +262,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/05/DesignPatterns/TemplateMethod/">
+                      <a href="/2020/08/07/DesignPatterns/Decorator/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Template Method</span>
+                        <span class="hidden-mobile">Decorator</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -389,8 +272,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/10/13/pipeline/">
-                        <span class="hidden-mobile">CA - Pipeline</span>
+                      <a href="/2020/08/06/DesignPatterns/Observer/">
+                        <span class="hidden-mobile">Observer 观察者模式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -531,7 +414,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Strategy Method&nbsp;",
+        "面向对象设计原则&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
