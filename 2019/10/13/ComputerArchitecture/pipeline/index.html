@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>CA - Pipeline - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-10-13 14:04" pubdate>
+      October 13, 2019 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      45
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">CA - Pipeline</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1><a name="pipline">附录C流水线</a></h1>
+
+<h2 id="1-什么是流水线"><a href="#1-什么是流水线" class="headerlink" title="1 什么是流水线"></a>1 什么是流水线</h2><p>流水线是一种将多条指令 <strong><em>重叠执行</em></strong> 的实现技术  </p>
+<p>一条执行包含多种操作，流水线充分利用了这些 <strong><em>操作之间的并行性</em></strong><br><br/></p>
+<p>为了能更形象地理解这个问题，不妨用汽车装配线来做类比    </p>
+<blockquote>
+<p>汽车装配线的每一环节负责一项任务，所有环节是并行的（也就是不同的汽车同时在不同的环节上）  </p>
+<p>在流水线中，指令就像是一辆待装配的汽车，不同环节完成指令的一部分,这些环节的每一步称为 <strong><em>流水级或者流水段</em></strong>。流水级前后相连形成流水线  </p>
+<p>汽车装配线的 <strong><em>吞吐量</em></strong> 定义为单位时间生产的汽车数量，由完整汽车退出装配线的频率决定</p>
+<p>流水线的吞吐量由指令退出流水线的频率决定。一条指令在流水线中下移一步需要的时间为 <strong><em>处理器周期</em></strong> 。因为各个环节同时执行，所以处理器周期由最缓慢的流水线级确定。</p>
+</blockquote>
+<p>可以想见，要使流水线性能高，平衡各流水线级很重要  </p>
+<blockquote>
+<p>因为处理器周期由最缓慢的流水线级确定，我们想要使最缓慢环节的加快，就要平衡各流水线级。  [木桶原理]</p>
+</blockquote>
+<p>如果各级达到完美平衡，那么每条指令在流水线处理器中的时间为  </p>
+<script type="math/tex; mode=display">\frac{非流水线机器上每条指令的时间}{流水级的数目}</script><p>在这些条件下，流水线加速比=流水级的数目</p>
+<p><br/></p>
+<h1 id="2-RISC指令集"><a href="#2-RISC指令集" class="headerlink" title="2 RISC指令集"></a>2 RISC指令集</h1><p>我们以RISC指令集为例来了解一下流水线实现。一下，我们会介绍RISC指令集以及没有流水线的实现方式。</p>
+<p>RISC指令集子集中每条指令都可以在5个时钟周期以内实现。以MIPS指令集为例介绍这5个时钟周期</p>
+<ul>
+<li><strong><em>指令提取周期(IF(Instruction Fetch))</em></strong>  </li>
+<li><strong><em>指令译码/寄存器提取周期(ID)</em></strong>  </li>
+<li><strong><em>执行/有效地址周期(EX)</em></strong>  </li>
+<li><strong><em>存储器访问(MEM)</em></strong></li>
+<li><strong><em>写回周期(WB)</em></strong></li>
+</ul>
+<center><img="/Users/jones/Library/Application Support/typora-user-images/image-20191219230108716.png" alt="image-20191219230108716" style="zoom:50%;" /></center>
+
+<p><a href="http://web.cs.iastate.edu/~prabhu/Tutorial/PIPELINE/DLXimplem.html" target="_blank" rel="noopener">http://web.cs.iastate.edu/~prabhu/Tutorial/PIPELINE/DLXimplem.html</a></p>
+<p><br/></p>
+<h1 id="3-RISC处理器经典五级流水线"><a href="#3-RISC处理器经典五级流水线" class="headerlink" title="3 RISC处理器经典五级流水线"></a>3 RISC处理器经典五级流水线</h1><center><img src="ca20190908-1.png" srcset="/img/loading.gif" width="600"></center>
+<center><img src="ca20190908-2.png" srcset="/img/loading.gif" width="600"></center>
+
+<p><br/></p>
+<p>在RISC流水线中，多条指令的执行重叠不会引入多少冲突，因为以下三点</p>
+<h4 id="A"><a href="#A" class="headerlink" title="A."></a>A.</h4><p>使用分离的指令存储器和数据存储器。</p>
+<p>这样做是因为指令提取和数据访问都需要访问存储器，会引发冲突，所以分离指令和数据存储器。</p>
+<p>注意：如果流水线处理器时钟周期=多周期处理器时钟周期，存储器需要提供<strong>5倍带宽</strong></p>
+<h4 id="B"><a href="#B" class="headerlink" title="B."></a>B.</h4><p>两个阶段使用了寄存器堆：<strong>ID</strong>阶段decode, <strong>WB</strong>阶段writeback写入</p>
+<p>因此，每个时钟周期寄存器需要两次读取(A=Reg[rs], B=Reg[rt]) 和一次写入</p>
+<p>为了出气对相同寄存器堆多次读取和一次写入，<strong><em>我们在时钟周期的前半部分写寄存器，后半部分读寄存器</em></strong></p>
+<h4 id="C"><a href="#C" class="headerlink" title="C."></a>C.</h4><p>程序计数器在IF阶段要递增</p>
+<p>ID阶段要计算潜在的分支目标。若分支在ID改变程序计数器？</p>
+<p><br/></p>
+<p>除了要确保流水线中的指令不会在相同时间使用相同的硬件资源，还要确保不同流水级的指令不会互相干扰。这是通过在流水级之间引入 <u>流水线寄存器</u>来实现的。将一个给定的流水级得出的结果存储到流水线寄存器，并在下一个时钟周期作为下一个流水级的输入。</p>
+<center><img src="image-20191013133054888.png" srcset="/img/loading.gif" alt="image-20191013133054888" style="zoom: 30%;" /></center>
+
+<h1 id="4-流水化的主要阻碍-流水线冒险"><a href="#4-流水化的主要阻碍-流水线冒险" class="headerlink" title="4 流水化的主要阻碍-流水线冒险"></a>4 流水化的主要阻碍-流水线冒险</h1><p>冒险降低来了流水化所能带来的理想加速比<br>冒险共有一下三类  </p>
+<ol>
+<li><p>结构冒险  </p>
+<p>在重叠执行模式下，硬件无法同时支持指令的所有可能组合，就会出现资源冲突 [比如大家都想访问存储器]</p>
+</li>
+<li><p>数据冒险  </p>
+<p>指令之间存在先后顺序，一条指令取决于先前指令的结果</p>
+</li>
+<li><p>控制冒险 </p>
+<p>分支指令以及其他改变程序计数器的指令会导致控制冒险</p>
+</li>
+</ol>
+<p>为了避免冒险，要求流水线中的一些指令延迟时，其他指令能够继续执行 。</p>
+<div class="note note-warning">
+            <p>这里讨论的流水线，当一条指令被stall时，在指令停顿之后发射的<strong><em>所有指令也会被停顿</em></strong>，之前发射的指令不会被停顿</p>
+          </div>
+<p><br/></p>
+<h2 id="4-1-带有停顿的流水线性能"><a href="#4-1-带有停顿的流水线性能" class="headerlink" title="4.1 带有停顿的流水线性能"></a>4.1 带有停顿的流水线性能</h2><p>$<br>流水化加速比=\frac{非流水化指令平均执行时间}{流水化指令平均执行时间}$<br>$=\frac{非流水化CPI\times 非流水化时钟周期}{流水化CPI\times 流水化时钟周期}$<br>$=\frac{非流水化CPI}{流水化CPI}\times \frac{非流水化时钟周期}{流水化时钟周期}$</p>
+<p><br/></p>
+<p>流水化处理器的理想CPI几乎总是等于1，算上停顿<br>$<br>流水化CPI=理想CPI+每条指令的流水线停顿时钟周期$<br>$=1+每条指令的流水线停顿时间周期$</p>
+<p>所以</p>
+<script type="math/tex; mode=display">加速比=\frac{非流水化CPI}{1+每条指令的流水线停顿周期}</script><p>如果所有指令周期数相同，等于流水级数目(流水线深度)，那么非流水化CPI=流水线深度</p>
+<script type="math/tex; mode=display">加速比=\frac{流水深度}{1+每条指令的流水线停顿周期}</script><div class="note note-warning">
+            <p><u>所以，如果没有流水线停顿，加速比=流水线深度</u></p>
+          </div>
+<h2 id="4-2-结构冒险"><a href="#4-2-结构冒险" class="headerlink" title="4.2 结构冒险"></a>4.2 结构冒险</h2><p>i. 什么是结构冒险</p>
+<blockquote>
+<p>指令重叠执行需要实现功能单元的流水化和资源的复制，以允许在流水线中出现所有可能的指令组合</p>
+<p>如果由于资源冲突而不能容许某些指令组合，就说出现结构冒险</p>
+</blockquote>
+<p>ii. 解决方式</p>
+<p>在发生结构冒险时，使流水线停顿一个时钟周期</p>
+<p>停顿称为 <u>流水线气泡</u>，他们漂浮穿过流水线，占有空间但是不执行有效工作。导致CPI增大</p>
+<p><br/></p>
+<h2 id="4-3-数据冒险"><a href="#4-3-数据冒险" class="headerlink" title="4.3 数据冒险"></a>4.3 数据冒险</h2><p>i. 数据冒险是什么</p>
+<blockquote>
+<p>有些指令依赖于之前指令的结果</p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs armasm"><span class="hljs-symbol">DADD</span> <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R2</span>, <span class="hljs-built_in">R3</span>
+<span class="hljs-symbol">DSUB</span> <span class="hljs-built_in">R4</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R5</span>
+<span class="hljs-keyword">AND </span> <span class="hljs-built_in">R6</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R7</span>
+<span class="hljs-symbol">OR</span>   <span class="hljs-built_in">R8</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R9</span>
+<span class="hljs-symbol">XOR</span>  <span class="hljs-built_in">R10</span>,<span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R11</span></code></pre></div>
+<p>DADD后的所有指令都用到了DADD指令的结果R1</p>
+<p>所以在DADD的结果writeback之前，下面的指令都是不能execute的</p>
+<center><img src="image-20191013143518878.png" srcset="/img/loading.gif" alt="image-20191013143518878" style="zoom:30%;" /></center>
+
+<p>ii. 解决方法</p>
+<p>A. 转发(forwarding)</p>
+<p>转发是一个什么思想呢？ </p>
+<blockquote>
+<p>DSUB需要DADD的结果x, 那么不妨DADD在算出x之后，就把结果给到DSUB需要这个x的位置，而不用等到writeback</p>
+</blockquote>
+<p>转发的工作方式</p>
+<ol>
+<li>来自EX/MEM和MEM/WB流水线寄存器的输入总是被反馈回ALU的输入端</li>
+<li>如果转发硬件检测到前一个ALU操作已经对当前ALU操作的原寄存器进行了写入操作，则控制逻辑选择转发结果作为ALU输入，而不是选择从寄存器堆中读区的值</li>
+</ol>
+<center><img src="https://miaochenlu.github.io/picture/屏幕快照 2019-10-13 下午2.56.04.png" srcset="/img/loading.gif" style="zoom: 30%;" /></center>
+
+<p>B, 需要停顿的数据冒险</p>
+<p>并非所有的潜在数据冒险都可以通过转发处理</p>
+<div class="hljs"><pre><code class="hljs armasm"><span class="hljs-symbol">LD</span>   <span class="hljs-built_in">R1</span>, <span class="hljs-number">0</span>(<span class="hljs-built_in">R2</span>)
+<span class="hljs-symbol">DSUB</span> <span class="hljs-built_in">R4</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R5</span>
+<span class="hljs-keyword">AND </span> <span class="hljs-built_in">R6</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R7</span>
+<span class="hljs-symbol">OR</span>   <span class="hljs-built_in">R8</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R9</span></code></pre></div>
+<center><img src="image-20191013151122898.png" srcset="/img/loading.gif" alt="image-20191013151122898" style="zoom:30%;" /></center>
+<center><img src="image-20191013151314878.png" srcset="/img/loading.gif" alt="image-20191013151314878" style="zoom:25%;" /></center>
+
+<h3 id="More-about-data-dependences-and-hazards"><a href="#More-about-data-dependences-and-hazards" class="headerlink" title="More about data dependences and hazards"></a>More about data dependences and hazards</h3><h4 id="A-data-dependences"><a href="#A-data-dependences" class="headerlink" title="A. data dependences"></a>A. data dependences</h4><ol>
+<li>数据相关[真数据相关]</li>
+</ol>
+<p>指令i生成的结果可能会被指令j用到</p>
+<p>指令j数据相关于指令k, 指令k数据相关于指令i</p>
+<center><img="https://miaochenlu.github.io/picture/image-20191223102354535.png" alt="image-20191223102354535" style="zoom:50%;" /></center>
+
+<ol>
+<li>名称相关</li>
+</ol>
+<p>当两条指令使用相同的寄存器或者存储器位置[称为名称]， 但与该名称相关的指令之间并没有数据流动时，就会发生名称相关。</p>
+<ul>
+<li><p>Anti-dependence: S1 -&gt; S2 </p>
+<p>(i)  S1 executes before S2<br>(ii) S1 reads from a location that is overwritten later by S2</p>
+</li>
+</ul>
+<div class="note note-warning">
+            <p>WAR</p><ul><li><p>Output dependence: S1 -&gt; S2 </p><p>(i)  S1 executes before S2<br>(ii) S1 and S2 write to the same location </p></li></ul>
+          </div>
+<p>WAW</p>
+<p>由于没有在指令之间传递值, 所以antidependence和output dependence只是名称相关，不是真数据相关。改变这些指令中使用的名称[寄存器号或者存储器位置],  就可以使这些指令不再冲突。</p>
+<h4 id="B-data-hazards"><a href="#B-data-hazards" class="headerlink" title="B. data hazards"></a>B. data hazards</h4><ul>
+<li>RAW</li>
+<li>WAW: 对应于output dependence。 只有在前一指令stall时允许后一指令继续执行的流水线中，才会存在WAW冒险</li>
+<li>WAR: 对应于antidependence。</li>
+</ul>
+<h2 id="4-4-分支冒险"><a href="#4-4-分支冒险" class="headerlink" title="4.4 分支冒险"></a>4.4 分支冒险</h2><h3 id="i-分支冒险是什么"><a href="#i-分支冒险是什么" class="headerlink" title="i. 分支冒险是什么"></a>i. 分支冒险是什么</h3><p>执行分支指令时，修改后的PC可能等于也可能不等于PC+4。</p>
+<p>如果分支讲PC改到其目标地址，就是选中了分支；否则就是没有选中分支。一般等到ID末尾，完成地址计算和对比之后才会改变PC</p>
+<p>那么还不知到分支指令跳到哪里，pipeline按顺序执行的指令可能不会被执行到。</p>
+<h3 id="ii-解决方法"><a href="#ii-解决方法" class="headerlink" title="ii. 解决方法"></a>ii. 解决方法</h3><p>一旦在ID期间检测到分支，就对该分支之后的指令重新取值。但是这样处理的问题是，如果分支没有被选中，所以事实上已经正确提取了指令，所以IF的重复没有必要</p>
+<p><img src="image-20191021095111.png" srcset="/img/loading.gif" alt="image-20191021095111" style="zoom:50%;" /></p>
+<p>所以，如何降低流水线分支代价？</p>
+<p>4种简单的编译时机制</p>
+<h4 id="A-冻结或者冲刷流水线，保留或删除分支之后的所有指令，直到知道分支目标"><a href="#A-冻结或者冲刷流水线，保留或删除分支之后的所有指令，直到知道分支目标" class="headerlink" title="A. 冻结或者冲刷流水线，保留或删除分支之后的所有指令，直到知道分支目标"></a>A. 冻结或者冲刷流水线，保留或删除分支之后的所有指令，直到知道分支目标</h4><h4 id="B-将每个分支看作未选中分支，允许硬件继续执行，就好像分支未被执行一样。"><a href="#B-将每个分支看作未选中分支，允许硬件继续执行，就好像分支未被执行一样。" class="headerlink" title="B. 将每个分支看作未选中分支，允许硬件继续执行，就好像分支未被执行一样。"></a>B. 将每个分支看作未选中分支，允许硬件继续执行，就好像分支未被执行一样。</h4><p>这种预测未选中机制的实现方式是继续提取指令，就好像分支指令时一条正常指令一样。但是，如果分支被选中，就要将已经提取的指令转化为空操作，重新开始在目标地址提取指令。</p>
+<p>这一机制的复杂性在于要知道处理器可能何时被指令改变，以及如何撤销这种改变</p>
+<center><img src="image-20191014112116582.png" srcset="/img/loading.gif" alt="image-20191014112116582" style="zoom:35%;" /></center>
+
+<h4 id="C-将所有分支都看作选中分支"><a href="#C-将所有分支都看作选中分支" class="headerlink" title="C. 将所有分支都看作选中分支"></a>C. 将所有分支都看作选中分支</h4><p>只要对分支指令进行了译码并且计算了目标地址，就假定该分支被选中，开始在目标位置提取和执行。</p>
+<p>但是在我们的五级流水线中，不可能在知道分支输出结果之前知道目标地址，所以这对我们没什么用。</p>
+<h4 id="D-延迟分支"><a href="#D-延迟分支" class="headerlink" title="D. 延迟分支"></a>D. 延迟分支</h4><blockquote>
+<p>分支指令</p>
+<p>依序后续指令[位于delay slots]</p>
+<p>选中时的分支指令</p>
+</blockquote>
+<p>获得编译器支持，编译器让后续指令有效并且可用</p>
+<center><img src="image-20191021095901298.png" srcset="/img/loading.gif" alt="image-20191021095901298" style="zoom: 40%;" ></center>
+
+<p>延迟调度有局限性，这个局限性是因为</p>
+<blockquote>
+<ol>
+<li>可以排在延迟时隙[delay slots]中的指令有限制</li>
+<li>编译时预测一个分支是否可能被选中的能力有限。为了提高编译器填充delay slots的能力，大多数具有条件分支的处理器引入了<em>canceling</em> or <em>nullifying</em> branch . 在取消分支中，指令包含了预测分支的方向。当分支行为和预期一致时，分支延迟时隙中的指令就想普通的延迟分支一样执行。预测错误时，分支延迟时隙中的指令转为空操作。</li>
+</ol>
+</blockquote>
+<p>看一下这些不同的解决方法效率有什么差别</p>
+<center><img src="image-20191021101747938.png" srcset="/img/loading.gif" alt="image-20191021101747938" style="zoom:50%;" ></center>
+
+<p>考虑flush pipeline</p>
+<p>unconditional branch指的是像j, jal这种的，这些直到Decode才会知道分支目标，所以penalty=2</p>
+<p>其他conditional，像beq等，需要EXE才知道是否要跳转，所以penalty=3</p>
+<p>这样，考虑predicted untaken</p>
+<p>unconditional 指令被预测不执行，但是一定会执行，代价是2</p>
+<p>conditional的如果没有执行，和预测一致，代价为0。如果和预测不一致，代价为3</p>
+<p>考虑predicted taken</p>
+<p>如果和预测一致。那么在Branch指令的EXE阶段才能知道分支目标，所以要stall 2个时钟周期才能跳转</p>
+<p><br></p>
+<p>当流水线越来越深，分支的潜在代价增加，使用延迟分支是不够的。要更积极地去预测分支。静态机制[依赖编译时信息，成本低]，动态预测[依据程序特性]</p>
+<h4 id="i-静态分支预测"><a href="#i-静态分支预测" class="headerlink" title="i. 静态分支预测"></a>i. 静态分支预测</h4><p>事先收集数据，根据数据来预测分支</p>
+<h4 id="ii-动态分支预测"><a href="#ii-动态分支预测" class="headerlink" title="ii. 动态分支预测"></a>ii. 动态分支预测</h4><p>使用分支预测缓冲区[Branch-Prediction Buffer].</p>
+<p>这是一个cache，分支指令地址的低位部分用来索引，所有访问都会hit。</p>
+<p>这个存储器包含一个bit来标示这个分支最近是否被选中。这个bit可以用来为接下来的这条分支提供指导。如果预测结果和bit不一致，反转bit; 一致则不反转</p>
+<p>但是只有1bit来标示会存在一点问题，比如分支一直被选中，但是某一次没有被选中，bit也会反转，这种反转其实没有必要，会影响效率。</p>
+<p>所以这里提出了2位预测机制。</p>
+<p>两位预测机制，预测必须连续错过两次才会进行修改。</p>
+<center><img src="image-20191021103246990.png" srcset="/img/loading.gif" alt="image-20191021103246990" style="zoom:50%;" ></center>
+
+<h1 id="5-如何实现流水线"><a href="#5-如何实现流水线" class="headerlink" title="5. 如何实现流水线"></a>5. 如何实现流水线</h1><p>MIPS CPU多周期实现</p>
+<center><img src="image-20191021105802697.png" srcset="/img/loading.gif" alt="image-20191021105802697" style="zoom:45%;" ></center>
+
+<h2 id="Basic-Pipeline"><a href="#Basic-Pipeline" class="headerlink" title="Basic Pipeline"></a>Basic Pipeline</h2><center><img src="image-20191021110018403.png" srcset="/img/loading.gif" alt="image-20191021110018403" style="zoom:45%;" ></center>
+
+<h3 id="i-IF"><a href="#i-IF" class="headerlink" title="i. IF"></a>i. IF</h3><div class="hljs"><pre><code class="hljs cpp">IF/ID.IR = Mem[PC];	<span class="hljs-comment">//取指令</span>
+<span class="hljs-keyword">if</span>((EX/MEM.opcode == branch) &amp;&amp; EX/MEM.cond) &#123;
+  IF/IR.NPC = EX/MEM.ALUOutput;
+  PC = EX/MEM.ALUOutput;
+&#125; <span class="hljs-keyword">else</span> &#123;
+  IF/IR.NPC = PC + <span class="hljs-number">4</span>;
+  PC = PC + <span class="hljs-number">4</span>;
+&#125;</code></pre></div>
+<h3 id="ii-ID"><a href="#ii-ID" class="headerlink" title="ii. ID"></a>ii. ID</h3><div class="hljs"><pre><code class="hljs cpp">ID/EX.A = Regs[IF/ID.IR[rs]];
+ID/EX.B = Regs[IF/ID.IR[rt]];
+ID/EX.NPC = IF/ID.NPC;
+ID/EX.IR = IF/ID.IR;
+ID/EX.Imm = sign-extend(IF/ID.IR[immediate]);</code></pre></div>
+<h3 id="iii-EX"><a href="#iii-EX" class="headerlink" title="iii. EX"></a>iii. EX</h3><h4 id="A-ALU-EX"><a href="#A-ALU-EX" class="headerlink" title="A. ALU EX"></a>A. ALU EX</h4><div class="hljs"><pre><code class="hljs cpp">EX/MEM.IR = ID/EX.IR;
+执行以下之一
+<span class="hljs-number">1.</span> EX/MEM.ALUOutput = ID/EX.A func ID/EX.B;
+<span class="hljs-number">2.</span> EX/MEM.ALUOutput = ID/EX.A op ID/EX.Imm</code></pre></div>
+<h4 id="B-Load-Store-EX"><a href="#B-Load-Store-EX" class="headerlink" title="B. Load Store EX"></a>B. Load Store EX</h4><div class="hljs"><pre><code class="hljs cpp">EX/MEM.IR to ID/EX.IR;
+EX/MEM.ALUOutput = ID/EX.A + ID/EX.imm;
+EX/MEM.B = ID/EX.B;</code></pre></div>
+<h4 id="C-Branch-EX"><a href="#C-Branch-EX" class="headerlink" title="C. Branch EX"></a>C. Branch EX</h4><div class="hljs"><pre><code class="hljs cpp">EX/MEM.ALUOutput = ID/EX.NPC + (ID/EX.Imm &lt;&lt; <span class="hljs-number">2</span>);
+EX/MEM.cond = (ID/EX.A == <span class="hljs-number">0</span>);</code></pre></div>
+<h3 id="iv-MEM"><a href="#iv-MEM" class="headerlink" title="iv. MEM"></a>iv. MEM</h3><h4 id="A-ALU-MEM"><a href="#A-ALU-MEM" class="headerlink" title="A. ALU MEM"></a>A. ALU MEM</h4><div class="hljs"><pre><code class="hljs cpp">MEM/WB.IR = EX/MEM.IR;
+MEM/WB.ALUOutput = EX/MEM.ALUOutput;</code></pre></div>
+<h4 id="B-Load-Store-MEM"><a href="#B-Load-Store-MEM" class="headerlink" title="B. Load Store MEM"></a>B. Load Store MEM</h4><div class="hljs"><pre><code class="hljs cpp">MEM/WB.OR = EX/MEM.IR;
+<span class="hljs-number">1.</span> MEM/WB.LMD = Mem[EX/MEM.ALUOutput];
+<span class="hljs-number">2.</span> Mem[EX/MEM.ALUOutput] = EX/MEM.B;</code></pre></div>
+<h3 id="v-WB"><a href="#v-WB" class="headerlink" title="v. WB"></a>v. WB</h3><h4 id="A-ALU-WB"><a href="#A-ALU-WB" class="headerlink" title="A. ALU WB"></a>A. ALU WB</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-number">1.</span> Regs[MEM/WB.IR[rd]] = MEM/WB.ALUOutput;
+<span class="hljs-number">2.</span> Resg[MEM/WB.IR[rt]] = MEM/WB.ALUOutput;</code></pre></div>
+<h4 id="B-Load-Store-WB"><a href="#B-Load-Store-WB" class="headerlink" title="B. Load Store WB"></a>B. Load Store WB</h4><div class="hljs"><pre><code class="hljs cpp">For load only
+Regs[MEM/WB.IR[rt]] = MEM/WB.LMD;</code></pre></div>
+<h2 id="Control-the-Pipeline"><a href="#Control-the-Pipeline" class="headerlink" title="Control the Pipeline"></a>Control the Pipeline</h2><p>instruction issue:</p>
+<blockquote>
+<p>一条指令从ID移入EX的过程</p>
+</blockquote>
+<p>对于整数流水线，所有数据冒险都可以在ID进行检查。</p>
+<p>如果存在数据冒险，这个指令将会在issue之前停顿。</p>
+<p>同样，我们可以确定在ID期间需要哪种转发，并设定适当的控制。</p>
+<center><img src="image-20191021115323894.png" srcset="/img/loading.gif" alt="image-20191021115323894" style="zoom:35%;" /></center>
+
+
+
+<p>pipeline overhead</p>
+<p>due to stage imbalance, pipeline register setup</p>
+<h3 id="Deal-with-forwarding"><a href="#Deal-with-forwarding" class="headerlink" title="Deal with forwarding"></a>Deal with forwarding</h3><center><img="https://miaochenlu.github.io/picture/image-20191222210658336.png" alt="image-20191222210658336" style="zoom:50%;" /></center>
+
+
+
+
+<h1 id="6-扩展MIPS流水线，以处理多周期操作"><a href="#6-扩展MIPS流水线，以处理多周期操作" class="headerlink" title="6. 扩展MIPS流水线，以处理多周期操作"></a>6. 扩展MIPS流水线，以处理多周期操作</h1><p>扩展mips流水线，以处理浮点运算</p>
+<p>浮点运算的问题</p>
+<blockquote>
+<p>要求所有浮点运算在1个周期内完成时不现实的，甚至2个时钟周期都不太可能</p>
+<p>如果想要在一个时钟周期内完成，就必须降低clock rate, 或者增加大量的逻辑单元。</p>
+<p>所以</p>
+<ul>
+<li>为了完成操作，EX周期可能要根据需要重复多次</li>
+<li>可能存在多个浮点功能单元，如果待发射指令会导致浮点所用功能单元的结构冒险，或者数据冒险，就会出现停顿。</li>
+</ul>
+</blockquote>
+<p>4个独立的功能单元</p>
+<ul>
+<li>主整数单元，处理load, store, 整数ALU operation, branch</li>
+<li>浮点与整数乘法器</li>
+<li>浮点加法器，处理浮点加、减和转换</li>
+<li>浮点和整型除法器</li>
+</ul>
+<p>假定这些功能单元的执行级没有实现流水化</p>
+<center><img="https://miaochenlu.github.io/picture/image-20191111101801471.png" alt="image-20191111101801471" style="zoom:50%;" /></center>
+
+<p>两个指标</p>
+<ul>
+<li><p>latency</p>
+<p>the number of intervening cycles between an instruction that produces a result and an instruction that uses the result. 一条指令产生结果后，下一条指令等待多久才可以使用这个结果。注意，是等待。</p>
+<blockquote>
+<p>Essentially, pipeline <strong>latency</strong> is 1 cycle less than the depth of the execution pipeline, which is the number of stages from the <strong>EX stage</strong> to the stage that produces the result </p>
+</blockquote>
+</li>
+<li><p>initiation/repeat interval</p>
+<p>同一类型的指令执行之间必须间隔的周期数。比如，integer ALU的一条指令开始执行，下一条integer ALU指令需要在他后面一个周期才能开始执行</p>
+</li>
+</ul>
+<center><img="https://miaochenlu.github.io/picture/IMG_C3E4F59B24C4-1.png" alt="IMG_C3E4F59B24C4-1" style="zoom:50%;" /></center>
+
+<p><img src="IMG_C3E4F59B24C4.png" srcset="/img/loading.gif" alt="IMG_C3E4F59B24C4-1" style="zoom:50%;" /></p>
+<p>instruction issue: 从ID到EX的阶段</p>
+<p><center><img="image-20191111103138887.png" alt="image-20191111103138887" style="zoom:50%;" /></center></p>
+<p><center><img="image-20191111104720076.png" alt="image-20191111104720076" style="zoom:50%;" /></center></p>
+<table>
+  <tr>
+    <td>
+      <img src="image-20191111103409484.png" srcset="/img/loading.gif" alt="image-20191111103409484" style="zoom:50%;" />
+    </td>
+    <td>
+      <img src="image-20191111103455864.png" srcset="/img/loading.gif" alt="image-20191111103455864" style="zoom:50%;" />
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <img src="image-20191111103637824.png" srcset="/img/loading.gif" alt="image-20191111103637824" style="zoom:50%;" />
+    </td>
+    <td>
+      <img src="image-20191111104058863.png" srcset="/img/loading.gif" alt="image-20191111104058863" style="zoom:50%;" />
+    </td>
+  </tr>
+</table>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Computer-Architecture/">Computer Architecture</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Computer-Architecture/">Computer Architecture</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/08/ComputerArchitecture/Storage/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CA - Storage</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/09/17/PhysicalLayer/">
+                        <span class="hidden-mobile">Computer network--物理层</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CA - Pipeline&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

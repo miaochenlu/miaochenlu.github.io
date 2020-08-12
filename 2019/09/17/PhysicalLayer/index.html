@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>Computer network--物理层 - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-09-17 16:29" pubdate>
+      September 17, 2019 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      48
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Computer network--物理层</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="1-数据通信的理论基础"><a href="#1-数据通信的理论基础" class="headerlink" title="1 数据通信的理论基础"></a>1 数据通信的理论基础</h1><h2 id="1-1傅里叶分析"><a href="#1-1傅里叶分析" class="headerlink" title="1.1傅里叶分析"></a>1.1傅里叶分析</h2><p>任何一个行为合理周期为T的函数g(t)，都可以表示成正弦函数和余弦函数组成的无穷级数</p>
+<script type="math/tex; mode=display">g(t)=\frac{1}{2}c+\sum_{n=1}^{\infty}a_nsin(2\pi nft)+\sum_{n=1}^{\infty}b_ncos(2\pi nft)</script><p>其中$f=\frac{1}{T}$是基本频率，$a_n$和$b_n$是n次谐波的正弦振幅和余弦振幅,c是常数</p>
+<p><br/></p>
+<h2 id="1-2-带宽有限的信号"><a href="#1-2-带宽有限的信号" class="headerlink" title="1.2 带宽有限的信号"></a>1.2 带宽有限的信号</h2><p>我们考虑一个特殊的例子：</p>
+<p>传输ASCII字符b,这个字符被编码成一个8比特长的字节，01100010</p>
+<p>可以得到系数</p>
+<center><img src="image-20190917211816031.png" srcset="/img/loading.gif" alt="image-20190917211816031" style="zoom:50%;" /></center>
+
+<blockquote>
+<p> 所有传输设施在传输过程中都要损失一些能量    </p>
+<p> 如果所有傅里叶分量都等量衰减，则结果信号将会在振幅上有所减小，但形状不会变。  </p>
+<p>但是，实际情况是，所有传输设施对于不同傅里叶分量的衰减程度并不相同，这会导致接收端接收到的信号发生<strong>变形</strong>。  </p>
+<p>一般对导线来说，在[0,$f_c$]的频率范围，振幅在传输过程中不回衰减，而在$f_c$这个截止频率之上的所有频率的振幅都会有不同程度的减弱。    </p>
+<p>这个在传输过程中振幅不回明显减弱的频率的宽度就称为<strong>带宽</strong>   </p>
+<p>但是截止频率不是一个突变的量，不是说到达某个阈值，振幅就突然减弱了，所以通常引用的带宽是指从0到接收能量保留一半到那个频率位置</p>
+</blockquote>
+<p>带宽是传输介质的一种物理特性，取决于介质  </p>
+<p>一般将从0到某个最大频率的信号称为<strong>基带信号</strong>，将被搬移并占用某个更大频率范围的信号称为<strong>通带信号</strong>  </p>
+<center><img src="image-20190917211449784.png" srcset="/img/loading.gif" alt="image-20190917211449784" style="zoom: 67%;" /></center>
+
+<p><br/></p>
+<h4 id="带宽很低，会发生什么？"><a href="#带宽很低，会发生什么？" class="headerlink" title="带宽很低，会发生什么？"></a>带宽很低，会发生什么？</h4><p>如果带宽很低，则只有几个最低频率才能被传输</p>
+<p>假设比特率为$b$ bit/s[每秒发送8个比特]</p>
+<p>则发送8个比特所需要的时间是$\frac{8}{b}$秒</p>
+<p>所以第一个谐波频率是$\frac{b}{8}$赫兹</p>
+<p>如果截止频率是3000hz,则可以通过的最高谐波数为</p>
+<script type="math/tex; mode=display">\frac{3000}{\frac{8}{b}}</script><center><img src="image-20190917213738345.png" srcset="/img/loading.gif" alt="image-20190917213738345" style="zoom:50%;" /></center>
+
+<p>如上图所示，如果能发送的频率数很少，我们就没办法精确表示周期函数</p>
+<p><br/></p>
+<h2 id="1-3-信道的最大数据速率"><a href="#1-3-信道的最大数据速率" class="headerlink" title="1.3 信道的最大数据速率"></a>1.3 信道的最大数据速率</h2><p><a href="https://blog.csdn.net/supreme42/article/details/7734763" target="_blank" rel="noopener">一些概念</a></p>
+<p>波特率[baud rate/ symbol rate]</p>
+<blockquote>
+<p>波特率指的是信号每秒钟电平变化的次数，单位是<em>Hz</em></p>
+</blockquote>
+<p>比特率</p>
+<blockquote>
+<p>信号每秒钟传输的数据的位数。计算机中数据都是用<em>0</em>，<em>1</em>表示的，所以比特率也就是每秒钟传输<em>0</em>和<em>1</em>的个数，单位是<em>bps</em>[<em>bit per second</em>]</p>
+</blockquote>
+<p>波特率和比特率的关系</p>
+<blockquote>
+<p>我们可以假设一个信号只有两个电平，那么这个时候可以把低电平理解为<em>“0”</em>，高电平理解为<em>“1”</em>，这样每秒钟电平变化的次数也就是传输的<em>0</em>，<em>1</em>个数了，即比特率 <em>=</em> 波特率。</p>
+<p>但是有些信号可能不止两个电平，比如一个四电平的信号，那么每个电平就可以被理解成<em>“00”</em>，<em>“01”</em>，<em>“10”</em>，<em>“11”</em>，这样每次电平变化就能传输两位的数据了，即比特率 <em>= 2 ×</em> 波特率。</p>
+<p>一般的，$bit\,rate = buad\,rate × log_2V$，这里V就是信号电平的个数。</p>
+</blockquote>
+<p>Nyquist证明：如果一个任意信号通过一个带宽为B的低通滤波器，那么只要进行每秒2B次确切采样[一个周期采样2次]，就可以完全重构出被过滤的信号</p>
+<p>不考虑噪声，如果信号包含了V个离散等级，那么公式可以写为</p>
+<script type="math/tex; mode=display">最大数据速率=2Blog_2V(bit/s)</script><p>[最大symbol rate=$2B\,symbol/s$]</p>
+<blockquote>
+<p>每秒采样2B次，也就是采样了2B个电平信号</p>
+<p>也就是采样了2BlogV个bits</p>
+</blockquote>
+<p>事实上，要想重构出信号，每秒2B次采样是不够的，要多一些才够。</p>
+<center><img src="9FC21EC72573A17040AD0FCD3C37A790.png" srcset="/img/loading.gif" alt="9FC21EC72573A17040AD0FCD3C37A790" style="zoom:10%;" /></center>
+
+<p><br/></p>
+<h4 id="接下来考虑如果存在随机噪声"><a href="#接下来考虑如果存在随机噪声" class="headerlink" title="接下来考虑如果存在随机噪声"></a>接下来考虑如果存在随机噪声</h4><script type="math/tex; mode=display">信噪比(SNR)=\frac{信号功率}{噪声功率}=\frac{S}{N}</script><p>通常将其写成对数形式$10log_{10}\frac{S}{N}$,单位为分贝. </p>
+<p>香农得出：对于一条带宽为B赫兹，噪声比是$\frac{S}{N}$的有噪声通道，他的最大数据传输速率是. </p>
+<script type="math/tex; mode=display">最大比特率=Blog_2{(1+\frac{S}{N})}</script><h2 id="2-引导性传输介质-有线传输"><a href="#2-引导性传输介质-有线传输" class="headerlink" title="2 引导性传输介质[有线传输]"></a>2 引导性传输介质[有线传输]</h2><p>物理层的作用是将bit从一条机器传输到另一台机器。传输所用的物理介质会在传输带宽、延迟、成本等方面产生差别。</p>
+<p>可以将介质分为</p>
+<ul>
+<li>引导性介质：如铜线、光纤</li>
+<li>非引导性介质：如卫星、激光</li>
+</ul>
+<p><br/></p>
+<h3 id="2-1-磁介质"><a href="#2-1-磁介质" class="headerlink" title="2.1 磁介质"></a>2.1 磁介质</h3><p>Never underestimate the bandwidth of station wagon full of tapes hurtling down the highway.</p>
+<h3 id="2-2-双绞线"><a href="#2-2-双绞线" class="headerlink" title="2.2 双绞线"></a>2.2 双绞线</h3><p>构成</p>
+<blockquote>
+<p>双绞线由两根铜线以螺旋状的形式紧紧地绞在一起。</p>
+</blockquote>
+<p>之所以要绞在一起，是因为这样不同电线产生的干扰波会相互抵消，显著降低电线的辐射。</p>
+<p>并且，信号以两根电线的电压差来承载，这样对外部噪声有更好的免疫力，因为噪声对两根电线的干扰是相同的，因此电压差不会改变。</p>
+<p><br/></p>
+<p>双绞线既可以传输模拟信号，也可以传输数字信号。</p>
+<p>传输方向：</p>
+<ul>
+<li>全双工链路[full-duplex]：可以双向同时使用的链路</li>
+<li>半双工链路half-duplex]：可以双向使用但一次只能使用一个方向</li>
+<li>单工链路[simplex]：只允许一个方向上传输</li>
+</ul>
+<p>双绞线的type:</p>
+<blockquote>
+<p>– Category 5 [100Mbps, 1Gbps]<br>– Category 6 [10Gbps]<br>– Category 7 [Shielded Twisted Pair]</p>
+</blockquote>
+<center><img src="image-20191007125121828.png" srcset="/img/loading.gif" alt="image-20191007125121828" style="zoom:33%;" /></center>
+
+<p>双绞线的缺点是：</p>
+<p>传输距离远的话，信号衰减很厉害，需要使用中继器</p>
+<h3 id="2-3-同轴电缆-coaxial-cable"><a href="#2-3-同轴电缆-coaxial-cable" class="headerlink" title="2.3 同轴电缆[coaxial cable]"></a>2.3 同轴电缆[coaxial cable]</h3><p>构成：</p>
+<blockquote>
+<p>硬的铜芯，外面包上一层绝缘材料，绝缘材料的外面是网状圆柱导体，外层导体再覆盖上一层保护塑料外套</p>
+</blockquote>
+<center><img src="image-20191007133601513.png" srcset="/img/loading.gif" alt="image-20191007133601513" style="zoom: 33%;" /></center>
+
+<p>特点：</p>
+<blockquote>
+<p>同轴电缆的结构和屏蔽性使得它既有很高的带宽，又有很好的抗噪性。</p>
+<p>这点比双绞线更优秀，因此也比双绞线传的远</p>
+</blockquote>
+<h3 id="2-4-电力线-power-line"><a href="#2-4-电力线-power-line" class="headerlink" title="2.4 电力线[power line]"></a>2.4 电力线[power line]</h3><center><img src="image-20191007133946196.png" srcset="/img/loading.gif" alt="image-20191007133946196" style="zoom: 33%;" /></center>
+
+<h3 id="2-5-Fiber-optics"><a href="#2-5-Fiber-optics" class="headerlink" title="2.5 Fiber optics"></a>2.5 Fiber optics</h3><center><img src="page40image34686176.png" srcset="/img/loading.gif" alt="page40image34686176.jpg" style="zoom:33%;" /></center>
+
+<p>Types:</p>
+<blockquote>
+<p>Multimode多模：many different rays</p>
+<p>Unimode单模：single rays, longer distance</p>
+</blockquote>
+<p>Transmission of light through fiber:</p>
+<blockquote>
+<p>-Attenuation [衰减] of light through fiber in the infrared region.</p>
+<p>– Three wavelength bands are used for optical communication. They are centered at 0.85, 1.30, and 1.55 micros [微米].</p>
+</blockquote>
+<center><img src="page41image34714624.png" srcset="/img/loading.gif" alt="page41image34714624.jpg" style="zoom: 33%;" /></center>
+
+<h4 id="光缆："><a href="#光缆：" class="headerlink" title="光缆："></a><u>光缆</u>：</h4><p>构成：</p>
+<blockquote>
+<p>中间core是玻璃芯，光秒冲通过它传播</p>
+<p>玻璃芯外面是一个玻璃覆盖层[cladding]，覆盖层的折射率比玻璃低，这样可以限制所有光都限制在玻璃芯内[全反射]</p>
+<p>最外面是一层塑料封套[jacket],用来保护里面的玻璃包层</p>
+<p>光纤通常被扎捆成束，最外面再加一层保护套</p>
+</blockquote>
+<center><img src="page42image34731632.png" srcset="/img/loading.gif" alt="page42image34731632.jpg" style="zoom:35%;" /></center>
+
+<p>信号源一半有两种光源：发光LED和半导体激光</p>
+<center><img src="page44image34725184.png" srcset="/img/loading.gif" alt="page44image34725184.jpg" style="zoom:33%;" /></center>
+
+<h4 id="光纤和铜线的比较"><a href="#光纤和铜线的比较" class="headerlink" title="光纤和铜线的比较"></a><u>光纤和铜线的比较</u></h4><p>– Advantages</p>
+<ul>
+<li>Higher bandwidths and Low attenuation.</li>
+<li>Not being affected by power surges, electromagnetic interference, or power failures.</li>
+<li>Not affected by corrosive chemicals in the air.</li>
+<li>Thin and lightweight.</li>
+<li>Fibers do not leak light and quite difficult to tap.</li>
+</ul>
+<p>– Disadvantages</p>
+<ul>
+<li><p>Less familiar technology.</p>
+<p>要求较高的操作技能，光纤被过度弯曲容易折断</p>
+</li>
+<li><p>Fiber interfaces more expensive.</p>
+</li>
+</ul>
+<p>– Conclusion: For new routes [longer ones], fiber win</p>
+<h1 id="3-无线传输"><a href="#3-无线传输" class="headerlink" title="3 无线传输"></a>3 无线传输</h1><h2 id="3-1电磁频谱"><a href="#3-1电磁频谱" class="headerlink" title="3.1电磁频谱"></a>3.1电磁频谱</h2><center><img src="image-20191007140913262.png" srcset="/img/loading.gif" alt="image-20191007140913262" style="zoom:30%;" /></center>
+
+<p>由香农定理我们知道一个电磁波的信号能够携带的信息量与带宽成正比，从图中可以看到光纤带宽是多么宽</p>
+<p>Some spread its frequency over a <em>wide frequency band</em>[spread spectrum, 扩频].</p>
+<p>– Frequency hopping spread spectrum [military, 802.11, Bluetooth]</p>
+<p>– Direct sequence spread spectrum [3G mobile phones]</p>
+<p>– UWB [UltraWideBand]</p>
+<center><img src="page49image35151168.png" srcset="/img/loading.gif" alt="page49image35151168.jpg" style="zoom:33%;" /></center>
+
+<h3 id="3-2-Radar"><a href="#3-2-Radar" class="headerlink" title="3.2 Radar"></a>3.2 Radar</h3><h3 id="3-3-Radio-transmission"><a href="#3-3-Radio-transmission" class="headerlink" title="3.3 Radio transmission"></a>3.3 Radio transmission</h3><p>[a] In the VLF, LF, and MF bands, radio waves follow the curvature of the earth.</p>
+<p>[b] In the HF band, they bounce off the ionosphere [电离层].</p>
+<center><img src="page52image35155536.png" srcset="/img/loading.gif" alt="page52image35155536.jpg" style="zoom:33%;" /></center>
+
+<h3 id="3-4-Microwave-transmission"><a href="#3-4-Microwave-transmission" class="headerlink" title="3.4 Microwave transmission"></a>3.4 Microwave transmission</h3><h1 id="4-数字调制与多路复用"><a href="#4-数字调制与多路复用" class="headerlink" title="4 数字调制与多路复用"></a>4 数字调制与多路复用</h1><h4 id="什么是数字调制？"><a href="#什么是数字调制？" class="headerlink" title="什么是数字调制？"></a>什么是数字调制？</h4><blockquote>
+<p>比特与代表他们的信号之间的转换过程称为<strong>数字调制</strong></p>
+</blockquote>
+<p><br/></p>
+<p>我们首先来看如何把<strong>比特直接转换成信号</strong>的方案，这些方案导致了<strong>基带传输</strong></p>
+<blockquote>
+<p>基带传输是指：信号的传输占有传输介质上从0到最大值之间的全部频率</p>
+</blockquote>
+<p>然后我们看通过调节载波信号的幅值、相位或者频率来运载比特的模式，这些方案导致了<strong>通带传输</strong></p>
+<blockquote>
+<p>通带传输是指：信号占据了以载波信号频率为中心的一段频带</p>
+</blockquote>
+<p><br/></p>
+<p>信道通常被多个信号共享，这种信道的共享形式称为<strong>多路复用技术</strong></p>
+<p>多路复用技术可以通过：时分复用、频分复用、码分复用 实现</p>
+<h2 id="4-1-基带传输"><a href="#4-1-基带传输" class="headerlink" title="4.1 基带传输"></a>4.1 基带传输</h2><center><img src="image-20200101212239647.png" srcset="/img/loading.gif" alt="image-20200101212239647" style="zoom:50%;" /></center>
+
+
+<h3 id="NRZ"><a href="#NRZ" class="headerlink" title="NRZ"></a>NRZ</h3><p>翻转代表1，不翻转代表0</p>
+<p>一旦NRZ信号被发出去，它沿线缆传播。另一端的接收器以一定周期对信号采样，然后把采样信号转换成比特。</p>
+<p>Problem:</p>
+<blockquote>
+<p>a long run of 0s or 1s leaves the signal unchanged. </p>
+<p>After a while it is hard to tell the bits apart, as 15 zeros look much like 16 zeros unless you have a very accurate clock.</p>
+</blockquote>
+<p>Accurate clock: </p>
+<blockquote>
+<p> For all schemes that encode bits into symbols, the receiver must know <strong>when one symbol ends and the next symbol begins</strong> to correctly decode the bits.</p>
+</blockquote>
+<p>一般来说，accurate clock是很难做到的，那么我们该怎么办呢？</p>
+<h4 id="Clock-Recovery"><a href="#Clock-Recovery" class="headerlink" title="Clock Recovery"></a><u>Clock Recovery</u></h4><ul>
+<li><p>一种方法，额外拉一根时钟线，给接收器发送单独的时钟信号</p>
+<p>这个方法不好，因为这很浪费，用一根额外的线来发送时钟，还不如用它来发送数据呢</p>
+</li>
+</ul>
+<ul>
+<li>A clever trick is to mix the clock signal with the data signal by XORing them together so that no extra line is needed.→<strong><u>Manchester Encoding</u></strong></li>
+</ul>
+<p>  <strong><u>Manchester Encoding</u></strong>的方法是，时钟的频率是比特率的两倍，也就是在一个bit 时间内，时钟会产生一次跳变。时钟XOR bit，产生输出</p>
+<p>  如上图所示</p>
+<blockquote>
+<p> 第一个bit时间t内，传输的bit是1，时钟在[0,t/2]内是0，与bit 1异或，编码成1; </p>
+<p> 在[t/2, t]内时钟跳变到1，与bit 0异或，编码成0.</p>
+<p> 因此我们在第一个bit时间看到的编码先是1后翻转到0</p>
+</blockquote>
+<p>  问题：需要两倍于NRZ的带宽，一个bit时间他要传输两个信号</p>
+<ul>
+<li>As a step in the right direction, we can simplify the situation by encoding a 1 as a transition and a 0 as no transition, or vice versa.→<strong><u>NRZI</u></strong> [Non-Return-to- Zero Inverted,不归零倒相制, Used in USB]</li>
+</ul>
+<p>  <strong><u>NRZI</u></strong>方法是：编码有跳变表示1，编码无跳变表示0</p>
+<p>  这样，再长的一串1都不会产生时钟恢复问题；但是一长串的0仍然有问题</p>
+<ul>
+<li><p>Problem: long runs of 0s?→<strong><u>4B/5B</u></strong></p>
+<p><strong><u>4B/5B</u></strong>的方法是：每4个bits被映射成一个5bits的模式，映射按照一张固定的转换表进行，5bits的选择使得映射结果永远不会出现连续3个0</p>
+<center><img src="page63image36690640.png" srcset="/img/loading.gif" alt="page63image36690640.png" style="zoom:33%;" /></center>
+
+<p>问题：增加了25%的带宽</p>
+</li>
+</ul>
+<p><br/></p>
+<h2 id="4-2-通带传输"><a href="#4-2-通带传输" class="headerlink" title="4.2 通带传输"></a>4.2 通带传输</h2><p>一般情况下，我们在一个信道上发送信息使用的频率范围并不是从0开始的。对于无线信道来说，发送非常低频率的信号不切实际，因为天线的大小与信号的波长成比例，低频信号需要很大的天线。</p>
+<p>发射频率一般是由监管约束和避免干扰的需要决定的</p>
+<h3 id="4-2-1-数字调试"><a href="#4-2-1-数字调试" class="headerlink" title="4.2.1 数字调试"></a>4.2.1 数字调试</h3><center><img src="image-20191007153614734.png" srcset="/img/loading.gif" alt="image-20191007153614734" style="zoom:50%;" /></center>
+
+<h4 id="A-幅移键控-ASK-Amplitude-Shift-Keying"><a href="#A-幅移键控-ASK-Amplitude-Shift-Keying" class="headerlink" title="A 幅移键控[ASK, Amplitude Shift Keying]"></a>A 幅移键控[ASK, Amplitude Shift Keying]</h4><p>通过采用不同的振幅表示0和1</p>
+<blockquote>
+<p>如上图(b)所示，这里采用非零幅值和一个零幅值</p>
+</blockquote>
+<h4 id="B-频移键控-FSK-Frequency-Shift-Keying"><a href="#B-频移键控-FSK-Frequency-Shift-Keying" class="headerlink" title="B 频移键控[FSK, Frequency Shift Keying]"></a>B 频移键控[FSK, Frequency Shift Keying]</h4><p>采用两个或更多的频率</p>
+<blockquote>
+<p>如上图[c]所示，使用两个频率表示0和1</p>
+</blockquote>
+<h4 id="C-相移键控-PSK-Phase-Shift-Keying"><a href="#C-相移键控-PSK-Phase-Shift-Keying" class="headerlink" title="C 相移键控[PSK, Phase Shift Keying]"></a>C 相移键控[PSK, Phase Shift Keying]</h4><p>在每个符号的周期中，系统把载波波形偏移0度或者180度。由于只有两个相位，这种调制方法称为二进制相移键控[BPSK]，这里的二进制表示的是两个符号</p>
+<blockquote>
+<p>如上图[d]所示，使用两种相位量表示0和1</p>
+</blockquote>
+<p>当然，我们可以用更多数量的偏移。比如用4个偏移，45，135，225，315，那么每个符号可以表示2bit。这种称为正交相移键控[QPSK, Quadrature]</p>
+<h4 id="D-集大成者"><a href="#D-集大成者" class="headerlink" title="D 集大成者"></a>D 集大成者</h4><p>我们可以综合以上调制方式，使得每个符号表示更多的bit.</p>
+<p>我们选择综合振幅和相位。为什么不考虑频率呢？因为频率和相位有关</p>
+<p><br/></p>
+<p>我们给出星座图</p>
+<blockquote>
+<p> 一个点的相位是以他为起点到原点的线与x轴正方向的夹角</p>
+<p> 一个点的振幅是他到原点的距离</p>
+</blockquote>
+<center><img src="image-20191007154637608.png" srcset="/img/loading.gif" alt="image-20191007154637608" style="zoom: 33%;" /></center>
+
+<blockquote>
+<p>如图[b], QAM-16：</p>
+<p>一共有16个符号，16个符号可以表示出4bits的所有组合</p>
+<p>因此一个符号可以传输4个比特</p>
+<p>同样，如图[c], QAM-64</p>
+<p>一共有64个符号，一个符号可以传输6bits [..$2^6=64$]</p>
+</blockquote>
+<h2 id="4-3-Multiplexing"><a href="#4-3-Multiplexing" class="headerlink" title="4.3 Multiplexing"></a>4.3 Multiplexing</h2><h3 id="4-3-1-频分复用-FDM-Frequency-Division-Multiplexing"><a href="#4-3-1-频分复用-FDM-Frequency-Division-Multiplexing" class="headerlink" title="4.3.1 频分复用[FDM,Frequency Division Multiplexing]"></a>4.3.1 频分复用[FDM,Frequency Division Multiplexing]</h3><p>利用通带传输的优势使多个用户共享一个信道。</p>
+<p>FDM将频谱分成几个频段，每个用户完全拥有其中一个频段来发送自己的信号</p>
+<center><img src="image-20191005234836200.png" srcset="/img/loading.gif" alt="image-20191005234836200" style="zoom: 40%;" /></center>
+
+<h4 id="正交频分复用-OFDM-orthogonal"><a href="#正交频分复用-OFDM-orthogonal" class="headerlink" title="正交频分复用[OFDM,orthogonal]"></a>正交频分复用[OFDM,orthogonal]</h4><p>信道带宽被分成许多独立发送数据的子载波，每个子载波之间频率的间隔是$\Delta f$</p>
+<p>每个子载波发出的信号虽然可以扩散到相邻子载波，但是每个子载波的频率响应被设计成在相邻子载波的中心为0。因此，可以在子载波中心频率采样而不会收到其邻居的干扰</p>
+<center><img src="image-20191007160446233.png" srcset="/img/loading.gif" alt="image-20191007160446233" style="zoom:40%;" /></center>
+
+<h3 id="4-3-2-时分复用"><a href="#4-3-2-时分复用" class="headerlink" title="4.3.2 时分复用"></a>4.3.2 时分复用</h3><p>用户以循环的方式轮流工作。每个用户周期性获得整个带宽非常短的一个时间</p>
+<center><img src="image-20191005234914576.png" srcset="/img/loading.gif" alt="image-20191005234914576" style="zoom:40%;" /></center>
+
+<h3 id="4-3-3-码分复用"><a href="#4-3-3-码分复用" class="headerlink" title="4.3.3 码分复用"></a>4.3.3 码分复用</h3><p>传输一个bit的时间被划分成m个更短的时间间隔，称这个时间间隔为<u>码片</u>[chip]。每个站分配得到唯一的m位码，称为 <u>码片序列</u></p>
+<p>如果要发送bit 1,站就发送分配给他的码片序列；如果要发送bit 0,站就发送分配给他的码片序列的反码。</p>
+<blockquote>
+<p>m=8,即一个bit时间传输的码片序列是8位的。</p>
+<p>如果A站分配到的码片序列为[-1-1-1+1+1-1+1+1]</p>
+<p>那么如果A想发送bit 1，就发送码片序列[-1-1-1+1+1-1+1+1]</p>
+<p>如果A想发送 bit 0, 就发送码片序列[+1+1+1-1-1+1-1-1]</p>
+</blockquote>
+<p>码片序列的要求：</p>
+<blockquote>
+<p> 所有的码片序列都要两两正交</p>
+</blockquote>
+<center><img src="image-20191006000007082.png" srcset="/img/loading.gif" alt="image-20191006000007082" style="zoom:35%;" /></center>
+
+<p>A,B,C,D 是发送信号的4个station，他们的码片序列两两正交。</p>
+<p>S1,S2,…S6是6个例子,S6表示这个比特时间A,B,D发送了bit 1，C发送了bit 0。但是我们收到的是S6这个不同站的信号都混淆在一起的整体。怎么把C站发送的比特提取出来呢？</p>
+<p>方法是S6与C做归一化内积。即$S_6\cdot C=[2-2+0-2+0-2-4+0]/8=-1$</p>
+<p>因此我们知道在S6所处的这个比特时间内，C站传输了bit 0。</p>
+<blockquote>
+<p>内积结果</p>
+<p>=1 说明该站发送了 bit 1</p>
+<p>=-1说明该站发送了bit 0</p>
+<p>=0 说明该站没有发送数据</p>
+</blockquote>
+<h1 id="5-公共电话交换网络"><a href="#5-公共电话交换网络" class="headerlink" title="5 公共电话交换网络"></a>5 公共电话交换网络</h1><p>How to connect computers?</p>
+<blockquote>
+<p>For small number of computers and a local area</p>
+<ul>
+<li>LAN </li>
+</ul>
+<p>For a large number of computers or a wide area or lacking right of way</p>
+<ul>
+<li>PSTN [Public Switched Telephone Network]</li>
+</ul>
+</blockquote>
+<h2 id="5-1-Structure-of-the-Telephone-System"><a href="#5-1-Structure-of-the-Telephone-System" class="headerlink" title="5.1 Structure of the Telephone System"></a>5.1 Structure of the Telephone System</h2><p>电话网络的变迁</p>
+<center><img src="image-20191007161859322.png" srcset="/img/loading.gif" alt="image-20191007161859322" style="zoom:40%;" /></center>
+
+<p>Bell system model</p>
+<p>Levels:</p>
+<ul>
+<li>End office 本地局</li>
+<li>toll office 长途局</li>
+<li>primary office 初级局</li>
+<li>Sectional office 地区局</li>
+<li>Regional office 区域局</li>
+</ul>
+<p>Major components </p>
+<ul>
+<li><p>Local loops [本地回路]: 进入家庭和公司的模拟双绞线</p>
+</li>
+<li><p>Trunks [干线]: 连接交换局的数字光纤</p>
+</li>
+<li><p>Switching offices [交换局]:电话呼叫在这里从一条中继线被接入另一条中继线</p>
+</li>
+</ul>
+<center><img src="image-2019100742053.png" srcset="/img/loading.gif" alt="屏幕快照 2019-10-07 下午4.20.53" style="zoom:50%;" /></center>
+
+<h2 id="5-1-本地回路：调制解调器、ADSL、光纤"><a href="#5-1-本地回路：调制解调器、ADSL、光纤" class="headerlink" title="5.1 本地回路：调制解调器、ADSL、光纤"></a>5.1 本地回路：调制解调器、ADSL、光纤</h2><h3 id="A-电话调制解调器"><a href="#A-电话调制解调器" class="headerlink" title="A 电话调制解调器"></a>A 电话调制解调器</h3><p>要在物理信道上发送比特，必须把比特转换为可以在信道上传输的模拟信号。这个方式我们在上一节已经学过。</p>
+<p>在信号的另一端，模拟信号要被还原成比特</p>
+<p><br/></p>
+<p><strong><u>调制解调器</u></strong></p>
+<p>是什么</p>
+<blockquote>
+<p>执行数字比特流和模拟信号流之间转换的设备就是调制解调器[modem]</p>
+<p>调制解调器是调制器[modulator]和解调器[demodulator]的缩写</p>
+</blockquote>
+<center><img src="page102image35767104.png" srcset="/img/loading.gif" alt="page102image35767104.png" style="zoom:70%;" /> </center>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Computer-Network/">Computer Network</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Computer-Network/">Computer Network</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/10/13/ComputerArchitecture/pipeline/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CA - Pipeline</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/09/08/ComputerArchitecture/instructionSet/">
+                        <span class="hidden-mobile">CA - Instruction Set</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Computer network--物理层&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

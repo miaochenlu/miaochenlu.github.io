@@ -170,6 +170,109 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/11/DesignPatterns/Bridge/" target="_self">
+          <img src="/img/image-20200811150059187.png" srcset="/img/loading.gif" alt="Bridge 桥模式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/08/11/DesignPatterns/Bridge/">Bridge 桥模式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/11/DesignPatterns/Bridge/">
+          
+          
+            
+          
+          Bridge属于”单一职责”模式在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码， 这时候的关键是划清责任。
+
+典型模式
+• Decorator
+• Bridge
+
+
+动机由于某些类型的固有的实现逻辑，使得它们具有两个变化的维度， 乃至多个纬度的变化。
+如何应对这种”多维度的变化”？如何利用面向对象技术来使得类型可以轻松地沿着两个乃
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-11 06:48" pubdate>
+              2020-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Design-Patterns/">Design Patterns</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Design-Patterns/">Design Patterns</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/08/09/Capital/">资本论读书摘抄</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/09/Capital/">
+          
+          
+            
+          
+          2020-08-09商品 第一卷第一章
+商品的两个因素: 使用价值和价值
+
+物的有用性成为使用价值。服务是具有使用价值的。
+
+由于使用价值才是构成一个社会的财富的物质内容，因此，股票市场的涨跌并不代表一个社会的财富的增加或减少
+
+交换价值首先表现为一种使用价值同另一种使用价值相交换的量的关系或比例。
+
+由于交换是一个私人劳动向社会劳动的转变过程，这个过程中存在一定的随机性，因此交换价值具有一定的偶
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-09 14:59" pubdate>
+              2020-08-09
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/08/07/DesignPatterns/Decorator/" target="_self">
           <img src="/img/image-20200807160507597.png" srcset="/img/loading.gif" alt="Decorator">
         </a>
@@ -186,9 +289,14 @@
           
             
           
-          动机在某些情况下我们可能会”过度地使用继承来扩展对象的功能”， 由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性； 并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。
-如何使”对象功能的扩展”能够根据需要来动态地实现？同时避免”扩展功能的增多”带来的子类膨胀问题？从而使得任何”功能扩展变化”所导致的影响将为最低？
-所谓静态特质, 比如在Crypto
+          Decorator属于”单一职责”模式在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码， 这时候的关键是划清责任。
+
+典型模式
+• Decorator
+• Bridge
+
+
+动机在某些情况下我们可能会”过度地使用继承来扩展对象的功能”， 由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性； 并且随着子类的增多（扩展功能的增多）
         </a>
       </p>
 
@@ -238,9 +346,6 @@
           
             变化是复用的天敌！ 面向对象设计最大的优势在于：抵御变化
           
-
-
-
 依赖倒置原则 (DIP)
 高层模块(稳定)不应该依赖于低层模块(变化)，二者都应该依赖于抽象(稳定) 。
 
@@ -248,11 +353,11 @@
 
 
 
-
 开放封闭原则 (OCP)
 对扩展开放，对更改封闭。
 
 类模块应该是可扩展的，但是不可修改。
+
 
 
         </a>
@@ -451,18 +556,81 @@ Strategy Method定义定义一系列算法，把它们一个个封装起来，�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/10/13/pipeline/" target="_self">
+        <a href="/2019/12/08/ComputerArchitecture/Storage/" target="_self">
+          <img src="/img/image-20191209103141041.png" srcset="/img/loading.gif" alt="CA - Storage">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2019/12/08/ComputerArchitecture/Storage/">CA - Storage</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/12/08/ComputerArchitecture/Storage/">
+          
+          
+            
+          
+          1. Introduction
+
+1.1 缓存性能CPU execution time
+=(CPU\, clock\, cycles + Memory\, stall\, cycles)\times Clock\, cycle\, time{:.warning}
+这里CPU clock cicles包括handle cache hit/miss的时间
+
+
+
+看一道例题
+
+a computer wi
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-12-08 07:39" pubdate>
+              2019-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Computer-Architecture/">Computer Architecture</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Computer-Architecture/">Computer Architecture</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2019/10/13/ComputerArchitecture/pipeline/" target="_self">
           <img src="/img/image-20191021110018403.png" srcset="/img/loading.gif" alt="CA - Pipeline">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2019/10/13/pipeline/">CA - Pipeline</a>
+        <a href="/2019/10/13/ComputerArchitecture/pipeline/">CA - Pipeline</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/10/13/pipeline/">
+        <a href="/2019/10/13/ComputerArchitecture/pipeline/">
           
           
             
@@ -511,37 +679,24 @@ Strategy Method定义定义一系列算法，把它们一个个封装起来，�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/09/08/instructionSet/" target="_self">
-          <img src="/img/image-20190930101228492.png" srcset="/img/loading.gif" alt="CA - Instruction Set">
+        <a href="/2019/09/17/PhysicalLayer/" target="_self">
+          <img src="/img/image-20190917211449784.png" srcset="/img/loading.gif" alt="Computer network--物理层">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2019/09/08/instructionSet/">CA - Instruction Set</a>
+        <a href="/2019/09/17/PhysicalLayer/">Computer network--物理层</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/09/08/instructionSet/">
+        <a href="/2019/09/17/PhysicalLayer/">
           
           
             
           
-          附录A 指令集基本原理 1 What is ISA?ISA: Instruction Set Architecture
-
-
-2 What types of ISA?2.1 Basis
-type of internal storage
-
-
-stack
-accumulator
-Register-memory
-Register-register/load-store
-
-
-
-先来解释一下implicit 
+          1 数据通信的理论基础1.1傅里叶分析任何一个行为合理周期为T的函数g(t)，都可以表示成正弦函数和余弦函数组成的无穷级数
+g(t)=\frac{1}{2}c+\sum_{n=1}^{\infty}a_nsin(2\pi nft)+\sum_{n=1}^{\infty}b_ncos(2\pi nft)其中$f=\frac{1}{T}$是基本频率，$a_n$和$b_n$是n次谐波的正弦振幅和余弦振幅
         </a>
       </p>
 
@@ -549,8 +704,8 @@ Register-register/load-store
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2019-09-08 14:04" pubdate>
-              2019-09-08
+            <time datetime="2019-09-17 16:29" pubdate>
+              2019-09-17
             </time>
           </div>
         
@@ -558,7 +713,7 @@ Register-register/load-store
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Computer-Architecture/">Computer Architecture</a>
+              <a href="/categories/Computer-Network/">Computer Network</a>
             
           </div>
         
@@ -566,7 +721,7 @@ Register-register/load-store
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Computer-Architecture/">Computer Architecture</a>
+              <a href="/tags/Computer-Network/">Computer Network</a>
             
           </div>
         
@@ -575,6 +730,18 @@ Register-register/load-store
   </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

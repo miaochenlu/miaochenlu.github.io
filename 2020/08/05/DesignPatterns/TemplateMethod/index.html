@@ -223,12 +223,8 @@
 <p>核心在于在稳定与变化之间求得一个平衡，如果全部稳定或者全部变化都是不需要设计模式的。</p>
 <p>如何在确定<strong>稳定操作结构</strong>的前提下，来灵活应对<strong>各个子步骤的变化</strong>或者<strong>晚期实现需求</strong>？</p>
 <p>假设整个代码的操作结构如下图所示，其中红色是Library开发人员完成的，蓝色部分是Application开发人员完成的</p>
-<img src="image-20200710191024075.png" srcset="/img/loading.gif" alt="image-20200710191024075" style="zoom:33%;" />
-
-
-
-<h2 id="结构化软件流程设计"><a href="#结构化软件流程设计" class="headerlink" title="结构化软件流程设计"></a>结构化软件流程设计</h2><img src="image-20200710191212499.png" srcset="/img/loading.gif" alt="image-20200710191212499" style="zoom:50%;" />
-
+<p><img src="image-20200710191024075.png" srcset="/img/loading.gif" alt="image-20200710191024075" style="zoom:33%;" /></p>
+<h2 id="结构化软件流程设计"><a href="#结构化软件流程设计" class="headerlink" title="结构化软件流程设计"></a>结构化软件流程设计</h2><p><img src="image-20200710191212499.png" srcset="/img/loading.gif" alt="image-20200710191212499" style="zoom:50%;" /></p>
 <p>lib.cpp</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span> &#123;</span>
 <span class="hljs-keyword">public</span>:
@@ -242,7 +238,6 @@
         <span class="hljs-comment">//...</span>
     &#125;
 &#125;</code></pre></div>
-
 <p>app.cpp</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//应用程序开发人员</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> &#123;</span>
@@ -254,7 +249,6 @@
         <span class="hljs-comment">//...</span>
     &#125;
 &#125;</code></pre></div>
-
 <p>主程序</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-function">Library <span class="hljs-title">lib</span><span class="hljs-params">()</span></span>;
@@ -270,11 +264,7 @@
     &#125;
     lib.Step5();
 &#125;</code></pre></div>
-
-
-
-<h2 id="用模板方法的代码重构为"><a href="#用模板方法的代码重构为" class="headerlink" title="用模板方法的代码重构为"></a>用模板方法的代码重构为</h2><img src="image-20200710191917988.png" srcset="/img/loading.gif" alt="image-20200710191917988" style="zoom:50%;" />
-
+<h2 id="用模板方法的代码重构为"><a href="#用模板方法的代码重构为" class="headerlink" title="用模板方法的代码重构为"></a>用模板方法的代码重构为</h2><p><img src="image-20200710191917988.png" srcset="/img/loading.gif" alt="image-20200710191917988" style="zoom:50%;" /></p>
 <p>lib.cpp</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Library</span> &#123;</span>
 <span class="hljs-keyword">public</span>:
@@ -304,7 +294,6 @@
     <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Step2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">//变化</span>
     <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Step4</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">//变化</span>
 &#125;</code></pre></div>
-
 <p>app.cpp</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-comment">//应用程序开发人员</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span>:</span> <span class="hljs-keyword">public</span> Library &#123;
@@ -316,19 +305,14 @@
         <span class="hljs-comment">//...</span>
     &#125;
 &#125;;</code></pre></div>
-
 <p>主程序</p>
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
     Library* pLib = <span class="hljs-keyword">new</span> Application();
     lib.Run();
     <span class="hljs-keyword">delete</span> pLib;
 &#125;</code></pre></div>
-
-
-
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这两者的区别在于早绑定和晚绑定。前者属于早绑定，而template method属于晚绑定</p>
-<img src="image-20200710192039991.png" srcset="/img/loading.gif" alt="image-20200710192039991" style="zoom:50%;" />
-
+<p><img src="image-20200710192039991.png" srcset="/img/loading.gif" alt="image-20200710192039991" style="zoom:50%;" /></p>
 <p>定义一个操作中的算法的骨架 (稳定)，而将一些步骤延迟 (变化)到子类中。Template Method使得子类可以不改变 (复用)一个算法的结构即可重定义(override 重写)该算法的某些特定步骤。</p>
 
             </div>

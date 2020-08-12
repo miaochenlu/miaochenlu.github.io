@@ -238,7 +238,6 @@
         splitter.split();
     &#125;
 &#125;</code></pre></div>
-
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileSplitter</span> &#123;</span>
     <span class="hljs-built_in">string</span> m_filePath;
     <span class="hljs-keyword">int</span> m_fileNumber;
@@ -258,9 +257,6 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
-
-
 <h4 id="需求1：文件分割进度条"><a href="#需求1：文件分割进度条" class="headerlink" title="需求1：文件分割进度条"></a>需求1：文件分割进度条</h4><ul>
 <li>第一种实现方式</li>
 </ul>
@@ -278,9 +274,6 @@
         splitter.split();
     &#125;
 &#125;</code></pre></div>
-
-
-
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileSplitter</span> &#123;</span>
     <span class="hljs-built_in">string</span> m_filePath;
     <span class="hljs-keyword">int</span> m_fileNumber;
@@ -308,13 +301,9 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
 <div class="note note-warning">
             <p>但是这种实现方式违反了<u>依赖倒置原则</u>。FileSplitter依赖ProgressBar 这样一种具体的实现细节，但是进度条的种类和展现形式是变化的，如果我们想将进度条换一种展现形式，比如不断打点，那么就会面临需求变更的困扰。</p>
           </div>
-
-
-
 <ul>
 <li>第二种实现方式</li>
 </ul>
@@ -351,7 +340,6 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span>:</span> <span class="hljs-keyword">public</span> Form, <span class="hljs-keyword">public</span> IProgress&#123;
     TextBox* txtFilePath;
     TextBox* txtFileNumber;
@@ -369,7 +357,6 @@
         progressBar-&gt;setValue(value);
     &#125;
 &#125;</code></pre></div>
-
 <p>C++支持多继承，但是不推荐使用多继承，因为会带来很多耦合的问题。但是有一种情况是推荐使用多继承的，一个主的继承类，其他都是接口  (单继承多实现), 这里就属于这种情况</p>
 <ul>
 <li>再修改一下</li>
@@ -411,11 +398,6 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
-
-
-
-
 <h4 id="需求2-多观察者"><a href="#需求2-多观察者" class="headerlink" title="需求2: 多观察者"></a>需求2: 多观察者</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IProgress</span> &#123;</span>
 <span class="hljs-keyword">public</span>:
     <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoProgresss</span><span class="hljs-params">(<span class="hljs-keyword">float</span> value)</span> </span>= <span class="hljs-number">0</span>;
@@ -463,7 +445,6 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
 <div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainForm</span>:</span> <span class="hljs-keyword">public</span> Form, <span class="hljs-keyword">public</span> IProgress&#123;
     TextBox* txtFilePath;
     TextBox* txtFileNumber;
@@ -493,13 +474,7 @@
         <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"."</span>;
     &#125;
 &#125;</code></pre></div>
-
-
-
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><img src="image-20200806160700160.png" srcset="/img/loading.gif" alt="image-20200806160700160" style="zoom: 50%;" />
-
-
-
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="image-20200806160700160.png" srcset="/img/loading.gif" alt="image-20200806160700160" style="zoom: 50%;" /></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li><p>使用面向对象的抽象，Observer模式使得我们可以独立地改变目标与观察者，从而使二者之间的依赖关系达致松耦合。 </p>
 </li>
@@ -507,8 +482,7 @@
 </li>
 <li><p>观察者自己决定是否需要订阅通知，目标对象对此一无所知。 </p>
 </li>
-<li><p>Observer模式是基于事件的UI框架中非常常用的设计模式，也是 MVC模式的一个重要组成部分。</p>
-</li>
+<li>Observer模式是基于事件的UI框架中非常常用的设计模式，也是 MVC模式的一个重要组成部分。</li>
 </ul>
 
             </div>
