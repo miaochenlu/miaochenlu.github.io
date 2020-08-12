@@ -4,7 +4,18 @@ date: 2020-08-07 14:15:57
 index_img: /img/image-20200807160507597.png
 tags: Design Patterns
 categories: Design Patterns
+
 ---
+
+## Decorator属于"单一职责"模式
+
+在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码， 这时候的关键是划清责任。
+
+* 典型模式
+
+  • Decorator
+
+  • Bridge
 
 ## 动机
 
@@ -379,13 +390,3 @@ void Process() {
 * Decorator类在接口上表现为is-a Component的继承关系，即Decorator类继承了Component类所具有的接口。但在实现上又 表现为has-a Component的组合关系，即Decorator类又使用了 另外一个Component类。
 
 * Decorator模式的目的并非解决"多子类衍生的多继承"问题，Decorator模式应用的要点在于解决"主体类在多个方向上的扩展 功能"——是为"装饰"的含义。
-
-## Decorator属于单一职责模式
-
-在软件组件的设计中，如果责任划分的不清晰，使用继承得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码， 这时候的关键是划清责任。
-
-* 典型模式
-
-  • Decorator
-
-  • Bridge
