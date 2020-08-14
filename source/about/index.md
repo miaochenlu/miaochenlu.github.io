@@ -4,8 +4,6 @@ date: 2020-07-28 14:51:36
 layout: about
 ---
 
-<header >
-</header>
 <main class="mdl-color--blue-grey-50">
     <section class="mdl-color--white mdl-shadow--2dp">
         <h2 class="mdl-typography--display-1">&emsp;Education</h2>
@@ -28,3 +26,4 @@ layout: about
             <br>
         </section>
     </section>
+</main>
