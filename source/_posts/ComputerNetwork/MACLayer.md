@@ -1,7 +1,9 @@
 ---
-title: MACLayer
-date: 2020-08-14 20:06:17
-tags:
+title: Computer network--MAC子层
+date: 2019-11-12 20:06:17
+tags:  Computer Network
+categories:  Computer Network
+index_img: /img/image-20191115204112604.png
 ---
 
 计算机网络课程-MAC子层总结
@@ -15,7 +17,7 @@ tags:
 </style>
 
 
-<br/>
+
 
 网络链路可以分成两类
 
