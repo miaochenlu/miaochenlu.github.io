@@ -1,5 +1,5 @@
 ---
-title: AbstractFactory
+title: Abstract Factory
 date: 2020-08-21 13:51:40
 index_img: /img/image-20200821143526358.png
 tags: Design Patterns
