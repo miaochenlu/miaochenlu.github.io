@@ -1,0 +1,894 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>Computer network--网络层part2 - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-12-06 07:00" pubdate>
+      December 6, 2019 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      54
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Computer network--网络层part2</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="3-拥塞控制算法"><a href="#3-拥塞控制算法" class="headerlink" title="3. 拥塞控制算法"></a>3. 拥塞控制算法</h1><h3 id="i-什么是拥塞-congestion"><a href="#i-什么是拥塞-congestion" class="headerlink" title="i. 什么是拥塞[congestion]"></a>i. 什么是拥塞[congestion]</h3><div class="note note-warning">
+            <p>网络中存在太多的数据包导致数据包被延迟延迟和丢失，从而降低了传输性能，这种情况称为拥塞</p>
+          </div>
+<p>网络层和传输层共同承担着处理拥塞的责任。</p>
+<ul>
+<li><p>由于拥塞发生在网络内，正是网络层直接经历着拥塞，而且必须由它最终确定如何处理过载的数据包。</p>
+</li>
+<li><p>然而，控制拥塞的最有效方法是减少传输层注入网络的负载。这就需要网络层和传输层共同努力协同工作。</p>
+</li>
+</ul>
+<h3 id="ii-拥塞的影响"><a href="#ii-拥塞的影响" class="headerlink" title="ii. 拥塞的影响"></a>ii. 拥塞的影响</h3><center><img src="image-20191202212045404.png" srcset="/img/loading.gif" alt="image-20191202212045404" style="zoom:30%;" /></center>
+
+<ul>
+<li>当主机发送到网络的数据包数量在其承载能力范围之内时， 送达的数据包数与发送的数据包数成正比例增长</li>
+<li>然而，随着负载接近承载能力，偶尔突发的流量填满了路由器内部的缓冲区，因而某些数据包会被丢失。这些丢失的数据包消耗了部分容量，因此，送达的数据包数量低于理想曲线。网络现在开始拥塞。</li>
+</ul>
+<ul>
+<li>除非网络是精心设计的，否则它极有可能会遭遇拥塞崩溃 [Ccongestion collapse ]，表现为随着注入负载的增加到超出网络的容量，网络性能骤降。</li>
+</ul>
+<p><br/></p>
+<p>拥塞控制和流量控制</p>
+<blockquote>
+<ul>
+<li>拥塞控制的任务是确保网络能够承载所有到达的流量。这是一个全局性的问题，涉及各方面的行为，包括所有的主机和所有的路由器。</li>
+<li>与此相反，流量控制只与特定的发送方和特定的接收方之间的点到点流量有关。它的任务是确保一个快速的发送方不会持续地以超过接收方接收能力的速率传输数据。</li>
+</ul>
+</blockquote>
+<p><br/></p>
+<h2 id="3-1-拥塞控制的途径"><a href="#3-1-拥塞控制的途径" class="headerlink" title="3.1 拥塞控制的途径"></a>3.1 拥塞控制的途径</h2><p>拥塞的出现意味着负载（暂时）大于资源（在网络的一部分〉可以处理的能力。</p>
+<p>很自然能想到两个解决方案</p>
+<ul>
+<li>增加资源</li>
+<li>减少负载。</li>
+</ul>
+<center><img src="image-20191202215504805.png" srcset="/img/loading.gif" alt="image-20191202215504805" style="zoom: 33%;" /></center>
+
+<h2 id="3-2-流量感知路由-traffic-aware-routing"><a href="#3-2-流量感知路由-traffic-aware-routing" class="headerlink" title="3.2 流量感知路由[traffic-aware routing]"></a>3.2 流量感知路由[traffic-aware routing]</h2><p>把链路权重设置成一个（固定）链路带宽、传输延迟、（可变）测量负载或平均排队延迟的函数。在所有其他条件都相同的情况下，最小权重的路径更青睐那些<strong><em>轻负载</em></strong>的路径。</p>
+<p><br/></p>
+<h2 id="3-3-准入控制-admission-control"><a href="#3-3-准入控制-admission-control" class="headerlink" title="3.3 准入控制[admission control]"></a>3.3 准入控制[admission control]</h2><p>一种广泛应用于虚电路网络，防止出现拥塞的技术是准入控制（ admission control ）</p>
+<p>思想：</p>
+<div class="note note-warning">
+            <p>除非网络可以携带额外的流量而不会变得拥塞，否则不再建立新的虚电路。因此，任何建立新的虚电路的尝试或许会失败。</p>
+          </div>
+<p>常用：<u>leaky bucket</u> or <u>token bucket</u></p>
+<h2 id="3-4-流量调节-traffic-throttling"><a href="#3-4-流量调节-traffic-throttling" class="headerlink" title="3.4 流量调节[traffic throttling]"></a>3.4 流量调节[traffic throttling]</h2><p>在 Internet 和许多其他计算机网络中，发送方调整它们的传输速度以便发送网络能实际传送的流量。在这种设置下，网络的目标是在拥塞发生之前正常工作。</p>
+<p>而当拥塞迫在眉睫，它必须告诉发送方紧急刹车放慢传输速度。这种反馈是一种常态而不是针对特殊情况的一种处理。</p>
+<p><br/></p>
+<h3 id="限制流量的方法"><a href="#限制流量的方法" class="headerlink" title="限制流量的方法"></a>限制流量的方法</h3><p>要解决两个问题：</p>
+<h4 id="1-路由器必须确定何时快要接近拥塞，最好在拥塞发生之前能确定-排队时延"><a href="#1-路由器必须确定何时快要接近拥塞，最好在拥塞发生之前能确定-排队时延" class="headerlink" title="1. 路由器必须确定何时快要接近拥塞，最好在拥塞发生之前能确定[排队时延]"></a>1. 路由器必须确定何时快要接近拥塞，最好在拥塞发生之前能确定[排队时延]</h4><blockquote>
+<p>解决方法：每个路由器连续监测它正在使用的资源。可以输出在路由器内缓冲的排队数据包。路由器内部的排队延迟直接捕获了数据包经历过的任何拥塞情况</p>
+<p>为了维持良好的排队延迟估计d, 假设s表示瞬时队列长度的样值, d可以定期生成，按如下方式更新，其中$\alpha$是一个参数，加权移动平均</p>
+<script type="math/tex; mode=display">d_{new}=\alpha d_{old}+(1-\alpha)s</script><p>如果d升高到某一个阈值之上，则路由器就要开始注意拥堵了</p>
+</blockquote>
+<h4 id="2-路由器必须及时把反馈消息传递给造成拥塞的发送方"><a href="#2-路由器必须及时把反馈消息传递给造成拥塞的发送方" class="headerlink" title="2. 路由器必须及时把反馈消息传递给造成拥塞的发送方"></a>2. 路由器必须及时把反馈消息传递给造成拥塞的发送方</h4><p><strong>2.A 抑制包</strong></p>
+<blockquote>
+<ul>
+<li>路由器选择一个被拥塞的数据包，给该数据包的源主机返回一个抑制包（choke packet ）。</li>
+</ul>
+<p>抑制包中的<strong><em><u>目标地址</u></em></strong>取自该拥塞数据包。同时，在原来的拥塞数据包上添加一个<strong><em><u>标记</u></em></strong>（设置头部中的一位），因而它在前行的路径上不会产生更多的抑制包。</p>
+<ul>
+<li><p>数据包的转发过程如同平常 一样。 </p>
+</li>
+<li><p>当源主机收到了抑制包，按照要求它必须减少发送给指定目标的流量，比如说减少 50% 。</p>
+</li>
+</ul>
+<p>在数据报网络中，发生拥塞时路由器简单地随机选择一个数据包，很有可能就把抑 制包发给了快速发送方，因为发送方的速度越快，它的数据包排队在路由器队列中的数目就越多。</p>
+</blockquote>
+<center><img src="image-20191205230214522.png" srcset="/img/loading.gif" alt="image-20191205230214522" style="zoom:50%;" /></center>
+
+<p><strong>2.B 逐跳后压[hop-by-hop choke packets]</strong></p>
+<p>因为传播延迟的影响，拥塞信号发出到起作用之间已经有很多新的数据包注入了网络。</p>
+<p>因此，可以让抑制包在沿途的每一跳都发挥作用</p>
+<center><img src="image-20191205232440838.png" srcset="/img/loading.gif" alt="image-20191205232440838" style="zoom:50%;" /></center>
+
+<p><strong>2.C Explicit Congestion Notification [ECN]</strong></p>
+<blockquote>
+<ul>
+<li><p>路由器可以在它转发的任何数据包上打上标记[设置数据包头的某一个标志位]发出信号，表明它正在经历着拥塞。</p>
+</li>
+<li><p>当网络传递数据包时， 接收方可以注意到有个拥塞己经发生，在它发送应答包时顺便告知发送方。</p>
+</li>
+<li><p>然后发送方可以像以前那样紧急刹车降低传输速率。</p>
+</li>
+</ul>
+</blockquote>
+<center><img src="image-20191205231809305.png" srcset="/img/loading.gif" alt="image-20191205231809305" style="zoom:50%;" /></center>
+
+
+<p><br/></p>
+<h2 id="3-5-负载脱落-load-shedding"><a href="#3-5-负载脱落-load-shedding" class="headerlink" title="3.5 负载脱落[load shedding]"></a>3.5 负载脱落[load shedding]</h2><p>当路由器因为来不及处理数据包而面临被这些数据包淹没的危险时，就将它们丢弃。</p>
+<p>关键问题：选择丢弃哪个数据包</p>
+<ul>
+<li>旧的比新的好，丢新包[wine策略]</li>
+<li>新的比旧的好[milk 策略]</li>
+</ul>
+<h3 id="随机早期检测-random-early-detection"><a href="#随机早期检测-random-early-detection" class="headerlink" title="随机早期检测[random early detection]"></a>随机早期检测[random early detection]</h3><p>为什么早期：</p>
+<blockquote>
+<p>在拥塞刚出现苗头时就处理它比等拥塞形成之后再设法解决它更加有效，即在所有的缓冲空间都精疲力竭之前丢弃数据包。</p>
+</blockquote>
+<p>为什么随机:</p>
+<blockquote>
+<p>随机选择丢弃的数据包使得快速发送方发现丢包的可能性更大。发送方没有收到期待的确认信息时，就会认为丢包了，然后传输协议将放慢速度。因此，丢失的数据包起到了传递抑制包的同样作用</p>
+</blockquote>
+<p><br/></p>
+<h1 id="4-服务质量-QUALITY-OF-SERVICE"><a href="#4-服务质量-QUALITY-OF-SERVICE" class="headerlink" title="4. 服务质量[QUALITY OF SERVICE ]"></a>4. 服务质量[QUALITY OF SERVICE ]</h1><p>A flow is a stream of packets from a source to a destination.</p>
+<p>The needs of each flow can be characterized by fourprimary parameters:</p>
+<ul>
+<li><p>Reliability(可靠性)</p>
+</li>
+<li><p>延迟(Delay)</p>
+</li>
+<li><p>抖动(Jitter)</p>
+</li>
+<li><p>带宽(Bandwidth)</p>
+</li>
+</ul>
+<h2 id="4-1-应用需求"><a href="#4-1-应用需求" class="headerlink" title="4.1 应用需求"></a>4.1 应用需求</h2><center><img src="image-20191205233904014.png" srcset="/img/loading.gif" alt="image-20191205233904014" style="zoom:30%;" /></center>
+
+<h2 id="4-2-流量整形-traffic-shaping"><a href="#4-2-流量整形-traffic-shaping" class="headerlink" title="4.2 流量整形[traffic shaping]"></a>4.2 流量整形[traffic shaping]</h2><center><img src="image-20191206000433623.png" srcset="/img/loading.gif" alt="image-20191206000433623" style="zoom:50%;" /></center>
+
+<h1 id="5-INTERNETWORKING-网络互连"><a href="#5-INTERNETWORKING-网络互连" class="headerlink" title="5. INTERNETWORKING [网络互连]"></a>5. INTERNETWORKING [网络互连]</h1><h2 id="5-1-How-networks-differ"><a href="#5-1-How-networks-differ" class="headerlink" title="5.1 How networks differ"></a>5.1 How networks differ</h2><center><img src="image-20191224232122964.png" srcset="/img/loading.gif" alt="image-20191224232122964" style="zoom:40%;" /></center>
+
+<h2 id="5-2-How-networks-can-be-connected"><a href="#5-2-How-networks-can-be-connected" class="headerlink" title="5.2 How networks can be connected"></a>5.2 How networks can be connected</h2><p>多协议路由器[multiprotocol router]</p>
+<center><img src="image-20191224232335024.png" srcset="/img/loading.gif" alt="image-20191224232335024" style="zoom:40%;" /></center>
+
+<h2 id="5-3-Tunneling"><a href="#5-3-Tunneling" class="headerlink" title="5.3 Tunneling"></a>5.3 Tunneling</h2><p>处理两个不同网络相互连接时的一般情况超级困难。然而，却存在一种最常见的甚至可管理不同网络协议的情形。</p>
+<blockquote>
+<p>这种情形就是源主机和目标主机所在网络的类型完全相同， 但它们中间却隔着一个不同类型的网络。举例来说，请考虑一家跨国银行，它在巴黎有一 个IPv6 网，在伦敦也有一个 IPv6 网, 但是连接巴黎和伦敦办事处的却是 IPv4 Internet</p>
+</blockquote>
+<p>可以用tunneling来解决这个问题。</p>
+<ul>
+<li>为了给伦敦办事处的主机发送一个 IP 数据包，巴黎的主机构造一个包含伦敦 IPv6 地址的数据包</li>
+<li>然后将该数据包发送到连接巴黎 IPv6 网络到 IPv4 Internet 上的多协议路由器</li>
+<li>当该多协议路由器获得 IPv6数据包后，它把该数据包用一个 IPv4 头封装，封装后的 IPv4 数据包指向多协议路由器另 一边的 IPv4，该网络与伦敦的 IPv6网络相连：也就是说，路由器将一个IPv6数据包放 入到一个IPv4数据包中。</li>
+<li>当这个包裹着的数据包到达伦敦路由器，原来的 IPv6 数据包 被提取出来，并被发送给最终的目标主机。</li>
+</ul>
+<div class="note note-success">
+            <p>可以把通过 IPv4 Internet 的路径看作是一根从一个多协议路由器延伸到另一个多协议路由器的大隧道。</p>
+          </div>
+<center><img src="image-20191224232619688.png" srcset="/img/loading.gif" alt="image-20191224232619688" style="zoom:40%;" /></center>
+
+<h2 id="5-4-Internetwork-Routing"><a href="#5-4-Internetwork-Routing" class="headerlink" title="5.4 Internetwork Routing"></a>5.4 Internetwork Routing</h2><h3 id="AS-Autonamous-System"><a href="#AS-Autonamous-System" class="headerlink" title="AS[Autonamous System]"></a>AS[Autonamous System]</h3><blockquote>
+<p>each network is operated independently of all the others, it is often referred to as an AS (Autonomous System).</p>
+</blockquote>
+<p>Use Two-level routing</p>
+<ul>
+<li>Internet(inter-AS) routing: Exterior gateway protocol, like BGP</li>
+<li>Intranet(intra-AS) routing: Interior gateway protocol, like LS, DV</li>
+</ul>
+<h2 id="5-5-Internetworking-Fragmentation"><a href="#5-5-Internetworking-Fragmentation" class="headerlink" title="5.5 Internetworking: Fragmentation"></a>5.5 Internetworking: Fragmentation</h2><p>每个网络或链路都会限制其数据包的最大长度。主机一般倾向于传输大的数据包，因为这样可以降低开销，比如浪费在头字节上的带宽。当一个大数据包要穿过一个最大数据包尺寸太小的网络时，一个明显的网络互联问题就出现了。</p>
+<p>MTU[path Maximum Transmission Unit]</p>
+<blockquote>
+<p>到达接收方可以发送的最大数据包尺寸</p>
+</blockquote>
+<p>可以对数据包进行分段来解决这个问题，有两种分段策略</p>
+<h3 id="A-transparent"><a href="#A-transparent" class="headerlink" title="A. transparent"></a>A. transparent</h3><blockquote>
+<p>由“小数据 包”网络引起的分段过程对于沿途后续的网络都是透明的，也就是说，从该网络一直到最终的目标途中的每个网络都感觉不到曾经发生过分段</p>
+</blockquote>
+<p>一些问题</p>
+<ul>
+<li>出口路由器必须知道什么时候它己经接收到了全部的段，所以每个分段中必须提供一个计数字段或者一个“数据包结束”标志位。</li>
+<li>由于所有的数据包必须经过同一个出口路由器才能进行重组，因此路由受到了限制。由于不允许有些段沿着一条路径到达最终目标，而另一些段沿着一条不相交路径到达最终目标，所以，可能会损失一些性能。</li>
+<li>路由器可能不得不做大量的工作。如果不是所有的段都己到达，它还需要缓冲到达的段，并且决定何时丢弃这些段。</li>
+</ul>
+<center><img src="image-20191224233917684.png" srcset="/img/loading.gif" alt="image-20191224233917684" style="zoom:40%;" /></center>
+
+<h3 id="B-nontransparent"><a href="#B-nontransparent" class="headerlink" title="B. nontransparent"></a>B. nontransparent</h3><p><code>优点</code></p>
+<p>是路由器做的工作比较少</p>
+<p>IP采用的是非透明方式。</p>
+<blockquote>
+<p>给每个段一个数据包序号(所有的数据包都携带), 一个数据包内的绝对字节偏移量和一个指明是否到达数据包末尾的标志位</p>
+</blockquote>
+<center><img src="image-20191224234335972.png" srcset="/img/loading.gif" alt="image-20191224234335972" style="zoom:40%;" /></center>
+
+
+
+<p><strong><em>path MTU discovery</em></strong></p>
+<p>这样还是会存在问题。但真正的问题首先还是因为段的存在，因此开销可能比透明分段高。因为除了增加头开销，数据包的丢失概率也增加了。</p>
+<p>我们要提供在网络中避免分段操作的方式。</p>
+<blockquote>
+<p>每个 IP 数据包发出时在它的头设置一个比特，指示不允许对该数据包实施分段操作。</p>
+<p>如果一个路由器接收的数据包太大，它就生成一个报错数据包并发送给源端，然后丢弃该数据包</p>
+<p>当源端收到报错数据包，它就使用报错数据包携带的信息重新将出错数据包分段，每个段足够小到报错路由器能处理。</p>
+<p>如果沿着路径前进又遇到一个MTU更小的路由器，那么重复上述过程。</p>
+</blockquote>
+<center><img src="image-20191224234604657.png" srcset="/img/loading.gif" alt="image-20191224234604657" style="zoom:50%;" /></center>
+
+<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><h2 id="6-1-IPv4协议"><a href="#6-1-IPv4协议" class="headerlink" title="6.1 IPv4协议"></a>6.1 IPv4协议</h2><p>IP数据包包含：</p>
+<ul>
+<li>一个头[20bytes的定长部分和可选的变长部分组成]</li>
+<li>一个正文</li>
+</ul>
+<center><img src="image-20191126085207750.png" srcset="/img/loading.gif" alt="image-20191126085207750" style="zoom:50%;" /></center>
+
+<ul>
+<li><p>version: 数据报属于协议的哪个版本, IPv4该字段总是4</p>
+</li>
+<li><p>IHL[internet header length]: 由于头的长度不固定，IHL字段指明头到底有多长，以32bits长度为单位。</p>
+<p>IHL的最小值为5，5words=160bits=20bytes, 这表明头没有options字段。</p>
+<p>IHL的最大值为15</p>
+</li>
+<li><p>Differentiated services: </p>
+<ul>
+<li><strong>Type of service</strong> (past): 3 for priority, 3 for Delay, Throughput, and Reliability, and 2 unused. </li>
+<li><strong>Differentiated services</strong> (now): 6 for service class, 2 for congestion (e.g. ECN). </li>
+</ul>
+</li>
+<li><p>Total length: the length of header and data. 以bytes为单位 最大值为65535bytes</p>
+</li>
+<li><p>Identification: 让目标主机确定一个新到达的分段<strong><em>属于哪一个数据报</em></strong>。同一个数据报的所有段包含同样的表示值</p>
+</li>
+<li><p>灰色的部分是一个未使用的位</p>
+</li>
+<li><p>DF： Don’t fragment，不分段标志位 。只有当 DF = 0 时才允许分片  </p>
+</li>
+<li><p>MF：more fragment。除了最后一个段，其他段都必须设置这一位。MF = 1 表示后面“还有分片”。MF = 0 表示最后一个分片</p>
+</li>
+<li><p>Fragment: 指明该段在数据报中的位置。除了数据包的最后一个段，其他所有段的长度必须是8bytes的倍数。这个值是该段第一个比特在未分段的数据中所处的位置/8</p>
+</li>
+<li><p>Time to live: 限制数据报生存期的计数器。计数单位被设置为秒。在每一跳上该计数器必须被递减。实际上是<strong><em>跳计数器</em></strong>，当他递减到0时，数据报就被丢弃。</p>
+</li>
+<li><p>Protocol: 指明该将它交给哪个传输进程[TCP UDP …]</p>
+</li>
+<li><p>Header checksum: </p>
+</li>
+<li><p>Source address: 源IP地址</p>
+</li>
+<li><p>Destination address： 目标IP地址</p>
+</li>
+<li><p>options</p>
+</li>
+</ul>
+<center><img src="image-20191126090914574.png" srcset="/img/loading.gif" alt="image-20191126090914574" style="zoom:50%;" /></center>
+
+<p><a href="https://blog.csdn.net/ztguang/article/details/70949781" target="_blank" rel="noopener">OSPF protocol</a></p>
+<h3 id="数据包分段"><a href="#数据包分段" class="headerlink" title="数据包分段"></a>数据包分段</h3><p>注意除了数据包的最后一个段，其他所有段的长度必须是8bytes的倍数</p>
+<center><img src="image-20191225002643293.png" srcset="/img/loading.gif" alt="image-20191225002643293" style="zoom:50%;" /></center>
+
+<ul>
+<li><p>先找total length字段，知道数据包header+data的byte数</p>
+</li>
+<li><p>再找IHL, 知道header的word数</p>
+</li>
+<li><p>total-length得到data.</p>
+</li>
+<li><p>一个数据包最多发送max byte, 用max - IHL就是一个数据包可以发送的data大小</p>
+<ul>
+<li>如果不是最后一个fragment的话，需要减去一些大小，使得发送的数据是8bytes的倍数</li>
+<li>如果不是最后一个分段，无所谓</li>
+</ul>
+</li>
+<li>设置DF=0, MF=1[如果不是最后一个fragment], offset用上述方法计算</li>
+</ul>
+<h2 id="6-2-IP地址"><a href="#6-2-IP地址" class="headerlink" title="6.2 IP地址"></a>6.2 IP地址</h2><p>一个IP地址并不真正指向一台主机，而是指向一个网络接口，所以如果一台主机在两个网络上，它必须有两个IP地址。然而大多数主机都连在一个网络，因而只有一个IP地址。</p>
+<p>路由器有多个接口，从而有多个IP地址</p>
+<h3 id="A-前缀"><a href="#A-前缀" class="headerlink" title="A.前缀"></a>A.前缀</h3><p>IP地址具有层次性，可以将IP地址分成两部分</p>
+<ul>
+<li>高位可变长网络</li>
+<li>低位的主机</li>
+</ul>
+<center><img src="image-20191126091437663.png" srcset="/img/loading.gif" alt="image-20191126091437663" style="zoom:50%;" /></center>
+
+<p><strong>子网掩码</strong>可以与一个IP地址进行AND操作，提取出IP地址的network部分</p>
+<p>如上图，子网掩码为255.255.255.0</p>
+<h3 id="B-子网"><a href="#B-子网" class="headerlink" title="B.子网"></a>B.子网</h3><center><img src="image-20191126091938551.png" srcset="/img/loading.gif" alt="image-20191126091938551" style="zoom:50%;" /></center>
+
+<h3 id="C-CIDR-无类域间路由"><a href="#C-CIDR-无类域间路由" class="headerlink" title="C. CIDR 无类域间路由"></a>C. CIDR 无类域间路由</h3><center><img src="image-20191126113616524.png" srcset="/img/loading.gif" alt="image-20191126113616524" style="zoom: 33%;" /></center>
+
+<p>Question:</p>
+<center><img src="image-20191126113649618.png" srcset="/img/loading.gif" alt="image-20191126113649618" style="zoom: 33%;" /></center>
+
+<p><strong><em>对于A:</em></strong></p>
+<center><img src="image-20191126114956080.png" srcset="/img/loading.gif" alt="image-20191126114956080" style="zoom:50%;" /></center>
+
+<p>因为需要1024个地址，所以host有10位，子网掩码是22位</p>
+<p>202.101.0.0/22</p>
+<p><strong><em>对于B:</em></strong></p>
+<center><img src="image-20191126115309939.png" srcset="/img/loading.gif" alt="image-20191126115309939" style="zoom:50%;" /></center>
+
+<p>host有11位，子网掩码是21位</p>
+<p>202.101.8.0/21</p>
+<p><strong><em>对于C:</em></strong></p>
+<center><img src="image-20191126115323260.png" srcset="/img/loading.gif" alt="image-20191126115323260" style="zoom:50%;" /></center>
+
+<p>host有11位，子网掩码是21位</p>
+<p>202.101.16.0/21</p>
+<h3 id="E-NAT"><a href="#E-NAT" class="headerlink" title="E. NAT"></a>E. NAT</h3><p>处理IPv4地址短缺的问题。</p>
+<blockquote>
+<p>NAT 的基本思想是 ISP 为每个家庭或每个公司分配一个IP地址，用这个 IP 地址来传输Internet 流量。在客户网络内部，每台计算机有唯一的IP 地址，该地址主要用来路由内部流量。然而，当一个数据包需要离开客户网络，发向其他 ISP 时，它必须执行一个地址转换，把唯一的内部 IP 地址转换成那个共享的公共 IP 地址。这种地址转换使用了 IP 地址的三个范围，这些地址己经被声明为私有化。任何网络可以在内部随意地使用这些地址。仅有的规则是不允许包含这些地址的数据包出现在 Internet 上。这 3 个保留的地址范围为：</p>
+<p>10.0.0.0~ 10.255.255.255/8 (16 777216 个主机）</p>
+<p>172.16.0.0 ~ 172.31.255.255/12 ( 1048576 个主机〉</p>
+<p>192.168.0.0~ 192.168.255.255/16 (65536 个主机〉</p>
+</blockquote>
+<center><img src="image-20191227230836370.png" srcset="/img/loading.gif" alt="image-20191227230836370" style="zoom:35%;" /></center>
+
+
+
+
+
+
+
+<h2 id="6-4-IPv6-Protocol"><a href="#6-4-IPv6-Protocol" class="headerlink" title="6.4 IPv6 Protocol"></a>6.4 IPv6 Protocol</h2><p>IPv6协议采用128位地址，基本在未来任何时间都不可能出现地址短缺问题</p>
+<h3 id="主要的IPv6头-40bytes"><a href="#主要的IPv6头-40bytes" class="headerlink" title="主要的IPv6头[40bytes]"></a>主要的IPv6头[40bytes]</h3><center><img src="image-20191126120754968.png" srcset="/img/loading.gif" alt="image-20191126120754968" style="zoom: 40%;" /></center>
+
+<ul>
+<li><p>version: 对于IPv6,总是6</p>
+</li>
+<li><p>Differentiated services: 区分数据包的服务类别</p>
+</li>
+<li><p>Flow label: 为源端和接收方提供了一种建立伪连接的方式，即源端和接收方把一组具有同样需求并希望得到网络同等对待的数据报打上标记。</p>
+</li>
+<li>payload length: 数据的字节数，这里是不包括头的，和IPv4不一样</li>
+<li>Next header: 指明当前头后还有哪种扩展头。如果当前的头是最后一个IP头，那么下一个头字段指定了该数据报将被传递给哪个传输协议处理(TCP, UDP)</li>
+<li><p>Hop limit: 跳数限制，相当于IPv4的TTL</p>
+</li>
+<li><p>entension</p>
+</li>
+</ul>
+<p>IPv6地址的书写</p>
+<p><strong>8</strong> groups of <strong>4</strong> hexadecimal digits with colons between the groups</p>
+<p>e.g. 8000:0000:0000:0000:0123:4567:89AB:CDEF</p>
+<p>优化</p>
+<ol>
+<li><p>leading zeros within a group can be omitted</p>
+<p>0123可以写作123</p>
+</li>
+<li><p>one or more groups of 16 zero bits can be replaced by a pair of colons</p>
+<p>8000::123:4567:89AB:CDEF</p>
+</li>
+<li><p>IPv4 addresses can be written as a pair of colons and an old dotted decimal number</p>
+<p>::192.31.20.46</p>
+</li>
+</ol>
+<h2 id="6-4-Internet控制协议"><a href="#6-4-Internet控制协议" class="headerlink" title="6.4 Internet控制协议"></a>6.4 Internet控制协议</h2><h3 id="ICMP—-Internet-Control-Message-Protocol"><a href="#ICMP—-Internet-Control-Message-Protocol" class="headerlink" title="ICMP—-Internet Control Message Protocol"></a>ICMP—-Internet Control Message Protocol</h3><p>当路由器在处理一个数据包的过程中发生了意外，可以用过ICMP向数据包的源端报告有关事件</p>
+<p>ICMP还可以用来测试Internet</p>
+<center><img src="image-20191129174803743.png" srcset="/img/loading.gif" alt="image-20191129174803743" style="zoom:50%;" /></center>
+
+<h3 id="ARP—-The-address-resolution-protocol"><a href="#ARP—-The-address-resolution-protocol" class="headerlink" title="ARP—-The address resolution protocol"></a>ARP—-The address resolution protocol</h3><center><img src="image-20191227233627543.png" srcset="/img/loading.gif" alt="image-20191227233627543" style="zoom:50%;" /></center>
+
+<p>作用是：将IP地址解析为MAC地址</p>
+<p>为什么同时需要IP地址和MAC地址呢？</p>
+<p><a href="https://www.jianshu.com/p/0ce15c07b294" target="_blank" rel="noopener">IP/MAC address</a></p>
+<p>ip地址负责标记发送方和接收方，MAC地址负责传输过程中的分段传送，比如下一跳的MAC地址。</p>
+<p><a href="https://blog.csdn.net/u010164190/article/details/79446575" target="_blank" rel="noopener">ARP详解</a></p>
+<p><a href="https://blog.csdn.net/lm409/article/details/80299823" target="_blank" rel="noopener">ARP详解2</a></p>
+<h3 id="DHCP—-Dynamic-Host-Configuration-Protocol"><a href="#DHCP—-Dynamic-Host-Configuration-Protocol" class="headerlink" title="DHCP—-Dynamic Host Configuration Protocol"></a>DHCP—-Dynamic Host Configuration Protocol</h3><p>动态获取IP地址</p>
+<p><a href="https://blog.csdn.net/wuruixn/article/details/8282554" target="_blank" rel="noopener">DHCP协议的工作过程</a></p>
+<center><img src="image-20191227233813861.png" srcset="/img/loading.gif" alt="image-20191227233813861" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>采用 DHCP 时，每个网络必须有一个 DHCP 服务器负责地址配置。</p>
+<ul>
+<li>当计算机启动时， 它有一个嵌入在 NIC 中的内置以太网地址或其他链路层地址，但没有 IP 地址。像 ARP 一 样，该计算机在自己的网络上广播一个报文，请求 IP 地址。这个请求报文就是 DHCP DISCOVER 包</li>
+<li>这个包必须到达 DHCP 服务器。如果 DHCP 服务器没有直接连在本地网络， 那么必须将路由器配置成能接收 DHCP 广播并将该请求报文中继给 DHCP 服务器，由 DHCP 服务器来处理 DHCP 报文。</li>
+<li>当 DHCP 服务器收到请求，它就为该主机分配一个空闲的 IP 地址，并通过 DHCP OFFER 包返回给主机（这个报文或许也要通过路由器中继〉。为了在主机没有 IP 地址的情况下完成此项工作，服务器用主机的以太网地址来标识这台主机（主机的以太网地址由 DHCP DISCOVER 包携带过来）。</li>
+</ul>
+</blockquote>
+<p>为了确定一个主机拥有IP地址的时间，采用了leasing技术。在leasing期满前，主机必须和DHCP续订。</p>
+<h3 id="Label-Switching-and-MPLS"><a href="#Label-Switching-and-MPLS" class="headerlink" title="Label Switching and MPLS"></a>Label Switching and MPLS</h3><p>MPLS(multiprotocol label switching)</p>
+<p>MPLS 在每个数据包前面增加一个标签，路由器根据<strong><em><u>数据包标签</u></em></strong>而不是数据包目标地址实施转发。用标签作为一个内部表的索引，快速查找该表找出正确的输出线路，因而这只是一个表查操作。使用这种技术，路由器的转发速度非常快。</p>
+<center><img src="image-20191227234537219.png" srcset="/img/loading.gif" alt="image-20191227234537219" style="zoom:50%;" /></center>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Computer-Network/">Computer Network</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Computer-Network/">Computer Network</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/08/ComputerArchitecture/Storage/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CA - Storage</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/06/NetworkLayer/">
+                        <span class="hidden-mobile">Computer network--网络层part1</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Computer network--网络层part2&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
