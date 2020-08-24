@@ -1,7 +1,7 @@
 ---
 title: Terminal AddOns
 date: 2020-08-23 17:10:39
-tags: Terminal  Theme
+tags: [Terminal, Theme]
 index_img: /img/image-20200823172029258.png
 ---
 
