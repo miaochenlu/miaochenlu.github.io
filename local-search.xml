@@ -4,6 +4,38 @@
   
   
   <entry>
+    <title>Terminal AddOns</title>
+    <link href="/2020/08/23/AddOns/"/>
+    <url>/2020/08/23/AddOns/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://github.com/romkatv/powerlevel10k" target="_blank" rel="noopener">powerlevel10k</a>: a theme for Zsh. It emphasizes <a href="https://github.com/romkatv/powerlevel10k#uncompromising-performance" target="_blank" rel="noopener">speed</a>, <a href="https://github.com/romkatv/powerlevel10k#extremely-customizable" target="_blank" rel="noopener">flexibility</a> and <a href="https://github.com/romkatv/powerlevel10k#configuration-wizard" target="_blank" rel="noopener">out-of-the-box experience</a>.</p><p><a href="https://github.com/SpaceVim/SpaceVim" target="_blank" rel="noopener">SpaceVim</a>: SpaceVim is a community-driven modular Vim distribution. It manages collections of plugins in layers, which help to collect related packages together to provide IDE-like features. SpaceVim is not just a vimrc but an ultimate Vim configuration, It contains many built-in features.</p><p><img src="image-20200823172304012.png" srcset="/img/loading.gif" alt="image-20200823172304012" style="zoom:50%;" /></p><p><img src="image-20200823174451884.png" srcset="/img/loading.gif" alt="image-20200823174451884" style="zoom:50%;" /></p><p><a href="https://github.com/Mayccoll/Gogh" target="_blank" rel="noopener">Gogh</a> : color theme</p><p><img src="image-20200823172029258.png" srcset="/img/loading.gif" alt="image-20200823172029258" style="zoom:50%;" /></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Terminal  Theme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>gem5lec1</title>
+    <link href="/2020/08/21/gem5lec1/"/>
+    <url>/2020/08/21/gem5lec1/</url>
+    
+    <content type="html"><![CDATA[<p>安装</p><div class="hljs"><pre><code class="hljs shell">sudo apt install gitsudo apt install sconssudo apt install python-pipsudo apt-get install six</code></pre></div><div class="hljs"><pre><code class="hljs shell">sudo apt install build-essential git m4 scons zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev python-dev python</code></pre></div><div class="hljs"><pre><code class="hljs shell">mkdir tempcd tempgit clone https://gem5.googlesource.com/public/gem5scons build/X86/gem5.opt -j5</code></pre></div><p>git clone 的这个网站需要vpn</p><p><img src="gem5lec1/image-20200821211421714.png" srcset="/img/loading.gif" alt="image-20200821211421714" style="zoom:50%;" /></p><h4 id="M4-macro-processor-not-installed"><a href="#M4-macro-processor-not-installed" class="headerlink" title="M4 macro processor not installed"></a>M4 macro processor not installed</h4><p>If the M4 macro processor isn’t installed you’ll see an error similar to this:</p><div class="hljs"><pre><code class="hljs subunit">...Checking for member exclude_host in struct perf_event_attr...yes<span class="hljs-keyword">Error: </span>Can't find version of M4 macro processor.  Please install M4 and try again.</code></pre></div><p>Just installing the M4 macro package may not solve this issue. You may nee to also install all of the <code>autoconf</code> tools. On Ubuntu, you can use the following command.</p><div class="hljs"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install automake</code></pre></div><h4 id="gem5-architecture"><a href="#gem5-architecture" class="headerlink" title="gem5 architecture"></a>gem5 architecture</h4><ul><li>gem5 consists of <strong>SimObjects</strong></li></ul><p>most C++ objects in gem5 inherit from <code>class SimObject</code></p><p>Represent </p><ul><li>gem5 is a discrete event simulator</li></ul><h4 id="gem5-use-inteface"><a href="#gem5-use-inteface" class="headerlink" title="gem5 use inteface"></a>gem5 use inteface</h4>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>VMware虚拟机共享本机vpn</title>
     <link href="/2020/08/21/UbuntuNet/"/>
     <url>/2020/08/21/UbuntuNet/</url>
