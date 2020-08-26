@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      63 字
+      154 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -219,12 +219,37 @@
             <h1 style="display: none">Terminal AddOns</h1>
             
             <div class="markdown-body" id="post-body">
-              <p><a href="https://github.com/romkatv/powerlevel10k" target="_blank" rel="noopener">powerlevel10k</a>: a theme for Zsh. It emphasizes <a href="https://github.com/romkatv/powerlevel10k#uncompromising-performance" target="_blank" rel="noopener">speed</a>, <a href="https://github.com/romkatv/powerlevel10k#extremely-customizable" target="_blank" rel="noopener">flexibility</a> and <a href="https://github.com/romkatv/powerlevel10k#configuration-wizard" target="_blank" rel="noopener">out-of-the-box experience</a>.</p>
-<p><a href="https://github.com/SpaceVim/SpaceVim" target="_blank" rel="noopener">SpaceVim</a>: SpaceVim is a community-driven modular Vim distribution. It manages collections of plugins in layers, which help to collect related packages together to provide IDE-like features. SpaceVim is not just a vimrc but an ultimate Vim configuration, It contains many built-in features.</p>
+              <ul>
+<li><a href="https://github.com/romkatv/powerlevel10k" target="_blank" rel="noopener">powerlevel10k</a>: a theme for Zsh. It emphasizes <a href="https://github.com/romkatv/powerlevel10k#uncompromising-performance" target="_blank" rel="noopener">speed</a>, <a href="https://github.com/romkatv/powerlevel10k#extremely-customizable" target="_blank" rel="noopener">flexibility</a> and <a href="https://github.com/romkatv/powerlevel10k#configuration-wizard" target="_blank" rel="noopener">out-of-the-box experience</a>.</li>
+</ul>
+<ul>
+<li><a href="https://github.com/SpaceVim/SpaceVim" target="_blank" rel="noopener">SpaceVim</a>: SpaceVim is a community-driven modular Vim distribution. It manages collections of plugins in layers, which help to collect related packages together to provide IDE-like features. SpaceVim is not just a vimrc but an ultimate Vim configuration, It contains many built-in features.</li>
+</ul>
 <p><img src="image-20200823172304012.png" srcset="/img/loading.gif" alt="image-20200823172304012" style="zoom:50%;" /></p>
 <p><img src="image-20200823174451884.png" srcset="/img/loading.gif" alt="image-20200823174451884" style="zoom:50%;" /></p>
-<p><a href="https://github.com/Mayccoll/Gogh" target="_blank" rel="noopener">Gogh</a> : color theme</p>
+<ul>
+<li><a href="https://github.com/Mayccoll/Gogh" target="_blank" rel="noopener">Gogh</a> : color theme</li>
+</ul>
 <p><img src="image-20200823172029258.png" srcset="/img/loading.gif" alt="image-20200823172029258" style="zoom:50%;" /></p>
+<p><br></p>
+<p>Vim clipboard无法使用的问题:</p>
+<ul>
+<li>linux</li>
+</ul>
+<div class="hljs"><pre><code class="hljs shell">sudo apt-get install vim-gnome</code></pre></div>
+<p>安装后执行</p>
+<div class="hljs"><pre><code class="hljs shell">vim --version | grep "clipboard"</code></pre></div>
+<p>可以发现clipboard前面有一个加号</p>
+<ul>
+<li>MacOS</li>
+</ul>
+<p>弄了半天还是不行，不搞了，可恶</p>
+<p>那就这样吧</p>
+<p>To copy the current line, in command mode type:</p>
+<div class="hljs"><pre><code class="hljs 1c"><span class="hljs-string">"*yy</span></code></pre></div>
+<p>To copy the whole file/buffer, in command mode, first go to the beginning via <code>gg</code>, then type</p>
+<div class="hljs"><pre><code class="hljs 1c"><span class="hljs-string">"*yG</span></code></pre></div>
+<p><code>&quot;*5yy</code> says <code>5 lines yanked</code> </p>
 
             </div>
             <hr>
@@ -249,6 +274,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2020/08/26/Prototype/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Prototype 原型模式</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -514,6 +545,21 @@
   </script>
 
 
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
