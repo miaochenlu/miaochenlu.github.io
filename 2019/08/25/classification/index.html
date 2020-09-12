@@ -1,0 +1,1190 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>classification and clustering - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-08-25 07:27" pubdate>
+      August 25, 2019 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">classification and clustering</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：September 12, 2020 am
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <a id="more"></a>
+<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><h3 id="什么是聚类"><a href="#什么是聚类" class="headerlink" title="什么是聚类"></a>什么是聚类</h3><p>一类数据点的集合</p>
+<ul>
+<li>类内相似性</li>
+<li>类间差异性</li>
+</ul>
+<h2 id="衡量聚类好坏的标准"><a href="#衡量聚类好坏的标准" class="headerlink" title="衡量聚类好坏的标准"></a>衡量聚类好坏的标准</h2><ul>
+<li>最大化类间距离</li>
+<li>最小化类内距离</li>
+</ul>
+<p><br></p>
+<p>数值闵可夫斯基距离</p>
+<script type="math/tex; mode=display">d(X,Y)=\Vert{X-Y}\Vert_p=(\sum_{i=1}^n\vert{x_i-y_i}\vert^p)^{\frac{1}{p}}</script><ul>
+<li><p>L1曼哈顿距离</p>
+<script type="math/tex; mode=display">d(X,Y)=\vert{X-Y}\vert</script></li>
+<li><p>L2欧几里得距离</p>
+<script type="math/tex; mode=display">d(X,Y)=\sqrt{(x_1-y_1)^2+(x_2-y_2)^2}</script></li>
+<li><p>切比雪夫距离</p>
+<script type="math/tex; mode=display">d(X,Y)=\underset{p->\infty}{lim}(\sum_{i=1}^{n}\vert{x_i-y_i}\vert^p)^{\frac{1}{p}}=\underset{i}{max}\vert{x_i-y_i}\vert</script></li>
+<li><p>向量-余弦相似度</p>
+<script type="math/tex; mode=display">cos(d_1,d_2)=\frac{d_1\cdot d_2}{\Vert{d_1}\Vert\cdot \Vert{d2}\Vert}</script><p>余弦相似性是通过测量两个向量的夹角的余弦值来度量他们之间的相似性</p>
+</li>
+</ul>
+<h2 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h2><p>已知观测集$(x<em>{1},x</em>{2},…,x<em>{n})$，其中每个观测都是一个d-维实向量，<em>k</em>-平均聚类要把这n个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S</em>{i}$</p>
+<script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中$\mu <em>{i}$是$S</em>{i}$中所有点的均值</p>
+<p><strong>总之：思想是最小化类内距离平方之和</strong></p>
+<p><br></p>
+<p>方法</p>
+<p>随机选取k个聚类质心点，$u_1,u_2,\cdots,u_k\in\mathbb{R}^n$</p>
+<p>重复下面过程直到收敛</p>
+<p>​    对每一个样例i,计算其应该属于的类</p>
+<p>​    $c^{(i)}:=arg\,\underset{\mathbf{j}}min\Vert{x^{(i)}-u_j}\Vert^2$</p>
+<p>​    对每一个类j,重新计算该类的质心</p>
+<p>​    $u_j:=\frac{1}{n_j}\underset{x_j\in c^{(j)}}\sum x_j$</p>
+<p><br/></p>
+<p><code>pseudocode</code></p>
+<center><img src="image-20190930204646360.png" srcset="/img/loading.gif" alt="image-20190930204646360" style="zoom:50%;" /></center>
+
+<p><br/></p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>简单快速</li>
+<li>聚类结果容易收到起始点影响</li>
+<li>聚类结果在向量空间为球状[凸集]</li>
+<li>聚类结果容易收到噪声[脏数据]影响</li>
+</ul>
+<center><img src="image-20190822091651085.png" srcset="/img/loading.gif" alt="image-20190822091651085" style="zoom:50%;" /></center>
+
+<p>k-means是做不到第二种聚类效果的</p>
+<p><br/></p>
+<h2 id="K-medoids"><a href="#K-medoids" class="headerlink" title="K-medoids"></a>K-medoids</h2><p>Mean:聚类的中心</p>
+<script type="math/tex; mode=display">u_i=\frac{1}{n_i}\sum_{x_j\in c_i}x_j</script><p>Medoid:聚类的中心数据点[到类内每个数据点到距离之和最小]</p>
+<p><br></p>
+<p><strong>算法</strong>：</p>
+<p>1、把所有数据划分为k个非空子集</p>
+<p>2、计算每个子集的中心点[mean]</p>
+<p>3、把离中心最近的数据点[medoid]作为该子集的实际中心点</p>
+<p>4、把所有数据点重新划分[划分到离该数据点最近的中心点]</p>
+<p>5、重复步骤2，直到中心点不发生变化</p>
+<center><img src="image-20190822092021862.png" srcset="/img/loading.gif" alt="image-20190822092021862" style="zoom:50%;" /></center>
+
+<p><br/></p>
+<h2 id="谱聚类"><a href="#谱聚类" class="headerlink" title="谱聚类"></a>谱聚类</h2><p>思想：把数据集看作带权无向图，将图切分成多个不相交的子图，使子图内相似度较高，子图间相似度较低</p>
+<ul>
+<li>$找到最小切分min\,cut(A,B)$</li>
+</ul>
+<p>&emsp;$cut(A,B)=\underset{i\in A,j\in B}\sum w_{ij}$</p>
+<p>&emsp;A与B两类之间相连边的权重</p>
+<ul>
+<li>最大化类内连接相似度 $max(assoc(A,A)+assoc(B,B))$</li>
+</ul>
+<p>&emsp;$assoc(A,A)=\underset{i\in A,j\in A}\sum w_{ij}$</p>
+<p>&emsp;A类内相连边的权重</p>
+<ul>
+<li>Normalized-cut</li>
+</ul>
+<p>&emsp;$Ncut(A,B)=\frac{cut(A,B)}{assoc(A,V)}+\frac{cut(A,B)}{assoc(B,V)}$</p>
+<p>&emsp;要使类间相似度最小，也就是分子最小</p>
+<p>&emsp;要使类内相似度最大，也就是（分母-分子）越大</p>
+<p>&emsp;目标 $min\,Ncut(A,B)$</p>
+<p><br/></p>
+<p><strong>开始化简</strong></p>
+<p>$cut(A,B)=assoc(A,V)-assoc(A,A)=assoc(B,V)-assoc(B,B)$</p>
+<p>$Ncut(A,B)=\frac{cut(A,B)}{assoc(A,V)}+\frac{cut(A,B)}{assoc(B,V)}$</p>
+<p>$=\frac{assoc(A,V)-assoc(A,A)}{assoc(A,V)}+\frac{assoc(B,V)-assoc(B,B)}{assoc(B,V)}$</p>
+<p>$=2-(\frac{assoc(A,A)}{assoc(A,V)}+\frac{assoc(B,B)}{assoc(B,V)})$</p>
+<p>$=2-Nassoc(A,B)$    （Nassoc(A,B)跟Ncut很像）</p>
+<p><br/></p>
+<p>为了化简，使用一些技巧</p>
+<p>$\mathbf{x}\in {1,-1}^n$</p>
+<p>$if\quad i\in A, x_i=1$   $else\quad if\quad i\in B,x_i=-1$  即在A类，x=1; 在B类，x=-1</p>
+<p>$d<em>i=\sum_j w</em>{ij}$  也就是与i相连边的权重之和</p>
+<p>我们的目标函数就可以变成</p>
+<script type="math/tex; mode=display">Ncut(A,B)=\frac{cut(A,B)}{assoc(A,V)}+\frac{cut(A,B)}{assoc(B,V)}</script><p>&emsp;<script type="math/tex">=\frac{\sum_{x_i>0,x_j<0}-w_{ij}x_i x_j}{\sum_{x_i>0}d_i}+\frac{\sum_{x_i<0,x_j>0}-w_{ij}x_ix_j}{\sum_{x_i<0d_i}}</script></p>
+<p>cut(A,B)在A类x为+1，B类为-1，要计算权重和也就变成了 $\sum<em>{x_i&gt;0,x_j&lt;0}-w\</em>{ij}x_i x_j$</p>
+<p>assoc(A,V)计算与A中的点相连的边的权重之和，在A中的点x=+1，他上面连的边的权重 $\sum_{x_i&gt;0}d_i$</p>
+<p><br/></p>
+<p>继续化简</p>
+<p>先提出两个矩阵</p>
+<p>$W\in R^{n\times n} \, formed \, by\,w_{ij}$</p>
+<p>$D\in R^{n\times n}\, formed\, by\,d_i$</p>
+<script type="math/tex; mode=display">W=\left[\begin{matrix}0&w_{12}&w_{13}\\  w_{21}&0&w_{23}\\ w_{31}&w_{32}&0\end{matrix}\right]</script><script type="math/tex; mode=display">D=\left[\begin{matrix}d_1&0&0\\ 0&d_2&0\\ 0&0&d_3\end{matrix}\right]</script><p>提出一个系数</p>
+<p>$k=\frac{\sum_{x_i&gt;0}d_i}{\sum_i d_i}$也就是与第i个点相连的边的顶点在A中的权重所占所有边权重的比例</p>
+<p><br/></p>
+<p>推导</p>
+<script type="math/tex; mode=display">D-W=\left[\begin{matrix}d_1&-w_{12}&-w_{13}\\  -w_{21}&d_2&-w_{23}\\ -w_{31}&-w_{32}&d_3\end{matrix}\right]</script><p>$(1-x)$在A中x为0，在B中x为2</p>
+<p>$(1+x)$在A中x为2，在B中x为0</p>
+<p>$\mathbf{1}$全为1的向量</p>
+<p><br/></p>
+<p>先来证明</p>
+<script type="math/tex; mode=display">4\frac{\sum_{x_i>0,x_j<0}-w_{ij}x_i x_j}{\sum_{x_i>0}d_i}=(1-\mathbf{x})^T(D-W)(1+\mathbf{x})</script><script type="math/tex; mode=display">\left[\begin{matrix}1-x_1&1-x_2&\cdots&1-x_n\end{matrix}\right]\left[\begin{matrix}d_1&-w_{12}&-w_{13}\\ -w_{21}&d_2&-w_{23}\\-w_{31}&-w_{32}&d_3\end{matrix}\right]\left[\begin{matrix}1+x_1\\1+x_2\\\cdots\\1+x_n\end{matrix}\right]</script><script type="math/tex; mode=display">=\left[\begin{matrix}(1-x_1)d_1-(1-x_2)w_{21}-\cdots -(1-x_n)w_{31}&-(1-x_1)w_{12}+(1-x_2)d_2-(1-x_3)W_{32}-\cdots -(1-x_n)w_{n2}&\cdots\end{matrix}\right] \left[\begin{matrix}1+x_1\\1+x_2\\\cdots\\1+x_n\end{matrix}\right]</script><script type="math/tex; mode=display">=(1-x_1^2)d_1-(1-x_2)(1+x_1)w_{21}-(1-x_3)(1+x_1)w_{31}-\cdots +(x_2的部分)+(\cdots)+(x_n的部分)</script><p><br/></p>
+<p>首先可知的是</p>
+<p>$(1-x_i^2)=0$,所以 $d_i$系数都是0，我们可以不考虑</p>
+<p>然后 $w_{ij}$的系数是 $(1-x_i)(1+x_j)$，要使系数不为0，则 $x_i=1$,$x_j=-1$,即i在A类，j在B类</p>
+<p>这里，我们就基本上证明了</p>
+<script type="math/tex; mode=display">4\frac{\sum_{x_i>0,x_j<0}-w_{ij}x_i x_j}{\sum_{x_i>0}d_i}=(1-\mathbf{x})^T(D-W)(1+\mathbf{x})</script><p>再来证明 $\sum_{x_i&gt;0}d_i=k\mathbf{1}^TD\mathbf{1}$</p>
+<script type="math/tex; mode=display">\mathbf{1}^TD\mathbf{1}=\left[\begin{matrix}1&1&\cdots &1\end{matrix}\right]\left[\begin{matrix}d_1&0&0\\0&d_2&0\\0&0&d_3\end{matrix}\right]\left[\begin{matrix}1\\1\\\cdots \end{matrix}\right]=d_1+d_2+\cdots+d_n</script><p><br/></p>
+<p>$4Ncut(A,B)=\frac{(1-\mathbf{x})^T(D-W)(1+\mathbf{x})}{k\mathbf{1}^TD\mathbf{1}}+\frac{(1+\mathbf{x})^T(D-W)(1-\mathbf{x})}{(1-k)\mathbf{1}^TD\mathbf{1}}$</p>
+<p><br/></p>
+<p>继续做化简</p>
+<p>提出另一个系数 $b=\frac{k}{1-k}$这也就是在 $\frac{A中权重}{B中权重}$</p>
+<p>$4Ncut(A,B)=\frac{(1+\mathbf{x})^T(D-W)(1+\mathbf{x})}{k\mathbf{1}^TD\mathbf{1}}+\frac{(1-\mathbf{x})^T(D-W)(1-\mathbf{x})}{(1-k)\mathbf{1}^TD\mathbf{1}}=\frac{[(1+x)-b(1-x)]^T(D-W)[(1+x)-b(1-x)]}{b\mathbf{1}^TD\mathbf{1}}$</p>
+<p> 令 $y=(1+x)-b(1-x)$</p>
+<script type="math/tex; mode=display">y^TD1=\sum_{i=1}^{n}(((1+x_i)-b(1-x_i))d_i)=2\sum_{x_i>0} d_i-2b\sum_{x_i<0}d_i=0</script><script type="math/tex; mode=display">y^TDy=\sum_{i=1}^{n}(((1+x_i)-b(1-x_i))^2d_i)=\sum_{x_i>0}4d_i+\sum_{x_i<0}4b^2d_i</script><p>$\sum_{x_i&gt;0}d_i=b\sum_{x_i&lt;0}d_i$  $(\frac{A中权重}{B中权重}\cdot B中权重=A中权重)$</p>
+<p>$\Rightarrow$ <script type="math/tex">y^TDy=4b(\sum_{x_i<0}d_i+b\sum_{x_i<0}d_i)=4b1^TD1</script></p>
+<p><br/></p>
+<p>综上</p>
+<p>$\underset{x}{min}Ncut(x)=\underset{y}{min}\frac{y^T(D-W)y}{y^TDy}$</p>
+<p>$s.t.\,y\in{2,-2b}^n,y^TD1=0$</p>
+<p>我们放宽对y的限制</p>
+<p>$\underset{y}{min}\frac{y^T(D-W)y}{y^TDy}，y\in R^n,y^TD1=0$</p>
+<p>接下来讨论如何求解y</p>
+<p><br/></p>
+<p><u>瑞丽商</u></p>
+<p>$Rayleigh\,Quotient$</p>
+<p>$\underset{x}{max}\frac{x^TAx}{x^TBx}\Rightarrow \underset{x}{max}x^TAx \quad s.t.x^TBx=1$</p>
+<p>$L(x)=x^TAx+\lambda (x^TBx-1)$</p>
+<script type="math/tex; mode=display">x^TAx=\left[\begin{matrix}\sum_{i=1}^{n}x_iA_{i1}&\cdots\end{matrix}\right]\left[\begin{matrix}x_1\\x_2\\\cdots\\x_n\end{matrix}\right]</script><script type="math/tex; mode=display">=\sum_{s=1}^{n}x_s\sum_{i=1}^{n}x_iA_{is}</script><script type="math/tex; mode=display">\frac{\partial L(x)}{\partial x_j}=\sum_{i=1}^{n}x_iA_{ij}+\sum_{s=1}^{n}x_sA_{js}</script><p><strong>推论</strong></p>
+<p>$f(x)=x^TAx$,则 $\frac{\partial f(x)}{\partial x}=(A+A^T)x$</p>
+<p><br/></p>
+<p>这样就可以推得</p>
+<p>$\frac{\partial L(x)}{\partial x}=0\Rightarrow (A+A^T)x+\lambda(B+B^T)x=0$</p>
+<p>如果A和B是对称矩阵</p>
+<p>$Ax=kBx,k=-\lambda$</p>
+<p><br/></p>
+<p>回到原题的计算</p>
+<p>即求 $(D-W)y=\lambda Dy$</p>
+<p>$D^{-1}(D-W)y=\lambda y$</p>
+<p>即求 $D^{-1}(D-W)的特征向量(舍弃最小的特征值)$</p>
+<p><br/></p>
+<p>插一个矩阵的求导</p>
+<p>对于一个函数 $f: \mathbb{R}^{m\times n}\mapsto\mathbb{R}$ 从一个$m\times n$的矩阵映射到实数，我们定义f对于A的导数为</p>
+<script type="math/tex; mode=display">\nabla_Af(A) = 
+\left[
+\begin{matrix} 
+\frac{\partial f}{\partial A_{11}} & \cdots & \frac{\partial f}{\partial A_{1n}}\\
+\vdots & \ddots &  \vdots \\
+\frac{\partial f}{\partial A_{m1}} &\cdots & \frac{\partial f}{\partial A_{mn}}\\
+\end{matrix}
+\right]</script><p>举个例子  </p>
+<script type="math/tex; mode=display">A = \left[ \begin{matrix} A_{11} & A_{12} \\ A_{21} & A{22}\\ \end{matrix} \right]</script><p> 函数 $f:\mathbb{R}^{2\times 2}\mapsto \mathbb{R}$为</p>
+<script type="math/tex; mode=display">f(A)=\frac{3}{2}A_{11}+5A_{12}^2+A_{21}A_{22}</script><p>可以得到</p>
+<script type="math/tex; mode=display">\nabla_Af(A) = \left[
+\begin{matrix} 
+\frac{3}{2} & 10A_{12}\\
+A_{22} & A_{21}\\
+\end{matrix}
+\right]</script><p><br/></p>
+<p>整体聚类的步骤：</p>
+<ul>
+<li>假设 $y_1,y_2,\cdots,y_k\in R^{n\times k}$是最小的k个特征向量</li>
+<li>令 $Y=[y_1,y_2,\cdots,y_k] \in R^{n\times k}$</li>
+<li>矩阵Y的行可以看作原始数据的k维表示</li>
+<li>利用k-means算法</li>
+</ul>
+<p><br/></p>
+<p>为什么可以用y来做特征进行k-means聚类呢</p>
+<p>首先要问，求出来的y是什么？</p>
+<p>​    $\mathbf{y_i}$是Ncut(A,B)取最小值时对应的一组特征向量，y与x之间存在关系，$\mathbf{y}=(1+\mathbf{x})-b(1-\mathbf{x})$,x代表的是每个点的类别，那么我们可以认为，每个y对应着Ncut(A,B)最小时的一种分类方式  </p>
+<p>我们得到了一个 $n\times k$的矩阵Y</p>
+<script type="math/tex; mode=display">Y=\left[\begin{matrix}y_1^1&y_2^1&\cdots&y_k^1\\ \vdots&\vdots&\vdots&\vdots\\ y_1^n&y_2^n&\cdots&y_k^n\end{matrix}\right]</script><p>我们相当于对 $p_1=\left[\begin{matrix}y_1^1&amp;y_2^1&amp;\cdots&amp;y_k^1\end{matrix}\right]$</p>
+<p>$p_2=\left[\begin{matrix}y_1^2&amp;y_2^2&amp;\cdots&amp;y_k^2\end{matrix}\right]$</p>
+<p>$p_n=\left[\begin{matrix}y_1^n&amp;y_2^n&amp;\cdots&amp;y_k^n\end{matrix}\right]$</p>
+<p>这n个元素做聚类</p>
+<p>$p_i$的意义是在对应着第i个元素最佳的k种分类方式</p>
+<p>对 $p_i$做聚类，也就是找到最相似的 $p_i$们聚到一起，也就是在k种分类方式中，把经常分到一组的聚到一起</p>
+<p><br/></p>
+<h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>什么是分类问题</p>
+<p>从有标签的数据集（训练集）中提取规律，并应用规律对无标签数据集（测试集）进行分类</p>
+<h2 id="衡量分类好坏的标准"><a href="#衡量分类好坏的标准" class="headerlink" title="衡量分类好坏的标准"></a>衡量分类好坏的标准</h2><p>混淆矩阵</p>
+<center><img src="image-20190822101338137.png" srcset="/img/loading.gif" alt="image-20190822101338137" style="zoom:50%;" /></center>
+
+<p><strong><em>精确度</em></strong></p>
+<p>$prercision=\frac{TP}{TP+FP}$</p>
+<p><strong><em>召回率</em></strong></p>
+<p>$recall=\frac{TP}{TP+FN}$</p>
+<p>$F_1$<strong><em>score</em></strong></p>
+<p>$F_1=\frac{2}{\frac{1}{precision}+\frac{1}{rercall}}$</p>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>曲线拟合</p>
+<p>泰勒展开</p>
+<script type="math/tex; mode=display">h(x,\mathbf{\theta})=\theta_0+\theta_1x+\theta_2x^2+\cdots+\theta_nx^n=\sum_{i=0}^n\theta_ix^i</script><p>$\mathbf{x}=[1,x,x^2,\cdots,x^M]^T$</p>
+<p>$\mathbf{\theta}=[\theta_0,\theta_1,\theta_2,\cdots,\theta_n]^T$</p>
+<p>$h(x,\mathbf{\theta})=\mathbf{\theta}^T\mathbf{x}$</p>
+<p><br></p>
+<p>分类问题中的线性回归</p>
+<p>$x\in A, h(x,\theta)=0$</p>
+<p>$x\in B,h(x,\theta)=1$</p>
+<p><img src="image-20190823105415045.png" srcset="/img/loading.gif" alt="image-20190823105415045" style="zoom:50%;" /></p>
+<h4 id="均方误差"><a href="#均方误差" class="headerlink" title="均方误差"></a>均方误差</h4><script type="math/tex; mode=display">MSE(\theta)=\frac{1}{2}\sum_{i=1}^n(y_i-h_{\theta}(x^{(i)}))^2</script><p>目标函数</p>
+<script type="math/tex; mode=display">J(\theta)=\frac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2</script><p>目标是求<script type="math/tex">J(\theta)=\frac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2</script>取最小值时的$\theta$向量</p>
+<p><br></p>
+<h2 id="迹"><a href="#迹" class="headerlink" title="迹"></a>迹</h2><p>接下来介绍“迹”，“tr”。对于一个$n\times n$的矩阵 A, A的迹是他对角线上的元素之和</p>
+<script type="math/tex; mode=display">trA = \sum_{i=1}^{n}A_{ii}</script><h3 id="迹的一些性质"><a href="#迹的一些性质" class="headerlink" title="迹的一些性质"></a>迹的一些性质</h3><script type="math/tex; mode=display">trAB = trBA</script><p>假设$A是m\times n$矩阵，B是$n\times m$矩阵</p>
+<script type="math/tex; mode=display">A=\left[
+\begin{matrix} 
+ A_{11} & \cdots &  A_{1n}\\
+\vdots & \ddots &  \vdots \\
+A_{m1} &\cdots & A_{mn}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">B=\left[
+\begin{matrix} 
+ B_{11} & \cdots &  B_{1m}\\
+\vdots & \ddots &  \vdots \\
+B_{n1} &\cdots & B_{nm}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">AB=\left[
+\begin{matrix} 
+ A_{11} & \cdots &  A_{1n}\\
+\vdots & \ddots &  \vdots \\
+A_{m1} &\cdots & A_{mn}\\
+\end{matrix}
+\right]
+\left[
+\begin{matrix} 
+ B_{11} & \cdots &  B_{1m}\\
+\vdots & \ddots &  \vdots \\
+B_{n1} &\cdots & B_{nm}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">BA=\left[
+\begin{matrix} 
+ B_{11} & \cdots &  B_{1m}\\
+\vdots & \ddots &  \vdots \\
+B_{n1} &\cdots & B_{nm}\\
+\end{matrix}
+\right]
+\left[
+\begin{matrix} 
+ A_{11} & \cdots &  A_{1n}\\
+\vdots & \ddots &  \vdots \\
+A_{m1} &\cdots & A_{mn}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">trAB=\sum_{i=1}^{i=n}A_{1i}B_{i1}+\cdots+\sum_{i=1}^{i=n}A_{mi}B_{im}\\
+=\sum_{j=1}^{j=m}\sum_{i=1}^{i=n}A_{ji}B_{ij}\\
+=\sum_{i=1}^{i=n}\sum_{j=1}^{j=m}B_{ij}A_{ji}\\</script><script type="math/tex; mode=display">trBA=\sum_{j=1}^{j=m}B_{1j}A_{j1}+\cdots+\sum_{j=1}^{j=m}B_{nj}A_{jn}
+=\sum_{i=1}^{i=n}\sum_{j=1}^{j=m}B_{ij}A_{ji}\\</script><p>得到</p>
+<script type="math/tex; mode=display">trAB=trBA</script><p><br/></p>
+<p>易证</p>
+<ul>
+<li>$trA=trA^T$</li>
+<li>$tr(A+B)=trA+trB$</li>
+<li>$traA=atrA$</li>
+</ul>
+<p><br/></p>
+<p>下面是迹微分的一些性质:$\vert A\vert$表示行列式</p>
+<ol>
+<li>$\nabla_AtrAB=B^T$</li>
+<li>$\nabla_{A^T}f(A)=(\nabla_A f(A))^T$</li>
+<li>$\nabla_AtrABA^TC=CAB+C^TAB^T$</li>
+<li>$\nabla_A\vert{A}\vert=\vert{A}\vert(A^{-1})^T$ 非奇异矩阵</li>
+</ol>
+<p><br></p>
+<ul>
+<li>证明1</li>
+</ul>
+<script type="math/tex; mode=display">A=\left[
+\begin{matrix} 
+ A_{11} & \cdots &  A_{1n}\\
+\vdots & \ddots &  \vdots \\
+A_{m1} &\cdots & A_{mn}\\
+\end{matrix}
+\right]
+\quad
+B=\left[
+\begin{matrix} 
+ B_{11} & \cdots &  B_{1m}\\
+\vdots & \ddots &  \vdots \\
+B_{n1} &\cdots & B_{nm}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">trAB=\sum_{j=1}^{j=m}\sum_{i=1}^{i=n}A_{ji}B_{ij}\\
+\nabla_AtrAB=\nabla_A(\sum_{j=1}^{j=m}\sum_{i=1}^{i=n}A_{ji}B_{ij})
+=（B^{ij})=B^T</script><ul>
+<li>证明2</li>
+</ul>
+<script type="math/tex; mode=display">左边矩阵的元素a_{ij}=\frac{\partial f}{\partial A_{ji}}\\
+右边矩阵的元素b_{ij}=\frac{\partial f}{\partial A_{ji}}=a_{ij}\\</script><ul>
+<li>证明3</li>
+</ul>
+<script type="math/tex; mode=display">\nabla_Atr(ABA^TC)=\nabla_Atr(ABXC)\vert_{X=A^T}+\nabla_Atr(YBA^TC)\vert_{Y=A}\quad链式法则求导</script><script type="math/tex; mode=display">\nabla_Atr(ABXC)\vert_{X=A^T}=\nabla_A{A(BXC)}=(BXC)^T=C^TAB^T  \quad性质1</script><script type="math/tex; mode=display">\nabla_Atr(YBA^TC)\vert_{Y=A}=\nabla_A(C^TAB^TY^T)=\nabla_Atr(AB^TA^TC^T) \quad 考虑方阵和迹的性质</script><script type="math/tex; mode=display">\nabla_Atr(A(B^TA^TC^T))
+=CAB\quad性质1\\</script><ul>
+<li>证明4</li>
+</ul>
+<p>令$C_{ij}$为代数余子式</p>
+<script type="math/tex; mode=display">\vert{A}\vert=A_{1j}C_{1j}+\cdots+A_{nj}C_{nj}\\
+左边 a_{ij}=\frac{\partial  \vert{A}\vert}{\partial A_{ij}}\\
+=Cij</script><p>由此可得</p>
+<script type="math/tex; mode=display">A=\left[
+\begin{matrix} 
+C_{11} & \cdots &  C_{1n}\\
+\vdots & \ddots &  \vdots \\
+C_{n1} & \cdots & C_{nn}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">
+A^{-1}=\frac{1}{\vert{A}\vert} A^{*}\\
+=\frac{1}{\vert{A}\vert}\times
+\left[\begin{matrix} 
+C_{11} & \cdots &  C_{n1}\\
+\vdots & \ddots & \vdots \\
+C_{1n} & \cdots & C_{nn}\\
+\end{matrix}
+\right]</script><script type="math/tex; mode=display">右边=\vert{A}\vert(A^{-1})^T=\left[
+\begin{matrix} 
+C_{11} & \cdots &  C_{1n}\\
+\vdots & \ddots &  \vdots \\
+C_{n1} & \cdots & C_{nn}\\
+\end{matrix}
+\right]</script><p>解释第一条<br>假设我们有一个矩阵$B\in\mathbb{R}^{n\times m}$<br>我们可以定义一个函数$f:\mathbb{R}^{m\times n}\mapsto\mathbb{R}$<br>$f(A)=trAB$<br>这样的定义是有意义的，因为如果$A\in \mathbb{R}^{m\times n}$,那么$AB$就是一个方阵，可以求迹，因此$f$确实从$\mathbb{R}^{m\times n}$映射到$\mathbb{R}$</p>
+<p>接下来，我们着手找到使$J(\theta)$取到最小值的$\theta$.可以从把$J$写成向量矩阵的形式开始</p>
+<p>对于一个训练集，定义一个设计矩阵X</p>
+<script type="math/tex; mode=display">X=
+\left[ 
+\begin{matrix}
+--&(x^{(1)})^T&--\\
+--&(x^{(2)})^T&--\\
+&\vdots&\\
+--&(x^{(m)})^T&--\\
+\end{matrix}
+\right]</script><p>同样，$\overrightarrow{y}$是包含了训练集目标值的m维向量</p>
+<script type="math/tex; mode=display">\overrightarrow{y}=\left[\begin{matrix}
+y^{(1)}\\
+y^{(2)}\\
+\vdots\\
+y^{(m)}\\
+\end{matrix}\right]</script><p>我们有$h_\theta(x^{(i)})=(x^{(i)})^T\theta$，可以得到</p>
+<script type="math/tex; mode=display">
+X\theta-\overrightarrow{y} = 
+X=
+\left[ 
+\begin{matrix}
+&(x^{(1)})^T\theta&\\
+&(x^{(2)})^T\theta&\\
+&\vdots&\\
+&(x^{(m)})^T\theta&\\
+\end{matrix}
+\right]-
+\left[\begin{matrix}
+y^{(1)}\\
+y^{(2)}\\
+\vdots\\
+y^{(m)}\\
+\end{matrix}\right]\\
+=\left[\begin{matrix}
+&h_{\theta}(x^{(1)})-y^{(1)}&\\
+&\vdots&\\
+&h_{\theta}(x^{(m)})-y^{(m)}&\\
+\end{matrix}
+\right]</script><p>对于一个向量$\overrightarrow{z}$,有$\overrightarrow{z}^{T}\overrightarrow{z} = \sum_{i}z_{i}^{2}$</p>
+<script type="math/tex; mode=display">J(\theta)=\frac{1}{2}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})-y^{(i)})^2\\
+=\frac{1}{2}(X\theta-\overrightarrow{y})^T(X\theta-\overrightarrow{y})</script><p>为了得到$J(\theta)$的最小值，对$\theta$微分</p>
+<p>用上面的性质2，3<br>$\nabla_{A^T}f(A)=\nabla_A f(A)^T$<br>$\nabla_AtrABA^TC=CAB+C^TAB^T$<br>可以得到  </p>
+<ol>
+<li>$\nabla_{A^T}trABA^TC=\nabla_A(trABA^TC)^T=B^TA^TC^T+BA^TC$</li>
+</ol>
+<p><br/></p>
+<p>计算得出</p>
+<script type="math/tex; mode=display">\nabla_{\theta}J(\theta)=\nabla_{\theta}\frac{1}{2}(X\theta-\overrightarrow{y})^T(X\theta-\overrightarrow{y})</script><script type="math/tex; mode=display">=\frac{1}{2}\nabla_{\theta}(\theta^TX^TX\theta-\theta^TX^T\overrightarrow{y}-\overrightarrow{y}^{T}X\theta+\overrightarrow{y}^T\overrightarrow{y})\quad因为\nabla_{\theta}J(\theta)是实数，实数的迹是他本身</script><script type="math/tex; mode=display">=\frac{1}{2}\nabla_{\theta}tr(\theta^TX^TX\theta-\theta^TX^T\overrightarrow{y}-\overrightarrow{y}^{T}X\theta+\overrightarrow{y}^T\overrightarrow{y})</script><script type="math/tex; mode=display">=\frac{1}{2}\nabla_{\theta}(tr\theta^TX^TX\theta-2tr\overrightarrow{y}^{T}X\theta)</script><script type="math/tex; mode=display">=\frac{1}{2}(X^TX\theta+X^TX\theta-2X^T\overrightarrow{y})\quad 利用性质5,A^T=\theta,B=B^T=X^TX,C=I</script><script type="math/tex; mode=display">=X^TX\theta-X^T\overrightarrow{y}\quad利用性质1</script><p>为了得到$J(\theta)$的最小值，使$\nabla_{\theta}J(\theta)=0$, 可以得到<strong>正规方程</strong></p>
+<script type="math/tex; mode=display">X^T X\theta=X^T\overrightarrow{y}</script><script type="math/tex; mode=display">\theta=(X^TX)^{-1}X^T\overrightarrow{y}</script><p><br/></p>
+<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p><img src="image-20190823112326455.png" srcset="/img/loading.gif" alt="image-20190823112326455" style="zoom: 33%;" /></p>
+<p>容易看到，这两种分类方法，第二种是更优的，我们可以认为在不同的分界线中，离数据点远点线是更优的</p>
+<p>令我们需要拟合的直线为 $w^Tx+b$</p>
+<p><br/></p>
+<h4 id="函数间隔和几何间隔"><a href="#函数间隔和几何间隔" class="headerlink" title="函数间隔和几何间隔"></a>函数间隔和几何间隔</h4><p>给定一个训练样本 $(x^{(i)},y^{(i)})$,其中x是特征,y是结果 标签</p>
+<p>定义函数间隔如下:</p>
+<p>$\hat{\gamma}^{(i)} = y^{(i)}(w^Tx^{(i)} + b)$</p>
+<p>当$y^{(i)}=1$时,$\hat{\gamma}^{(i)}$应该hi是个大整数，$y^{(i)}=-1时$ 是个大负数</p>
+<p>函数间隔越大，我们对分类结果越确信</p>
+<p>定义全局样本上的函数间隔为</p>
+<p>$\hat{\gamma}=\underset{i=1,\cdots,m}{min}\hat{\gamma}^{(i)}$</p>
+<p><br/></p>
+<p>定义几何间隔如下</p>
+<center><img src="image-20190825154844249.png" srcset="/img/loading.gif" alt="image-20190825154844249" style="zoom:33%;" /></center>
+
+<p>B在 $w^Tx+b=0$上，A到分割面的距离用 $\gamma^{(i)}$表示，B是A在分割面上的投影</p>
+<p>向量 $\overrightarrow{BA}$的方向就是w的方向</p>
+<center><img src="image-20190825162137589.png" srcset="/img/loading.gif" width="300"></center>
+
+<p>​        这个地方产生了问题是因为没有想清楚 $y=w^Tx+b$如上图所示，两个坐标轴应该是     $x_1, x_2$,$y$是标圈和叉的那个维度，图为二维实则三维，所以是个分割面</p>
+<p><br/></p>
+<p>A的坐标是 $(x^{(i)}, y^{(i)})$，所以B的坐标应该是 $x=x^{(i)}-\gamma^{(i)}\frac{w}{\Vert{w}\Vert}$（这里做的是向量减法)</p>
+<p>带入 $w^Tx+b=0$</p>
+<p>​    $w^T(x^{(i)}-\gamma^{(i)}\frac{w}{\Vert{w}\Vert}) + b=0$    </p>
+<p>​    解得$\gamma^{(i)}=\frac{w^Tx_i+b}{\Vert{w}\Vert}=(\frac{w}{\Vert{w}\Vert})^Tx^{(i)}+\frac{b}{\Vert{w}\Vert}$</p>
+<p>通常，我们会将几何间隔定义为</p>
+<p>$\gamma^{(i)}=y^{(i)}(\frac{w}{\Vert{w}\Vert})^Tx^{(i)}+\frac{b}{\Vert{w}\Vert}$</p>
+<p>我们可以看到 当$\Vert{w}\Vert=1$时，$\gamma^{(i)}=y^{(i)}(w^Tx^{(i)}+b)=\hat{y}$，即几何间隔等于函数间隔</p>
+<p>定义全局的几何间隔 $\gamma=\underset{i=1,\cdots,m}{min}\gamma^{(i)}$</p>
+<p><br/></p>
+<h4 id="最优间隔分类器"><a href="#最优间隔分类器" class="headerlink" title="最优间隔分类器"></a>最优间隔分类器</h4><p>我们要做的就是寻找一个分割面，使得离分割面最近的点和分割面的距离最大，距离越大我们就对一个样本分到正确的类越有信心</p>
+<p>我们要使$\gamma=\underset{i=1,\cdots,m}{min}\gamma^{(i)}$取到最大值，即</p>
+<p>$max_{\gamma,w,b}\gamma\quad s.t.\,\, y^{(i)}(\frac{w}{\Vert{w}\Vert})^Tx^{(i)}+\frac{b}{\Vert{w}\Vert}\geq\gamma\,\,\,\, i=1,\cdots,m\quad \Vert{w}\Vert=1$</p>
+<p>这里将 $\Vert{w}\Vert$规约为1，因为几何间隔中  $\Vert{w}\Vert$ 变成2，那么所有几何间隔缩小为原来的一半，对大小的比较不产生影响</p>
+<p><br/></p>
+<p>但是  $\Vert{w}\Vert$不是一个凸集，无法带入优化软件计算，我们考虑几何间隔与函数间隔 $\hat{y}$之间d 关系后得到</p>
+<p>$max_{\gamma,w,b}\frac{\hat{\gamma}}{\Vert{w}\Vert} \quad s.t.\,\, y^{(i)}(w^Tx^{(i)}+b)\geq\hat{\gamma}\,\,\,\, i=1,\cdots,m$</p>
+<p>这里的 w就不受$\Vert{w}\Vert=1$的限制了</p>
+<p><br/></p>
+<p>但是目标函数依然不是凸函数，我们对 $\hat{\gamma}$做限制，取 $\hat{\gamma}=1$，那么离分割面最近的距离为 $\frac{1}{\Vert{w}\Vert}$，求 $\frac{1}{\Vert{w}\Vert}$的最大值相当于求 $\frac{1}{2}\Vert{w}\Vert^2$的最小值，最后得到</p>
+<p>$min_{\gamma,w,b}\frac{1}{2}\Vert{w}\Vert^2\quad s.t.\,\,\,\, y^{(i)}(w^Tx^{(i)}+b)\geq 1\quad i=1,\cdots,m$</p>
+<p>这是个二次规划问题，可以带入软件求解</p>
+<p><br/></p>
+<p>补充凸优化</p>
+<p>为什么要凸优化？<br>这种优化是一定可以找到全局最优的，因为不存在局部最优，只有一个最优点<br>所以对于梯度下降或其他的最优化算法而言，在非凸的情况下，很可能找到的只是个局部最优</p>
+<p>什么是凸集？</p>
+<p>集合中任意两点的连线都在集合中 </p>
+<table>
+  <tr>
+    <td> 
+      <img src="image-20190930210429006.png" srcset="/img/loading.gif" alt="301934503929624" style="zoom: 50%;" />
+    </td>
+    <td>
+      <img src="image-20190930210452992.png" srcset="/img/loading.gif" alt="image-20190930210452992" style="zoom:50%;" />
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+<p>凸优化问题的定义</p>
+<p>在凸集上寻找凸函数的全局最值的过程称为凸优化<br>即，目标函数(objective function)是凸函数，可行集(feasible set)为凸集</p>
+<p>为何目标函数需要是凸函数？<br>这个比较容易理解，不是凸函数会有多个局部最优，如下图，不一定可以找到全局最优 </p>
+<center><img src="image-20190930210310272.png" srcset="/img/loading.gif" alt="image-20190930210310272" style="zoom:50%;" /></center>
+
+<p>为何可行集需要为凸集？<br>稍微难理解一些，看下图<br>虽然目标函数为凸函数，但是如果可行集非凸集，一样无法找到全局最优 </p>
+<center><img src="image-20190930210206404.png" srcset="/img/loading.gif" alt="image-20190930210206404" style="zoom:50%;" /></center>
+
+<p><br/></p>
+<p><br/></p>
+<p>References:  </p>
+<p>[1] 吴恩达机器学习</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AI/">AI</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/09/08/ComputerArchitecture/instructionSet/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CA - Instruction Set</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2019/08/25/classification/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '6ojk1lVz9eq7GQnBo6Q8zR5d-gzGzoHsz'
+    var app_key = 'bOrBPlujAz77Ma6N5tY9wWJN'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "classification and clustering&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
