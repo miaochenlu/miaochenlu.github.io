@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>Builder - Explorer</title>
+  <title>isms - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-27 05:57" pubdate>
-      August 27, 2020 am
+    <time datetime="2020-09-15 09:29" pubdate>
+      September 15, 2020 am
     </time>
   </div>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      756 字
+      2.6k 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      25
        分钟
     </span>
   
@@ -216,182 +216,47 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Builder</h1>
+            <h1 style="display: none">isms</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：August 27, 2020 am
+                  本文最后更新于：September 15, 2020 am
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="Builder属于对象创建模式"><a href="#Builder属于对象创建模式" class="headerlink" title="Builder属于对象创建模式"></a>Builder属于对象创建模式</h2><p>通过对象创建模式绕开<code>new</code>, 来避免对象创建 (<code>new</code>) 过程中所导致的紧耦合(依赖具体类 )，从而支持对象创建的稳定。他是接口抽象之后的第一步工作。</p>
-<p>典型模式有</p>
-<ul>
-<li>Factory Method</li>
-<li>Abstract Factory</li>
-<li>Prototype</li>
-<li>BuilderPrototype属于对象创建模式</li>
-</ul>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><ul>
-<li><p>在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这 个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在 一起的算法却相对稳定。</p>
-</li>
-<li><p>如何应对这种变化？如何提供一种”封装机制”来隔离出”复杂对象的各个部分”的变化，从而保持系统中的”稳定构建算法”不 随着需求改变而改变？</p>
-</li>
-</ul>
-<h2 id="模式定义"><a href="#模式定义" class="headerlink" title="模式定义"></a>模式定义</h2><p>将一个复杂对象的构建与其表示相分离，使得同样的构建过 程(稳定)可以创建不同的表示(变化)</p>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">House</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>-&gt;BuildPart1();
-        
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
-            <span class="hljs-keyword">this</span>-&gt;BuildPart2();
-        &#125;
-        
-        <span class="hljs-keyword">bool</span> flag = <span class="hljs-keyword">this</span>-&gt;BuildPart3();
-        
-        <span class="hljs-keyword">if</span>(flag) &#123;
-            <span class="hljs-keyword">this</span>-&gt;BuildPart4();
-        &#125;
-        
-        <span class="hljs-keyword">this</span>-&gt;BuildPart5();
-    &#125;
-    <span class="hljs-keyword">virtual</span> ~House() &#123;&#125;
-<span class="hljs-keyword">protected</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart1</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart3</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart4</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart5</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StoneHouse</span>:</span> <span class="hljs-keyword">public</span> House &#123;
-<span class="hljs-keyword">protected</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart1</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart2</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart3</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart4</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart5</span><span class="hljs-params">()</span> </span>&#123;&#125;
-&#125;</code></pre></div>
-<p>我们会发现这份代码非常像template method</p>
-<div class="note note-warning">
-            <p>有个疑问就是，既然是创建对象， 能不能把Init()函数改成构造函数</p>
-          </div>
-<div class="note note-success">
-            <p>答案是不行，构造函数中调用虚函数用的是静态绑定</p>
-          </div>
-<ul>
-<li>重构</li>
-</ul>
-<p>拆分House类, HouseBuilder专管构建</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">House</span> &#123;</span>
-    <span class="hljs-comment">//...</span>
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HouseBulder</span> &#123;</span>
-    House* pHouse;
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>-&gt;BuildPart1();
-        
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
-            <span class="hljs-keyword">this</span>-&gt;BuildPart2();
-        &#125;
-        
-        <span class="hljs-keyword">bool</span> flag = <span class="hljs-keyword">this</span>-&gt;BuildPart3();
-        
-        <span class="hljs-keyword">if</span>(flag) &#123;
-            <span class="hljs-keyword">this</span>-&gt;BuildPart4();
-        &#125;
-        
-        <span class="hljs-keyword">this</span>-&gt;BuildPart5();
-    &#125;
-    
-    <span class="hljs-function">House* <span class="hljs-title">getResult</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> pHouse;
-    &#125;
-    
-    <span class="hljs-keyword">virtual</span> ~HouseBuilder() &#123;&#125;
-<span class="hljs-keyword">protected</span>:
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart1</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart3</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart4</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart5</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<ul>
-<li>再重构 </li>
-</ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">House</span> &#123;</span>
-    <span class="hljs-comment">//...</span>
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HouseBulder</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function">House* <span class="hljs-title">getResult</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> pHouse;
-    &#125;
-    
-    <span class="hljs-keyword">virtual</span> ~HouseBuilder() &#123;&#125;
-<span class="hljs-keyword">protected</span>:
-    House* pHouse;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart1</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart2</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart3</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart4</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPart5</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HouseDirector</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    HouseBuilder* pHouseBuilder;
-	<span class="hljs-function">House* <span class="hljs-title">Construct</span><span class="hljs-params">()</span> </span>&#123;
-        pHouseBuilder-&gt;BuildPart1();
-        
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;
-            pHouseBuilder-&gt;BuildPart2();
-        &#125;
-        
-        <span class="hljs-keyword">bool</span> flag = pHouseBuilder-&gt;BuildPart3();
-        
-        <span class="hljs-keyword">if</span>(flag) &#123;
-            pHouseBuilder-&gt;BuildPart4();
-        &#125;
-        
-        pHouseBuilder-&gt;BuildPart5();
-        <span class="hljs-keyword">return</span> pHouseBuilder-&gt;getResult();
-    &#125;
-&#125;</code></pre></div>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="image-20200827143019216.png" srcset="/img/loading.gif" alt="image-20200827143019216" style="zoom:67%;" /></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>Builder 模式主要用于“分步骤构建一个复杂的对象”。在这其中 “分步骤”是一个稳定的算法，而复杂对象的各个部分则经常变化。</p>
-</li>
-<li><p>变化点在哪里，封装哪里—— Builder模式主要在于应对”复杂对 象各个部分”的频繁需求变动。其缺点在于难以应对”分步骤构建 算法”的需求变动。</p>
-</li>
-<li><p>在Builder模式中，要注意不同语言中构造器内调用虚函数的差别 （C++ vs. C#) 。</p>
-</li>
-</ul>
+              <h2 id="机会主义"><a href="#机会主义" class="headerlink" title="机会主义"></a>机会主义</h2><p>wiki: 是一种有意识的策略或是行为，通过利用形势来自利肥己——常常不关心规则，不关心他人的处境。投机主义者的行为是以自利为主要驱动力的。该词可以描述人类个体或生物、群体、组织、风格、行为或倾向</p>
+<h2 id="投降主义"><a href="#投降主义" class="headerlink" title="投降主义"></a>投降主义</h2><p>wiki: 冲突和纠纷中，无原则地放弃己方集团的利益，向敌对集团没有底线地迁就与妥协，放弃与敌对集团进行斗争的主张和思想。投降主义和一般寻求接触和谈判解决纠纷的妥协主义的区别在于，妥协政策设置了妥协的底线，即核心利益，而投降主义可以无条件的承诺敌对集团的要求，以避免对敌对集团发生激烈斗争。</p>
+<blockquote>
+<p>知乎问题: 机会主义和投降主义有什么区别?</p>
+<p>一个是懒，一个是怂。</p>
+<p>懒的那个总想抄近路，抄着抄着看不见最初的的目标了，然后就走歪了。</p>
+<p>怂的那个没什么目标，是条好走的路就走，自然也走歪了。</p>
+</blockquote>
+<h2 id="考茨基主义"><a href="#考茨基主义" class="headerlink" title="考茨基主义"></a>考茨基主义</h2><p>他被列宁作为教条主义及对修正主义采取调和折中的中间派的代表加以抨</p>
+<p>列宁认为考茨基是教条主义，把历史唯物主义理解为经济决定论，理解为一种“经验科学”；用理论排斥实践，无视实践的发展。</p>
+<p>列宁在分析考茨基主义产生的社会根源时指出:考茨基主义不是偶然现象,而是第二国际各种矛盾的社会产物,是既要在口头上忠于马克思主义又要在实际上屈服于机会主义的社会产物。“中派”是一些被腐朽的合法性侵蚀了的,被议会制度的环境等等败坏了的守旧派,是习惯于待遇优厚的职位和“安稳”的工作的官吏。</p>
+<h2 id="无政府主义"><a href="#无政府主义" class="headerlink" title="无政府主义"></a>无政府主义</h2><p>其目的在于提升个人自由及废除政府当局与所有的政府管理机构。无政府主义包含了众多哲学体系和社会运动实践。它的基本立场是反对包括政府在内的一切统治和权威，提倡个体之间的自助关系，关注个体的自由和平等；其政治诉求是消除政府以及社会上或经济上的任何独裁统治关系。对大多数无政府主义者而言，“无政府”一词并不代表混乱、虚无、或道德沦丧的状态，而是一种由自由的个体自愿结合，以建立互助、自治、反独裁主义的和谐社会。</p>
+<p>马克思在驳斥无政府主义者时，反对的是他们废除国家的方式。马克思完全不是反对国家将随阶级的消失而消失，或国家将随阶级的废除而废除，而是反对要工人拒绝使用武器，拒绝使用有组织的暴力，即拒绝使用应为“粉碎资产阶级的反抗”这一目的服务的国家。</p>
+<p>为什么反权威主义者不只限于高喊反对政治权威，反对国家呢？所有的社会主义者都认为, 国家及政治权威将由于未来的社会革命而消失，这就是说，社会职能将失去其政治性质，而变为维护真正社会利益的简单的管理职能。但是，反权威主义者却要求在产生政治国家的各种社会条件消除以前，一举把政治国家废除。他们要求把废除权威作为社会革命的第一个行动。</p>
+<h2 id="沙文主义"><a href="#沙文主义" class="headerlink" title="沙文主义"></a>沙文主义</h2><p>原指极端的、不合理的、过分的爱国主义或民族主义。现在沙文主义定义为“认为自己的群体或人民优越于其他群体或人民的非理性信念”。也因此，沙文主义者会将自己的群体或人民视为独特的，而将其他的群体或人民视为平庸的。</p>
+<p>词源是拿破仑手下的一名（有可能是位文艺上杜撰的）士兵尼古拉·沙文，他由于获得军功章对拿破仑感恩戴德，对拿破仑以军事力量征服其他民族的政策狂热崇拜。而“沙文主义”这个名词则首先出现在法国的一部戏剧“三色帽徽”中，以讽刺的口吻描写沙文的这种情绪。后来这个词被广泛应用，如大国沙文主义、民族沙文主义等，还曾被女权运动的领袖用于“男性沙文主义”（相当于“大男人主义”）</p>
+<p>今日的沙文主义已经扩展到了对任何群体的不当偏爱和过度奉献，并尤其多的用于因该群体看不起局外人或者敌对势力时。</p>
+<p>沙文主义者一般都是对自己所在的国家、民族和团体感到骄傲，因此看不起其他的国家、民族和团体。</p>
+<h2 id="加速主义"><a href="#加速主义" class="headerlink" title="加速主义"></a>加速主义</h2><p>是一种政治与社会理论，认为资本主义制度或历史上某种技术相关的社会进程应该被加速以产生巨大社会变革。当代的加速主义哲学以德勒兹和伽塔利的理论为起点，旨在强化加速去领域化的力量，以克服阻碍深远社会变革可能性的对抗趋势。加速主义也可能指更广泛的支持资本主义的深化的观点，这些论点认为这将加速资本主义自我毁灭的倾向，并最终导致其崩溃。</p>
+<p>加速论者的理论分为相互矛盾的左右派系。“左翼加速主义”试图将“技术演进的过程”从“资本主义的限制”中剥离，将现代技术改造为服务社会有益和解放的目的；“右翼加速主义”支持资本主义本身的无限强化，带来一个技术奇异点。</p>
+<h2 id="民族主义"><a href="#民族主义" class="headerlink" title="民族主义"></a>民族主义</h2><p>通常是指认同本民族文化、传统、利益的一种意识形态，其旨在追求民族的生存、发展、兴盛。民族主义者往往认为民族拥有自我治理的主权，而不应受他人干涉，即民族拥有所谓“<a href="https://zh.wikipedia.org/wiki/民族自决权" target="_blank" rel="noopener">民族自决权</a>”，而这一观念则起源于<a href="https://zh.wikipedia.org/wiki/人民主权论" target="_blank" rel="noopener">人民主权论</a>。民族主义中的“民族”既可能是基于<a href="https://zh.wikipedia.org/wiki/語言" target="_blank" rel="noopener">语言</a>、<a href="https://zh.wikipedia.org/wiki/族群" target="_blank" rel="noopener">族裔</a>、<a href="https://zh.wikipedia.org/wiki/部落" target="_blank" rel="noopener">部落</a>或<a href="https://zh.wikipedia.org/wiki/人種" target="_blank" rel="noopener">种族</a>的团体，也可能是一国、一地之<a href="https://zh.wikipedia.org/wiki/公民" target="_blank" rel="noopener">公民</a>集体，还可能是某一宗教的信徒。</p>
+<p>就民族主义的起源而言，早期学者多认为民族主义是自古已有的原生概念，有时会主张民族间存在着基因差异。而现代研究多认为民族是社会<a href="https://zh.wikipedia.org/wiki/现代化" target="_blank" rel="noopener">现代化</a>的产物，将18世纪<a href="https://zh.wikipedia.org/wiki/法国大革命" target="_blank" rel="noopener">法国大革命</a>和<a href="https://zh.wikipedia.org/wiki/民族國家" target="_blank" rel="noopener">民族国家</a>的形成视为民族主义的起源，而欧洲以外的民族主义都是扩散自欧洲，例如<a href="https://zh.wikipedia.org/wiki/本尼迪克特·安德森" target="_blank" rel="noopener">本尼迪克特·安德森</a>在《<a href="https://zh.wikipedia.org/wiki/想像的共同體_(書" target="_blank" rel="noopener">想象的共同体</a>)》中描述了民族作为“<a href="https://zh.wikipedia.org/wiki/想像的共同體" target="_blank" rel="noopener">想象的共同体</a>”的产生及其随着殖民扩张在世界范围扩散的轨迹。近年来，也有部分学者挑战民族主义的<a href="https://zh.wikipedia.org/wiki/歐洲中心主義" target="_blank" rel="noopener">欧洲中心论</a>，提出了与欧洲的民族国家相对的亚洲<a href="https://zh.wikipedia.org/wiki/文明国家" target="_blank" rel="noopener">文明国家</a>概念，其中代表即<a href="https://zh.wikipedia.org/wiki/中华文明" target="_blank" rel="noopener">中华文明</a>。</p>
+<p>学界一般认为民族主义和政治上的<a href="https://zh.wikipedia.org/wiki/國族" target="_blank" rel="noopener">民族</a>、<a href="https://zh.wikipedia.org/wiki/主权" target="_blank" rel="noopener">主权</a>概念密不可分，但对于到底“什么是民族主义”乃至“什么是民族”仍莫衷一是，历史上民族（nation）一词要到<a href="https://zh.wikipedia.org/wiki/法国大革命" target="_blank" rel="noopener">法国大革命</a>时期才和<a href="https://zh.wikipedia.org/wiki/民族國家" target="_blank" rel="noopener">民族国家</a>等政治概念联系到一起，很多情况下不同地区、不同族群间的民族主义内容相差迥异，难以给出一个笼统的概括。而民族主义和不同的社会领域、意识形态的结合也使得其内容纷繁复杂，枝叶众多，既有<a href="https://zh.wikipedia.org/wiki/經濟民族主義" target="_blank" rel="noopener">经济民族主义</a>，也有<a href="https://zh.wikipedia.org/w/index.php?title=宗教民族主義&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">宗教民族主义</a>，既存在<a href="https://zh.wikipedia.org/wiki/極右派" target="_blank" rel="noopener">极右翼</a>的<a href="https://zh.wikipedia.org/wiki/法西斯主义" target="_blank" rel="noopener">法西斯主义</a>，也相应存在着<a href="https://zh.wikipedia.org/wiki/左翼民族主義" target="_blank" rel="noopener">左翼民族主义</a>；而最为常见的划分是将民族主义分为<a href="https://zh.wikipedia.org/wiki/公民民族主義" target="_blank" rel="noopener">公民民族主义</a>和<a href="https://zh.wikipedia.org/wiki/族群民族主义" target="_blank" rel="noopener">族裔民族主义</a>，反映了民族主义者“以国建族”和“以族建国”的两种政治倾向。</p>
+<p><a href="https://zh.wikipedia.org/wiki/爱国主义" target="_blank" rel="noopener">爱国主义</a>及对统治者、土地、文化、宗教、血族的忠诚相伴人类文明始终，在<a href="https://zh.wikipedia.org/wiki/原生主义" target="_blank" rel="noopener">原生主义</a>者看来这就是民族主义的最初体现，而<a href="https://zh.wikipedia.org/wiki/建構主義" target="_blank" rel="noopener">建构主义</a>者则认为作为一种政治行动信条的民族主义直到18世纪才登上历史舞台——在此后民族主义既是<a href="https://zh.wikipedia.org/wiki/民族独立运动" target="_blank" rel="noopener">民族独立</a>和民族解放的重要动力，促成了<a href="https://zh.wikipedia.org/wiki/法国大革命" target="_blank" rel="noopener">法国大革命</a>、<a href="https://zh.wikipedia.org/wiki/德意志统一" target="_blank" rel="noopener">德意志统一</a>、<a href="https://zh.wikipedia.org/wiki/非洲的非殖民化" target="_blank" rel="noopener">非洲的去殖民化</a>、<a href="https://zh.wikipedia.org/wiki/苏联解体" target="_blank" rel="noopener">苏联解体</a>等一系列重大历史事件，也有着罄竹难书的阴暗之处，导致了<a href="https://zh.wikipedia.org/wiki/世界大戰" target="_blank" rel="noopener">两次世界大战</a>、<a href="https://zh.wikipedia.org/wiki/亚美尼亚种族大屠杀" target="_blank" rel="noopener">亚美尼亚大屠杀</a>、<a href="https://zh.wikipedia.org/wiki/猶太人大屠殺" target="_blank" rel="noopener">纳粹大屠杀</a>等惨绝人寰的悲剧发生。民族主义者在推动政治进程的同时，也创造出<a href="https://zh.wikipedia.org/wiki/国旗" target="_blank" rel="noopener">国旗</a>、<a href="https://zh.wikipedia.org/wiki/国歌" target="_blank" rel="noopener">国歌</a>、<a href="https://zh.wikipedia.org/wiki/民族語言" target="_blank" rel="noopener">国语</a>、<a href="https://zh.wikipedia.org/w/index.php?title=民族史诗&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">民族史诗</a>等一系列代表<a href="https://zh.wikipedia.org/wiki/國族認同" target="_blank" rel="noopener">民族认同</a>的民族象征物。时至今日，民族主义仍是社会的一大重要思潮，<a href="https://zh.wikipedia.org/wiki/极端民族主义" target="_blank" rel="noopener">极端民族主义</a>及其所引发的一系列纠纷仍威胁着世界的和平与稳定。</p>
+<p>世界上绝大多数人口都生活在——至少是名义上的——民族国家之中<a href="https://zh.wikipedia.org/wiki/民族主義#cite_note-4" target="_blank" rel="noopener">[3]</a>，但大多数国家都存在着多民族、多族群的社会结构，只有日本、韩国在内10%左右的国家可以算是<a href="https://zh.wikipedia.org/wiki/單一民族國家" target="_blank" rel="noopener">纯粹的民族国家</a>，在这些国家民族主义和<a href="https://zh.wikipedia.org/wiki/爱国主义" target="_blank" rel="noopener">爱国主义</a>内涵比较一致；而此外的大多数国家都奉行着融合、平权、乃至压迫的政策来解决其国内的<a href="https://zh.wikipedia.org/wiki/民族問題" target="_blank" rel="noopener">民族问题</a>。<a href="https://zh.wikipedia.org/wiki/民族主義#cite_note-:6-5" target="_blank" rel="noopener">[4]</a></p>
+<p>逆向民族主义</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Design-Patterns/">Design Patterns</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Design-Patterns/">Design Patterns</a>
-                    
-                  </div>
                 
               </div>
               
@@ -402,9 +267,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/15/isms/">
+                      <a href="/2020/09/17/MemoryManagement/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">isms</span>
+                        <span class="hidden-mobile">MemoryManagement</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -412,8 +277,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/26/DesignPatterns/Prototype/">
-                        <span class="hidden-mobile">Prototype 原型模式</span>
+                      <a href="/2020/08/27/DesignPatterns/Builder/">
+                        <span class="hidden-mobile">Builder</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -663,7 +528,7 @@
       if ('true' === 'true') {
         var viewCtn = document.querySelector('#leancloud-post-views-container');
         if (viewCtn || enableIncr) {
-          var target = decodeURI('/2020/08/27/DesignPatterns/Builder/');
+          var target = decodeURI('/2020/09/15/isms/');
           var viewGetter = getRecord(Counter, target).then((record) => {
             incrArr.push(buildIncrement(record.objectId))
             if (viewCtn) {
@@ -757,7 +622,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Builder&nbsp;",
+        "isms&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
