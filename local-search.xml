@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>OS Memory</category>
+      <category>OS</category>
       
     </categories>
     
@@ -21,6 +21,8 @@
     <tags>
       
       <tag>OS</tag>
+      
+      <tag>Memory</tag>
       
     </tags>
     
