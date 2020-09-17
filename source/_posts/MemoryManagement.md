@@ -1,6 +1,6 @@
 ---
 title: Memory Management
-date: 2020-09-17 14:33:11
+date: 2019-11-22 14:33:11
 index_img: /img/image-20191125120512021.png
 tags: [OS, Memory]
 categories: OS
