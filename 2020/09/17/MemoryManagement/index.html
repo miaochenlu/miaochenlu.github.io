@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>MemoryManagement - Explorer</title>
+  <title>Memory Management - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-09-17 06:33" pubdate>
-      September 17, 2020 am
+    <time datetime="2020-09-17 14:33" pubdate>
+      September 17, 2020 pm
     </time>
   </div>
 
@@ -216,7 +216,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">MemoryManagement</h1>
+            <h1 style="display: none">Memory Management</h1>
             
               <p class="note note-info">
                 
@@ -260,14 +260,8 @@
 <p><br/></p>
 <h2 id="1-3-虚拟内存作为缓存的工具"><a href="#1-3-虚拟内存作为缓存的工具" class="headerlink" title="1.3 虚拟内存作为缓存的工具"></a>1.3 虚拟内存作为缓存的工具</h2><p>磁盘上的数据被分割成块，块是磁盘是主存之间的传输单元。</p>
 <p>内存又是怎么分割的呢？</p>
-<ul>
-<li><h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3></li>
-</ul>
-<p>页面是主存物理空间中划分出来的等长的固定区域。分页方式的优点是页长固定，因而便于构造页表、易于管理，且不存在外碎片。但分页方式的缺点是页长与程序的逻辑大小不相关。例如，某个时刻一个子程序可能有一部分在主存中，另一部分则在辅存中。这不利于编程时的独立性，并给换入换出处理、存储保护和存储共享等操作造成麻烦。</p>
-<ul>
-<li><h3 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h3></li>
-</ul>
-<p>段是按照程序的自然分界划分的长度可以动态改变的区域。通常，程序员把子程序、操作数和常数等不同类型的数据划分到不同的段中，并且每个程序可以有多个相同类型的段。</p>
+<h3 id="emsp-emsp-分页"><a href="#emsp-emsp-分页" class="headerlink" title="&emsp;&emsp;分页"></a>&emsp;&emsp;分页</h3><p>页面是主存物理空间中划分出来的等长的固定区域。分页方式的优点是页长固定，因而便于构造页表、易于管理，且不存在外碎片。但分页方式的缺点是页长与程序的逻辑大小不相关。例如，某个时刻一个子程序可能有一部分在主存中，另一部分则在辅存中。这不利于编程时的独立性，并给换入换出处理、存储保护和存储共享等操作造成麻烦。</p>
+<h3 id="emsp-emsp-分段"><a href="#emsp-emsp-分段" class="headerlink" title="&emsp;&emsp;分段"></a>&emsp;&emsp;分段</h3><p>段是按照程序的自然分界划分的长度可以动态改变的区域。通常，程序员把子程序、操作数和常数等不同类型的数据划分到不同的段中，并且每个程序可以有多个相同类型的段。</p>
 <p> 段表本身也是一个段，可以存在辅存中，但一般是驻留在主存中。将用户程序地址空间分成若干个大小不等的段，每段可以定义一组相对完整的逻辑信息。存储分配时，以段为单位，段与段在内存中可以不相邻接，也实现了离散分配。</p>
 <p>(1)    段的逻辑独立性使其易于编译、管理、修改和保护，也便于多道程序共享。</p>
 <p>(2)    段长可以根据需要动态改变，允许自由调度，以便有效利用主存空间。</p>
@@ -579,18 +573,16 @@
 <p>具有值11000100的移位寄存器的页比具有01110111的页更为最近被使用</p>
 </blockquote>
 <p>如果将这8个bits作为无符号整数，那么具有最小值的页就是least recently used</p>
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="referencebit.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/referencebit.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
-
-<p><br/></p>
 <h3 id="B-二次机会算法"><a href="#B-二次机会算法" class="headerlink" title="B. 二次机会算法"></a>B. 二次机会算法</h3><p>为了避免FIFO可能会把经常使用的页替换出去的问题，我们可以对它做一个简单的修改：对最老页面的R位进行检查。</p>
 <ul>
 <li>如果是0，那么这个页既老又没用，应该被立刻替换掉</li>
 <li>如果是1，就清除这个位，把这个页放到页链表的尾端，修改它的装入时间让它就象刚装入的一样，然后继续搜索下一个FIFO页。</li>
 </ul>
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="secondchance.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/secondchance.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -598,7 +590,7 @@
 
 
 <p><a href="http://netclass.csu.edu.cn/NCourse/hep086/chapter4/section4/4.4.4.htm" target="_blank" rel="noopener">second chance</a></p>
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="clockreplace.mov"
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/clockreplace.mov"
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -612,7 +604,7 @@
 <li>[1, 1]最近使用过并且修改过—-他又可能很快又要被使用，并且置换之前需要将页写回磁盘</li>
 </ul>
 <p>每个有序对都代表了一个类，[0,0]是最小的类，[1, 0]类的页在它的R位被时钟中断清除后就成了[0,0]类。</p>
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="advancesecondchance.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/advancesecondchance.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -735,25 +727,25 @@
 
 
 
-
-
-
-
-
-<video id="video" controls="" preload="none" width="400" src="referencebit.mov"></video>
-
-
-
-
-
-
-
-
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/OS-Memory/">OS Memory</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OS/">OS</a>
+                    
+                  </div>
                 
               </div>
               
@@ -1113,7 +1105,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "MemoryManagement&nbsp;",
+        "Memory Management&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
