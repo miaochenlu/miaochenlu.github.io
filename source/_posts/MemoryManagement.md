@@ -1,7 +1,9 @@
 ---
-title: MemoryManagement
+title: Memory Management
 date: 2020-09-17 14:33:11
-tags:
+index_img: /img/image-20191125120512021.png
+tags: OS
+categories: OS Memory
 ---
 
 <!--more-->
@@ -63,11 +65,11 @@ CPU生成一个虚拟地址来访问主存
 
 内存又是怎么分割的呢？
 
-* ### 分页
+### &emsp;&emsp;分页
 
 页面是主存物理空间中划分出来的等长的固定区域。分页方式的优点是页长固定，因而便于构造页表、易于管理，且不存在外碎片。但分页方式的缺点是页长与程序的逻辑大小不相关。例如，某个时刻一个子程序可能有一部分在主存中，另一部分则在辅存中。这不利于编程时的独立性，并给换入换出处理、存储保护和存储共享等操作造成麻烦。
 
-* ### 分段
+### &emsp;&emsp;分段
 
 段是按照程序的自然分界划分的长度可以动态改变的区域。通常，程序员把子程序、操作数和常数等不同类型的数据划分到不同的段中，并且每个程序可以有多个相同类型的段。
 
@@ -512,12 +514,9 @@ We can keep an 8-bit byte for each page in a table in memory.用来存放8个时
 
 如果将这8个bits作为无符号整数，那么具有最小值的页就是least recently used
 
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="referencebit.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/referencebit.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
-
-
-<br/>
 
 ### B. 二次机会算法
 
@@ -526,7 +525,7 @@ We can keep an 8-bit byte for each page in a table in memory.用来存放8个时
 * 如果是0，那么这个页既老又没用，应该被立刻替换掉
 * 如果是1，就清除这个位，把这个页放到页链表的尾端，修改它的装入时间让它就象刚装入的一样，然后继续搜索下一个FIFO页。
 
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="secondchance.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/secondchance.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -535,7 +534,7 @@ We can keep an 8-bit byte for each page in a table in memory.用来存放8个时
 
 <a href="http://netclass.csu.edu.cn/NCourse/hep086/chapter4/section4/4.4.4.htm">second chance</a>
 
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="clockreplace.mov"
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/clockreplace.mov"
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -553,7 +552,7 @@ We can keep an 8-bit byte for each page in a table in memory.用来存放8个时
 
 每个有序对都代表了一个类，[0,0]是最小的类，[1, 0]类的页在它的R位被时钟中断清除后就成了[0,0]类。
 
-<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="advancesecondchance.mov"> 
+<center><video id="video" controls="" preload="none" width="400"><source id="mp4" src="https://miaochenlu.github.io/2020/09/17/MemoryManagement/advancesecondchance.mov"> 
       <p>Your user agent does not support the HTML5 Video element.</p>
 </video></center>
 
@@ -720,20 +719,6 @@ working set来控制thrashing并不灵活，一种更加直接的方法是页错
 可以直接测量和控制PFF来防止颠簸
 
 <center><img src="image-20191205142402546.png" alt="image-20191205142402546" style="zoom:45%;" /></center>
-
-
-
-
-
-
-
-
-
-<video id="video" controls="" preload="none" width="400" src="referencebit.mov"></video>
-
-
-
-
 
 
 
