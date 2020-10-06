@@ -13,7 +13,7 @@ tags:
 sudo apt install git
 sudo apt install scons
 sudo apt install python-pip
-sudo apt-get install six
+pip install git
 ```
 
 ```shell
