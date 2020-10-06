@@ -4,6 +4,206 @@
   
   
   <entry>
+    <title>线性规划松弛算法</title>
+    <link href="/2020/10/06/OperationResearch/lpslack/"/>
+    <url>/2020/10/06/OperationResearch/lpslack/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./lpslack.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TSP问题</title>
+    <link href="/2020/10/06/OperationResearch/tsp/"/>
+    <url>/2020/10/06/OperationResearch/tsp/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./TSP.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>贪心算法</title>
+    <link href="/2020/10/06/OperationResearch/greedy/"/>
+    <url>/2020/10/06/OperationResearch/greedy/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./greedy.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Bin Packing的近似算法</title>
+    <link href="/2020/10/06/OperationResearch/binpacking/"/>
+    <url>/2020/10/06/OperationResearch/binpacking/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./Binpacking.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>原始对偶算法</title>
+    <link href="/2020/10/06/OperationResearch/primedual/"/>
+    <url>/2020/10/06/OperationResearch/primedual/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./primedual.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>对偶单纯形法</title>
+    <link href="/2020/10/06/OperationResearch/dualsimplex/"/>
+    <url>/2020/10/06/OperationResearch/dualsimplex/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./dualsimplex.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>线性规划的对偶</title>
+    <link href="/2020/10/06/OperationResearch/LPdual/"/>
+    <url>/2020/10/06/OperationResearch/LPdual/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./lpdual.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>单纯形法</title>
+    <link href="/2020/10/06/OperationResearch/simplex/"/>
+    <url>/2020/10/06/OperationResearch/simplex/</url>
+    
+    <content type="html"><![CDATA[<a id="more"></a><div class="row">    <embed src="./simplex.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Applied Operation Research</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Applied Operation Research</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>isms</title>
     <link href="/2020/09/15/isms/"/>
     <url>/2020/09/15/isms/</url>
