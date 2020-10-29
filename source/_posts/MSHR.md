@@ -16,15 +16,15 @@ miss status holding register (MSHR) 主要用来处理non-blocing cache中cache 
 
 这里你可能就会对non-blocking cache感到疑惑了。什么是non-blocking cache呢? (不疑惑的话当我没说, 啊这...)
 
-当我们发出一个memory request, 然后就会在cache中寻找这个地址。如果这个地址不在cache中，那么就是一个cache miss。所谓的blocking cache, 当出现cache miss后, 那后续对cache的请求将被阻塞，直到处理完了cache miss的情况。很显然，这样很影响效率。
+当我们发出一个memory request, 然后就会在cache中寻找这个地址。如果这个地址不在cache中，那么就是一个cache miss。所谓的blocking cache, 当出现cache miss后, 后续对cache的请求将被阻塞，直到处理完了cache miss的情况。很显然，这样很影响效率。
 
-因此，non-blocking cache出来制止这种 "stop the world"的行为。他允许processer继续处理指令，即使存在cache miss。他很像是pipelining the memory system, 可以达到hiding memory latency的效果。
+因此，non-blocking cache出来制止这种 "stop the world"的行为。他允许processer继续处理指令，即使存在cache miss。他很像是pipelining the memory system, 可以达到hiding memory latency的效果。下图就是这两者的对比
 
 
 
 <img src="image-20201029190843232.png" alt="image-20201029190843232" style="zoom:80%;" />
 
-是什么导致了blocking cache和non-blocking cache的这种差别呢？ 我认为，blocking cache只能存一个request的信息，而non-blocking cache可以存多个request的信息，关键是可以将miss信息都存储起来。将miss信息存在哪里了？---> MSHR
+是什么导致了blocking cache和non-blocking cache的这种差别呢？ 我认为，这是因为blocking cache只能存一个request的信息，而non-blocking cache可以存多个request的信息，关键是可以将miss信息都存储起来。将miss信息存在哪里了？---> MSHR
 
 
 
