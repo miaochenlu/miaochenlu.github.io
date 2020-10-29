@@ -60,6 +60,8 @@ MSHR track的information为
 
 <img src="image-20201029201655094.png" alt="image-20201029201655094" style="zoom:80%;" />
 
+<img src="MSHREntry.svg" alt="image-20201029201655094" style="zoom:80%;" />
+
 # MSHR Operation
 
 下图展示了Non-blocking cache处理memory access的过程， 其中 [h1]-[h3]展示了cache hit的过程，[m1]-[m`6]展示了cache miss的过程
@@ -86,7 +88,7 @@ process发送request给cache, cache hit, 然后将data返回
 
 
 
-
+<br>
 
 references
 
