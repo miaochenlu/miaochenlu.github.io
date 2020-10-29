@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-10-29 18:47" pubdate>
-      October 29, 2020 pm
+    <time datetime="2020-10-29 10:47" pubdate>
+      October 29, 2020 am
     </time>
   </div>
 
@@ -254,6 +254,7 @@
 <li>返回给哪个哪个CPU的哪个destination register或者是store buffer entry address</li>
 </ul>
 <p><img src="image-20201029201655094.png" srcset="/img/loading.gif" alt="image-20201029201655094" style="zoom:80%;" /></p>
+<p><img src="MSHREntry.svg" srcset="/img/loading.gif" alt="image-20201029201655094" style="zoom:80%;" /></p>
 <h1 id="MSHR-Operation"><a href="#MSHR-Operation" class="headerlink" title="MSHR Operation"></a>MSHR Operation</h1><p>下图展示了Non-blocking cache处理memory access的过程， 其中 [h1]-[h3]展示了cache hit的过程，[m1]-[m`6]展示了cache miss的过程</p>
 <h3 id="cache-hit的情况"><a href="#cache-hit的情况" class="headerlink" title="cache hit的情况"></a>cache hit的情况</h3><p>process发送request给cache, cache hit, 然后将data返回</p>
 <h3 id="cache-miss的情况"><a href="#cache-miss的情况" class="headerlink" title="cache miss的情况"></a>cache miss的情况</h3><ul>
@@ -275,6 +276,7 @@
 </li>
 </ul>
 <p><img src="image-20201029192203454.png" srcset="/img/loading.gif" alt="image-20201029192203454" style="zoom:80%;" /></p>
+<p><br></p>
 <p>references</p>
 <p>[1] <a href="https://safari.ethz.ch/architecture/fall2017/lib/exe/fetch.php?media=onur-comparch-fall2017-lecture3-afterlecture.pdf" target="_blank" rel="noopener">https://safari.ethz.ch/architecture/fall2017/lib/exe/fetch.php?media=onur-comparch-fall2017-lecture3-afterlecture.pdf</a></p>
 <p>[2] <a href="https://www.researchgate.net/publication/237283841_Performance_Effects_of_a_Cache_Miss_Handling_Architecture_in_a_Multi-core_Processor" target="_blank" rel="noopener">https://www.researchgate.net/publication/237283841_Performance_Effects_of_a_Cache_Miss_Handling_Architecture_in_a_Multi-core_Processor</a></p>
@@ -310,12 +312,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/10/29/LL-SC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LL/SC</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/29/LL-SC/">
-                        <span class="hidden-mobile">LL/SC</span>
+                      <a href="/2020/10/06/OperationResearch/lpslack/">
+                        <span class="hidden-mobile">线性规划松弛算法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
