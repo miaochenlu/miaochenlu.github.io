@@ -144,7 +144,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/default.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      838 字
+      857 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -220,12 +220,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：October 29, 2020 pm
+                  本文最后更新于：October 30, 2020 am
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <a id="more"></a>
+              <blockquote>
+<p> miss status holding register (MSHR) 主要用来处理non-blocing cache中cache miss的情况</p>
+</blockquote>
+<a id="more"></a>
 <h1 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h1><p>miss status holding register (MSHR) 主要用来处理non-blocing cache中cache miss的情况，因此也被称为miss buffer</p>
 <p>这里你可能就会对non-blocking cache感到疑惑了。什么是non-blocking cache呢? (不疑惑的话当我没说, 啊这…)</p>
 <p>当我们发出一个memory request, 然后就会在cache中寻找这个地址。如果这个地址不在cache中，那么就是一个cache miss。所谓的blocking cache, 当出现cache miss后, 后续对cache的请求将被阻塞，直到处理完了cache miss的情况。很显然，这样很影响效率。</p>
