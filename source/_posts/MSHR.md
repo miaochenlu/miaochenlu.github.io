@@ -6,7 +6,7 @@ tags: Computer Architecture
 categories: Computer Architecture
 ---
 
-
+>  miss status holding register (MSHR) 主要用来处理non-blocing cache中cache miss的情况
 
 <!--more-->
 
