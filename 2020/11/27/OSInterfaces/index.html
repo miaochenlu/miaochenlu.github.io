@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>LL/SC - Explorer</title>
+  <title>操作系统接口 - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-10-29 10:47" pubdate>
-      October 29, 2020 am
+    <time datetime="2020-11-27 11:44" pubdate>
+      November 27, 2020 am
     </time>
   </div>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      66 字
+      1.5k 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      17
        分钟
     </span>
   
@@ -216,21 +216,135 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">LL/SC</h1>
+            <h1 style="display: none">操作系统接口</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：October 30, 2020 am
+                  本文最后更新于：November 29, 2020 am
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <p>先占坑</p>
-<a id="more"></a>
-<h1 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h1><p>LL/SC指的是<code>load-link</code> and <code>store-conditional</code>这一对指令。LL/SC是一对原子操作。他们被用来在多线程中实现synchronization。</p>
-<p>references</p>
-<p>[1] <a href="http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture08-synchronization.pdf" target="_blank" rel="noopener">http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture08-synchronization.pdf</a></p>
-<p>[2] <a href="https://alexpolt.github.io/atomic-data.html" target="_blank" rel="noopener">https://alexpolt.github.io/atomic-data.html</a></p>
+              <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>如下图所示是一个计算机系统，最底层有有一些硬件资源，比如: CPU, 内存，磁盘，网卡。</p>
+<p>在上层运行一些应用程序，比如一个文本编辑器（VI），一个C编译器(CC), 一个Shell。这些程序都运行在一个空间中：用户空间(user space)。</p>
+<p>除了用户空间还存在一个内核空间(kernel space)。kernel对底层管理硬件资源，为上层程序提供了大量的服务。他对用户空间程序(进程)，对内存进行分配，进行访问控制……。kernel程序总是第一个被启动的，他也是独一无二的存在。</p>
+<p><img src="OS.jpg" srcset="/img/loading.gif" alt="OS" style="zoom:80%;" /></p>
+<p>用户空间又如何与内核空间进行交互呢？这是通过一系列的接口来实现的。通常这通过系统调用 (system call)来实现。</p>
+<p>如下图所示，在用户空间中有一个shell程序在运行。如果这个时候得到一条读取文件的命令，shell invoke <code>read</code> 这个system call， 跳转到内核空间，执行该命令，然后将结果返回用户空间。 [这里是这么实现的呢]</p>
+<p><img src="image-20201127194539928.png" srcset="/img/loading.gif" alt="image-20201127194539928" style="zoom:80%;" /></p>
+<h1 id="一些系统调用"><a href="#一些系统调用" class="headerlink" title="一些系统调用"></a>一些系统调用</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a><code>fork</code></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>System Call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int fork()</code></td>
+<td>Create a process, return child’s PID</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>fork</code> 的作用是克隆进程，也就是将原先的一个进程再克隆出一个来，克隆出的这个进程就是原进程的子进程，这个子进程和其他的进程没有什么区别，同样拥有自己的独立的地址空间。不同的是子进程是在fork返回之后才开始执行的。</p>
+<p>在XV6中，父子进程除了fork的返回值，其他都是一样的。除了内存是一样的以外，文件描述符的表单也从父进程拷贝到子进程。所以如果父进程打开了一个文件，子进程可以看到同一个文件描述符，尽管子进程看到的是一个文件描述符的表单的拷贝。</p>
+<p><code>fork</code>函数有三个返回值</p>
+<ul>
+<li>该进程为父进程时，返回子进程的pid</li>
+<li>该进程为子进程时，返回0</li>
+<li>fork执行失败，返回-1</li>
+</ul>
+<p><img src="v2-c5c3ba7e5e1f3eb0127683faef9cce32_720w.png" srcset="/img/loading.gif" alt="img" style="zoom:67%;" /></p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt; 	//for fork</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;sys/wait.h&gt;//for wait</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+  <span class="hljs-keyword">int</span> pid = fork();
+  <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"parent: child = %d\n"</span>, pid);
+    pid = wait(<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"child %d is done\n"</span>, pid);
+  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>) &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"child: exiting\n"</span>);
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"fork error\n"</span>);
+  &#125;
+&#125;</code></pre></div>
+<p>输出</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash">./a.out</span>
+parent: child = 24482
+child: exiting
+child 24482 is done</code></pre></div>
+<h2 id="exec"><a href="#exec" class="headerlink" title="exec"></a><code>exec</code></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>System call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int exec(char* file, char* argv[])</code></td>
+<td>Load a file and execute it with arguments; only returns if error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>把当前进程的内存替换为文件里保存的内存镜像并执行之。<code>exec</code>有两个参数，第一个是要执行的程序，第二个这个程序的参数(以字符串数组的形式出现)。</p>
+<ol>
+<li>exec系统调用会保留当前的文件描述符表单。所以任何在exec系统调用之前的文件描述符，例如0，1，2等。它们在新的程序中表示相同的东西。</li>
+<li>通常来说exec系统调用不会返回，因为exec会完全替换当前进程的内存，相当于当前进程不复存在了，所以exec系统调用已经没有地方能返回了。</li>
+</ol>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+  <span class="hljs-keyword">char</span>* argv[] = &#123;<span class="hljs-string">"echo"</span>, <span class="hljs-string">"this"</span>, <span class="hljs-string">"is"</span>, <span class="hljs-string">"echo"</span>, <span class="hljs-number">0</span>&#125;;
+  execv(<span class="hljs-string">"/bin/echo"</span>, argv);
+
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"exec failed\n"</span>);
+&#125;</code></pre></div>
+<p>输出</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> ./a.out  </span>
+this is echo</code></pre></div>
+<h2 id="shell是怎么工作的"><a href="#shell是怎么工作的" class="headerlink" title="shell是怎么工作的"></a>shell是怎么工作的</h2><p>首先看 <code>main</code> 函数，main loop通过 <code>getcmd</code>读取一行输入</p>
+<p>然后调用 <code>fork</code>函数，创建一个shell process的copy。子进程通过<code>runcmd</code>执行命令，父进程等待。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span>
+main(<span class="hljs-keyword">void</span>)
+&#123;
+  	<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">100</span>];
+	..
+
+      <span class="hljs-comment">// Read and run input commands.</span>
+    <span class="hljs-keyword">while</span>(getcmd(buf, <span class="hljs-keyword">sizeof</span>(buf)) &gt;= <span class="hljs-number">0</span>)&#123;
+    	...
+        <span class="hljs-keyword">if</span>(fork1() == <span class="hljs-number">0</span>)
+          runcmd(parsecmd(buf));
+        wait(<span class="hljs-number">0</span>);
+    &#125;
+    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+&#125;</code></pre></div>
+<p>比如用户在shell中输入了 <code>echo hello</code>, <code>getcmd</code>获取了这条命令，通过fork创建了子进程，子进程调用 <code>runcmd</code>函数，<code>runcmd</code>将<code>echo hello</code>作为其参数。在<code>runcmd</code>中，他调用 <code>exec</code>函数执行<code>echo</code>。在某个时刻, <code>echo</code>调用 <code>exit</code>函数，这使父进程return from <code>wait</code></p>
+<p><img src="OS-2.png" srcset="/img/loading.gif" alt="OS-2" style="zoom:80%;" /></p>
+<h1 id="fork-amp-exec-OR-forkexec"><a href="#fork-amp-exec-OR-forkexec" class="headerlink" title="fork() &amp; exec() OR forkexec()"></a><code>fork()</code> &amp; <code>exec()</code> OR <code>forkexec()</code></h1><div class="note note-warning">
+            <p>如上面所说，<code>fork</code>了之后再需要调用<code>exec</code>将替换子进程的内存，为什么不直接将<code>fork</code>和<code>exec</code>合并成一个system call呢?</p>
+          </div>
+<p>将<code>fork</code>与<code>exec</code>分成两个系统调用，方便了I/O redirection的实现</p>
+<p>如下所示, 我们希望将echo hello的输出结果重定向到<code>newfile.txt</code>。</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hello &gt; newfile.txt</span></code></pre></div>
+<p>shell实现的方法是: 在子进程创建后，调用 <code>exec</code>之前，shell关闭标准输出，并且打开文件<code>newfile.txt</code>, 这样结果就不会被输出到屏幕上，而是被输出到<code>newfile.txt</code>。</p>
+<p>当然这个效果也依赖于操作系统对文件描述符的管理方式。文件描述符由kernel管理的对象，用一个比较小的整数来表示，把文件描述符指向的对象称为file，通过文件描述符可以对文件进行读写操作。通常，0为standard input, 1为standard output, 2为standard error。在分配文件描述符时，UNIX系统会从0开始寻找第一个可以使用的文件描述符。shell关闭了标准输出后，<code>STDOUT_FILENO</code>就是第一个可以使用的文件描述符。调用<code>open</code>函数打开文件后，这个文件就会被分配到这个文件描述符。</p>
+<p>考虑，如果将<code>fork</code>, <code>exec</code>合并为一个系统调用<code>forkexec</code>，那怎么才能实现重定向呢？有几下几种思考</p>
+<ul>
+<li>shell在调用<code>forkexec</code>之前修改他的I/O</li>
+<li><code>forkexec</code>接受I/O重定向的参数</li>
+<li>每个程序自己处理I/O重定向问题</li>
+</ul>
+<p>显然，这些都比较复杂。还是将<code>fork</code>和<code>exec</code>作为两个函数比较方便。但是，这也有一个问题，fork需要拷贝内存，而exec需要替换内存，这样是比较浪费时间的，所以后面会采用copy-on-write的方式进行优化。</p>
 
             </div>
             <hr>
@@ -240,7 +354,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Computer-Architecture/">Computer Architecture</a>
+                      <a class="hover-with-bg" href="/categories/Operating-System/">Operating System</a>
                     
                   </div>
                 
@@ -248,7 +362,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Computer-Architecture/">Computer Architecture</a>
+                      <a class="hover-with-bg" href="/tags/Operating-System/">Operating System</a>
                     
                   </div>
                 
@@ -261,18 +375,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/27/OSInterfaces/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">操作系统接口</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/29/MSHR/">
-                        <span class="hidden-mobile">Miss Status Holding Registers (MSHR)</span>
+                      <a href="/2020/10/29/LL-SC/">
+                        <span class="hidden-mobile">LL/SC</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -522,7 +630,7 @@
       if ('true' === 'true') {
         var viewCtn = document.querySelector('#leancloud-post-views-container');
         if (viewCtn || enableIncr) {
-          var target = decodeURI('/2020/10/29/LL-SC/');
+          var target = decodeURI('/2020/11/27/OSInterfaces/');
           var viewGetter = getRecord(Counter, target).then((record) => {
             incrArr.push(buildIncrement(record.objectId))
             if (viewCtn) {
@@ -616,7 +724,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "LL/SC&nbsp;",
+        "操作系统接口&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
