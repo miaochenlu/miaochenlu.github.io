@@ -208,6 +208,8 @@ $ echo hell > /tmp/xyz; wc < /tmp/xyz
 
 <br>
 
+<br>
+
 # references
 
 [1]https://en.wikipedia.org/wiki/File_descriptor
