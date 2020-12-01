@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Chenlu Miao">
   <meta name="keywords" content="">
-  <title>操作系统接口 - Explorer</title>
+  <title>pipe - Explorer</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -157,8 +157,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-11-27 11:44" pubdate>
-      November 27, 2020 am
+    <time datetime="2020-12-01 14:35" pubdate>
+      December 1, 2020 pm
     </time>
   </div>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      20
        分钟
     </span>
   
@@ -216,135 +216,129 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">操作系统接口</h1>
+            <h1 style="display: none">pipe</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 29, 2020 am
+                  本文最后更新于：December 1, 2020 pm
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>如下图所示是一个计算机系统，最底层有有一些硬件资源，比如: CPU, 内存，磁盘，网卡。</p>
-<p>在上层运行一些应用程序，比如一个文本编辑器（VI），一个C编译器(CC), 一个Shell。这些程序都运行在一个空间中：用户空间(user space)。</p>
-<p>除了用户空间还存在一个内核空间(kernel space)。kernel对底层管理硬件资源，为上层程序提供了大量的服务。他对用户空间程序(进程)，对内存进行分配，进行访问控制……。kernel程序总是第一个被启动的，他也是独一无二的存在。</p>
-<p><img src="OS.jpg" srcset="/img/loading.gif" alt="OS" style="zoom:80%;" /></p>
-<p>用户空间又如何与内核空间进行交互呢？这是通过一系列的接口来实现的。通常这通过系统调用 (system call)来实现。</p>
-<p>如下图所示，在用户空间中有一个shell程序在运行。如果这个时候得到一条读取文件的命令，shell invoke <code>read</code> 这个system call， 跳转到内核空间，执行该命令，然后将结果返回用户空间。 [这里是这么实现的呢]</p>
-<p><img src="image-20201127194539928.png" srcset="/img/loading.gif" alt="image-20201127194539928" style="zoom:80%;" /></p>
-<h1 id="一些系统调用"><a href="#一些系统调用" class="headerlink" title="一些系统调用"></a>一些系统调用</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a><code>fork</code></h2><div class="table-container">
+              <a id="more"></a>
+<h1 id="File-Descriptor—操作系统是怎样操作文件的？"><a href="#File-Descriptor—操作系统是怎样操作文件的？" class="headerlink" title="File Descriptor—操作系统是怎样操作文件的？"></a>File Descriptor—操作系统是怎样操作文件的？</h1><h2 id="1-什么是file-descriptor"><a href="#1-什么是file-descriptor" class="headerlink" title="1. 什么是file descriptor"></a>1. 什么是file descriptor</h2><p>文件描述符是一个small int，它代表了一个内核管理的对象(kernel-managed object)，进程可以通过文件描述符对该对象进行读写操作。</p>
+<p>进程可能通过如下方法获取文件描述符： 打开文件、目录或设备，创建管道，复制一个已有的描述符。为简单起见，文件描述符指向的对象都被称为是“文件”；文件描述符抽象出来文件、管道和设备的共同点，使它们看起来都像是字节流。</p>
+<p>文件描述符从0开始计数。按照惯例，0是标准输入，1是标准输出，2是标准错误。</p>
+<p><img src="pipe012.jpg" srcset="/img/loading.gif" alt="pipe012" style="zoom:80%;" /></p>
+<h2 id="2-那怎么通过file-descriptor来操作文件呢"><a href="#2-那怎么通过file-descriptor来操作文件呢" class="headerlink" title="2. 那怎么通过file descriptor来操作文件呢"></a>2. 那怎么通过file descriptor来操作文件呢</h2><p><img src="organization.jpg" srcset="/img/loading.gif" alt="organization" style="zoom:80%;" /></p>
+<p>如图有三个table: (per-process) file descriptor table, (system-wide) file table, inode table。 通过这三个table, 我们可以就可以通过file descriptor来处理文件了</p>
+<p>内核为每个进程维护一个file descriptor table, 它保存了文件描述符并且指向一个file table entry。(per-process)</p>
+<p>内核维护了一个全局的file table, 记录了所有被打开的文件的信息。每个entry记录了这个file所处的mode (read, write, …), 当前操作的偏移量，它指向inode table中的一个entry</p>
+<p>inode table对应真实的underlying file的信息。</p>
+<h2 id="3-open-close-dup-…"><a href="#3-open-close-dup-…" class="headerlink" title="3. open, close,dup …"></a>3. open, close,dup …</h2><p>system call <code>close</code>会释放一个file descriptor, 以供以后的 <code>open</code>, <code>pipe</code>, <code>dup</code>等系统调用进行使用。</p>
+<p>在分配file descriptor时，系统总是会分配最小的、没有被使用的file descriptor。</p>
+<div class="hljs"><pre><code class="hljs cpp">close(<span class="hljs-number">0</span>);
+open(<span class="hljs-string">"input.txt"</span>, O_RDONLY);</code></pre></div>
+<p>系统调用<code>close</code>释放了file descriptor 0, 那么当前最小的，可供分配的file descriptor就是0</p>
+<p>然后以只读的方式打开了文件<code>input.txt</code>, 他将会被分配到file descriptor 0</p>
+<p><code>dup</code>这个系统调用会分配一个新的file descriptor，指向当前file descriptor指向的object。</p>
+<div class="hljs"><pre><code class="hljs cpp">fd = dup(<span class="hljs-number">1</span>);</code></pre></div>
+<p>fd得到了一个指向[file descriptor 1指向的object]的file descriptor （禁止套娃!</p>
+<h1 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h1><div class="table-container">
 <table>
 <thead>
 <tr>
-<th>System Call</th>
+<th>System cal</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>int fork()</code></td>
-<td>Create a process, return child’s PID</td>
+<td>int pipe(int p[])</td>
+<td>Create a pipe, put read/write file descriptors in p[0] and p[1]</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><code>fork</code> 的作用是克隆进程，也就是将原先的一个进程再克隆出一个来，克隆出的这个进程就是原进程的子进程，这个子进程和其他的进程没有什么区别，同样拥有自己的独立的地址空间。不同的是子进程是在fork返回之后才开始执行的。</p>
-<p>在XV6中，父子进程除了fork的返回值，其他都是一样的。除了内存是一样的以外，文件描述符的表单也从父进程拷贝到子进程。所以如果父进程打开了一个文件，子进程可以看到同一个文件描述符，尽管子进程看到的是一个文件描述符的表单的拷贝。</p>
-<p><code>fork</code>函数有三个返回值</p>
-<ul>
-<li>该进程为父进程时，返回子进程的pid</li>
-<li>该进程为子进程时，返回0</li>
-<li>fork执行失败，返回-1</li>
-</ul>
-<p><img src="v2-c5c3ba7e5e1f3eb0127683faef9cce32_720w.png" srcset="/img/loading.gif" alt="img" style="zoom:67%;" /></p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt; 	//for fork</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;sys/wait.h&gt;//for wait</span></span>
-
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-  <span class="hljs-keyword">int</span> pid = fork();
-  <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>) &#123;
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"parent: child = %d\n"</span>, pid);
-    pid = wait(<span class="hljs-number">0</span>);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"child %d is done\n"</span>, pid);
-  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>) &#123;
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"child: exiting\n"</span>);
-  &#125; <span class="hljs-keyword">else</span> &#123;
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"fork error\n"</span>);
-  &#125;
-&#125;</code></pre></div>
-<p>输出</p>
-<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash">./a.out</span>
-parent: child = 24482
-child: exiting
-child 24482 is done</code></pre></div>
-<h2 id="exec"><a href="#exec" class="headerlink" title="exec"></a><code>exec</code></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>System call</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>int exec(char* file, char* argv[])</code></td>
-<td>Load a file and execute it with arguments; only returns if error</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>把当前进程的内存替换为文件里保存的内存镜像并执行之。<code>exec</code>有两个参数，第一个是要执行的程序，第二个这个程序的参数(以字符串数组的形式出现)。</p>
-<ol>
-<li>exec系统调用会保留当前的文件描述符表单。所以任何在exec系统调用之前的文件描述符，例如0，1，2等。它们在新的程序中表示相同的东西。</li>
-<li>通常来说exec系统调用不会返回，因为exec会完全替换当前进程的内存，相当于当前进程不复存在了，所以exec系统调用已经没有地方能返回了。</li>
-</ol>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
-
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-  <span class="hljs-keyword">char</span>* argv[] = &#123;<span class="hljs-string">"echo"</span>, <span class="hljs-string">"this"</span>, <span class="hljs-string">"is"</span>, <span class="hljs-string">"echo"</span>, <span class="hljs-number">0</span>&#125;;
-  execv(<span class="hljs-string">"/bin/echo"</span>, argv);
-
-  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"exec failed\n"</span>);
-&#125;</code></pre></div>
-<p>输出</p>
-<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> ./a.out  </span>
-this is echo</code></pre></div>
-<h2 id="shell是怎么工作的"><a href="#shell是怎么工作的" class="headerlink" title="shell是怎么工作的"></a>shell是怎么工作的</h2><p>首先看 <code>main</code> 函数，main loop通过 <code>getcmd</code>读取一行输入</p>
-<p>然后调用 <code>fork</code>函数，创建一个shell process的copy。子进程通过<code>runcmd</code>执行命令，父进程等待。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span>
-main(<span class="hljs-keyword">void</span>)
-&#123;
-  	<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">100</span>];
-	..
-
-      <span class="hljs-comment">// Read and run input commands.</span>
-    <span class="hljs-keyword">while</span>(getcmd(buf, <span class="hljs-keyword">sizeof</span>(buf)) &gt;= <span class="hljs-number">0</span>)&#123;
-    	...
-        <span class="hljs-keyword">if</span>(fork1() == <span class="hljs-number">0</span>)
-          runcmd(parsecmd(buf));
-        wait(<span class="hljs-number">0</span>);
-    &#125;
-    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
-&#125;</code></pre></div>
-<p>比如用户在shell中输入了 <code>echo hello</code>, <code>getcmd</code>获取了这条命令，通过fork创建了子进程，子进程调用 <code>runcmd</code>函数，<code>runcmd</code>将<code>echo hello</code>作为其参数。在<code>runcmd</code>中，他调用 <code>exec</code>函数执行<code>echo</code>。在某个时刻, <code>echo</code>调用 <code>exit</code>函数，这使父进程return from <code>wait</code></p>
-<p><img src="OS-2.png" srcset="/img/loading.gif" alt="OS-2" style="zoom:80%;" /></p>
-<h1 id="fork-amp-exec-OR-forkexec"><a href="#fork-amp-exec-OR-forkexec" class="headerlink" title="fork() &amp; exec() OR forkexec()"></a><code>fork()</code> &amp; <code>exec()</code> OR <code>forkexec()</code></h1><div class="note note-warning">
-            <p>如上面所说，<code>fork</code>了之后再需要调用<code>exec</code>将替换子进程的内存，为什么不直接将<code>fork</code>和<code>exec</code>合并成一个system call呢?</p>
+<p>pipe用于进程间的通信，它其实是内核里一块小的缓冲区，这个缓冲区向进程提供了一对文件描述符，一个用于读而另一个用于写。向管道的一端写数据，会使管道的另一端可以读这些数据。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> p[<span class="hljs-number">2</span>];
+pipe(p);</code></pre></div>
+<p>程序调用<code>pipe</code>来创建管道，并把读和写的文件描述符记录在数组<code>p</code>里, p[0]为读端，p[1]为写端，可以通过file descriptor <code>p[1]</code>向pipe buffer写入内容，通过file descriptor <code>p[0]</code>从pipe buffer中读取内容。</p>
+<div class="note note-warning">
+            <p>pipe中的内容存储在pipe buffer中，pipe buffer是kernel space中的一块空间，他的大小是有限的。</p>
           </div>
-<p>将<code>fork</code>与<code>exec</code>分成两个系统调用，方便了I/O redirection的实现</p>
-<p>如下所示, 我们希望将echo hello的输出结果重定向到<code>newfile.txt</code>。</p>
-<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hello &gt; newfile.txt</span></code></pre></div>
-<p>shell实现的方法是: 在子进程创建后，调用 <code>exec</code>之前，shell关闭标准输出，并且打开文件<code>newfile.txt</code>, 这样结果就不会被输出到屏幕上，而是被输出到<code>newfile.txt</code>。</p>
-<p>当然这个效果也依赖于操作系统对文件描述符的管理方式。文件描述符由kernel管理的对象，用一个比较小的整数来表示，把文件描述符指向的对象称为file，通过文件描述符可以对文件进行读写操作。通常，0为standard input, 1为standard output, 2为standard error。在分配文件描述符时，UNIX系统会从0开始寻找第一个可以使用的文件描述符。shell关闭了标准输出后，<code>STDOUT_FILENO</code>就是第一个可以使用的文件描述符。调用<code>open</code>函数打开文件后，这个文件就会被分配到这个文件描述符。</p>
-<p>考虑，如果将<code>fork</code>, <code>exec</code>合并为一个系统调用<code>forkexec</code>，那怎么才能实现重定向呢？有几下几种思考</p>
+<p>关于pipe是如何实现的，可以<a href="https://www.halolinux.us/kernel-reference/creating-and-destroying-a-pipe.html" target="_blank" rel="noopener">点我</a></p>
+<p><img src="addpipe.jpg" srcset="/img/loading.gif" alt="addpipe" style="zoom:100%;" /></p>
+<h2 id="pipe-amp-fork"><a href="#pipe-amp-fork" class="headerlink" title="pipe &amp; fork"></a>pipe &amp; fork</h2><p><code>pipe</code>一般会和<code>fork</code>配合使用</p>
+<p>下面的代码是一个例子</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> p[<span class="hljs-number">2</span>];
+<span class="hljs-keyword">char</span> *argv[<span class="hljs-number">2</span>];
+
+argv[<span class="hljs-number">0</span>] = <span class="hljs-string">"wc"</span>;
+argv[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
+
+pipe(p);
+<span class="hljs-keyword">if</span>(fork() == <span class="hljs-number">0</span>) &#123;
+    close(<span class="hljs-number">0</span>);
+    dup(p[<span class="hljs-number">0</span>]);
+    close(p[<span class="hljs-number">0</span>]);
+    close(p[<span class="hljs-number">1</span>]);
+    exec(<span class="hljs-string">"/bin/wc"</span>, argv);
+&#125; <span class="hljs-keyword">else</span> &#123;
+    close(p[<span class="hljs-number">0</span>]);
+    write(p[<span class="hljs-number">1</span>], <span class="hljs-string">"hello world\n"</span>, <span class="hljs-number">12</span>);
+    close(p[<span class="hljs-number">1</span>]);
+&#125;</code></pre></div>
+<p>分段解析这份代码</p>
 <ul>
-<li>shell在调用<code>forkexec</code>之前修改他的I/O</li>
-<li><code>forkexec</code>接受I/O重定向的参数</li>
-<li>每个程序自己处理I/O重定向问题</li>
+<li>首先<code>pipe(p)</code>, <code>fork()</code>。注意fork的时候file descriptor是会被复制的</li>
 </ul>
-<p>显然，这些都比较复杂。还是将<code>fork</code>和<code>exec</code>作为两个函数比较方便。但是，这也有一个问题，fork需要拷贝内存，而exec需要替换内存，这样是比较浪费时间的，所以后面会采用copy-on-write的方式进行优化。</p>
+<p><img src="forkprocess.jpg" srcset="/img/loading.gif" alt="forkprocess" style="zoom:67%;" /></p>
+<ul>
+<li>子进程关闭了0, dup(p[0]), 这样0这个file descriptor就会指向pipe的读一端。子进程继续关闭了p[0], p[1];  父进程关闭了p[0]。形成的局面是，parent 可以通过p[1]将内容写入pipe, child可以通过file descriptor 0读pipe中的内容</li>
+</ul>
+<p><img src="closedup.jpg" srcset="/img/loading.gif" alt="closedup" style="zoom:67%;" /></p>
+<ul>
+<li>父进程将”hello world\n”写入pipe。子进程执行的<code>wc</code>程序从标准输入里读时，它就是从pipe里读。当pipe里没有数据的时候，管道上的<code>read</code>要么等数据写入，要么等写入端的文件描述符被关闭；在后一种情况下，<code>read</code>将返回0，就像到达了数据文件的尾部一样</li>
+</ul>
+<p><img src="afterwrite.jpg" srcset="/img/loading.gif" alt="afterwrite" style="zoom:67%;" /></p>
+<ul>
+<li>父进程写完后，close(p[1])。此时，这个pipe的所有写端都已关闭。子进程<code>wc</code>处理完pipe中的数据后，在标准输出显示”hello world\n”</li>
+</ul>
+<p><img src="eof.jpg" srcset="/img/loading.gif" alt="eof" style="zoom:67%;" /></p>
+<h2 id="Shell-Pipeline"><a href="#Shell-Pipeline" class="headerlink" title="Shell Pipeline"></a>Shell Pipeline</h2><p>shell的命令可以流水线执行</p>
+<p>如下所示，<code>echo hello</code>的output作为了<code>wc</code>的input, 最终结果被输出在屏幕上</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hello | wc</span>
+1 1 6</code></pre></div>
+<p>shell中pipeline的处理和pipe&amp;fork中的代码示例的道理是一样的。</p>
+<p>shell会fork出一个子进程z来处理<code>echo hello | wc</code>。</p>
+<p>为了将左边的输出发送给右边，子进程z创建一个pipe来连接左边cmd和右边cmd。</p>
+<p>接着，子进程z调用fork创建z1, 通过<code>runcmd</code>执行左边的命令，再<code>fork</code>创建z2, 通过<code>runcmd</code>执行右边的命令。子进程等待两边执行结束。使用方式，在处理pipeline的过程中shell可以创建出一棵进程树</p>
+<div class="note note-warning">
+            <p>为什么需要fork两次呢，子进程z不能用来执行左边或者右边的命令吗？</p><p>A: 这样是不合理的。考虑<code>echo hello | wc</code>这行命令，z执行左边的命令。那么echo hello执行完了之后z进程直接exit, 不会再fork出进程来执行右边的命令了。因为这个问题，我们可能需要修改代码，让runcmd执行左边的命令时不调用exit，这会使code复杂化。</p><p>z执行右边也是同理的，考虑<code>sleep 10 | echo hi</code>这行命令，会直接输出”hi”然后z exit, 不会再sleep 10了。</p>
+          </div>
+<p><br></p>
+<p>如下shell pipeline可以创建出一棵进程树</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> a | b | c | d</span></code></pre></div>
+<p><img src="pipelineprocesstree.jpg" srcset="/img/loading.gif" alt="pipelineprocesstree" style="zoom:67%;" /></p>
+<h1 id="pipe的优势"><a href="#pipe的优势" class="headerlink" title="pipe的优势"></a>pipe的优势</h1><p>看起来管道做的事，用临时文件重定向也可以做。一下两行命令可以 达到同样的效果</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hello | wc</span>
+<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hell &gt; /tmp/xyz; wc &lt; /tmp/xyz</span></code></pre></div>
+<p>但实际上，管道比临时文件至少有如下优势：</p>
+<ol>
+<li>管道会自动清除它自己，而使用重定向则要手动清除临时文件。</li>
+<li>管道可以传输任意长度的数据流，而重定向则要求磁盘有足够的空间来保存所有的数据。</li>
+<li>管道可以并行执行，而重定向只能依次执行。</li>
+<li>如果进行的是进程间通信，管道阻塞读和写这样的语义比文件的非阻塞语义更有效。</li>
+</ol>
+<p><br></p>
+<h1 id="references"><a href="#references" class="headerlink" title="references"></a>references</h1><p>[1]<a href="https://en.wikipedia.org/wiki/File_descriptor" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/File_descriptor</a></p>
+<p>[2]<a href="https://www.computerhope.com/jargon/f/file-descriptor.htm" target="_blank" rel="noopener">https://www.computerhope.com/jargon/f/file-descriptor.htm</a></p>
+<p>[3]<a href="https://zhuanlan.zhihu.com/p/105086274" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/105086274</a></p>
+<p>[4]<a href="https://stackoverflow.com/questions/33151457/where-does-the-linux-kernel-keep-the-data-written-to-a-pipe" target="_blank" rel="noopener">https://stackoverflow.com/questions/33151457/where-does-the-linux-kernel-keep-the-data-written-to-a-pipe</a></p>
+<p>[5]<a href="https://www.halolinux.us/kernel-reference/creating-and-destroying-a-pipe.html" target="_blank" rel="noopener">https://www.halolinux.us/kernel-reference/creating-and-destroying-a-pipe.html</a></p>
+<p>[6]<a href="http://www.rozmichelle.com/pipes-forks-dups/" target="_blank" rel="noopener">http://www.rozmichelle.com/pipes-forks-dups/</a></p>
+<p>[7]<a href="https://github.com/shzhxh/xv6-riscv-book-CN/blob/master/1_操作系统接口.md" target="_blank" rel="noopener">https://github.com/shzhxh/xv6-riscv-book-CN/blob/master/1_操作系统接口.md</a></p>
 
             </div>
             <hr>
@@ -375,18 +369,12 @@ main(<span class="hljs-keyword">void</span>)
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/30/QuizGameInGolang/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">QuizGameInGolang</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/29/LL-SC/">
-                        <span class="hidden-mobile">LL/SC</span>
+                      <a href="/2020/11/30/QuizGameInGolang/">
+                        <span class="hidden-mobile">QuizGameInGolang</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -636,7 +624,7 @@ main(<span class="hljs-keyword">void</span>)
       if ('true' === 'true') {
         var viewCtn = document.querySelector('#leancloud-post-views-container');
         if (viewCtn || enableIncr) {
-          var target = decodeURI('/2020/11/27/OSInterfaces/');
+          var target = decodeURI('/2020/12/01/pipe/');
           var viewGetter = getRecord(Counter, target).then((record) => {
             incrArr.push(buildIncrement(record.objectId))
             if (viewCtn) {
@@ -730,7 +718,7 @@ main(<span class="hljs-keyword">void</span>)
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "操作系统接口&nbsp;",
+        "pipe&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
