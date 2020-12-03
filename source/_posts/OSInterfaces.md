@@ -3,7 +3,7 @@ title: 操作系统接口
 date: 2020-11-27 19:44:30
 tags: Operating System
 categories: Operating System
-index_img: /img/20201129OS.jpg
+index_img: /img/operatingsystem.jpg
 ---
 
 # Overview

@@ -149,6 +149,21 @@ if(fork() == 0) {
 
 <img src="eof.jpg" alt="eof" style="zoom:67%;" />
 
+
+
+
+
+{% note warning %}
+
+ 为什么linux中的pipe end不用要关闭
+
+* 首先，file descriptor可以分配的数量是有限的
+* 另外，读操作会一直读或者一直阻塞，直到看到了end of file。在pipe的所有写端都关闭时，才会有end of file信号。
+
+{% endnote %}
+
+
+
 ## Shell Pipeline
 
 shell的命令可以流水线执行
