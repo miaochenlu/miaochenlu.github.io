@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.7k 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      21
        分钟
     </span>
   
@@ -220,7 +220,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 1, 2020 pm
+                  本文最后更新于：December 3, 2020 am
                 
               </p>
             
@@ -306,6 +306,9 @@ pipe(p);
 <li>父进程写完后，close(p[1])。此时，这个pipe的所有写端都已关闭。子进程<code>wc</code>处理完pipe中的数据后，在标准输出显示”hello world\n”</li>
 </ul>
 <p><img src="eof.jpg" srcset="/img/loading.gif" alt="eof" style="zoom:67%;" /></p>
+<div class="note note-warning">
+            <p> 为什么linux中的pipe end不用要关闭</p><ul><li>首先，file descriptor可以分配的数量是有限的</li><li>另外，读操作会一直读或者一直阻塞，直到看到了end of file。在pipe的所有写端都关闭时，才会有end of file信号。</li></ul>
+          </div>
 <h2 id="Shell-Pipeline"><a href="#Shell-Pipeline" class="headerlink" title="Shell Pipeline"></a>Shell Pipeline</h2><p>shell的命令可以流水线执行</p>
 <p>如下所示，<code>echo hello</code>的output作为了<code>wc</code>的input, 最终结果被输出在屏幕上</p>
 <div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">echo</span> hello | wc</span>
@@ -370,12 +373,18 @@ pipe(p);
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2020/12/03/xv6-lab1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Xv6 and Unix utilities [OS lab1]</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/30/QuizGameInGolang/">
-                        <span class="hidden-mobile">QuizGameInGolang</span>
+                      <a href="/2020/11/27/OSInterfaces/">
+                        <span class="hidden-mobile">操作系统接口</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
