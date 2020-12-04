@@ -664,7 +664,397 @@ int main(int argc, char* argv[]) {
 
 # find
 
+{%note primary%}
+
+Write a simple version of the UNIX find program: find all the files in a directory tree with a specific name. Your solution should be in the file `user/find.c`.
+
+{%endnote%}
+
+## Some hints:
+
+{%note success%}
+
+* Look at `user/ls.c` to see how to read directories.
+
+{% endnote %}
+
+这是`user/ls.c`的代码
+
+```cpp
+#include "kernel/types.h"
+#include "kernel/stat.h"
+#include "user/user.h"
+#include "kernel/fs.h"
+
+char*
+fmtname(char *path)
+{
+  static char buf[DIRSIZ+1];
+  char *p;
+
+  // Find first character after last slash.
+  for(p=path+strlen(path); p >= path && *p != '/'; p--)
+    ;
+  p++;
+
+  // Return blank-padded name.
+  if(strlen(p) >= DIRSIZ)
+    return p;
+  memmove(buf, p, strlen(p));
+  memset(buf+strlen(p), ' ', DIRSIZ-strlen(p));
+  return buf;
+}
+
+void
+ls(char *path)
+{
+  char buf[512], *p;
+  int fd;
+  struct dirent de;
+  struct stat st;
+
+  if((fd = open(path, 0)) < 0){
+    fprintf(2, "ls: cannot open %s\n", path);
+    return;
+  }
+
+  if(fstat(fd, &st) < 0){
+    fprintf(2, "ls: cannot stat %s\n", path);
+    close(fd);
+    return;
+  }
+
+  switch(st.type){
+  case T_FILE:
+    printf("%s %d %d %l\n", fmtname(path), st.type, st.ino, st.size);
+    break;
+
+  case T_DIR:
+    if(strlen(path) + 1 + DIRSIZ + 1 > sizeof buf){
+      printf("ls: path too long\n");
+      break;
+    }
+    strcpy(buf, path);
+    p = buf+strlen(buf);
+    *p++ = '/';
+    while(read(fd, &de, sizeof(de)) == sizeof(de)){
+      if(de.inum == 0)
+        continue;
+      memmove(p, de.name, DIRSIZ);
+      p[DIRSIZ] = 0;
+      if(stat(buf, &st) < 0){
+        printf("ls: cannot stat %s\n", buf);
+        continue;
+      }
+      printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
+    }
+    break;
+  }
+  close(fd);
+}
+
+int
+main(int argc, char *argv[])
+{
+  int i;
+
+  if(argc < 2){
+    ls(".");
+    exit(0);
+  }
+  for(i=1; i<argc; i++)
+    ls(argv[i]);
+  exit(0);
+
+```
+
+总结一下就是
+
+* 由于需要获取文件的类型等信息，用`fstat`函数获取文件的stat信息
+
+```cpp
+if(fstat(fd, &st) < 0){
+    fprintf(2, "ls: cannot stat %s\n", path);
+    close(fd);
+    return;
+}
+```
+
+* 根据文件类型 `st.type`分别进行处理
+
+  * 如果是`T_FILE`, 直接输出文件信息
+
+  * 如果是`T_DIR`,  需要输出目录包含的文件的信息目录文件通过一个个struct direct (directory entry)来记录他所包含的文件
+
+    建了一个buf数组来存放目录中文件的path, 他将会存储的信息是目录path+"/"+filename+'/0'
+
+    因此，这里先对path的size做了限制，不能超过buf的大小
+
+    然后，将directory的path拷贝到buf中，并且加入了一个'/'
+
+    接着循环读取目录中的dirent结构到de。根据de, 获得filename, filename拷贝到buf， 输出文件信息。
+
+
+
+{%note success%}
+
+- Use recursion to allow find to descend into sub-directories.
+
+{% endnote %}
+
+{%note success%}
+
+- Don't recurse into "." and "..".
+
+{% endnote %}
+
+这里如果不做处理会进入死循环
+
+{%note success%}
+
+- Changes to the file system persist across runs of qemu; to get a clean file system run make clean and then make qemu.
+
+{% endnote %}
+
+{%note success%}
+
+- You'll need to use C strings. Have a look at K&R (the C book), for example Section 5.5.
+
+{% endnote %}
+
+{%note success%}
+
+- Note that `==` does not compare strings like in Python. Use strcmp() instead.
+
+{% endnote %}
+
+{%note success%}
+
+- Add the program to `UPROGS` in Makefile.
+
+{% endnote %}
+
+## Final Code
+
+思路: find命令的使用方式是`find dir filename`
+
+打开directory, 获取里面每个文件的信息
+
+* 如果是文件： 文件名字与需要查找的文件名相同，就组织成path输出
+
+* 如果是目录，并且不是".", "..", 就递归查找
+
+```cpp
+#include "kernel/types.h"
+#include "kernel/stat.h"
+#include "user/user.h"
+#include "kernel/fs.h"
+
+
+void find(char* path, char* filename) {
+    char buf[512], *p;
+    int fd;
+    struct dirent de;
+    struct stat st;
+
+    if((fd = open(path, 0)) < 0) {
+        fprintf(2, "find: cannot open %s\n", path);
+        return;
+    }
+
+    if(fstat(fd, &st) < 0) {
+        fprintf(2, "find: cannot stat %s\n", path);
+        close(fd);
+        return;
+    }
+
+    if(st.type != T_DIR) {
+        fprintf(2, "find: %s is not a directory\n", path);
+        close(fd);
+        return;
+    }
+    if(strlen(path) + 1 + DIRSIZ + 1 > sizeof buf){
+        printf("find: path too long\n");
+        close(fd);
+        return;
+    }
+
+    strcpy(buf, path);
+    p = buf+strlen(buf);
+    *p++ = '/';
+
+    while(read(fd, &de, sizeof(de)) == sizeof(de)) {
+        if(de.inum == 0) 
+            continue;
+        if(strcmp(de.name, ".") == 0 || strcmp(de.name, "..") == 0)
+            continue;
+        memmove(p, de.name, DIRSIZ);
+        p[DIRSIZ] = 0;
+        if(stat(buf, &st) < 0) {
+            fprintf(2, "find: cannot stat %s\n", buf);;
+            continue;
+        }
+
+        switch (st.type)
+        {
+        case T_FILE:
+            if(strcmp(de.name, filename) == 0) {
+                printf("%s\n", buf);
+            }
+            break;
+        
+        case T_DIR:
+            find(buf, filename);
+        }
+    }
+    close(fd);
+}
+
+int
+main(int argc, char *argv[])
+{
+  if(argc < 3){
+    fprintf(2, "Usage: find path filename\n");
+    exit(1);
+  }
+  find(argv[1], argv[2]);
+  exit(0);
+}
+
+```
+
+
+
 
 
 # xargs
+
+{% note primary %}
+
+Write a simple version of the UNIX xargs program: read lines from the standard input and run a command for each line, supplying the line as arguments to the command. Your solution should be in the file `user/xargs.c`.
+
+{% endnote %}
+
+
+
+The following example illustrates xarg's behavior:
+
+```shell
+$ echo hello too | xargs echo bye
+bye hello too
+$
+```
+
+Note that the command here is "echo bye" and the additional arguments are "hello too", making the command "echo bye hello too", which outputs "bye hello too".
+
+Please note that xargs on UNIX makes an optimization where it will feed more than argument to the command at a time. We don't expect you to make this optimization. To make xargs on UNIX behave the way we want it to for this lab, please run it with the -n option set to 1. For instance
+
+```shell
+$ echo "1\n2" | xargs -n 1 echo line
+line 1
+line 2
+$
+```
+
+我感觉这个命令的意思是从标准输入读取数据作为后面命令的参数
+
+## Some hints:
+
+{% note success %}
+
+- Use `fork` and `exec` to invoke the command on each line of input. Use `wait` in the parent to wait for the child to complete the command.
+
+{% endnote %}
+
+{% note success %}
+
+- To read individual lines of input, read a character at a time until a newline ('\n') appears.
+
+{% endnote %}
+
+{% note success %}
+
+- `kernel/param.h declares MAXARG`, which may be useful if you need to declare an argv array.
+
+{% endnote %}
+
+```cpp
+#define MAXARG       32  // max exec arguments
+```
+
+{% note success %}
+
+- Add the program to `UPROGS` in Makefile.
+
+{% endnote %}
+
+{% note success %}
+
+- Changes to the file system persist across runs of qemu; to get a clean file system run make clean and then make qemu.
+
+{% endnote %}
+
+xargs, find, and grep combine well:
+
+```shell
+$ find . b | xargs grep hello
+```
+
+will run "grep hello" on each file named b in the directories below ".".
+
+
+
+
+
+
+
+## Final Code
+
+这个命令的重点在于重新组织`argv`, 将标准输入中的内容作为参数放入`argv`
+
+```cpp
+#include "kernel/types.h"
+#include "kernel/param.h"
+#include "user/user.h"
+
+int main(int argc, char* argv[]) {
+    char *nargs[MAXARG];
+    int argCount = 0;
+    for(int i = 1; i < argc; i++) {
+        nargs[argCount++] = argv[i];
+    }
+
+    char tmpchar = 0;
+    char buffer[1024];
+
+    int status = 1;
+    while(status) {
+        int pos = 0;
+        int argStartPos = 0;
+        
+        while(1) {
+            status = read(0, &tmpchar, 1);
+            if(status == 0) exit(0);
+            if(tmpchar != ' ' && tmpchar != '\n') {
+                buffer[pos++] = tmpchar;
+            } else if(tmpchar == ' ') {
+                buffer[pos++] = 0;
+                nargs[argCount++] = &buffer[argStartPos];
+                argStartPos = pos;
+            } else if(tmpchar == '\n') {
+                nargs[argCount++] = &buffer[argStartPos];
+                argStartPos = pos;
+                break;
+            }
+        }
+
+        if(fork() == 0) {
+            exec(nargs[0], nargs);
+        } else {
+            wait(0);
+        }
+    }
+    exit(0);
+}
+```
 
