@@ -1,0 +1,1111 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>启动xv6创建第一个进程 - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-12-07 11:05" pubdate>
+      December 7, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">启动xv6创建第一个进程</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 8, 2020 am
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="Xv6启动过程"><a href="#Xv6启动过程" class="headerlink" title="Xv6启动过程"></a>Xv6启动过程</h1><ul>
+<li><p>xv6通电后先完成初始化</p>
+</li>
+<li><p>运行存储在ROM中的boot loader</p>
+</li>
+<li><p>boot loader将xv6 kernel加载到memory中。kernel被加载到0x80000000处，之所以不加载到0x0处是因为在0x0:0x80000000之间包含了I/O设备。（此时分页硬件被disable了，虚拟地址直接对应物理地址)</p>
+</li>
+<li><p>在machine mode下，CPU从<code>_entry</code>(<code>kernel/entry.S:6</code>)开始执行xv6。<code>_entry</code>的作用是为C代码的运行指定栈。在<code>start.c</code>中, xv6声明了初始stack的空间<code>stack0</code>。<code>_entry</code>中的代码将地址<code>stack0+4096</code>加载到stack pointer register <code>sp</code>，也就是栈顶的地址。</p>
+</li>
+</ul>
+<div class="hljs"><pre><code class="hljs assembly">		# qemu -kernel loads the kernel at 0x80000000
+        # and causes each CPU to jump there.
+        # kernel.ld causes the following code to
+        # be placed at 0x80000000.
+.section .text
+_entry:
+		# set up a stack for C.
+        # stack0 is declared in start.c,
+        # with a 4096-byte stack per CPU.
+        # sp &#x3D; stack0 + (hartid * 4096)
+        la sp, stack0
+        li a0, 1024*4
+		csrr a1, mhartid
+        addi a1, a1, 1
+        mul a0, a0, a1
+        add sp, sp, a0
+		# jump to start() in start.c
+        call start
+spin:
+        j spin</code></pre></div>
+<ul>
+<li>接着，<code>_entry</code>跳转到<code>start</code>的C代码。<code>start</code>做了一些只能在machine mode下做的配置。他还初始化计时器中断。接着，他切换到supervisor mode。为了转换到supervisor mode, RISCV提供了<code>mret</code>指令。这个指令通常是用来从一个之前supervisor mode转换到machine mode的调用返回。但<code>start</code>并没有从一个这样的调用返回，他假装自己从这样的一个调用返回。他在register <code>mstatus</code>中将之前的privilege mode设置为supervisor mode，在register <code>mepc</code>中将main的地址设置为返回的地址，在page-table register <code>satp</code>中写入0来disable虚拟地址转换，并且将所有的interrupts和exceptions授权给supervisor mode</li>
+</ul>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"types.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"param.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"memlayout.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"riscv.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"defs.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">timerinit</span><span class="hljs-params">()</span></span>;
+
+<span class="hljs-comment">// entry.S needs one stack per CPU.</span>
+__attribute__ ((aligned (<span class="hljs-number">16</span>))) <span class="hljs-keyword">char</span> stack0[<span class="hljs-number">4096</span> * NCPU];
+
+<span class="hljs-comment">// scratch area for timer interrupt, one per CPU.</span>
+uint64 mscratch0[NCPU * <span class="hljs-number">32</span>];
+
+<span class="hljs-comment">// assembly code in kernelvec.S for machine-mode timer interrupt.</span>
+<span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">timervec</span><span class="hljs-params">()</span></span>;
+
+<span class="hljs-comment">// entry.S jumps here in machine mode on stack0.</span>
+<span class="hljs-keyword">void</span>
+start()
+&#123;
+  <span class="hljs-comment">// set M Previous Privilege mode to Supervisor, for mret.</span>
+  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> x = r_mstatus();
+  x &amp;= ~MSTATUS_MPP_MASK;
+  x |= MSTATUS_MPP_S;
+  w_mstatus(x);
+
+  <span class="hljs-comment">// set M Exception Program Counter to main, for mret.</span>
+  <span class="hljs-comment">// requires gcc -mcmodel=medany</span>
+  w_mepc((uint64)main);
+
+  <span class="hljs-comment">// disable paging for now.</span>
+  w_satp(<span class="hljs-number">0</span>);
+
+  <span class="hljs-comment">// delegate all interrupts and exceptions to supervisor mode.</span>
+  w_medeleg(<span class="hljs-number">0xffff</span>);
+  w_mideleg(<span class="hljs-number">0xffff</span>);
+  w_sie(r_sie() | SIE_SEIE | SIE_STIE | SIE_SSIE);
+
+  <span class="hljs-comment">// ask for clock interrupts.</span>
+  timerinit();
+
+  <span class="hljs-comment">// keep each CPU's hartid in its tp register, for cpuid().</span>
+  <span class="hljs-keyword">int</span> id = r_mhartid();
+  w_tp(id);
+
+  <span class="hljs-comment">// switch to supervisor mode and jump to main().</span>
+  <span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span><span class="hljs-params">(<span class="hljs-string">"mret"</span>)</span></span>;
+&#125;
+
+<span class="hljs-comment">// set up to receive timer interrupts in machine mode,</span>
+<span class="hljs-comment">// which arrive at timervec in kernelvec.S,</span>
+<span class="hljs-comment">// which turns them into software interrupts for</span>
+<span class="hljs-comment">// devintr() in trap.c.</span>
+<span class="hljs-keyword">void</span>
+timerinit()
+&#123;
+  <span class="hljs-comment">// each CPU has a separate source of timer interrupts.</span>
+  <span class="hljs-keyword">int</span> id = r_mhartid();
+
+  <span class="hljs-comment">// ask the CLINT for a timer interrupt.</span>
+  <span class="hljs-keyword">int</span> interval = <span class="hljs-number">1000000</span>; <span class="hljs-comment">// cycles; about 1/10th second in qemu.</span>
+  *(uint64*)CLINT_MTIMECMP(id) = *(uint64*)CLINT_MTIME + interval;
+
+  <span class="hljs-comment">// prepare information in scratch[] for timervec.</span>
+  <span class="hljs-comment">// scratch[0..3] : space for timervec to save registers.</span>
+  <span class="hljs-comment">// scratch[4] : address of CLINT MTIMECMP register.</span>
+  <span class="hljs-comment">// scratch[5] : desired interval (in cycles) between timer interrupts.</span>
+  uint64 *scratch = &amp;mscratch0[<span class="hljs-number">32</span> * id];
+  scratch[<span class="hljs-number">4</span>] = CLINT_MTIMECMP(id);
+  scratch[<span class="hljs-number">5</span>] = interval;
+  w_mscratch((uint64)scratch);
+
+  <span class="hljs-comment">// set the machine-mode trap handler.</span>
+  w_mtvec((uint64)timervec);
+
+  <span class="hljs-comment">// enable machine-mode interrupts.</span>
+  w_mstatus(r_mstatus() | MSTATUS_MIE);
+
+  <span class="hljs-comment">// enable machine-mode timer interrupts.</span>
+  w_mie(r_mie() | MIE_MTIE);
+&#125;</code></pre></div>
+<ul>
+<li>调用<code>mret</code>后，program counter切到<code>main</code> (<code>kernel/main.c:11</code>), 在supervisor mode在运行。</li>
+</ul>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"types.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"param.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"memlayout.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"riscv.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"defs.h"</span></span>
+
+<span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> started = <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">// start() jumps here in supervisor mode on all CPUs.</span>
+<span class="hljs-keyword">void</span>
+main()
+&#123;
+  <span class="hljs-keyword">if</span>(cpuid() == <span class="hljs-number">0</span>)&#123;
+    consoleinit();
+    printfinit();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"xv6 kernel is booting\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    kinit();         <span class="hljs-comment">// physical page allocator</span>
+    kvminit();       <span class="hljs-comment">// create kernel page table</span>
+    kvminithart();   <span class="hljs-comment">// turn on paging</span>
+    procinit();      <span class="hljs-comment">// process table</span>
+    trapinit();      <span class="hljs-comment">// trap vectors</span>
+    trapinithart();  <span class="hljs-comment">// install kernel trap vector</span>
+    plicinit();      <span class="hljs-comment">// set up interrupt controller</span>
+    plicinithart();  <span class="hljs-comment">// ask PLIC for device interrupts</span>
+    binit();         <span class="hljs-comment">// buffer cache</span>
+    iinit();         <span class="hljs-comment">// inode cache</span>
+    fileinit();      <span class="hljs-comment">// file table</span>
+    virtio_disk_init(); <span class="hljs-comment">// emulated hard disk</span>
+    userinit();      <span class="hljs-comment">// first user process</span>
+    __sync_synchronize();
+    started = <span class="hljs-number">1</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">while</span>(started == <span class="hljs-number">0</span>)
+      ;
+    __sync_synchronize();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"hart %d starting\n"</span>, cpuid());
+    kvminithart();    <span class="hljs-comment">// turn on paging</span>
+    trapinithart();   <span class="hljs-comment">// install kernel trap vector</span>
+    plicinithart();   <span class="hljs-comment">// ask PLIC for device interrupts</span>
+  &#125;
+
+  scheduler();        
+&#125;</code></pre></div>
+<ul>
+<li><code>main</code>初始化了一些设备和子系统，通过调用<code>userint</code>(<code>kernel/proc.c:212</code>)创建了第一个process</li>
+</ul>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-comment">// a user program that calls exec("/init")</span>
+<span class="hljs-comment">// od -t xC initcode</span>
+uchar initcode[] = &#123;
+  <span class="hljs-number">0x17</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x13</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x45</span>, <span class="hljs-number">0x02</span>,
+  <span class="hljs-number">0x97</span>, <span class="hljs-number">0x05</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x93</span>, <span class="hljs-number">0x85</span>, <span class="hljs-number">0x35</span>, <span class="hljs-number">0x02</span>,
+  <span class="hljs-number">0x93</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0x70</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x73</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>,
+  <span class="hljs-number">0x93</span>, <span class="hljs-number">0x08</span>, <span class="hljs-number">0x20</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x73</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>,
+  <span class="hljs-number">0xef</span>, <span class="hljs-number">0xf0</span>, <span class="hljs-number">0x9f</span>, <span class="hljs-number">0xff</span>, <span class="hljs-number">0x2f</span>, <span class="hljs-number">0x69</span>, <span class="hljs-number">0x6e</span>, <span class="hljs-number">0x69</span>,
+  <span class="hljs-number">0x74</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x24</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>,
+  <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>
+&#125;;
+
+<span class="hljs-comment">// Set up first user process.</span>
+<span class="hljs-keyword">void</span>
+userinit(<span class="hljs-keyword">void</span>)
+&#123;
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc</span> *<span class="hljs-title">p</span>;</span>
+
+  p = allocproc();
+  initproc = p;
+  
+  <span class="hljs-comment">// allocate one user page and copy init's instructions</span>
+  <span class="hljs-comment">// and data into it.</span>
+  uvminit(p-&gt;pagetable, initcode, <span class="hljs-keyword">sizeof</span>(initcode));
+  p-&gt;sz = PGSIZE;
+
+  <span class="hljs-comment">// prepare for the very first "return" from kernel to user.</span>
+  p-&gt;trapframe-&gt;epc = <span class="hljs-number">0</span>;      <span class="hljs-comment">// user program counter</span>
+  p-&gt;trapframe-&gt;sp = PGSIZE;  <span class="hljs-comment">// user stack pointer</span>
+
+  safestrcpy(p-&gt;name, <span class="hljs-string">"initcode"</span>, <span class="hljs-keyword">sizeof</span>(p-&gt;name));
+  p-&gt;cwd = namei(<span class="hljs-string">"/"</span>);
+
+  p-&gt;state = RUNNABLE;
+
+  <span class="hljs-built_in">release</span>(&amp;p-&gt;lock);
+&#125;</code></pre></div>
+<ul>
+<li>第一个进程执行了一个用RISC-V汇编写到小程序<code>initcode.S</code> (<code>user/initcode.S:1</code>)。他通过系统调用<code>exec</code>重新进入kernel。<code>exec</code>执行了一个新的程序<code>/init</code>。<code>/init</code>创建了一个控制台设备文件，并作为文件描述符0，1，2来打开它。然后在无限循环中，启动shell并处理僵尸进程。系统就这样启动了。</li>
+</ul>
+<div class="hljs"><pre><code class="hljs assembly"># Initial process that execs &#x2F;init.
+# This code runs in user space.
+
+#include &quot;syscall.h&quot;
+
+# exec(init, argv)
+.globl start
+start:
+        la a0, init
+        la a1, argv
+        li a7, SYS_exec
+        ecall
+
+# for(;;) exit();
+exit:
+        li a7, SYS_exit
+        ecall
+        jal exit
+
+# char init[] &#x3D; &quot;&#x2F;init\0&quot;;
+init:
+  .string &quot;&#x2F;init\0&quot;
+
+# char *argv[] &#x3D; &#123; init, 0 &#125;;
+.p2align 2
+argv:
+  .long init
+  .long 0</code></pre></div>
+<h1 id="GDB-管中窥豹"><a href="#GDB-管中窥豹" class="headerlink" title="GDB - 管中窥豹"></a>GDB - 管中窥豹</h1><p>首先，启动QEMU，并打开gdb。本质上来说QEMU内部有一个gdb server，启动之后，QEMU会等待gdb客户端连接。然后在计算机上再启动一个gdb客户端</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="image-20201207213216980.png" srcset="/img/loading.gif" alt="pic1"></div><div class="group-image-wrap"><img src="image-20201207213311003.png" srcset="/img/loading.gif" alt="pic1"></div></div></div>
+<p><code>b _entry</code>在程序的入口处设置一个断点。</p>
+<p><img src="image-20201207214718702.png" srcset="/img/loading.gif" alt="image-20201207214718702" style="zoom:80%;" /></p>
+<p>程序的起始位置应该是0x80000000, 但事实上，这里的breakpoint设置在了0x8000000a</p>
+<p><code>c</code> 运行程序，停在了0x8000000a, 此处的指令为<code>csrr a1, mhartid</code>, 这条指令读取了控制系统寄存器（Control System Register）<code>mhartid</code>，并将结果加载到<code>a1</code>寄存器。QEMU会模拟执行这条指令，之后执行下一条指令。</p>
+<p><img src="image-20201207215026892.png" srcset="/img/loading.gif" alt="image-20201207215026892" style="zoom:80%;" /></p>
+<p>XV6从<code>entry.s</code>开始启动，运行在machine mode下，这个时候没有内存分页，没有隔离性。XV6运行<code>start.c</code>后切换到supervisor mode, 然后准备运行<code>main.c</code>。我们在main函数设置一个断点，main函数已经运行在supervisor mode了。接下来运行程序，程序会在main函数的第一条指令停住。</p>
+<p><img src="image-20201207215406013.png" srcset="/img/loading.gif" alt="image-20201207215406013" style="zoom:80%;" /></p>
+<p>接下来，输入<code>layout split</code>在gdb的layout split模式下运行，从这个视图可以看出gdb要执行的下一条指令是什么，断点具体在什么位置。</p>
+<p><img src="image-20201207215518155.png" srcset="/img/loading.gif" alt="image-20201207215518155" style="zoom:80%;" /></p>
+<p>这里只在一个CPU上运行QEMU（见最初的make参数），这样会使得gdb调试更加简单。因为现在只指定了一个CPU核，QEMU只会仿真一个核，可以单步执行程序（因为在单核或者单线程场景下，单个断点就可以停止整个程序的运行）</p>
+<p>在gdb中输入n，可以执行到下一条指令。这里调用了一个名为consoleinit的函数，他的功能是设置好console。一旦console设置好了，接下来可以向console打印输出（代码16、17行）。执行完16、17行之后，可以在QEMU看到相应的输出。</p>
+<p><img src="image-20201207215718648.png" srcset="/img/loading.gif" alt="image-20201207215718648" style="zoom:80%;" /></p>
+<p>除了console之外，还有许多代码来做初始化</p>
+<ul>
+<li><code>kinit</code>：设置好页表分配器（page allocator）</li>
+<li><code>kvminit</code>：设置好虚拟内存</li>
+<li><code>kvminithart</code>：打开页表</li>
+<li><code>processinit</code>：设置好初始进程或者说设置好进程表单</li>
+<li><code>trapinit/trapinithart</code>：设置好user/kernel mode转换代码</li>
+<li><code>plicinit/plicinithart</code>：设置好中断控制器PLIC（Platform Level Interrupt Controller），我们后面在介绍中断的时候会详细的介绍这部分，这是我们用来与磁盘和console交互方式</li>
+<li><code>binit</code>：分配buffer cache</li>
+<li><code>iinit</code>：初始化inode缓存</li>
+<li><code>fileinit</code>：初始化文件系统</li>
+<li><code>virtio_disk_init</code>：初始化磁盘</li>
+<li><code>userinit</code>：最后当所有的设置都完成了，操作系统也运行起来了，会通过userinit运行第一个进程，这里有点意思，接下来我们看一下userinit</li>
+</ul>
+<p><code>userinit</code>函数启动了一个进程，调用<code>exec</code>系统调用运行了一个小程序 (定义在<code>initcode</code>数组中，左边所示，对应的汇编程序如右边所示)</p>
+<p><img src="image-20201207220205114.png" srcset="/img/loading.gif" alt="image-20201207220205114" style="zoom:80%;" /></p>
+<p>这个汇编程序中，它首先将init中的内容的指针加载到<code>a0</code>（<code>la a0, init</code>），<code>argv</code>中的地址加载到<code>a1</code>（<code>la a1, argv</code>），<code>exec</code>系统调用对应的数字加载到<code>a7</code>（<code>li a7, SYS_exec</code>），最后调用<code>ECALL。</code>所以这里执行了3条指令，之后在第4条指令将控制权交给了操作系统。</p>
+<p>如果在syscall中设置一个断点，</p>
+<p><img src="image-20201207220443312.png" srcset="/img/loading.gif" alt="image-20201207220443312" style="zoom:80%;" /></p>
+<p>并让程序运行起来。<code>userinit</code>会创建初始进程，返回到用户空间，执行刚刚介绍的3条指令，再回到内核空间。这里是任何XV6用户会使用到的第一个系统调用。</p>
+<p>通过在gdb中执行c，让程序运行起来，我们现在进入到了syscall函数。</p>
+<p><img src="image-20201207220543719.png" srcset="/img/loading.gif" alt="image-20201207220543719" style="zoom:80%;" /></p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-keyword">void</span>
+syscall(<span class="hljs-keyword">void</span>)
+&#123;
+  <span class="hljs-keyword">int</span> num;
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">proc</span> *<span class="hljs-title">p</span> = <span class="hljs-title">myproc</span>();</span>
+
+  num = p-&gt;trapframe-&gt;a7;
+  <span class="hljs-keyword">if</span>(num &gt; <span class="hljs-number">0</span> &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) &#123;
+    p-&gt;trapframe-&gt;a0 = syscalls[num]();
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %s: unknown sys call %d\n"</span>,
+            p-&gt;pid, p-&gt;name, num);
+    p-&gt;trapframe-&gt;a0 = <span class="hljs-number">-1</span>;
+  &#125;
+&#125;</code></pre></div>
+<p><code>num = p-&gt;trapframe-&gt;a7</code> 会读取使用的系统调用对应的整数。当代码执行完这一行之后，我们可以在gdb中打印num，可以看到是7</p>
+<p><img src="image-20201207220710342.png" srcset="/img/loading.gif" alt="image-20201207220710342" style="zoom:80%;" /></p>
+<p>如果我们查看<code>syscall.h</code>，可以看到7对应的是<code>exec</code>这个系统调用。</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-comment">// System call numbers</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_fork    1</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_exit    2</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_wait    3</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_pipe    4</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_read    5</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_kill    6</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SYS_exec    7</span>
+...</code></pre></div>
+<p>所以，这里本质上是告诉内核，某个用户应用程序执行了<code>ECALL</code>指令，并且想要调用<code>exec</code>系统调用。</p>
+<p><code>p-&gt;trapframe-&gt;a0 = syscall[num]()</code> 这一行是实际执行系统调用。这里可以看出，num用来索引一个数组，这个数组是一个函数指针数组，可以预期的是 <code>syscall[7]</code>对应了<code>exec</code>的入口函数。</p>
+<p>跳到<code>sys_exec</code>函数中</p>
+<p><img src="image-20201207220847640.png" srcset="/img/loading.gif" alt="image-20201207220847640" style="zoom:80%;" /></p>
+<p><code>sys_exec</code>中的第一件事情是从用户空间读取参数，它会读取path，也就是要执行程序的文件名。这里首先会为参数分配空间，然后从用户空间将参数拷贝到内核空间。之后我们打印path，</p>
+<p><img src="image-20201207220950356.png" srcset="/img/loading.gif" alt="image-20201207220950356" style="zoom:80%;" /></p>
+<p>可以看到传入的就是<code>init</code>程序。所以，综合来看，<code>initcode</code>完成了通过<code>exec</code>调用<code>init</code>程序。</p>
+<p>再来看<code>init</code>程序，</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-comment">// init: The initial user-level program</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/types.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/stat.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/spinlock.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/sleeplock.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/fs.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/file.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"user/user.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"kernel/fcntl.h"</span></span>
+
+<span class="hljs-keyword">char</span> *argv[] = &#123; <span class="hljs-string">"sh"</span>, <span class="hljs-number">0</span> &#125;;
+
+<span class="hljs-keyword">int</span>
+main(<span class="hljs-keyword">void</span>)
+&#123;
+  <span class="hljs-keyword">int</span> pid, wpid;
+
+  <span class="hljs-keyword">if</span>(<span class="hljs-built_in">open</span>(<span class="hljs-string">"console"</span>, O_RDWR) &lt; <span class="hljs-number">0</span>)&#123;
+    mknod(<span class="hljs-string">"console"</span>, CONSOLE, <span class="hljs-number">0</span>);
+    <span class="hljs-built_in">open</span>(<span class="hljs-string">"console"</span>, O_RDWR);
+  &#125;
+  dup(<span class="hljs-number">0</span>);  <span class="hljs-comment">// stdout</span>
+  dup(<span class="hljs-number">0</span>);  <span class="hljs-comment">// stderr</span>
+
+  <span class="hljs-keyword">for</span>(;;)&#123;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"init: starting sh\n"</span>);
+    pid = fork();
+    <span class="hljs-keyword">if</span>(pid &lt; <span class="hljs-number">0</span>)&#123;
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"init: fork failed\n"</span>);
+      <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    &#125;
+    <span class="hljs-keyword">if</span>(pid == <span class="hljs-number">0</span>)&#123;
+      exec(<span class="hljs-string">"sh"</span>, argv);
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"init: exec sh failed\n"</span>);
+      <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    &#125;
+
+    <span class="hljs-keyword">for</span>(;;)&#123;
+      <span class="hljs-comment">// this call to wait() returns if the shell exits,</span>
+      <span class="hljs-comment">// or if a parentless process exits.</span>
+      wpid = wait((<span class="hljs-keyword">int</span> *) <span class="hljs-number">0</span>);
+      <span class="hljs-keyword">if</span>(wpid == pid)&#123;
+        <span class="hljs-comment">// the shell exited; restart it.</span>
+        <span class="hljs-keyword">break</span>;
+      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(wpid &lt; <span class="hljs-number">0</span>)&#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"init: wait returned an error\n"</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+      &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// it was a parentless process; do nothing.</span>
+      &#125;
+    &#125;
+  &#125;
+&#125;</code></pre></div>
+<p><code>init</code>会为用户空间设置好一些东西，比如配置好console，调用<code>fork</code>，并在<code>fork</code>出的子进程中执行shell。</p>
+<p>最终的效果就是Shell运行起来了。如果再次运行代码，还会陷入到<code>syscall</code>中的断点，并且同样也是调用<code>exec</code>系统调用，只是这次是通过<code>exec</code>运行Shell。当Shell运行起来之后，可以从QEMU看到Shell。</p>
+<p><img src="image-20201207221231563.png" srcset="/img/loading.gif" alt="image-20201207221231563" style="zoom:80%;" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Operating-System/">Operating System</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Operating-System/">Operating System</a>
+                    
+                      <a class="hover-with-bg" href="/tags/xv6/">xv6</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/03/xv6-lab1/">
+                        <span class="hidden-mobile">Xv6 and Unix utilities [OS lab1]</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2020/12/07/startXv6/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '6ojk1lVz9eq7GQnBo6Q8zR5d-gzGzoHsz'
+    var app_key = 'bOrBPlujAz77Ma6N5tY9wWJN'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "启动xv6创建第一个进程&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
