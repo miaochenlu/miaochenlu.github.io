@@ -418,7 +418,7 @@ Your solution is correct if your program exchanges a byte between two processes 
 
 ## Final Code
 
-关于pipe的内容见之前的这篇文章
+关于pipe的内容见之前的[这篇文章](https://miaochenlu.github.io/2020/12/01/pipe/)
 
 这里就是创建两个pipe, 一个pipe的方向是parent-->child, 另一个pipe的方向是child-->parent
 
