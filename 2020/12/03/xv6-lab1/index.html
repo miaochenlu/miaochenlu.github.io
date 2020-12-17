@@ -220,7 +220,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 8, 2020 am
+                  本文最后更新于：December 17, 2020 am
                 
               </p>
             
@@ -895,17 +895,13 @@ line 2
 <div class="note note-success">
             <ul><li><code>kernel/param.h declares MAXARG</code>, which may be useful if you need to declare an argv array.</li></ul>
           </div>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXARG       32  <span class="hljs-comment">// max exec arguments</span></span></code></pre></div>
-{% note success %}
-
-- Add the program to `UPROGS` in Makefile.
-
-{% endnote %}
-{% note success %}
-
-- Changes to the file system persist across runs of qemu; to get a clean file system run make clean and then make qemu.
-
-{% endnote %}
+<p><code>#define MAXARG       32  // max exec arguments</code></p>
+<div class="note note-success">
+            <ul><li>Add the program to <code>UPROGS</code> in Makefile.</li></ul>
+          </div>
+<div class="note note-success">
+            <ul><li>Changes to the file system persist across runs of qemu; to get a clean file system run make clean and then make qemu.</li></ul>
+          </div>
 <p>xargs, find, and grep combine well:</p>
 <div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> find . b | xargs grep hello</span></code></pre></div>
 <p>will run “grep hello” on each file named b in the directories below “.”.</p>
