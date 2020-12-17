@@ -978,15 +978,17 @@ $
 
 {% endnote %}
 
-```cpp
-#define MAXARG       32  // max exec arguments
-```
+
+
+`#define MAXARG       32  // max exec arguments`
 
 {% note success %}
 
 - Add the program to `UPROGS` in Makefile.
 
 {% endnote %}
+
+
 
 {% note success %}
 
