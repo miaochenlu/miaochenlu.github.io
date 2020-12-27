@@ -6,7 +6,7 @@ tags: [Operating System, xv6]
 categories: Operating System
 ---
 
-## Print a page table
+# Print a page table
 
 To help you learn about RISC-V page tables, and perhaps to aid future debugging, your first task is to write a function that prints the contents of a page table.
 
