@@ -226,8 +226,7 @@
             
             <div class="markdown-body" id="post-body">
               <a id="more"></a>
-<h1 id="Gestalt-Laws"><a href="#Gestalt-Laws" class="headerlink" title="Gestalt Laws"></a>Gestalt Laws</h1><blockquote>
-<ol>
+<h1 id="Gestalt-Laws"><a href="#Gestalt-Laws" class="headerlink" title="Gestalt Laws"></a>Gestalt Laws</h1><ol>
 <li>知觉恒常性</li>
 <li>Law of Proximity接近原则：接近/邻近的物体会被认为是一个整体</li>
 <li>Law of Similarity相似原则： 在观察对象时容易把相似的物体分成一组</li>
@@ -239,9 +238,7 @@
 <li><p>图形与背景法则：大脑将视觉区域分为主体和背景，主体包括一个场景中占据我们主要注意力的所有元素，其余则是背景</p>
 </li>
 </ol>
-</blockquote>
-<h1 id="Marr视觉表示的三个阶段"><a href="#Marr视觉表示的三个阶段" class="headerlink" title="Marr视觉表示的三个阶段"></a>Marr视觉表示的三个阶段</h1><blockquote>
-<ul>
+<h1 id="Marr视觉表示的三个阶段"><a href="#Marr视觉表示的三个阶段" class="headerlink" title="Marr视觉表示的三个阶段"></a>Marr视觉表示的三个阶段</h1><ul>
 <li><p>Primal Sketch：处理输入的原始图像，抽取基本特征（角点、边缘、纹理、线条、边界etc.), 这些特征的集合称为基元图</p>
 </li>
 <li><p>2.5D Sketch：在<strong><em>以观测者为中心</em></strong>的坐标系中，由输入图像和基元图恢复场景可见部分的深度、法线方向、轮廓etc，这些信息包含了深度信息，但不是真正的物体三维表示，因此，称为二维半图</p>
@@ -249,7 +246,6 @@
 <li><p>3D Model：在以物体为中心的坐标系中，由输入图像、基元图、二维半图，恢复表示识别三维物体</p>
 </li>
 </ul>
-</blockquote>
 <h1 id="二值图像"><a href="#二值图像" class="headerlink" title="二值图像"></a>二值图像</h1><h2 id="几何特性"><a href="#几何特性" class="headerlink" title="几何特性"></a>几何特性</h2><ul>
 <li>面积</li>
 <li>区域中心</li>
@@ -322,8 +318,7 @@
 <p>高的阈值是将要提取轮廓的物体与背景区分开来：阈值太高，部分轮廓丢失</p>
 <p>低的阈值是用来平滑边缘的轮廓：阈值太低，假边缘</p>
 <p>两个阈值：T1, T2 。 大于T1的称为强边界，T1和T2之间的称为弱边界</p>
-<h1 id="局部特征local-feature"><a href="#局部特征local-feature" class="headerlink" title="局部特征local feature"></a>局部特征local feature</h1><h2 id="Harris-Corner-detection"><a href="#Harris-Corner-detection" class="headerlink" title="Harris Corner detection"></a>Harris Corner detection</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><blockquote>
-<p>在图像I(x,y)对指定大小窗口进行各个方向的平移，观测窗口内图像的相似程度</p>
+<h1 id="局部特征local-feature"><a href="#局部特征local-feature" class="headerlink" title="局部特征local feature"></a>局部特征local feature</h1><h2 id="Harris-Corner-detection"><a href="#Harris-Corner-detection" class="headerlink" title="Harris Corner detection"></a>Harris Corner detection</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>在图像I(x,y)对指定大小窗口进行各个方向的平移，观测窗口内图像的相似程度</p>
 <ul>
 <li><p>Flat: 窗口内图像基本无变化</p>
 </li>
@@ -332,7 +327,6 @@
 <li><p>Corner: 各方向平移时都有较大变化</p>
 </li>
 </ul>
-</blockquote>
 <h3 id="推导公式"><a href="#推导公式" class="headerlink" title="推导公式"></a>推导公式</h3><p>$E(u,v)=\sum_{x,y}w(x,y)(I(x+u,y+v)-I(x,y))^2$</p>
 <p>$=\sum_{x,y}w(x,y)(uI_x+vI_y)^2$</p>
 <p>$=\sum_{x,y}w(x,y)(u^2I_x^2+2uvI_xI_y+v^2I_y^2)$</p>
@@ -438,12 +432,8 @@
 <p><img src="image-20191223170837231.png" srcset="/img/loading.gif" alt="image-20191223170837231" style="zoom:50%;" /></p>
 <p><strong><em><u>在最后，对特征向量进行归一化处理，去除光照变化的影响</u>。</em></strong></p>
 <h1 id="曲线"><a href="#曲线" class="headerlink" title="曲线"></a>曲线</h1><h2 id="Hough变换"><a href="#Hough变换" class="headerlink" title="Hough变换"></a>Hough变换</h2><p><a href="https://sikasjc.github.io/2018/04/20/Hough/#introduction-介绍" target="_blank" rel="noopener">excellent article</a></p>
-<h3 id="用来解决什么问题"><a href="#用来解决什么问题" class="headerlink" title="用来解决什么问题"></a>用来解决什么问题</h3><blockquote>
-<p>Hough变换是基于voting原理对参数估计方法，是一种重要的形状检测技术</p>
-</blockquote>
-<h3 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h3><blockquote>
-<p>图像中每一点对参数组合进行表决，赢得多数票的参数组合为胜者(结果) </p>
-</blockquote>
+<h3 id="用来解决什么问题"><a href="#用来解决什么问题" class="headerlink" title="用来解决什么问题"></a>用来解决什么问题</h3><p>Hough变换是基于voting原理对参数估计方法，是一种重要的形状检测技术</p>
+<h3 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h3><p>图像中每一点对参数组合进行表决，赢得多数票的参数组合为胜者(结果) </p>
 <h3 id="具体原理"><a href="#具体原理" class="headerlink" title="具体原理"></a>具体原理</h3><p>但是在直角坐标系下的表示形式，存在无法表示垂直于x轴的直线的问题，此时$a=\infty$</p>
 <p>$y=ax+b$改写成极坐标形式$r=xcos\theta+ysin\theta$</p>
 <p>即$y=-\frac{cos\theta}{sin\theta}x+\frac{r}{sin\theta}$</p>
@@ -494,40 +484,26 @@
 <li>Fitting the transformation(RANSAC计算Homography矩阵，进行变换)</li>
 <li>image Blending </li>
 </ol>
-<h1 id="物体识别"><a href="#物体识别" class="headerlink" title="物体识别"></a>物体识别</h1><h2 id="Visual-Recognition"><a href="#Visual-Recognition" class="headerlink" title="Visual Recognition"></a>Visual Recognition</h2><h3 id="基本任务可以分为哪几大类"><a href="#基本任务可以分为哪几大类" class="headerlink" title="基本任务可以分为哪几大类"></a>基本任务可以分为哪几大类</h3><blockquote>
-<ol>
+<h1 id="物体识别"><a href="#物体识别" class="headerlink" title="物体识别"></a>物体识别</h1><h2 id="Visual-Recognition"><a href="#Visual-Recognition" class="headerlink" title="Visual Recognition"></a>Visual Recognition</h2><h3 id="基本任务可以分为哪几大类"><a href="#基本任务可以分为哪几大类" class="headerlink" title="基本任务可以分为哪几大类"></a>基本任务可以分为哪几大类</h3><ol>
 <li>图片分类 </li>
 <li>检测和定位物体/图片分割 </li>
 <li>估计语义和几何属性 </li>
 <li>对人类活动和事件进行分类 </li>
 </ol>
-</blockquote>
-<h3 id="都具有哪些挑战因素"><a href="#都具有哪些挑战因素" class="headerlink" title="都具有哪些挑战因素"></a>都具有哪些挑战因素</h3><blockquote>
-<p>视角变换<br>光线变化<br>尺度变化<br>物体形变<br>物体遮挡<br>背景凌乱<br>内部类别多样</p>
-</blockquote>
-<h2 id="基于词袋-BoW-bag-of-words-的物体分类"><a href="#基于词袋-BoW-bag-of-words-的物体分类" class="headerlink" title="基于词袋(BoW bag of words)的物体分类"></a>基于词袋(BoW bag of words)的物体分类</h2><h3 id="图像的BoW是指什么意思"><a href="#图像的BoW是指什么意思" class="headerlink" title="图像的BoW是指什么意思"></a>图像的BoW是指什么意思</h3><blockquote>
-<p>图像中的单词被定义为一个图像块的特征向量，图像的Bow模型即图像中所有图像块的特征向量得到的直方图</p>
-</blockquote>
-<h3 id="基本步骤-1"><a href="#基本步骤-1" class="headerlink" title="基本步骤"></a>基本步骤</h3><blockquote>
-<ol>
+<h3 id="都具有哪些挑战因素"><a href="#都具有哪些挑战因素" class="headerlink" title="都具有哪些挑战因素"></a>都具有哪些挑战因素</h3><p>视角变换<br>光线变化<br>尺度变化<br>物体形变<br>物体遮挡<br>背景凌乱<br>内部类别多样</p>
+<h2 id="基于词袋-BoW-bag-of-words-的物体分类"><a href="#基于词袋-BoW-bag-of-words-的物体分类" class="headerlink" title="基于词袋(BoW bag of words)的物体分类"></a>基于词袋(BoW bag of words)的物体分类</h2><h3 id="图像的BoW是指什么意思"><a href="#图像的BoW是指什么意思" class="headerlink" title="图像的BoW是指什么意思"></a>图像的BoW是指什么意思</h3><p>图像中的单词被定义为一个图像块的特征向量，图像的Bow模型即图像中所有图像块的特征向量得到的直方图</p>
+<h3 id="基本步骤-1"><a href="#基本步骤-1" class="headerlink" title="基本步骤"></a>基本步骤</h3><ol>
 <li>特征提取和表示（grid），每个特征为一个质点 </li>
 <li>通过对质点聚类建立字典（k 聚类），得到k个聚类中心，聚类中心就是词袋中的单词，所有聚类中心就是特征直方图的基 </li>
 <li>将图片用直方图的基表示出来，这样就可以得到关于图片的特征直方图。该直方图与单词的顺序没有关系，而是每个单词在图片中出现的频率 </li>
 <li>将新的图片获取质点，然后映射到直方图上进行聚类</li>
 </ol>
-</blockquote>
-<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><h2 id="A-深度学习"><a href="#A-深度学习" class="headerlink" title="A. 深度学习"></a>A. 深度学习</h2><h3 id="怎么理解被称为end-to-end的学习"><a href="#怎么理解被称为end-to-end的学习" class="headerlink" title="怎么理解被称为end-to-end的学习"></a>怎么理解被称为end-to-end的学习</h3><blockquote>
-<p>raw inputs to predictions</p>
+<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><h2 id="A-深度学习"><a href="#A-深度学习" class="headerlink" title="A. 深度学习"></a>A. 深度学习</h2><h3 id="怎么理解被称为end-to-end的学习"><a href="#怎么理解被称为end-to-end的学习" class="headerlink" title="怎么理解被称为end-to-end的学习"></a>怎么理解被称为end-to-end的学习</h3><p>raw inputs to predictions</p>
 <p><strong>一端输入我的原始数据，一端输出我想得到的结果。只关心输入和输出，中间的步骤全部都不管。</strong></p>
-</blockquote>
-<h3 id="神经网络的学习，数学本质上是求解什么？常用的基本方法？"><a href="#神经网络的学习，数学本质上是求解什么？常用的基本方法？" class="headerlink" title="神经网络的学习，数学本质上是求解什么？常用的基本方法？"></a>神经网络的学习，数学本质上是求解什么？常用的基本方法？</h3><blockquote>
-<p>本质：Learning hierarchical representations from data，学习权重</p>
+<h3 id="神经网络的学习，数学本质上是求解什么？常用的基本方法？"><a href="#神经网络的学习，数学本质上是求解什么？常用的基本方法？" class="headerlink" title="神经网络的学习，数学本质上是求解什么？常用的基本方法？"></a>神经网络的学习，数学本质上是求解什么？常用的基本方法？</h3><p>本质：Learning hierarchical representations from data，学习权重</p>
 <p>常用的基本方法：梯度下降法</p>
-</blockquote>
-<h2 id="B-CNN"><a href="#B-CNN" class="headerlink" title="B. CNN"></a>B. CNN</h2><h3 id="理解卷积层和Pooling层的作用"><a href="#理解卷积层和Pooling层的作用" class="headerlink" title="理解卷积层和Pooling层的作用"></a>理解卷积层和Pooling层的作用</h3><blockquote>
-<p>卷积层：用于提取图像中的特征</p>
+<h2 id="B-CNN"><a href="#B-CNN" class="headerlink" title="B. CNN"></a>B. CNN</h2><h3 id="理解卷积层和Pooling层的作用"><a href="#理解卷积层和Pooling层的作用" class="headerlink" title="理解卷积层和Pooling层的作用"></a>理解卷积层和Pooling层的作用</h3><p>卷积层：用于提取图像中的特征</p>
 <p>Pooling: make the representations smaller and more manageable without losing too much information.</p>
-</blockquote>
 <h3 id="计算卷积层中各种weight的数量"><a href="#计算卷积层中各种weight的数量" class="headerlink" title="计算卷积层中各种weight的数量"></a>计算卷积层中各种weight的数量</h3><p>CNN和NN的结构差异</p>
 <p><img src="image-20200112171633117.png" srcset="/img/loading.gif" alt="image-20200112171633117" style="zoom:30%;" /></p>
 <p><img src="image-20200112171816074.png" srcset="/img/loading.gif" alt="image-20200112171816074" style="zoom:25%;" /></p>
@@ -567,12 +543,8 @@
 <p>一共有30个neuron，则一共要学习 30*5*5*3​个权重</p>
 </blockquote>
 <p><img src="image-20200113152540199.png" srcset="/img/loading.gif" alt="image-20200113152540199" style="zoom:50%;" /></p>
-<h2 id="C-BP-算法"><a href="#C-BP-算法" class="headerlink" title="C. BP 算法"></a>C. BP 算法</h2><h3 id="知道BP算法的作用"><a href="#知道BP算法的作用" class="headerlink" title="知道BP算法的作用"></a>知道BP算法的作用</h3><blockquote>
-<p>计算梯度</p>
-</blockquote>
-<h3 id="理解梯度下降法和BP算法的关系"><a href="#理解梯度下降法和BP算法的关系" class="headerlink" title="理解梯度下降法和BP算法的关系"></a>理解梯度下降法和BP算法的关系</h3><blockquote>
-<p>梯度下降 是 找损失函数极小值的一种方法，<br>反向传播 是 求解梯度的一种方法，解释计算神经网络中误差函数梯度的一种方法。</p>
-</blockquote>
+<h2 id="C-BP-算法"><a href="#C-BP-算法" class="headerlink" title="C. BP 算法"></a>C. BP 算法</h2><h3 id="知道BP算法的作用"><a href="#知道BP算法的作用" class="headerlink" title="知道BP算法的作用"></a>知道BP算法的作用</h3><p>计算梯度</p>
+<h3 id="理解梯度下降法和BP算法的关系"><a href="#理解梯度下降法和BP算法的关系" class="headerlink" title="理解梯度下降法和BP算法的关系"></a>理解梯度下降法和BP算法的关系</h3><p>梯度下降 是 找损失函数极小值的一种方法，<br>反向传播 是 求解梯度的一种方法，解释计算神经网络中误差函数梯度的一种方法。</p>
 <h3 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h3><p><img src="image-20200112181313333.png" srcset="/img/loading.gif" alt="image-20200112181313333" style="zoom:33%;" /></p>
 <p><img src="image-20200112181337922.png" srcset="/img/loading.gif" alt="image-20200112181337922" style="zoom:33%;" /></p>
 <p><img src="image-20200112181402139.png" srcset="/img/loading.gif" alt="image-20200112181402139" style="zoom:33%;" /></p>
@@ -583,10 +555,8 @@
 <p><img src="image-20200112181645783.png" srcset="/img/loading.gif" alt="image-20200112181645783" style="zoom:33%;" /></p>
 <p><img src="image-20200112181714819.png" srcset="/img/loading.gif" alt="image-20200112181714819" style="zoom:33%;" /></p>
 <h1 id="光流—-gt-运动跟踪"><a href="#光流—-gt-运动跟踪" class="headerlink" title="光流—&gt;运动跟踪"></a>光流—&gt;运动跟踪</h1><p><img src="image-20200112151210825.png" srcset="/img/loading.gif" alt="image-20200112151210825" style="zoom: 33%;" /></p>
-<h2 id="A-光流解决的问题"><a href="#A-光流解决的问题" class="headerlink" title="A. 光流解决的问题"></a>A. 光流解决的问题</h2><blockquote>
-<p>是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法.</p>
+<h2 id="A-光流解决的问题"><a href="#A-光流解决的问题" class="headerlink" title="A. 光流解决的问题"></a>A. 光流解决的问题</h2><p>是空间运动物体在观察成像平面上的像素运动的瞬时速度，是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法.</p>
 <p>评估从H到I到像素运动，给出图像H中的一个像素， 找到图像I中相同颜色的相近像素，解决的是像素对应问题</p>
-</blockquote>
 <h2 id="B-光流的三个基本假设"><a href="#B-光流的三个基本假设" class="headerlink" title="B. 光流的三个基本假设"></a>B. 光流的三个基本假设</h2><ul>
 <li>brightness constancy 亮度恒定性</li>
 </ul>
@@ -598,14 +568,10 @@
 <p>使用<strong><em><u>纹理复杂区域</u></em></strong>， 梯度比较大且方向不同， 求出来的特征值比较大</p>
 <p>不用边缘的原因</p>
 <p><img src="D58381987D5E8F2CF1DCC31BE0E96919.png" srcset="/img/loading.gif" alt="D58381987D5E8F2CF1DCC31BE0E96919" style="zoom:50%;" /></p>
-<h1 id="相机模型"><a href="#相机模型" class="headerlink" title="相机模型"></a>相机模型</h1><h2 id="A-理解：景深-光圈-焦距-视场"><a href="#A-理解：景深-光圈-焦距-视场" class="headerlink" title="A. 理解：景深/光圈/焦距/视场"></a>A. 理解：景深/光圈/焦距/视场</h2><h3 id="景深depth-of-field"><a href="#景深depth-of-field" class="headerlink" title="景深depth of field"></a>景深depth of field</h3><blockquote>
-<p>相机镜头能够取得清晰图像的成像所测定的被摄物体前后范围距离</p>
-</blockquote>
+<h1 id="相机模型"><a href="#相机模型" class="headerlink" title="相机模型"></a>相机模型</h1><h2 id="A-理解：景深-光圈-焦距-视场"><a href="#A-理解：景深-光圈-焦距-视场" class="headerlink" title="A. 理解：景深/光圈/焦距/视场"></a>A. 理解：景深/光圈/焦距/视场</h2><h3 id="景深depth-of-field"><a href="#景深depth-of-field" class="headerlink" title="景深depth of field"></a>景深depth of field</h3><p>相机镜头能够取得清晰图像的成像所测定的被摄物体前后范围距离</p>
 <p><img src="image-20200112111521768.png" srcset="/img/loading.gif" alt="image-20200112111521768" style="zoom:30%;" /></p>
 <p><img src="image-20200112111758310.png" srcset="/img/loading.gif" alt="image-20200112111758310" style="zoom:30%;" /></p>
-<h3 id="视场field-of-view"><a href="#视场field-of-view" class="headerlink" title="视场field of view"></a>视场field of view</h3><blockquote>
-<p>镜头能够观察到的最大范围</p>
-</blockquote>
+<h3 id="视场field-of-view"><a href="#视场field-of-view" class="headerlink" title="视场field of view"></a>视场field of view</h3><p>镜头能够观察到的最大范围</p>
 <p><img src="image-20200112103140704.png" srcset="/img/loading.gif" alt="image-20200112103140704" style="zoom: 25%;" /></p>
 <h3 id="光圈对景深的影响"><a href="#光圈对景深的影响" class="headerlink" title="光圈对景深的影响"></a>光圈对景深的影响</h3><p>镜头光圈：光圈越大，景深越小；光圈越小，景深越大；</p>
 <p>镜头焦距镜头焦距越长，景深越小；焦距越短，景深越大;</p>
@@ -637,10 +603,8 @@
 <h4 id="齐次坐标"><a href="#齐次坐标" class="headerlink" title="齐次坐标"></a>齐次坐标</h4><p>convert to homogeneous coordinates</p>
 <script type="math/tex; mode=display">(x,y,z)\Rightarrow \left[\begin{matrix}x \\ y\\z\\1\end{matrix}\right]</script><p>convert from homogeneous coordinates</p>
 <script type="math/tex; mode=display">(x,y,z,w)\Rightarrow \left[\begin{matrix}x/w \\ y/w\\z/w\end{matrix}\right]</script><p>透视矩阵</p>
-<script type="math/tex; mode=display">\left[\begin{matrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&-1/d&0\end{matrix}\right]\left[\begin{matrix}x \\ y\\z\\1\end{matrix}\right]=\left[\begin{matrix}x\\y\\z\\-z/d\end{matrix}\right]\Rightarrow (-d\frac{x}{z}, -d\frac{y}{z})</script><h3 id="齐次坐标的好处"><a href="#齐次坐标的好处" class="headerlink" title="齐次坐标的好处"></a>齐次坐标的好处</h3><blockquote>
-<p>可以矩阵直接计算平移 旋转 尺度变换</p>
+<script type="math/tex; mode=display">\left[\begin{matrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&-1/d&0\end{matrix}\right]\left[\begin{matrix}x \\ y\\z\\1\end{matrix}\right]=\left[\begin{matrix}x\\y\\z\\-z/d\end{matrix}\right]\Rightarrow (-d\frac{x}{z}, -d\frac{y}{z})</script><h3 id="齐次坐标的好处"><a href="#齐次坐标的好处" class="headerlink" title="齐次坐标的好处"></a>齐次坐标的好处</h3><p>可以矩阵直接计算平移 旋转 尺度变换</p>
 <p>如果不是齐次就没有平移</p>
-</blockquote>
 <h3 id="Camera-Parameters内参矩阵"><a href="#Camera-Parameters内参矩阵" class="headerlink" title="Camera Parameters内参矩阵"></a>Camera Parameters内参矩阵</h3><p><a href="https://www.jianshu.com/p/7d97fccd79bb" target="_blank" rel="noopener">excellent article</a></p>
 <script type="math/tex; mode=display">(f_u,f_v, u_0,v_0)</script><h4 id="第一步：相机坐标系—-gt-成像坐标系-其中f为焦距"><a href="#第一步：相机坐标系—-gt-成像坐标系-其中f为焦距" class="headerlink" title="第一步：相机坐标系—&gt;成像坐标系  其中f为焦距"></a>第一步：相机坐标系—&gt;成像坐标系  其中f为焦距</h4><p><img src="image-20200112112825190.png" srcset="/img/loading.gif" alt="image-20200112112825190" style="zoom:50%;" /></p>
 <p><img src="image-20200112140843480.png" srcset="/img/loading.gif" alt="image-20200112140843480" style="zoom:50%;" /></p>
@@ -755,10 +719,8 @@
 <p>解得：$x=\frac{b}{fcot\theta-x’}x’$</p>
 <p><br/></p>
 <h2 id="C-ICP-algorithm"><a href="#C-ICP-algorithm" class="headerlink" title="C. ICP algorithm"></a>C. ICP algorithm</h2><p><a href="https://www.zhihu.com/question/34170804/answer/121533317" target="_blank" rel="noopener">https://www.zhihu.com/question/34170804/answer/121533317</a></p>
-<h3 id="要解决什么问题"><a href="#要解决什么问题" class="headerlink" title="要解决什么问题"></a>要解决什么问题</h3><blockquote>
-<p>计算两组数据（两帧图像）间的旋转平移量，使之形成最佳匹配</p>
+<h3 id="要解决什么问题"><a href="#要解决什么问题" class="headerlink" title="要解决什么问题"></a>要解决什么问题</h3><p>计算两组数据（两帧图像）间的旋转平移量，使之形成最佳匹配</p>
 <p>registeration点云配准问题</p>
-</blockquote>
 <h3 id="基本步骤-2"><a href="#基本步骤-2" class="headerlink" title="基本步骤"></a>基本步骤</h3><p>输入：点集P, P’ 输出：最佳匹配的旋转平移量$R, t, s.t. \forall i, p_i=Rp_i’+t$</p>
 <p>给定两个三维点集X与Y,将Y配准到X：</p>
 <p>① 计算Y中的每一个点在X中的对应最近点</p>
@@ -787,10 +749,8 @@
 </ul>
 <h2 id="2-PCA-principal-component-analysis"><a href="#2-PCA-principal-component-analysis" class="headerlink" title="2. PCA principal component analysis"></a>2. PCA principal component analysis</h2><h2 id="A-基本思想，主要作用"><a href="#A-基本思想，主要作用" class="headerlink" title="A.基本思想，主要作用"></a>A.基本思想，主要作用</h2><p>用于数据降维和去噪。</p>
 <p>选择一个新的坐标系进行线性降维，使得第一轴上是最大投影方向，第二轴上是第二大投影方向….以此类推</p>
-<h2 id="B-什么样的数据用PCA会比较有效"><a href="#B-什么样的数据用PCA会比较有效" class="headerlink" title="B. 什么样的数据用PCA会比较有效"></a>B. 什么样的数据用PCA会比较有效</h2><blockquote>
-<p>多元高斯分布</p>
+<h2 id="B-什么样的数据用PCA会比较有效"><a href="#B-什么样的数据用PCA会比较有效" class="headerlink" title="B. 什么样的数据用PCA会比较有效"></a>B. 什么样的数据用PCA会比较有效</h2><p>多元高斯分布</p>
 <p>维度过高但高维信息量低，相关度高的数据</p>
-</blockquote>
 <h3 id="C-PCA中的一些定义"><a href="#C-PCA中的一些定义" class="headerlink" title="C. PCA中的一些定义"></a>C. PCA中的一些定义</h3><ul>
 <li>d-维空间:$\mathbf{x}=(x_1,x_2,\cdots, x_d)$</li>
 <li>投影方向:$a_1=(a_1^1,a_1^2,\cdots,a_1^d)$ 其中$a_1^Ta_1=1$</li>
@@ -807,9 +767,7 @@
 <p>对$a_1^T$求微分，得必要条件$Sa_1-\lambda a_1=0\Rightarrow Sa_1=\lambda a_1$</p>
 <p>因此</p>
 <script type="math/tex; mode=display">var(z_1)=a_1^TSa_1=a_1^T\lambda a_1=\lambda a_1^Ta_1=\lambda</script><p>为了使$var(z_1)$取得最大值，必须用最大特征值对应的特征向量! </p>
-<h2 id="Eigenface"><a href="#Eigenface" class="headerlink" title="Eigenface"></a>Eigenface</h2><h3 id="Eigenface是什么"><a href="#Eigenface是什么" class="headerlink" title="Eigenface是什么"></a>Eigenface是什么</h3><blockquote>
-<p>使用特征脸进行人脸识别的方法</p>
-</blockquote>
+<h2 id="Eigenface"><a href="#Eigenface" class="headerlink" title="Eigenface"></a>Eigenface</h2><h3 id="Eigenface是什么"><a href="#Eigenface是什么" class="headerlink" title="Eigenface是什么"></a>Eigenface是什么</h3><p>使用特征脸进行人脸识别的方法</p>
 <p><img src="image-20191230191544548.png" srcset="/img/loading.gif" alt="image-20191230191544548" style="zoom:50%;" /></p>
 <p>步骤</p>
 <ul>
@@ -826,47 +784,33 @@
 <li><p>对输入的一幅待测图像，归一化后，将其映射到特征脸子空间中。然后用某种距离度量来描述两幅人脸图像的相似性，如欧式距离。</p>
 </li>
 </ul>
-<h3 id="将重构用于人脸检测的原理"><a href="#将重构用于人脸检测的原理" class="headerlink" title="将重构用于人脸检测的原理"></a>将重构用于人脸检测的原理</h3><blockquote>
-<p>对于任意待识别样本识别 f </p>
+<h3 id="将重构用于人脸检测的原理"><a href="#将重构用于人脸检测的原理" class="headerlink" title="将重构用于人脸检测的原理"></a>将重构用于人脸检测的原理</h3><p>对于任意待识别样本识别 f </p>
 <p>人脸投影到特征人脸空间中，保留了主要特征的信息，所以可以恢复人脸本来的样子</p>
 <p>$y_f=A^Tf$    这里的$A^T$是一个将图像投影到特征脸张成空间的转换矩阵</p>
 <p>$\hat{f}=Ay_f$     个人觉得$A^T=A^{-1}$，相当于做了一个逆变换</p>
-</blockquote>
-<h1 id="图像频域与图像分解"><a href="#图像频域与图像分解" class="headerlink" title="图像频域与图像分解"></a>图像频域与图像分解</h1><h2 id="图像的傅立叶变换"><a href="#图像的傅立叶变换" class="headerlink" title="图像的傅立叶变换"></a>图像的傅立叶变换</h2><h3 id="理解变换的基本含义"><a href="#理解变换的基本含义" class="headerlink" title="理解变换的基本含义"></a>理解变换的基本含义</h3><blockquote>
-<p>傅里叶变换讲的是任何信号（如图像信号）都可以表示成一系列正弦信号的叠加，在图像领域就是将图像brightness variation 作为正弦变量。傅里叶变化储存每一个频率的magnitude和phase信息，前者代表这个频率上有多少信号，后者间接可代表空间信息。 </p>
-</blockquote>
-<h3 id="理解图像的低频成分和高频成分"><a href="#理解图像的低频成分和高频成分" class="headerlink" title="理解图像的低频成分和高频成分"></a>理解图像的低频成分和高频成分</h3><blockquote>
-<ul>
+<h1 id="图像频域与图像分解"><a href="#图像频域与图像分解" class="headerlink" title="图像频域与图像分解"></a>图像频域与图像分解</h1><h2 id="图像的傅立叶变换"><a href="#图像的傅立叶变换" class="headerlink" title="图像的傅立叶变换"></a>图像的傅立叶变换</h2><h3 id="理解变换的基本含义"><a href="#理解变换的基本含义" class="headerlink" title="理解变换的基本含义"></a>理解变换的基本含义</h3><p>傅里叶变换讲的是任何信号（如图像信号）都可以表示成一系列正弦信号的叠加，在图像领域就是将图像brightness variation 作为正弦变量。傅里叶变化储存每一个频率的magnitude和phase信息，前者代表这个频率上有多少信号，后者间接可代表空间信息。 </p>
+<h3 id="理解图像的低频成分和高频成分"><a href="#理解图像的低频成分和高频成分" class="headerlink" title="理解图像的低频成分和高频成分"></a>理解图像的低频成分和高频成分</h3><ul>
 <li>图像的高频部分是像素值变化剧烈的地方，如图像的边缘和轮廓。</li>
 <li>低频部分是变化不剧烈的地方，对应大的色块。</li>
 </ul>
 <p>我们从近处看图像看到的是高频信息，而远处看到的是低频信息 </p>
-</blockquote>
-<h2 id="图像分解"><a href="#图像分解" class="headerlink" title="图像分解"></a>图像分解</h2><h3 id="从图像分解角度，理解傅立叶变换的意义"><a href="#从图像分解角度，理解傅立叶变换的意义" class="headerlink" title="从图像分解角度，理解傅立叶变换的意义"></a>从图像分解角度，理解傅立叶变换的意义</h3><blockquote>
-<p>$\sum基图像$</p>
-</blockquote>
-<h3 id="怎么理解拉普拉斯图像金字塔的每一层是带通滤波"><a href="#怎么理解拉普拉斯图像金字塔的每一层是带通滤波" class="headerlink" title="怎么理解拉普拉斯图像金字塔的每一层是带通滤波"></a>怎么理解拉普拉斯图像金字塔的每一层是带通滤波</h3><blockquote>
-<p>拉普拉斯金字塔是通过源图像减去先缩小再放大的一系列图像构成的。<strong>下采样的时候丢失了高频信息，而相邻金字塔相减的时候丢失了低频信息，因此只有中间频段的信息保留了下来</strong></p>
+<h2 id="图像分解"><a href="#图像分解" class="headerlink" title="图像分解"></a>图像分解</h2><h3 id="从图像分解角度，理解傅立叶变换的意义"><a href="#从图像分解角度，理解傅立叶变换的意义" class="headerlink" title="从图像分解角度，理解傅立叶变换的意义"></a>从图像分解角度，理解傅立叶变换的意义</h3><p>$\sum基图像$</p>
+<h3 id="怎么理解拉普拉斯图像金字塔的每一层是带通滤波"><a href="#怎么理解拉普拉斯图像金字塔的每一层是带通滤波" class="headerlink" title="怎么理解拉普拉斯图像金字塔的每一层是带通滤波"></a>怎么理解拉普拉斯图像金字塔的每一层是带通滤波</h3><p>拉普拉斯金字塔是通过源图像减去先缩小再放大的一系列图像构成的。<strong>下采样的时候丢失了高频信息，而相邻金字塔相减的时候丢失了低频信息，因此只有中间频段的信息保留了下来</strong></p>
 <ul>
 <li>带通滤波应该是指中间频率通过</li>
 <li>低通滤波应该是低频通过</li>
 </ul>
-</blockquote>
-<h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h1><h2 id="A-基于k-means聚类的图像分割"><a href="#A-基于k-means聚类的图像分割" class="headerlink" title="A. 基于k-means聚类的图像分割"></a>A. 基于k-means聚类的图像分割</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
-<p>基于区域间的不连续性(不同区域间)和相似性(同一区域内)</p>
-<p>已知观测集$(x<em>{1},x</em>{2},…,x<em>{n})$，其中每个观测都是一个d-维实向量，<em>k</em>-平均聚类要把这n个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S</em>{i}$</p>
+<h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h1><h2 id="A-基于k-means聚类的图像分割"><a href="#A-基于k-means聚类的图像分割" class="headerlink" title="A. 基于k-means聚类的图像分割"></a>A. 基于k-means聚类的图像分割</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>基于区域间的不连续性(不同区域间)和相似性(同一区域内)</p>
+<p>已知观测集<script type="math/tex">(x_{1},x_{2},...,x_{n})</script>，其中每个观测都是一个d-维实向量，<em>k</em>-平均聚类要把这n个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S_{i}$</p>
 <script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中$\mu <em>{i}$是$S</em>{i}$中所有点的均值</p>
 <p><strong>总之：思想是最小化类内距离平方之和</strong></p>
-</blockquote>
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><img src="image-20200111182152756.png" srcset="/img/loading.gif" alt="image-20200111182152756" style="zoom:50%;" /></p>
-<blockquote>
 <ol>
 <li>随机选择K个聚类中心$c^0$</li>
 <li>对图像上所有点，根据其与聚类中心的距离，将其划分到距离最近对应的中心的聚类簇</li>
 <li>重新计算每一簇的均值来更新中心（簇内均值）</li>
 <li>重复2，3步，直到no points are re-assigned</li>
 </ol>
-</blockquote>
 <h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ul>
 <li><p>Simple and fast</p>
 </li>
@@ -882,11 +826,8 @@
 <ul>
 <li>Rarely used for pixel segmentation</li>
 </ul>
-<h2 id="B-基于Mean-Shift的图像分割"><a href="#B-基于Mean-Shift的图像分割" class="headerlink" title="B. 基于Mean Shift的图像分割"></a>B. 基于Mean Shift的图像分割</h2><h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
-<p>将聚类看作密度的局部最大值</p>
-</blockquote>
-<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><blockquote>
-<ol>
+<h2 id="B-基于Mean-Shift的图像分割"><a href="#B-基于Mean-Shift的图像分割" class="headerlink" title="B. 基于Mean Shift的图像分割"></a>B. 基于Mean Shift的图像分割</h2><h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><p>将聚类看作密度的局部最大值</p>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ol>
 <li>Choose kernel and bandwidth</li>
 <li><p>For each point</p>
 <ul>
@@ -899,7 +840,6 @@
 <li><p>Assign points that lead to nearby modes to the same cluster</p>
 </li>
 </ol>
-</blockquote>
 <h3 id="Pros-1"><a href="#Pros-1" class="headerlink" title="Pros"></a>Pros</h3><ul>
 <li><p>Good general-purpose segmentation</p>
 </li>
