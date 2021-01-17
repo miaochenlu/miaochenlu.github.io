@@ -1087,7 +1087,7 @@ $$c=\left[\begin{matrix}cov(x,x)&cov(x,y)&cov(x,z)\\cov(y,x)&cov(y,y)&cov(y,z)\\
 
 * d-维空间:$\mathbf{x}=(x_1,x_2,\cdots, x_d)$
 * 投影方向:$a_1=(a_1^1,a_1^2,\cdots,a_1^d)$ 其中$a_1^Ta_1=1$
-* 投影值: $z_1=a_1^tx=\sum_{i=1}^da_1^ix_i$
+* 投影值: $$z_1=a_1^tx=\sum_{i=1}^da_1^ix_i$$
 * 问题：
   * 最大化$var(z1)$
   * 求投影方向$arg\;\underset{a}{max}\;var(z_1)$
@@ -1194,7 +1194,7 @@ $\sum基图像$
 
 $$arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2$$
 
-其中$\mu _{i}$是$S_{i}$中所有点的均值
+其中$$\mu _{i}$$是$$S_{i}$$中所有点的均值
 
 **总之：思想是最小化类内距离平方之和**
 
