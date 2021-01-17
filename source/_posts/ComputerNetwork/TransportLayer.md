@@ -1187,7 +1187,7 @@ Congestion Control Algorithm by Van Jacobson (1988)
 
 - When packet loss occurs
 
-  <center><img src=image-20191215205912344.png" alt="image-20191215205912344" style="zoom:33%;" /></center>
+  <center><img src="image-20191215205912344.png" alt="image-20191215205912344" style="zoom:33%;" /></center>
 
   - **cwnd** instead set to 1 MSS; 
   - window then grows exponentially to a **threshold**, then grows linearly
