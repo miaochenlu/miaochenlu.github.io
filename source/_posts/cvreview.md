@@ -593,13 +593,13 @@ pad2补全卷积后的图像到32*32[这块图片上有问题]
 
 > 那么每个neuron一共要学习 32\*32\*5\*5\*3​个权重
 >
-> 一共有30个neuron，则一共要学习30\*32\*32\*5\*5\*3​个权重
+> 一共有30个neuron，则一共要学习 30\*32\*32\*5\*5\*3​个权重
 
 * 如果share权重
 
-> 那么每个neuron一共要学习5\*5\*3个权重
+> 那么每个neuron一共要学习 5\*5\*3个权重
 >
-> 一共有30个neuron，则一共要学习30\* 5\*5\*3​个权重
+> 一共有30个neuron，则一共要学习 30\*5\*5\*3​个权重
 
 <img src="image-20200113152540199.png" alt="image-20200113152540199" style="zoom:50%;" />
 
@@ -1186,11 +1186,11 @@ $$var(z_1)=a_1^TSa_1=a_1^T\lambda a_1=\lambda a_1^Ta_1=\lambda$$
 
 > 基于区域间的不连续性(不同区域间)和相似性(同一区域内)
 >
-> 已知观测集![(x_{1},x_{2},...,x_{n})](https://wikimedia.org/api/rest_v1/media/math/render/svg/2730974584852a817e6ca24fda937c5896540888)，其中每个观测都是一个![d](https://wikimedia.org/api/rest_v1/media/math/render/svg/e85ff03cbe0c7341af6b982e47e9f90d235c66ab)-维实向量，*k*-平均聚类要把这![n](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)个观测划分到*k*个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类![S_{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e)，
+> 已知观测集$(x_{1},x_{2},...,x_{n})$，其中每个观测都是一个d-维实向量，*k*-平均聚类要把这n个观测划分到*k*个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S_{i}$
 >
 > $$arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2$$
 >
-> 其中![\mu _{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/dea0a0293841cce9eef98b55e53a92b82ae59ee4)是![S_{i}](https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e)中所有点的均值
+> 其中$\mu _{i}$是$S_{i}$中所有点的均值
 >
 > **总之：思想是最小化类内距离平方之和**
 
