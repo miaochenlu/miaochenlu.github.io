@@ -557,14 +557,14 @@
 </ul>
 <blockquote>
 <p>那么每个neuron一共要学习 32*32*5*5*3​个权重</p>
-<p>一共有30个neuron，则一共要学习30*32*32*5*5*3​个权重</p>
+<p>一共有30个neuron，则一共要学习 30*32*32*5*5*3​个权重</p>
 </blockquote>
 <ul>
 <li>如果share权重</li>
 </ul>
 <blockquote>
-<p>那么每个neuron一共要学习5*5*3个权重</p>
-<p>一共有30个neuron，则一共要学习30* 5*5*3​个权重</p>
+<p>那么每个neuron一共要学习 5*5*3个权重</p>
+<p>一共有30个neuron，则一共要学习 30*5*5*3​个权重</p>
 </blockquote>
 <p><img src="image-20200113152540199.png" srcset="/img/loading.gif" alt="image-20200113152540199" style="zoom:50%;" /></p>
 <h2 id="C-BP-算法"><a href="#C-BP-算法" class="headerlink" title="C. BP 算法"></a>C. BP 算法</h2><h3 id="知道BP算法的作用"><a href="#知道BP算法的作用" class="headerlink" title="知道BP算法的作用"></a>知道BP算法的作用</h3><blockquote>
@@ -854,8 +854,8 @@
 </blockquote>
 <h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h1><h2 id="A-基于k-means聚类的图像分割"><a href="#A-基于k-means聚类的图像分割" class="headerlink" title="A. 基于k-means聚类的图像分割"></a>A. 基于k-means聚类的图像分割</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><blockquote>
 <p>基于区域间的不连续性(不同区域间)和相似性(同一区域内)</p>
-<p>已知观测集<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2730974584852a817e6ca24fda937c5896540888" srcset="/img/loading.gif" alt="(x_{1},x_{2},...,x_{n})">，其中每个观测都是一个<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e85ff03cbe0c7341af6b982e47e9f90d235c66ab" srcset="/img/loading.gif" alt="d">-维实向量，<em>k</em>-平均聚类要把这<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" srcset="/img/loading.gif" alt="n">个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e" srcset="/img/loading.gif" alt="S_{i}">，</p>
-<script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dea0a0293841cce9eef98b55e53a92b82ae59ee4" srcset="/img/loading.gif" alt="\mu _{i}">是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/de6e810a93f67802ecb603ee0e3324005c6e583e" srcset="/img/loading.gif" alt="S_{i}">中所有点的均值</p>
+<p>已知观测集$(x<em>{1},x</em>{2},…,x<em>{n})$，其中每个观测都是一个d-维实向量，<em>k</em>-平均聚类要把这n个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S</em>{i}$</p>
+<script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中$\mu <em>{i}$是$S</em>{i}$中所有点的均值</p>
 <p><strong>总之：思想是最小化类内距离平方之和</strong></p>
 </blockquote>
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><img src="image-20200111182152756.png" srcset="/img/loading.gif" alt="image-20200111182152756" style="zoom:50%;" /></p>
