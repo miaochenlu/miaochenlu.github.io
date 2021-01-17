@@ -754,7 +754,7 @@
 <h3 id="C-PCA中的一些定义"><a href="#C-PCA中的一些定义" class="headerlink" title="C. PCA中的一些定义"></a>C. PCA中的一些定义</h3><ul>
 <li>d-维空间:$\mathbf{x}=(x_1,x_2,\cdots, x_d)$</li>
 <li>投影方向:$a_1=(a_1^1,a_1^2,\cdots,a_1^d)$ 其中$a_1^Ta_1=1$</li>
-<li>投影值: $z<em>1=a_1^tx=\sum</em>{i=1}^da_1^ix_i$</li>
+<li>投影值: <script type="math/tex">z_1=a_1^tx=\sum_{i=1}^da_1^ix_i</script></li>
 <li>问题：<ul>
 <li>最大化$var(z1)$</li>
 <li>求投影方向$arg\;\underset{a}{max}\;var(z_1)$</li>
@@ -802,7 +802,7 @@
 </ul>
 <h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a>图像分割</h1><h2 id="A-基于k-means聚类的图像分割"><a href="#A-基于k-means聚类的图像分割" class="headerlink" title="A. 基于k-means聚类的图像分割"></a>A. 基于k-means聚类的图像分割</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>基于区域间的不连续性(不同区域间)和相似性(同一区域内)</p>
 <p>已知观测集<script type="math/tex">(x_{1},x_{2},...,x_{n})</script>，其中每个观测都是一个d-维实向量，<em>k</em>-平均聚类要把这n个观测划分到<em>k</em>个集合中(k≤n),使得组内平方和（WCSS within-cluster sum of squares）最小。换句话说，它的目标是找到使得下式满足的聚类$S_{i}$</p>
-<script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中$\mu <em>{i}$是$S</em>{i}$中所有点的均值</p>
+<script type="math/tex; mode=display">arg\underset{s}{min}\underset{i=1}{\overset{k}{\sum}}\underset{x\in S_i}{\sum}\Vert{\mathbf{x}-\mathbf{u_i}}\Vert^2</script><p>其中<script type="math/tex">\mu _{i}</script>是<script type="math/tex">S_{i}</script>中所有点的均值</p>
 <p><strong>总之：思想是最小化类内距离平方之和</strong></p>
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><img src="image-20200111182152756.png" srcset="/img/loading.gif" alt="image-20200111182152756" style="zoom:50%;" /></p>
 <ol>
