@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="black">
+  <meta name="description" content="">
+  <meta name="author" content="Chenlu Miao">
+  <meta name="keywords" content="">
+  <title>cache_hit_miss_threshold - Explorer</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark.min.css" />
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Explorer</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-01-06 12:19" pubdate>
+      January 6, 2021 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      915 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-post-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-post-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">cache_hit_miss_threshold</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：January 17, 2021 am
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="inline-assembly"><a href="#inline-assembly" class="headerlink" title="inline assembly"></a>inline assembly</h1><p>在这里我们会使用到内联汇编，也就是嵌入到C/C++中到汇编代码。GCC采用的是AT&amp;T汇编</p>
+<p>GCC内联汇编的格式如下所示</p>
+<div class="hljs"><pre><code class="hljs assembly">asm ( 汇编语句
+    : 输出操作数     &#x2F;&#x2F; 非必需
+    : 输入操作数     &#x2F;&#x2F; 非必需
+    : 其他被污染的寄存器 &#x2F;&#x2F; 非必需
+    );</code></pre></div>
+<ul>
+<li><p>第一行是汇编语句，需要用双引号引起来；如果有多条语句，需要用”;”或者”\n\t”来分隔</p>
+</li>
+<li><p>第二行是输出操作数，形式为”=type(var)”</p>
+</li>
+</ul>
+<p>&emsp;&emsp; 其中var可以是任意内存变量，最终结果会存放到这个变量中</p>
+<p>&emsp;&emsp; type一般是如下标识符，表明了汇编中用什么来存这个操作数</p>
+<p>a,b,c,d,S,D 分别代表 eax,ebx,ecx,edx,esi,edi 寄存器 </p>
+<p>r 上面的寄存器的任意一个（谁闲着就用谁） </p>
+<p>m 内存 </p>
+<p>i 立即数（常量，只用于输入操作数） </p>
+<p>g 寄存器、内存、立即数 都行</p>
+<p><strong>在汇编中用 %序号 来代表这些输入/输出操作数，序号从 0 开始。为了与操作数区分开来，寄存器用两个%引出，如：%%eax</strong>        </p>
+<ul>
+<li>第三行是输入操作数。形式为”type(var)”。type可以是上述标识符，也可以是输出操作数的序号(如%0)，用var来初始化这个操作数。</li>
+<li>第4行标出那些在汇编代码中修改了的、又没有在输入/输出列表中列出的寄存器，这样 gcc 就不会擅自使用这些”危险的”寄存器。还可以用 “memory” 表示在内联汇编中修改了内存，之前缓存在寄存器中的内存变量需要重新读取。</li>
+</ul>
+<p>下面来看个例子</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+  <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>, c = <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">asm</span>(
+    <span class="hljs-string">"addl %2, %1"</span>
+    : <span class="hljs-string">"=g"</span>(c), <span class="hljs-string">"=g"</span>(b)
+    :  <span class="hljs-string">"0"</span>(a)
+    : <span class="hljs-string">"memory"</span>
+      );
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"now a: %d  b: %d  c: %d\n"</span>, a, b, c);
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs angelscript">now a: <span class="hljs-number">1</span>  b: <span class="hljs-number">3</span>  c: <span class="hljs-number">1</span></code></pre></div>
+<p>c对应%0，b对应%1, a对应%2</p>
+<p><code>&quot;0&quot;(a)</code>用a初始化%0, 因此最终c=1</p>
+<p><code>addl %2, %1</code> %1=%2+%1, 最终b=3</p>
+<h1 id="Time-Stamp-Counter—obtain-timing-information"><a href="#Time-Stamp-Counter—obtain-timing-information" class="headerlink" title="Time Stamp Counter—obtain timing information"></a>Time Stamp Counter—obtain timing information</h1><p>Time Stamp Counter (TSC)是x86处理器中的一个64位寄存器。这个寄存器中记录了从reset到当下的clock cycle。</p>
+<p>如何获取tsc的值？</p>
+<p><code>rdtsc</code>是一条读取tsc寄存器的指令。这个值会以如下形式存放<code>edx:eax</code>，也就是将tsc的低32位放在<code>eax</code>寄存器中, 将tsc的高32位放在<code>edx</code>寄存器中</p>
+<p>在汇编中可以如此使用</p>
+<div class="hljs"><pre><code class="hljs assembly">asm volatile(&quot;rdtsc&quot; : &quot;&#x3D;a&quot; (low), &quot;&#x3D;d&quot; (high))</code></pre></div>
+<p>在c语言中可以写出如下代码</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-keyword">uint64_t</span> a, d;
+<span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span> <span class="hljs-params">(<span class="hljs-string">"rdtsc"</span> : <span class="hljs-string">"=a"</span> (a), <span class="hljs-string">"=d"</span> (d))</span></span>;
+a = (d&lt;&lt;<span class="hljs-number">32</span>) | a;</code></pre></div>
+<p>这样a中就存储了当前的clock cycle</p>
+<p>rdtsc要和memory fence配合使用</p>
+<p>lfence</p>
+<p>mfence会清空store buffer become globally visible</p>
+<p>lfence: <a href="https://hadibrais.wordpress.com/2018/05/14/the-significance-of-the-x86-lfence-instruction/#:~:text=The%20SFENCE%2C%20LFENCE%2C%20and%20MFENCE,Manual%20Volume%203%20Section%208.2.&amp;text=One%20important%20phrase%20here%20is%20%E2%80%9Cweakly%2Dordered%20results%E2%80%9D" target="_blank" rel="noopener">https://hadibrais.wordpress.com/2018/05/14/the-significance-of-the-x86-lfence-instruction/#:~:text=The%20SFENCE%2C%20LFENCE%2C%20and%20MFENCE,Manual%20Volume%203%20Section%208.2.&amp;text=One%20important%20phrase%20here%20is%20%E2%80%9Cweakly%2Dordered%20results%E2%80%9D</a>.</p>
+<p>sfence: <a href="https://hadibrais.wordpress.com/2019/02/26/the-significance-of-the-x86-sfence-instruction/" target="_blank" rel="noopener">https://hadibrais.wordpress.com/2019/02/26/the-significance-of-the-x86-sfence-instruction/</a></p>
+<p><a href="https://stackoverflow.com/questions/27627969/why-is-or-isnt-sfence-lfence-equivalent-to-mfence" target="_blank" rel="noopener">https://stackoverflow.com/questions/27627969/why-is-or-isnt-sfence-lfence-equivalent-to-mfence</a></p>
+<p><a href="https://stackoverflow.com/questions/27595595/when-are-x86-lfence-sfence-and-mfence-instructions-required" target="_blank" rel="noopener">https://stackoverflow.com/questions/27595595/when-are-x86-lfence-sfence-and-mfence-instructions-required</a></p>
+<ul>
+<li>rdtsc</li>
+<li>clflush</li>
+<li></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] <a href="https://blog.csdn.net/liuqiaoyu080512/article/details/8457528?utm_medium=distribute.pc_relevant_download.none-task-blog-BlogCommendFromBaidu-10.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_download.none-task-blog-BlogCommendFromBaidu-10.nonecas" target="_blank" rel="noopener">https://blog.csdn.net/liuqiaoyu080512/article/details/8457528?utm_medium=distribute.pc_relevant_download.none-task-blog-BlogCommendFromBaidu-10.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_download.none-task-blog-BlogCommendFromBaidu-10.nonecas</a></p>
+<p>[2] <a href="https://blog.csdn.net/slvher/article/details/8864996?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control" target="_blank" rel="noopener">https://blog.csdn.net/slvher/article/details/8864996?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control</a></p>
+<p>[3] <a href="https://blog.csdn.net/gaotangtiankai/article/details/19410509?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control" target="_blank" rel="noopener">https://blog.csdn.net/gaotangtiankai/article/details/19410509?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control</a></p>
+<p>[4] <a href="https://blog.csdn.net/gonxi/article/details/6104842?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control" target="_blank" rel="noopener">https://blog.csdn.net/gonxi/article/details/6104842?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2021/01/06/cache-hit-miss-threshold/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = '6ojk1lVz9eq7GQnBo6Q8zR5d-gzGzoHsz'
+    var app_key = 'bOrBPlujAz77Ma6N5tY9wWJN'
+    var server_url = ''
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "cache_hit_miss_threshold&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

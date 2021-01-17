@@ -170,6 +170,78 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/21/UbuntuNet/" target="_self">
+          <img src="/img/image-20200821203833106.png" srcset="/img/loading.gif" alt="VMware虚拟机共享本机vpn">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/08/21/UbuntuNet/">VMware虚拟机共享本机vpn</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/21/UbuntuNet/">
+          
+          
+            
+          
+          
+设置windows上的vpn为允许其他设备接入
+
+
+
+找到windows的IPv4地址。打开cmd, 敲下命令
+
+ipconfig
+
+
+将虚拟机的网络更改到桥接NAT模式
+
+
+
+打开ubuntu的网络设置
+
+
+
+设置代理服务器
+
+
+这时浏览器已经可以上网，但是命令行还不行，还需要另外设置。
+
+open ubuntu terminal，输入如下内容
+
+export http_proxy=...
+e
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-21 12:32" pubdate>
+              2020-08-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ubuntu-VPN/">Ubuntu VPN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/08/21/DesignPatterns/AbstractFactory/" target="_self">
           <img src="/img/image-20200821143526358.png" srcset="/img/loading.gif" alt="Abstract Factory">
         </a>
@@ -683,69 +755,6 @@ To make use of the services pro
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Computer-Network/">Computer Network</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/08/ComputerArchitecture/Storage/" target="_self">
-          <img src="/img/image-20191209103141041.png" srcset="/img/loading.gif" alt="CA - Storage">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2019/12/08/ComputerArchitecture/Storage/">CA - Storage</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/12/08/ComputerArchitecture/Storage/">
-          
-          
-            
-          
-          1. Introduction
-
-1.1 缓存性能CPU execution time
-=(CPU\, clock\, cycles + Memory\, stall\, cycles)\times Clock\, cycle\, time{:.warning}
-这里CPU clock cicles包括handle cache hit/miss的时间
-
-
-
-看一道例题
-
-a computer wi
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-08 07:39" pubdate>
-              2019-12-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Computer-Architecture/">Computer Architecture</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Computer-Architecture/">Computer Architecture</a>
             
           </div>
         
