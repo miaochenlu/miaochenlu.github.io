@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>延长分支处理时间</title>
+    <link href="/2021/03/16/branchResolve/"/>
+    <url>/2021/03/16/branchResolve/</url>
+    
+    <content type="html"><![CDATA[<h1 id="problem"><a href="#problem" class="headerlink" title="problem"></a>problem</h1><p>最近在做spectre attack时，遇到了一个小问题。这是解决该问题的一种方式的小总结</p><p>我们想要延长处理分支(问号部分)的时间，以便能够speculatively execute更多分支中的语句，使得我们的实验结果看起来更显著。</p><div class="hljs"><pre><code class="hljs c"><span class="hljs-keyword">if</span>(x &lt; ???) &#123;&#125;</code></pre></div><h1 id="Initial-Thought-naive-way"><a href="#Initial-Thought-naive-way" class="headerlink" title="Initial Thought: naive way"></a>Initial Thought: naive way</h1><p>首先想到的是，在分支中放入很多需要从memory中load的数据，来延长时间，用Gem5得到的实验结果如下</p><div class="hljs"><pre><code class="hljs c">time1 = __rdtscp(&amp;junk);<span class="hljs-keyword">if</span>(x &lt; N[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + N[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + N[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>] + N[<span class="hljs-number">3</span>][<span class="hljs-number">0</span>] + N[i][<span class="hljs-number">0</span>] + ...) &#123;&#125;time2 = __rdtscp(&amp;junk) - time1 - overhead;</code></pre></div><div class="table-container"><table><thead><tr><th>N</th><th>clock cycles</th></tr></thead><tbody><tr><td>$N[0][0]$</td><td>3</td></tr><tr><td>$N[0][0]+N[1][0]$</td><td>136</td></tr><tr><td>$N[0][0]+N[1][0]+N[2][0]$</td><td>137</td></tr><tr><td>$N[0][0]+N[1][0]+N[2][0]+N[3][0]$</td><td>136</td></tr><tr><td>$N[0][0]+N[1][0]+N[2][0]+N[3][0]+N[4][0]$</td><td>148</td></tr><tr><td>$N[0][0]+N[1][0]+N[2][0]+N[3][0]+N[4][0]+N[5][0]$</td><td>160</td></tr></tbody></table></div><p>实验结果不尽如人意，不断加入N来延长分支处理时间的效果非常有限。事实上，这些load并没有依赖关系，应该可以并行处理，这使得他能够hide memory latency。</p><h1 id="Second-Thought-dependence"><a href="#Second-Thought-dependence" class="headerlink" title="Second Thought: dependence"></a>Second Thought: dependence</h1><p>如果说load的并行执行是一个关键所在，那么使这些load产生依赖关系，打破这种并行便是一个突破点。</p><p>比如$N[N[1][0]][0]$, $N[1][0]=0$, 那么首先要知道$N[1][0]$的值，才能进一步load, 这里是$N[0][0]$。这样就把latency拉成一条直线了</p><div class="hljs"><pre><code class="hljs c"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">20</span>; i++)    N[i][<span class="hljs-number">0</span>] = i - <span class="hljs-number">1</span>;time1 = __rdtscp(&amp;junk);<span class="hljs-keyword">if</span>(x &lt; N[N[N[N[<span class="hljs-number">3</span>][<span class="hljs-number">0</span>]][<span class="hljs-number">0</span>]][<span class="hljs-number">0</span>]][<span class="hljs-number">0</span>]) &#123;&#125;time2 = __rdtscp(&amp;junk) - time1 - overhead;</code></pre></div><p>如下实验结果</p><div class="table-container"><table><thead><tr><th>N</th><th>clock cycles</th></tr></thead><tbody><tr><td>$N[0][0]$</td><td>3</td></tr><tr><td>$N[N[1][0]][0]$</td><td>142</td></tr><tr><td>$N[N[N[2][0]][0]][0]$</td><td>151</td></tr><tr><td>$N[N[N[N[3][0]][0]][0]][0]$</td><td>279</td></tr><tr><td>$N[N[N[N[N[4][0]][0]][0]][0]][0]$</td><td>433</td></tr><tr><td>$N[N[N[N[N[N[5][0]][0]][0]][0]][0]][0]$</td><td>575</td></tr></tbody></table></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Computer Architecture</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Computer Architecture</tag>
+      
+      <tag>Research</tag>
+      
+      <tag>Random Thought</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CV Couse Review</title>
     <link href="/2021/01/17/cvreview/"/>
     <url>/2021/01/17/cvreview/</url>
