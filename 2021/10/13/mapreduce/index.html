@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MapReduce详解 | Explorer</title><meta name="keywords" content="分布式系统"><meta name="author" content="Chenlu Miao"><meta name="copyright" content="Chenlu Miao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="为什么会产生MapReduce 面对大量的数据，需要充分利用大量机器的运算资源来提高效率 但是，如何利用大量机器进行并行计算，如何分配数据到各个机器上，如何处理failure，在分布式的情况下都非常复杂 而MapReduce就是用来应对这种复杂性的抽象计算模型 。这个模型可以将大型数据处理任务分解成很多单个的、可以在服务器集群中并行执行的任务，而这些任务的计算结果可以合并在一起来计算最终的结果 M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MapReduce详解">
+<meta property="og:url" content="https://miaochenlu.github.io/2021/10/13/mapreduce/index.html">
+<meta property="og:site_name" content="Explorer">
+<meta property="og:description" content="为什么会产生MapReduce 面对大量的数据，需要充分利用大量机器的运算资源来提高效率 但是，如何利用大量机器进行并行计算，如何分配数据到各个机器上，如何处理failure，在分布式的情况下都非常复杂 而MapReduce就是用来应对这种复杂性的抽象计算模型 。这个模型可以将大型数据处理任务分解成很多单个的、可以在服务器集群中并行执行的任务，而这些任务的计算结果可以合并在一起来计算最终的结果 M">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://miaochenlu.github.io/img/default.jpg">
+<meta property="article:published_time" content="2021-10-13T02:19:33.000Z">
+<meta property="article:modified_time" content="2021-10-13T05:55:13.472Z">
+<meta property="article:author" content="Chenlu Miao">
+<meta property="article:tag" content="分布式系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miaochenlu.github.io/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://miaochenlu.github.io/2021/10/13/mapreduce/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MapReduce详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-13 13:55:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Explorer" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Explorer</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MapReduce详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-13T02:19:33.000Z" title="发表于 2021-10-13 10:19:33">2021-10-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-13T05:55:13.472Z" title="更新于 2021-10-13 13:55:13">2021-10-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MapReduce详解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>为什么会产生MapReduce</h1>
+<p>面对大量的数据，需要充分利用大量机器的运算资源来提高效率</p>
+<p>但是，如何利用大量机器进行并行计算，如何分配数据到各个机器上，如何处理failure，在分布式的情况下都非常复杂</p>
+<p>而MapReduce就是用来应对这种复杂性的抽象计算模型 。这个模型可以将大型数据处理任务分解成很多单个的、可以在服务器集群中并行执行的任务，而这些任务的计算结果可以合并在一起来计算最终的结果</p>
+<p>MapReduce主要有两个过程：Map和Reduce</p>
+<h1>Map过程</h1>
+<p>Map过程将原始数据转换成key/value pairs</p>
+<p>以最简单的word count程序为例，这个程序的功能是计算文件中每个单词的出现次数</p>
+<p>Map阶段， Map函数接收一个输入文件，对文件中的每一个单词输出一个键值对 <code>(word, occurrence)</code>, 这里每个单词出现就记occurrence为1，所以这里的键值对为<code>(word, 1)</code></p>
+<p>由此，我们将一个输入文件map到了一个key/value数组</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">map</span>(String key, String value):</span><br><span class="line">    <span class="comment"># key: document name</span></span><br><span class="line">    <span class="comment"># value: document contents</span></span><br><span class="line">	<span class="keyword">for</span> each word w <span class="keyword">in</span> value:</span><br><span class="line">        EmitIntermediate(w, <span class="string">&quot;1&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2021/10/13/mapreduce/1627540264381-90ad80dd-c734-47fa-b888-9be5da2c89ed.svg" alt="img" style="zoom:80%;">
+<h1>Reduce</h1>
+<p>对于map输出的key/value pairs, Reduce是将相同key值的value合并的过程</p>
+<p>在word count程序中，map输出了<code>(word, 1)</code>键值对，为了计算一个单词出现的总数，需要将key/value pair中key相同的value加起来</p>
+<p>每一个reducer处理特定的word。相同word的key/value pair进入同一个reducer, 统计计数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reduce(String key, Iterator values):</span><br><span class="line">    <span class="comment"># key: a word</span></span><br><span class="line">    <span class="comment"># values: a list of counts</span></span><br><span class="line">    <span class="built_in">int</span> result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> each v <span class="keyword">in</span> values:</span><br><span class="line">        result += ParseInt(v)</span><br><span class="line">    Emit(AsString(result))</span><br></pre></td></tr></table></figure>
+<img src="http://localhost/mapreduce/1627562526133-9c1a3c01-2f06-44bb-bf26-187096c1f137.svg" alt="img" style="zoom:100%;">
+<h1>More Complex</h1>
+<p>MapReduce实际细节中还包含更复杂的partition, shuffle, merge过程</p>
+<img src="/2021/10/13/mapreduce/../../Desktop/miaochenlu.github.io/source/_posts/mapreduce/1627562551985-06cf6168-36f2-4bec-b9d6-17fd8ba834e1.svg" alt="img" style="zoom:100%;">
+<h2 id="Map端Shuffle">Map端Shuffle</h2>
+<h3 id="整体思路">整体思路</h3>
+<p>可以预期，map过后，我们会得到无序的键值对，如下所示。每一个key的数据都可能分散在各个位置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, <span class="number">1</span></span><br><span class="line">b, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br><span class="line">c, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br><span class="line">b, <span class="number">1</span></span><br><span class="line">c, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>然而reducer是术业有专攻的，在reduce过程中，相同key值的数据需要被送到同一个reducer</p>
+<p>若要去一个一个文件全局搜索去寻找对应的key值，效率必然是低下的</p>
+<p>因此，我们希望map输出是聚集在一起的, 像下面这样。如此一来，寻找对应的key值就会很快</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br><span class="line">b, <span class="number">1</span></span><br><span class="line">b, <span class="number">1</span></span><br><span class="line">c, <span class="number">1</span></span><br><span class="line">c, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>当然，为了能够更快定位到reducer需要的key值部分，加上索引是更快捷的做法</p>
+<p>我的想法是索引和数据在同一文件，如下图</p>
+<img src="/2021/10/13/mapreduce/../../Desktop/miaochenlu.github.io/source/_posts/mapreduce/1627545370364-1e5e6f15-d3a9-45bd-a323-4d3093160436.svg" alt="img" style="zoom:100%;">
+<p>但似乎一般做法是索引与数据分离，让索引都存在于内存中</p>
+<img src="/2021/10/13/mapreduce/../../Desktop/miaochenlu.github.io/source/_posts/mapreduce/1627548186699-258e23e3-d302-41bb-9c82-4518aa4d2ad3.svg" alt="img" style="zoom:100%;">
+<p>接下来考虑如何才能让键值相同的数据聚集在一起呢？</p>
+<p>方法1: HashMap</p>
+<p>方法2: Sort</p>
+<p>用这两种方法的都有。sort耗费时间开销大，hashmap耗费空间开销大。这里我们基于sort</p>
+<h3 id="Partition">Partition</h3>
+<p>Map端输出是发送给N个Reducer做Reduce工作</p>
+<p>因此，我们需要将Map端的文件映射到Reducer, 相同键值的映射到同一个Reducer, 且尽量保证其负载均衡</p>
+<p>这是做Partition的目的。</p>
+<p>在Partition方式上，我们为key/value pair增加一个partition属性，这个partition属性是对key计算hash计算得到的，为了一个partition对应一个reducer, 在计算hash时对reducer的数量取模</p>
+<p>partition值为几，该key/value pair就会进入第几个reducer</p>
+<p>hash得到的partition能够保证相同键值的数据映射到同一个partition, 也就是reducer，但是一个partition不能保证只有一种键值</p>
+<h3 id="Collector">Collector</h3>
+<p>一个环状数组，最大限度地利用内存</p>
+<p>内存占用到一定程度，就会触发spill, 写入磁盘</p>
+<p>环状数组存储两类数据</p>
+<ul>
+<li>
+<p>原始的Key-Value数据</p>
+</li>
+<li>
+<p>Metadata数据：（注意Key, Value的大小不是固定的，所以需要存长度）</p>
+</li>
+<li>
+<ul>
+<li>Key的起始位置</li>
+<li>Value的起始位置</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Value的长度</li>
+<li>Partition</li>
+</ul>
+</li>
+</ul>
+<p>选定Equator, 这两类数据以Equator为起点，向两个相反的方向增长</p>
+<p>当数据达到一定阈值(比如80%时），Key-Value数据要写入磁盘。</p>
+<p>此时，空余的20%缓冲区可以用来接收新来的数据，此前，要重新选定Equator</p>
+<img src="/2021/10/13/mapreduce/../../Desktop/miaochenlu.github.io/source/_posts/mapreduce/1627551065742-e5cf8d36-5e74-41e8-967b-895a09c93a8f.svg" alt="img" style="zoom:100%;">
+<h3 id="Sort">Sort</h3>
+<p>Spill触发后，在写入磁盘前，将Collector中的数据按照partition和key对数据进行升序排序</p>
+<p>按照Partition排序是为了让相同partition数据的聚集在一起，但是一个partition不是只有一种键值，因此再对键值排序保证了相同键值的数据聚集在一起</p>
+<p>注意，不对Key-Value数据排序，而是对<strong>Metadata</strong>排序</p>
+<ul>
+<li>读取Metadata, 将Metadata数据按照Partition进行排序</li>
+<li>在同一Partition中，读取Metadata对应的Key值，按照Key值再次排序</li>
+</ul>
+<h3 id="Combine-自定义优化步骤">Combine(自定义优化步骤)</h3>
+<p>将Map输出的key/value pair进行合并，是一个本地reduce过程</p>
+<p>比如word count程序，map输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br><span class="line">a, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>我们就可以定义一个combine程序，将其合并为<code>(a, 3)</code>再发送给reducer</p>
+<h3 id="Spill">Spill</h3>
+<ul>
+<li>
+<p>创建磁盘文件</p>
+</li>
+<li>
+<p>将Collector中的数据按照Metadata排序顺序依次写入文件，写磁盘的时候数据会进行压缩</p>
+</li>
+<li>
+<p>同时会创建索引文件。索引文件对每一个partition会记录一个三元组 <code>(起始位置，原始数据长度，压缩后的数据长度)</code>, 在这个文件中也会存储crc32的校验数据</p>
+</li>
+</ul>
+<h3 id="Merge">Merge</h3>
+<p>在数据量大的时候，有可能进行好几次spill, 产生了多个数据文件和索引文件，这个时候就需要将文件合并</p>
+<p>如何获得Spill文件呢—&gt;扫描本地目录, 然后把文件路径存到数据里面，索引文件同理</p>
+<p>对于1个Partition，扫描索引文件，得到k个数据文件，做一个k路外部排序</p>
+<p>如果设置了combiner, Merge时也会调用combiner合并key相同的数据</p>
+<p>Map Shuffle整体结构</p>
+<img src="/2021/10/13/mapreduce/../../Desktop/miaochenlu.github.io/source/_posts/mapreduce/1627562412124-a77ba37a-3bb2-49cf-bfb3-6b63a2c272d0.svg" alt="img" style="zoom:80%;">
+<h1>Reduce Shuffle</h1>
+<p>Reduce Shuffle主要有两个过程：</p>
+<ul>
+<li>Copy</li>
+<li>Merge</li>
+</ul>
+<h2 id="Copy">Copy</h2>
+<p>将Map得到的数据copy到本地</p>
+<h2 id="Merge-2">Merge</h2>
+<p>做一个数据的外部排序</p>
+<h1>Reference</h1>
+<p>[1] <a target="_blank" rel="noopener" href="https://plandocheckaction.github.io/2020/09/07/BigData14-MapReduceSuffle/">环形缓冲区</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/edisonchou/p/4298423.html">Hadoop中的压缩</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5100252/external-sorting">External Sorting</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55884610">MapReduce计算框架</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenlu Miao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://miaochenlu.github.io/2021/10/13/mapreduce/">https://miaochenlu.github.io/2021/10/13/mapreduce/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://miaochenlu.github.io" target="_blank">Explorer</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a></div><div class="post_share"><div class="social-share" data-image="/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2021/10/13/hello-world/"><img class="prev-cover" src="/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chenlu Miao</div><div class="author-info__description">We make the world different!</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/miaochenlu" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:clmiao@zju.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">为什么会产生MapReduce</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Map过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Reduce</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">More Complex</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Map%E7%AB%AFShuffle"><span class="toc-number">4.1.</span> <span class="toc-text">Map端Shuffle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.1.</span> <span class="toc-text">整体思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partition"><span class="toc-number">4.1.2.</span> <span class="toc-text">Partition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collector"><span class="toc-number">4.1.3.</span> <span class="toc-text">Collector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sort"><span class="toc-number">4.1.4.</span> <span class="toc-text">Sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Combine-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BC%98%E5%8C%96%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.1.5.</span> <span class="toc-text">Combine(自定义优化步骤)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spill"><span class="toc-number">4.1.6.</span> <span class="toc-text">Spill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge"><span class="toc-number">4.1.7.</span> <span class="toc-text">Merge</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Reduce Shuffle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy"><span class="toc-number">5.1.</span> <span class="toc-text">Copy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-2"><span class="toc-number">5.2.</span> <span class="toc-text">Merge</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Reference</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/10/13/hello-world/" title="Hello World"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/10/13/hello-world/" title="Hello World">Hello World</a><time datetime="2021-10-13T03:55:30.516Z" title="发表于 2021-10-13 11:55:30">2021-10-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/13/mapreduce/" title="MapReduce详解"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MapReduce详解"/></a><div class="content"><a class="title" href="/2021/10/13/mapreduce/" title="MapReduce详解">MapReduce详解</a><time datetime="2021-10-13T02:19:33.000Z" title="发表于 2021-10-13 10:19:33">2021-10-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Chenlu Miao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
