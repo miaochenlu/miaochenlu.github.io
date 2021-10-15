@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://miaochenlu.github.io/about/index.html</loc>
+    <loc>https://miaochenlu.github.io/timeline/index.html</loc>
     
     <lastmod>2021-10-15</lastmod>
     
   </url>
   
   <url>
-    <loc>https://miaochenlu.github.io/timeline/index.html</loc>
+    <loc>https://miaochenlu.github.io/about/index.html</loc>
     
     <lastmod>2021-10-15</lastmod>
     
@@ -144,6 +144,13 @@
 
   
   <url>
+    <loc>https://miaochenlu.github.io/tags/Computer-Architecture/</loc>
+    <lastmod>2021-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://miaochenlu.github.io/tags/Operating-System/</loc>
     <lastmod>2021-10-15</lastmod>
     <changefreq>daily</changefreq>
@@ -152,13 +159,6 @@
   
   <url>
     <loc>https://miaochenlu.github.io/tags/Ubuntu-VPN/</loc>
-    <lastmod>2021-10-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://miaochenlu.github.io/tags/Computer-Architecture/</loc>
     <lastmod>2021-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -223,14 +223,14 @@
 
   
   <url>
-    <loc>https://miaochenlu.github.io/categories/Operating-System/</loc>
+    <loc>https://miaochenlu.github.io/categories/Computer-Architecture/</loc>
     <lastmod>2021-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://miaochenlu.github.io/categories/Computer-Architecture/</loc>
+    <loc>https://miaochenlu.github.io/categories/Operating-System/</loc>
     <lastmod>2021-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
