@@ -6,7 +6,7 @@
   <link href="https://miaochenlu.github.io/atom.xml" rel="self"/>
   
   <link href="https://miaochenlu.github.io/"/>
-  <updated>2021-10-16T02:12:20.846Z</updated>
+  <updated>2021-10-13T09:04:50.454Z</updated>
   <id>https://miaochenlu.github.io/</id>
   
   <author>
@@ -15,19 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>AOR</title>
-    <link href="https://miaochenlu.github.io/2021/10/16/AOR/"/>
-    <id>https://miaochenlu.github.io/2021/10/16/AOR/</id>
-    <published>2021-10-16T02:12:20.000Z</published>
-    <updated>2021-10-16T02:12:20.846Z</updated>
-    
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>MapReduce详解</title>
@@ -364,6 +351,29 @@ kernel-space code: &lt;code&gt;kernel/syscall.h&lt;</summary>
     
     
     <category term="Computer Architecture" scheme="https://miaochenlu.github.io/tags/Computer-Architecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>运筹学笔记汇总</title>
+    <link href="https://miaochenlu.github.io/2020/10/06/AOR/"/>
+    <id>https://miaochenlu.github.io/2020/10/06/AOR/</id>
+    <published>2020-10-06T14:50:50.000Z</published>
+    <updated>2021-10-16T02:45:07.238Z</updated>
+    
+    <content type="html"><![CDATA[<p>将所有运筹学的手写笔记汇总在这</p><div class="note primary disabled"><p>单纯形法 <kbd><a href="https://miaochenlu.github.io/file/simplex.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>Linear Programming 的对偶性理论 <kbd><a href="https://miaochenlu.github.io/file/lpdual.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>对偶单纯性法 <kbd><a href="https://miaochenlu.github.io/file/dualsimplex.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>原始对偶算法 <kbd><a href="https://miaochenlu.github.io/file/primedual.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>贪心算法 <kbd><a href="https://miaochenlu.github.io/file/greedy.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>BinPacking的近似算法 <kbd><a href="https://miaochenlu.github.io/file/Binpacking.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>TSP问题 <kbd><a href="https://miaochenlu.github.io/file/TSP.pdf">pdf</a></kbd></p></div> <div class="note primary disabled"><p>线性规划松弛算法 <kbd><a href="https://miaochenlu.github.io/file/lpslack.pdf">pdf</a></kbd></p></div> ]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;将所有运筹学的手写笔记汇总在这&lt;/p&gt;
+&lt;div class=&quot;note primary disabled&quot;&gt;&lt;p&gt;单纯形法 &lt;kbd&gt;&lt;a href=&quot;https://miaochenlu.github.io/file/simplex.pdf&quot;&gt;pdf&lt;/a&gt;&lt;/kbd&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="AOR" scheme="https://miaochenlu.github.io/tags/AOR/"/>
     
   </entry>
   
