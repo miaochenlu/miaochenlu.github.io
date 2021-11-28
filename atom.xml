@@ -6,7 +6,7 @@
   <link href="https://miaochenlu.github.io/atom.xml" rel="self"/>
   
   <link href="https://miaochenlu.github.io/"/>
-  <updated>2021-11-15T03:29:22.674Z</updated>
+  <updated>2021-11-27T15:25:02.944Z</updated>
   <id>https://miaochenlu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统也是程序 (调试Firmware和Bootloader)</title>
+    <link href="https://miaochenlu.github.io/2021/11/27/bootloader/"/>
+    <id>https://miaochenlu.github.io/2021/11/27/bootloader/</id>
+    <published>2021-11-27T15:20:01.000Z</published>
+    <updated>2021-11-27T15:25:02.944Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前我们已经写了一个最小的C程序</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/syscall.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  syscall(SYS_exit, <span class="number">42</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>用一种比较特殊的编译方式</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gcc a.c -static -Wl,--entry=main</span></span><br></pre></td></tr></table></figure><p>-Wl,会把后面的东西传递给链接器</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;之前我们已经写了一个最小的C程序&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;met</summary>
+      
+    
+    
+    
+    
+    <category term="Operating System" scheme="https://miaochenlu.github.io/tags/Operating-System/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统上的程序 - NJUOS</title>
