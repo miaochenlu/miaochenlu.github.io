@@ -6,7 +6,7 @@
   <link href="https://miaochenlu.github.io/atom.xml" rel="self"/>
   
   <link href="https://miaochenlu.github.io/"/>
-  <updated>2021-12-09T06:40:10.176Z</updated>
+  <updated>2021-12-09T10:10:45.924Z</updated>
   <id>https://miaochenlu.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++文件热更新设计</title>
+    <link href="https://miaochenlu.github.io/2021/12/09/hotupdate/"/>
+    <id>https://miaochenlu.github.io/2021/12/09/hotupdate/</id>
+    <published>2021-12-09T06:45:30.000Z</published>
+    <updated>2021-12-09T10:10:45.924Z</updated>
+    
+    <content type="html"><![CDATA[<h1>判断文件有没有被更新</h1><ul><li>检查文件最后一次更新的时间</li></ul><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string filename = <span class="string">&quot;./file.txt&quot;</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">result</span>;</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">stat</span>(filename.<span class="built_in">c_str</span>(), &amp;result) == <span class="number">0</span>) &#123;     </span><br><span class="line">        <span class="keyword">auto</span> modify_time = result.st_mtime;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Last file modification:   %s&quot;</span>, <span class="built_in">ctime</span>(&amp;modify_time));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>需要存储每一个文件上一次更新的时间信息，要新开一个类，专门存储和检查文件更新的相关信息</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1&gt;判断文件有没有被更新&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;检查文件最后一次更新的时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;spa</summary>
+      
+    
+    
+    
+    
+    <category term="C++" scheme="https://miaochenlu.github.io/tags/C/"/>
+    
+    <category term="Design Pattern" scheme="https://miaochenlu.github.io/tags/Design-Pattern/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统也是程序 (调试Firmware和Bootloader)</title>
